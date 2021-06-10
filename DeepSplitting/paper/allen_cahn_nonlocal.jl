@@ -1,5 +1,6 @@
 cd(@__DIR__)
 name_sim = split(splitpath(@__FILE__)[end],".")[1]
+using Statistics
 using HighDimPDE
 using Flux
 using Random
