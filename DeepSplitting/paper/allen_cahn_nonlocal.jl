@@ -1,6 +1,5 @@
 cd(@__DIR__)
 name_sim = split(splitpath(@__FILE__)[end],".")[1]
-using Pkg; Pkg.activate("../.");Pkg.instantiate()
 using HighDimPDE
 using Flux
 using Random
