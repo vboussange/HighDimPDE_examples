@@ -35,7 +35,7 @@ a(u) = u - u^3
 f(y,z,v_y,v_z,∇v_y,∇v_z,p,t) = a.(v_y) .- a.(v_z) .* Float32(π^(d/2) * σ_sampling^d) # nonlocal nonlinear part of the
 μ(X,p,t) = 0.0f0 # advection coefficients
 σ(X,p,t) = sqrt(2f0) # diffusion coefficients
-mc_sample(x) = x + randn(d,batch_size) * σ_sampling / sqrt(2f0) #montecarlo samples
+mc_sample(x) = (rand(Float32,d,batch_size) .- 0.5) * (u_domain[2]-u_domain[1]) .+ mean(u_domain) # uniform distrib in u_domain
 
 # defining the problem
 prob = PIDEProblem(g, f, μ, σ, X0, tspan, 
