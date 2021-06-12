@@ -47,7 +47,7 @@ function allen_cahn_nonlocal(;d,tspan,dt,batch_size,train_steps,σ_sampling,K)
         sol = solve(prob, alg, mc_sample,
                     dt=dt,
                     verbose = true,
-                    abstol=1e-1,
+                    abstol=1e-5,
                     maxiters = train_steps,
                     batch_size=batch_size,
                     use_cuda = true)
