@@ -33,7 +33,7 @@ function allen_cahn_nonlocal(;d,tspan,dt,batch_size,train_steps,σ_sampling,K)
         f(y,z,v_y,v_z,∇v_y,∇v_z, t) = a.(v_y) .- a.(v_z) #.* Float32(π^(d/2)) * σ_sampling^d .* exp.(sum(z.^2, dims = 1) / σ_sampling^2) # nonlocal nonlinear part of the
         μ_f(X,p,t) = 0.0f0 # advection coefficients
         σ_f(X,p,t) = sqrt(2f0) # diffusion coefficients
-        mc_sample(x) = (rand(Float32,d,batch_size) .- 0.5) * (u_domain[2]-u_domain[1]) .+ mean(u_domain) # uniform distrib in u_domain
+        mc_sample(x) = (CUDA.rand(Float32,d,batch_size) .- 0.5) * (u_domain[2]-u_domain[1]) .+ mean(u_domain) # uniform distrib in u_domain
 
         # defining the problem
         prob    = PIDEProblem(g, f, μ_f, σ_f, X0, tspan,
