@@ -71,19 +71,22 @@ for (i,ex) in enumerate(examples)
 
             for i in 1:5
                 # solving
+                println("d=",d," T=",T," i=",i)
+                println("DeepSplitting")
                 sol_ds = @timed solve(prob, alg_ds,
                             dt=dt,
                             verbose = false,
                             abstol=1e-6,
                             maxiters = maxiters,
                             batch_size = batch_size)
-                sol_mlp = @timed solve(prob, alg_mlp, multithreading=true)
-
                 push!(u_ds,[sol_ds.value.u[end],sol_ds.time])
                 push!(dfu_ds,(d, T, N, u_ds[end][1],u_ds[end][2]))
+                CSV.write("results/$(String(ex))_ds.csv", dfu_ds)
+
+                println("MLP")
+                sol_mlp = @timed solve(prob, alg_mlp, multithreading=true)
                 push!(u_mlp, [sol_mlp.value, sol_mlp.time])
                 push!(dfu_mlp,(d, T, N, u_mlp[end][1], u_mlp[end][2]))
-                CSV.write("results/$(String(ex))_ds.csv", dfu_ds)
                 CSV.write("results/$(String(ex))_mlp.csv", dfu_mlp)
             end
             push!(df_ds, (d, T, N, mean(u_ds)[1], std(u_ds)[1], mean(u_ds)[2] ))
