@@ -50,7 +50,6 @@ for (i,ex) in enumerate(examples)
             ##################
             # Deep Splitting #
             ##################
-            prob, mc_sample = eval(ex)(d, tspan, gpu)
             hls = d + 50 #hidden layer size
 
             nn = Flux.Chain(Dense(d,hls,tanh),
@@ -68,13 +67,13 @@ for (i,ex) in enumerate(examples)
             ################
             ##### MLP ######
             ################
-            prob, mc_sample = eval(ex)(d, tspan, cpu)
             alg_mlp = MLP(M = L, K = 10, L = L, mc_sample = mc_sample )
 
             for i in 1:5
                 # solving
                 println("d=",d," T=",T," i=",i)
                 println("DeepSplitting")
+                prob, mc_sample = eval(ex)(d, tspan, gpu)
                 sol_ds = @timed solve(prob, alg_ds,
                                         dt=dt,
                                         verbose = false,
@@ -86,6 +85,7 @@ for (i,ex) in enumerate(examples)
                 CSV.write(mydir*"/$(String(ex))_ds.csv", dfu_ds)
 
                 println("MLP")
+                prob, mc_sample = eval(ex)(d, tspan, cpu)
                 sol_mlp = @timed solve(prob, alg_mlp, multithreading=true)
                 push!(u_mlp, [sol_mlp.value, sol_mlp.time])
                 push!(dfu_mlp,(d, T, N, u_mlp[end][1], u_mlp[end][2]))
