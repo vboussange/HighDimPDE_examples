@@ -3,8 +3,7 @@ using Statistics
 using HighDimPDE
 using Flux
 using Random
-using CUDA
-Random.seed!(100)
+# Random.seed!(100)
 # for post processes
 using DataFrames
 using Latexify
@@ -29,7 +28,7 @@ Ts = [1/5, 1/2, 1] # [1/5]
 # Deepsplitting
 N = 10
 maxiters = 8000
-batch_size = 16000
+batch_size = 32000
 
 # MLP
 L = 5
@@ -65,14 +64,15 @@ for (i,ex) in enumerate(examples)
             ##################
                 println("d=",d," T=",T," i=",i)
                 println("DeepSplitting")
-                prob, mc_sample = eval(ex)(d, tspan, gpu)
-                alg_ds = DeepSplitting(nn, K = 5, opt = opt, mc_sample = mc_sample )
+                prob, mc_sample = eval(ex)(d, tspan, cpu)
+                alg_ds = DeepSplitting(nn, K = 2, opt = opt, mc_sample = mc_sample )
                 sol_ds = @timed solve(prob, alg_ds,
                                         dt=dt,
                                         verbose = false,
                                         abstol=1e-6,
                                         maxiters = maxiters,
-                                        batch_size = batch_size)
+                                        batch_size = batch_size,
+                                        use_cuda = true)
                 push!(u_ds,[sol_ds.value.u[end],sol_ds.time])
                 push!(dfu_ds,(d, T, N, u_ds[end][1],u_ds[end][2]))
                 CSV.write(mydir*"/$(String(ex))_ds.csv", dfu_ds)

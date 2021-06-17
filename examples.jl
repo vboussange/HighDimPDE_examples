@@ -18,13 +18,13 @@ function fisher_kpp(d, tspan, device)
         X0 = fill(0.0f0,d) |> device # initial point
         g(X) = exp.(-0.5f0 * sum(X.^2,dims=1))  # initial condition
         a(u) = u - u^3
-        f(y,z,v_y,v_z,∇v_y,∇v_z, t) = max.(0f0, v_y) .*( 1f0 .- max.(0f0,v_z) * Float32(π^(d/2)) * σ_sampling^d ) #.* Float32(π^(d/2)) * σ_sampling^d .* exp.(sum(z.^2, dims = 1) / σ_sampling^2) # nonlocal nonlinear part of the
+        f(y,z,v_y,v_z,∇v_y,∇v_z, t) = max.(0f0, v_y) .*( 1f0 .- max.(0f0,v_z) * Float32(π^(d/2)) * σ_sampling^d ) 
         μ_f(X,p,t) = 0f0 # advection coefficients
         σ_f(X,p,t) = 1f-1 # diffusion coefficients
         mc_sample = NormalSampling(σ_sampling / sqrt(2f0), true) # uniform distrib in u_domain
         # defining the problem
-        prob    = PIDEProblem(g, f, μ_f, σ_f, X0, tspan)
-        prob,mc_sample
+        prob = PIDEProblem(g, f, μ_f, σ_f, X0, tspan)
+        prob, mc_sample
 end
 
 function hamel(d, tspan, device)
