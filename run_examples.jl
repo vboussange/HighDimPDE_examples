@@ -47,9 +47,6 @@ for (i,ex) in enumerate(examples)
             dt = T / N
             tspan = (0f0,T)
 
-            ##################
-            # Deep Splitting #
-            ##################
             hls = d + 50 #hidden layer size
 
             nn = Flux.Chain(Dense(d,hls,tanh),
@@ -60,20 +57,16 @@ for (i,ex) in enumerate(examples)
                                 0.1,
                                 2000,
                                 1e-4),
-                                ADAM() )#optimiser
-
-            alg_ds = DeepSplitting(nn, K = 5, opt = opt, mc_sample = mc_sample )
-            
-            ################
-            ##### MLP ######
-            ################
-            alg_mlp = MLP(M = L, K = 10, L = L, mc_sample = mc_sample )
-
+                                ADAM() )#optimiser   
+            # solving         
             for i in 1:5
-                # solving
+            ##################
+            # Deep Splitting #
+            ##################
                 println("d=",d," T=",T," i=",i)
                 println("DeepSplitting")
                 prob, mc_sample = eval(ex)(d, tspan, gpu)
+                alg_ds = DeepSplitting(nn, K = 5, opt = opt, mc_sample = mc_sample )
                 sol_ds = @timed solve(prob, alg_ds,
                                         dt=dt,
                                         verbose = false,
@@ -83,9 +76,12 @@ for (i,ex) in enumerate(examples)
                 push!(u_ds,[sol_ds.value.u[end],sol_ds.time])
                 push!(dfu_ds,(d, T, N, u_ds[end][1],u_ds[end][2]))
                 CSV.write(mydir*"/$(String(ex))_ds.csv", dfu_ds)
-
+            ################
+            ##### MLP ######
+            ################
                 println("MLP")
                 prob, mc_sample = eval(ex)(d, tspan, cpu)
+                alg_mlp = MLP(M = L, K = 10, L = L, mc_sample = mc_sample )
                 sol_mlp = @timed solve(prob, alg_mlp, multithreading=true)
                 push!(u_mlp, [sol_mlp.value, sol_mlp.time])
                 push!(dfu_mlp,(d, T, N, u_mlp[end][1], u_mlp[end][2]))
