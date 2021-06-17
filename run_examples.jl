@@ -46,11 +46,11 @@ for (i,ex) in enumerate(examples)
             u_mlp = [ ]
             dt = T / N
             tspan = (0f0,T)
-            prob, mc_sample = eval(ex)(d,tspan)
 
             ##################
             # Deep Splitting #
             ##################
+            prob, mc_sample = eval(ex)(d, tspan, gpu)
             hls = d + 50 #hidden layer size
 
             nn = Flux.Chain(Dense(d,hls,tanh),
@@ -68,6 +68,7 @@ for (i,ex) in enumerate(examples)
             ################
             ##### MLP ######
             ################
+            prob, mc_sample = eval(ex)(d, tspan, cpu)
             alg_mlp = MLP(M = L, K = 10, L = L, mc_sample = mc_sample )
 
             for i in 1:5
