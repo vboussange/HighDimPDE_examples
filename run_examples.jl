@@ -10,17 +10,18 @@ using DataFrames
 using Latexify
 using LaTeXStrings
 using CSV
-isdir("results") ? nothing : mkdir("results")
+mydir = "results2"
+isdir(mydir) ? nothing : mkdir(mydir)
 
 include("examples.jl")
 examples = [#
-            :allen_cahn_nonlocal, 
             :fisher_kpp, 
             :hamel, 
             # :merton, 
             :mirrahimi, 
             :nonlocal_comp, 
-            :sine_gordon
+            :sine_gordon,
+            :allen_cahn_nonlocal, 
             ]
 ds = [1,2,5,10] # [1]
 Ts = [1/5,1/2,1] # [1/5]
@@ -28,7 +29,7 @@ Ts = [1/5,1/2,1] # [1/5]
 # Deepsplitting
 N = 10
 maxiters = 8000
-batch_size = 8000
+batch_size = 16000
 
 # MLP
 L = 5
@@ -62,44 +63,44 @@ for (i,ex) in enumerate(examples)
                                 1e-4),
                                 ADAM() )#optimiser
 
-            alg_ds = DeepSplitting(nn, K=1, opt = opt, mc_sample = mc_sample )
+            alg_ds = DeepSplitting(nn, K = 5, opt = opt, mc_sample = mc_sample )
             
             ################
             ##### MLP ######
             ################
-            alg_mlp = MLP(M=L, K=10, L = L, mc_sample = mc_sample )
+            alg_mlp = MLP(M = L, K = 10, L = L, mc_sample = mc_sample )
 
             for i in 1:5
                 # solving
                 println("d=",d," T=",T," i=",i)
                 println("DeepSplitting")
                 sol_ds = @timed solve(prob, alg_ds,
-                            dt=dt,
-                            verbose = false,
-                            abstol=1e-6,
-                            maxiters = maxiters,
-                            batch_size = batch_size)
+                                        dt=dt,
+                                        verbose = false,
+                                        abstol=1e-6,
+                                        maxiters = maxiters,
+                                        batch_size = batch_size)
                 push!(u_ds,[sol_ds.value.u[end],sol_ds.time])
                 push!(dfu_ds,(d, T, N, u_ds[end][1],u_ds[end][2]))
-                CSV.write("results/$(String(ex))_ds.csv", dfu_ds)
+                CSV.write(mydir*"/$(String(ex))_ds.csv", dfu_ds)
 
                 println("MLP")
                 sol_mlp = @timed solve(prob, alg_mlp, multithreading=true)
                 push!(u_mlp, [sol_mlp.value, sol_mlp.time])
                 push!(dfu_mlp,(d, T, N, u_mlp[end][1], u_mlp[end][2]))
-                CSV.write("results/$(String(ex))_mlp.csv", dfu_mlp)
+                CSV.write(mydir*"/$(String(ex))_mlp.csv", dfu_mlp)
             end
             push!(df_ds, (d, T, N, mean(u_ds)[1], std(u_ds)[1], mean(u_ds)[2] ))
             push!(df_mlp, (d, T, L, mean(u_mlp)[1], std(u_mlp)[1],mean(u_mlp)[2] ))
     end
     #ds
     tab_ds = latexify(df_ds,env=:tabular,fmt="%.7f") #|> String
-    io = open("results/$(String(ex))_ds.tex", "w")
+    io = open(mydir*"/$(String(ex))_ds.tex", "w")
     write(io,tab_ds);
     close(io)
     #mlp
     tab_mlp = latexify(df_mlp,env=:tabular,fmt="%.7f") #|> String
-    io = open("results/$(String(ex))_mlp.tex", "w")
+    io = open(mydir*"/$(String(ex))_mlp.tex", "w")
     write(io,tab_mlp);
     close(io)
 end

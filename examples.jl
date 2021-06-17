@@ -32,7 +32,7 @@ function hamel(d,tspan)
         X0 = fill(0f0,d)  # initial point
         g(X) = Float32(2f0^(d/2))* exp.(-2f0 * Float32(π)  * sum( X.^2, dims=1))   # initial condition
         m(x) = - 5f-1 * sum(x.^2, dims=1)
-        f(y, z, v_y, v_z, ∇v_y, ∇v_z, t) = max.(0f0, v_y) .* m(y) - max.(0f0, v_z) .* m(z) * Float32((2f0 * π)^(d/2) * σ_sampling^d) .* exp.(5f-1 * sum(z.^2, dims = 1) / σ_sampling^2) # nonlocal nonlinear part of the
+        f(y, z, v_y, v_z, ∇v_y, ∇v_z, t) = max.(0f0, v_y) .* ( m(y) - max.(0f0, v_z) .* m(z) * Float32((2f0 * π)^(d/2) * σ_sampling^d) .* exp.(5f-1 * sum(z.^2, dims = 1) / σ_sampling^2)) # nonlocal nonlinear part of the
         μ_f(X,p,t) = 0.0f0 # advection coefficients
         σ_f(X,p,t) = sqrt(1f-1) # diffusion coefficients
         mc_sample = NormalSampling(σ_sampling) # normal
