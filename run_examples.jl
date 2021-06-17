@@ -24,7 +24,7 @@ examples = [#
             :allen_cahn_nonlocal, 
             ]
 ds = [1,2,5,10] # [1]
-Ts = [1/5,1/2,1] # [1/5]
+Ts = [1/5, 1/2, 1] # [1/5]
 
 # Deepsplitting
 N = 10
