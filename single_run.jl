@@ -84,6 +84,6 @@ if true
     L = 5
     prob, mc_sample = hamel64(d, tspan)
     alg_mlp = MLP(M = L, K = 10, L = L, mc_sample = mc_sample )
-    @time sol_mlp = solve(prob, alg_mlp, multithreading=true)
+    @time sol_mlp = solve(prob, alg_mlp, multithreading=true, verbose=true)
     println("Solution MLP = ", sol_mlp)
 end

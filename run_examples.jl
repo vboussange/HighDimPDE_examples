@@ -21,6 +21,7 @@ examples = [#
             :nonlocal_comp, 
             :sine_gordon,
             :allen_cahn_nonlocal, 
+            :fisher_kpp_reflected,
             ]
 ds = [1,2,5,10] # [1]
 Ts = [1/5, 1/2, 1] # [1/5]
