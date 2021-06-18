@@ -64,7 +64,7 @@ for (i,ex) in enumerate(examples)
             ##################
                 println("d=",d," T=",T," i=",i)
                 println("DeepSplitting")
-                prob, mc_sample = eval(ex)(d, tspan, cpu)
+                prob, mc_sample = eval(ex)(d, tspan)
                 alg_ds = DeepSplitting(nn, K = 2, opt = opt, mc_sample = mc_sample )
                 sol_ds = @timed solve(prob, alg_ds,
                                         dt=dt,
@@ -80,7 +80,7 @@ for (i,ex) in enumerate(examples)
             ##### MLP ######
             ################
                 println("MLP")
-                prob, mc_sample = eval(ex)(d, tspan, cpu)
+                prob, mc_sample = eval(ex)(d, tspan)
                 alg_mlp = MLP(M = L, K = 10, L = L, mc_sample = mc_sample )
                 sol_mlp = @timed solve(prob, alg_mlp, multithreading=true)
                 push!(u_mlp, [sol_mlp.value, sol_mlp.time])

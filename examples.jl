@@ -1,6 +1,6 @@
 
-function allen_cahn_nonlocal(d, tspan, device)
-        X0 = fill(0.0f0,d) |> device  # initial point
+function allen_cahn_nonlocal(d, tspan)
+        X0 = fill(0.0f0,d) # initial point
         u_domain = [-5f-1,5f-1]
         g(X) = exp.(-0.25f0 * sum(X.^2,dims=1))   # initial condition
         a(u) = u - u^3
@@ -13,12 +13,11 @@ function allen_cahn_nonlocal(d, tspan, device)
         prob, mc_sample
 end
 
-function fisher_kpp(d, tspan, device)
+function fisher_kpp(d, tspan)
         σ_sampling = 1f-1
-        X0 = fill(0.0f0,d) |> device # initial point
+        X0 = fill(0.0f0,d) # initial point
         g(X) = exp.(-0.5f0 * sum(X.^2,dims=1))  # initial condition
-        a(u) = u - u^3
-        f(y,z,v_y,v_z,∇v_y,∇v_z, t) = max.(0f0, v_y) .*( 1f0 .- max.(0f0,v_z) * Float32(π^(d/2)) * σ_sampling^d ) 
+        f(y,z,v_y,v_z,∇v_y,∇v_z, t) = max.(0f0, v_y) .* ( 1f0 .- max.(0f0,v_z) * Float32(π^(d/2)) * σ_sampling^d ) 
         μ_f(X,p,t) = 0f0 # advection coefficients
         σ_f(X,p,t) = 1f-1 # diffusion coefficients
         mc_sample = NormalSampling(σ_sampling / sqrt(2f0), true) # uniform distrib in u_domain
@@ -27,14 +26,14 @@ function fisher_kpp(d, tspan, device)
         prob, mc_sample
 end
 
-function hamel(d, tspan, device)
+function hamel(d, tspan)
         σ_sampling = 1f-1
-        X0 = fill(0f0,d) |> device # initial point
+        X0 = fill(0f0,d) # initial point
         g(X) = Float32(2f0^(d/2))* exp.(-2f0 * Float32(π)  * sum( X.^2, dims=1))   # initial condition
         m(x) = - 5f-1 * sum(x.^2, dims=1)
         f(y, z, v_y, v_z, ∇v_y, ∇v_z, t) = max.(0f0, v_y) .* ( m(y) - max.(0f0, v_z) .* m(z) * Float32((2f0 * π)^(d/2) * σ_sampling^d) .* exp.(5f-1 * sum(z.^2, dims = 1) / σ_sampling^2)) # nonlocal nonlinear part of the
         μ_f(X,p,t) = 0.0f0 # advection coefficients
-        σ_f(X,p,t) = sqrt(1f-1) # diffusion coefficients
+        σ_f(X,p,t) = 1f-1 # diffusion coefficients
         mc_sample = NormalSampling(σ_sampling) # normal
 
         # defining the problem
@@ -44,10 +43,9 @@ function hamel(d, tspan, device)
 end
 
 
-function sine_gordon(d, tspan, device)
-        X0 = fill(0.0f0,d) |> device # initial point
+function sine_gordon(d, tspan)
+        X0 = fill(0.0f0,d) # initial point
         g(X) = exp.(-0.25f0 * sum(X.^2,dims=1))   # initial condition
-        a(u) = u - u^3
         f(y,z,v_y,v_z,∇v_y,∇v_z, t) = sin.(v_y) .- v_z * Float32(π^(d/2) * σ_sampling^d) #.* Float32(π^(d/2)) * σ_sampling^d .* exp.(sum(z.^2, dims = 1) / σ_sampling^2) # nonlocal nonlinear part of the
         μ_f(X,p,t) = 0.0f0 # advection coefficients
         σ_f(X,p,t) = 1f0 # diffusion coefficients
@@ -60,11 +58,10 @@ function sine_gordon(d, tspan, device)
 end
 
 
-function nonlocal_comp(d, tspan, device)
+function nonlocal_comp(d, tspan)
         σ_sampling = 1f-1
-        X0 = fill(0f0,d) |> device # initial point
+        X0 = fill(0f0,d) # initial point
         g(X) = exp.(-0.25f0 * sum(X.^2,dims=1))   # initial condition
-        a(u) = u - u^3
         f(y, z, v_y, v_z, ∇v_y ,∇v_z, t) =  max.(0f0, v_y) .* (1f0 .- max.(0f0, v_z) * Float32((2 * π )^(d/2) * σ_sampling^d))
         μ_f(X,p,t) = 0.0f0 # advection coefficients
         σ_f(X,p,t) = sqrt(1f-1) # diffusion coefficients
@@ -76,9 +73,9 @@ function nonlocal_comp(d, tspan, device)
 end
 
 
-function mirrahimi(d, tspan, device)
+function mirrahimi(d, tspan)
         σ_sampling = 1f-1
-        X0 = fill(0.0f0,d) |> device # initial point
+        X0 = fill(0.0f0,d) # initial point
         u_domain = [-5f-1,5f-1]
         g(X) = exp.(-0.25f0 * sum(X.^2,dims=1))   # initial condition
         a(y) = 1f0 .- 1f-1 .* sum(y.^2,dims=1)
