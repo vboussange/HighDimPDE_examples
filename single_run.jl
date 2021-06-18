@@ -9,8 +9,6 @@ using DataFrames
 using Latexify
 using LaTeXStrings
 using CSV
-mydir = "results2"
-isdir(mydir) ? nothing : mkdir(mydir)
 
 function hamel(d, tspan)
     σ_sampling = 1f0
