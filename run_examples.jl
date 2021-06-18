@@ -14,13 +14,13 @@ isdir(mydir) ? nothing : mkdir(mydir)
 
 include("examples.jl")
 examples = [#
-            # :fisher_kpp, 
-            # :hamel, 
-            # # :merton, 
-            # :mirrahimi, 
-            # :nonlocal_comp, 
-            # :sine_gordon,
-            # :allen_cahn_nonlocal, 
+            :fisher_kpp, 
+            :hamel, 
+            # :merton, 
+            :mirrahimi, 
+            :nonlocal_comp, 
+            :sine_gordon,
+            :allen_cahn_nonlocal, 
             :fisher_kpp_reflected,
             ]
 ds = [1,2,5,10] # [1]
