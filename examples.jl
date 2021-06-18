@@ -30,12 +30,12 @@ function fisher_kpp_reflected(d, tspan)
         u_domain = [-1f-1,1f-1]
         X0 = fill(0.0f0,d) # initial point
         g(X) = exp.(-0.5f0 * sum(X.^2,dims=1))  # initial condition
-        f(y,z,v_y,v_z,∇v_y,∇v_z, t) = max.(0f0, v_y) .* ( 1f0 .- max.(0f0,v_z) * Float32(π^(d/2)) * σ_sampling^d ) 
+        f(y,z,v_y,v_z,∇v_y,∇v_z, t) = max.(0f0, v_y) .* ( 1f0 .- max.(0f0,v_y) ) 
         μ_f(X,p,t) = 0f0 # advection coefficients
         σ_f(X,p,t) = 1f-1 # diffusion coefficients
-        mc_sample = UniformSampling(u_domain[1], u_domain[2]) # uniform distrib in u_domain
+        mc_sample = NoSampling() # uniform distrib in u_domain
         # defining the problem
-        prob = PIDEProblem(g, f, μ_f, σ_f, X0, tspan)
+        prob = PIDEProblem(g, f, μ_f, σ_f, X0, tspan, u_domain = u_domain)
         prob, mc_sample
 end
 
