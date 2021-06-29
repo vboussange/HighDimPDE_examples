@@ -7,9 +7,6 @@ using DataFrames
 using Latexify
 using LaTeXStrings
 using CSV
-using Revise
-# mydir = "results2"
-# isdir(mydir) ? nothing : mkdir(mydir)
 
 function hamel(d, tspan)
     T = Float64
