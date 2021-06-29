@@ -72,7 +72,7 @@ end
 
 
 function nonlocal_comp(d, tspan)
-        σ_sampling = 1f-1
+        σ_sampling = 1f-1 / sqrt(2f0)
         X0 = fill(0f0,d) # initial point
         g(X) = exp.(-0.25f0 * sum(X.^2,dims=1))   # initial condition
         f(y, z, v_y, v_z, ∇v_y ,∇v_z, t) =  max.(0f0, v_y) .* (1f0 .- max.(0f0, v_z) * Float32((2 * π )^(d/2) * σ_sampling^d))
@@ -89,7 +89,6 @@ end
 function mirrahimi(d, tspan)
         σ_sampling = 1f-1
         X0 = fill(0.0f0,d) # initial point
-        u_domain = [-5f-1,5f-1]
         g(X) = exp.(-0.25f0 * sum(X.^2,dims=1))   # initial condition
         a(y) = 1f0 .- 1f-1 .* sum(y.^2,dims=1)
         f(y, z, v_y, v_z, dv_y, dv_z, t) = max.(v_y , 0f0) .* (a(y) - 0.1f0 * max.(v_z , 0f0) .* (Float32(π^(d/2) * σ_sampling^d) .* exp.( sum(z.^2,dims=1)) / σ_sampling^2)) # function from solved equation

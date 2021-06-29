@@ -3,52 +3,51 @@ using Statistics
 using HighDimPDE
 using Flux
 using Random
-# Random.seed!(100)
-# for post processes
 using DataFrames
 using Latexify
 using LaTeXStrings
 using CSV
-mydir = "results2"
-isdir(mydir) ? nothing : mkdir(mydir)
+using Revise
+# mydir = "results2"
+# isdir(mydir) ? nothing : mkdir(mydir)
 
 function hamel(d, tspan)
-    σ_sampling = 1f0
+    T = Float64
+    σ_sampling = T(1.)
+    X0 = zeros(T, d) # initial point
+    g(X) = T(2.0^(d/2))* exp(-T(2.0 * π)  * sum( X.^2 ))   # initial condition
+    m(x) = - T(0.5) * sum(x.^2)
+    f(y, z, v_y, v_z, ∇v_y, ∇v_z, t) = max(zero(T), v_y) * ( m(y) - max(zero(T), v_z) * m(z) * T((2. * π)^(d/2) * σ_sampling^d) * exp(T(0.5) * sum(z.^2) / σ_sampling^2)) # nonlocal nonlinear part of the
+    μ_f(X,p,t) = 0. # advection coefficients
+    σ_f(X,p,t) = 0.1 # diffusion coefficients
+    mc_sample = NormalSampling(σ_sampling) # normal
+
+    # defining the problem
+    prob = PIDEProblem(g, f, μ_f, σ_f, X0, tspan)
+    prob, mc_sample
+end
+
+function nonlocal_comp(d, tspan)
+    σ_sampling = 1f-1 / sqrt(2f0)
     X0 = fill(0f0,d) # initial point
-    g(X) = Float32(2f0^(d/2))* exp.(-2f0 * Float32(π)  * sum( X.^2, dims=1))   # initial condition
-    m(x) = - 5f-1 * sum(x.^2, dims=1)
-    f(y, z, v_y, v_z, ∇v_y, ∇v_z, t) = max.(0f0, v_y) .* ( m(y) - max.(0f0, v_z) .* m(z) * Float32((2f0 * π)^(d/2) * σ_sampling^d) .* exp.(5f-1 * sum(z.^2, dims = 1) / σ_sampling^2)) # nonlocal nonlinear part of the
+    g(X) = exp.(-0.25f0 * sum(X.^2,dims=1))   # initial condition
+    f(y, z, v_y, v_z, ∇v_y ,∇v_z, t) =  max.(0f0, v_y) .* (1f0 .- max.(0f0, v_z) * Float32((2 * π )^(d/2) * σ_sampling^d))
     μ_f(X,p,t) = 0.0f0 # advection coefficients
     σ_f(X,p,t) = 1f-1 # diffusion coefficients
-    mc_sample = NormalSampling(σ_sampling) # normal
+    mc_sample = NormalSampling(σ_sampling, false) # uniform distrib in u_domain
 
     # defining the problem
-    prob    = PIDEProblem(g, f, μ_f, σ_f, X0, tspan,
-                            )
+    prob    = PIDEProblem(g, f, μ_f, σ_f, X0, tspan)
     prob, mc_sample
 end
 
-function hamel64(d, tspan)
-    σ_sampling = 1e-1
-    X0 = fill(0f0,d) # initial point
-    g(X) = 2e0^(d/2)* exp.(-2e0 * Float32(π)  * sum( X.^2, dims=1))   # initial condition
-    m(x) = - 5e-1 * sum(x.^2, dims=1)
-    f(y, z, v_y, v_z, ∇v_y, ∇v_z, t) = max.(0e0, v_y) .* ( m(y) - max.(0e0, v_z) .* m(z) * (2e0 * π)^(d/2) * σ_sampling^d .* exp.(5e-1 * sum(z.^2, dims = 1) / σ_sampling^2)) # nonlocal nonlinear part of the
-    μ_f(X,p,t) = 0e0 # advection coefficients
-    σ_f(X,p,t) = 1e-1 # diffusion coefficients
-    mc_sample = NormalSampling(σ_sampling) # normal
 
-    # defining the problem
-    prob    = PIDEProblem(g, f, μ_f, σ_f, X0, tspan,
-                            )
-    prob, mc_sample
-end
 
-T = 0.2
+T = 1.0
 tspan = (0f0,T)
 d = 1
 
-if false
+if true
     # Deepsplitting
     N = 10
     maxiters = 8000
@@ -67,8 +66,8 @@ if false
                         1e-4),
                         ADAM() )#optimiser
 
-    prob, mc_sample = hamel(d, tspan)
-    alg_ds = DeepSplitting(nn, K = 1, opt = opt, mc_sample = mc_sample )
+    prob, mc_sample = nonlocal_comp(d, tspan)
+    alg_ds = DeepSplitting(nn, K = 10, opt = opt, mc_sample = mc_sample )
     @time sol_ds = solve(prob, alg_ds,
                             dt=T/N,
                             verbose = true,
@@ -82,8 +81,10 @@ end
 if true
     # MLP
     L = 5
-    prob, mc_sample = hamel64(d, tspan)
-    alg_mlp = MLP(M = L, K = 10, L = L, mc_sample = mc_sample )
-    @time sol_mlp = solve(prob, alg_mlp, multithreading=true, verbose=true)
+    prob, mc_sample = hamel(d, tspan)
+    alg_mlp = MLP(M = L, K = 10, L = L, 
+                    mc_sample = mc_sample 
+                    )
+    @time sol_mlp = solve(prob, alg_mlp, multithreading = false, verbose = false)
     println("Solution MLP = ", sol_mlp)
 end
