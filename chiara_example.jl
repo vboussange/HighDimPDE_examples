@@ -13,8 +13,8 @@ function get_dim(y::Array, dim)
     return view(y,dim,ntuple(i->:,ndims(y)-1)...)
 end
 
-tspan = (0.0,1f-4)
-dt = 1f-4 # time step
+tspan = (0f0,1f0)
+dt = 1f-1 # time step
 
 
 d_spatial = 1
@@ -35,8 +35,8 @@ b(S) = ϕ .+ γ * S ./ (αs .+ S)
 h(S) = ϕ ./ (ϕ .+ γ * (S ./ (S .+ αs)) )
 volx = 1f0
 g(x) = Float32((2*π)^(-d/2)) * ss0^(- Float32(d) * 5f-1) * exp.(- 5f-1 *sum((x .-  5f-1) .^2f0 / ss0, dims = 1)) # initial condition
-plt.plot(xgrid1, g.(xgrid))
-gcf()
+# plt.plot(xgrid1, g.(xgrid))
+# gcf()
 
 
 function f(y, z, u, ∇u, t) 
@@ -57,8 +57,8 @@ if false
     a(S(x))
     b(S(x))
     h(S(x))
-    y = randn(Float32,d,10)
-    z =  randn(Float32,d,10, 10)
+    y = CUDA.randn(Float32,d,10)
+    z =  CUDA.randn(Float32,d,10, 10)
     f(y, z, u, 0f0, 0f0)
 end
 
@@ -66,8 +66,8 @@ end
 ##############################
 ####### Neural Network #######
 ##############################
-batch_size = 100
-train_steps = 1000
+batch_size = 1000
+train_steps = 2000
 K = 100
 
 hls = d + 50 #hidden layer size
