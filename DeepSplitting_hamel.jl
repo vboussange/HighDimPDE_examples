@@ -11,7 +11,7 @@ plotting = true
 tspan = (0f0,1f-2)
 dt = 1f-2 # time step
 μ(X,p,t) = 0f0 # advection coefficients
-σ(X,p,t) = 1f-1 # diffusion coefficients
+σ(X,p,t) = 0f0 #1f-1 # diffusion coefficients
 d = 5
 ss0 = 1f-2#std g0
 U = 5f-1
@@ -27,11 +27,11 @@ K = 100
 hls = d + 50 #hidden layer size
 
 nn_batch = Flux.Chain(
-        BatchNorm(d,affine = true, axis = 1),
+        BatchNorm(d,affine = true, dim = 1),
         Dense(d, hls, tanh),
-        BatchNorm(hls,affine = true, axis = 1),
+        BatchNorm(hls,affine = true, dim = 1),
         Dense(hls,hls,tanh),
-        BatchNorm(hls, affine = true, axis = 1),
+        BatchNorm(hls, affine = true, dim = 1),
         # Dense(hls,hls,relu),
         Dense(hls, 1, relu)) # Neural network used by the scheme, with batch normalisation
 
@@ -62,7 +62,7 @@ prob = PIDEProblem(g, f, μ, σ, tspan,
                 abstol = 1f0,
                 maxiters = train_steps,
                 batch_size = batch_size,
-                use_cuda = true
+                use_cuda = false
                 )
 
 ###############################

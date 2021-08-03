@@ -1,0 +1,97 @@
+cd(@__DIR__)
+using HighDimPDE
+using Random
+using Test
+using Flux
+using Revise
+using PyPlot
+using UnPack
+plotting = true
+
+##############################
+####### Global parameters ####
+##############################
+tspan = (0f0,2f-2)
+dt = 1f-2 # time step
+d = 1
+U = 5f-1
+u_domain = repeat([-U,U]', d, 1)
+
+##############################
+####### Neural Network #######
+##############################
+batch_size = 8192
+train_steps = 10000
+K = 1
+
+hls = d + 50 #hidden layer size
+
+nn_batch = Flux.Chain(
+        BatchNorm(d,affine = true, dim = 1),
+        Dense(d, hls, tanh),
+        BatchNorm(hls,affine = true, dim = 1),
+        Dense(hls,hls,tanh),
+        BatchNorm(hls, affine = true, dim = 1),
+        # Dense(hls,hls,relu),
+        Dense(hls, 1, relu)) # Neural network used by the scheme, with batch normalisation
+
+opt = Flux.Optimiser(ExpDecay(1e-1,
+                1e-2,
+                1000,
+                1e-6),
+                ADAM() )#optimiser
+
+##########################
+###### PDE Problem #######
+##########################
+μ(X,p,t) = 0f0 # advection coefficients
+σ(X,p,t) = 1f0 # diffusion coefficients
+g(X) = exp.(-0.5f0 * sum(X.^2,dims=1))  # initial condition
+f(y,z,v_y,v_z,∇v_y,∇v_z, t) = v_y .* ( 1f0 .- v_y)  # nonlocal nonlinear part of the
+
+# defining the problem
+alg = DeepSplitting(nn_batch, K=K, opt = opt)
+prob = PIDEProblem(g, f, μ, σ, tspan, u_domain = u_domain)
+# solving
+@time xgrid,ts,sol = solve(prob, 
+                alg, 
+                dt, 
+                verbose = true, 
+                abstol = 1f-6,
+                maxiters = train_steps,
+                batch_size = batch_size,
+                use_cuda = true,
+                )
+
+###############################
+######### Plotting ############
+###############################
+if plotting
+        clf()
+        fig, ax = plt.subplots( sharey = true)
+
+        xgrid1 = collect((-U:5f-3:U))
+        xgrid = [reshape(vcat(x, fill(0f0,d-1)),:,1) for x in xgrid1] 
+
+        #Deepsplitting sol
+        for i in 1:length(sol)
+                ax.scatter(xgrid1, reduce(vcat,sol[i].(xgrid)), s = .2, label="t = $(dt * (i-1))")
+        end
+        gcf()
+
+        ax.set_title("DeepSplitting")
+        ax.legend()
+        
+        gcf()
+        savefig("hamel_$(d)d.pdf")
+
+        #####
+        # other DimensionMismatch
+        #####
+        if false
+                dx = 0.05
+                x = u_domain[1,1]:dx:u_domain[1,2]
+                plt.contourf(x,x,g.(repeat(x,2)))
+        end
+end
+gcf()
