@@ -13,7 +13,7 @@ function get_dim(y::AbstractArray, dim)
     return view(y,dim,ntuple(i->:,ndims(y)-1)...)
 end
 
-tspan = (0f0, 1f-1)
+tspan = (0f0, 5f-1)
 dt = 5f-2 # time step
 
 
@@ -117,33 +117,37 @@ if plotting
         x = range(0, 1, length = 100)
         solinf = sol[end]
         function ρ(x, sol)
-                ρ, _ = quadgk(y -> sol(reshape([y,x],2,1)), 0, 1)
+                ρ, _ = quadgk(y -> sol(reshape([y,x],2,1))[], 0, 1)
                 return ρ[]
         end
 
         function μ(x, sol)
-                μ, _ = quadgk(y -> x * solinf(reshape([y,x],2,1)), 0, 1)
+                μ, _ = quadgk(y -> y * sol(reshape([y,x],2,1))[], 0, 1)
                 return μ[]
         end
 
         function σ²(x, sol)
-                σ², _ = quadgk(y -> x^2 * solinf(reshape([y,x],2,1)), 0, 1)
+                σ², _ = quadgk(y -> y^2 * sol(reshape([y,x],2,1))[], 0, 1)
                 return σ²[]
         end
 
-        fig, ax = plt.subplots(3, sharey = true)
+        fig, ax = plt.subplots(3)
 
         ax[1].set_title(L"\rho(x)")
         ax[2].set_title(L"\mu(x)")
         ax[3].set_title(L"\sigma^2(x)")
 
         for i in 1:length(sol)
-                ax[1].plot(x, ρ.(x, Ref(sol[i])), label="t = $(dt * (i-1))")
-                ax[2].plot(x, μ.(x, Ref(sol[i])), label="t = $(dt * (i-1))")
-                ax[3].plot(x, σ².(x, Ref(sol[i])), label="t = $(dt * (i-1))")
+                try
+                        ax[1].plot(x, ρ.(x, Ref(sol[i])), label="t = $(dt * (i-1))")
+                        ax[2].plot(x, μ.(x, Ref(sol[i])), label="t = $(dt * (i-1))")
+                        ax[3].plot(x, σ².(x, Ref(sol[i])), label="t = $(dt * (i-1))")
+                catch e
+                        println("did not work for i = $i")
+                end
         end
 
-        for _ax in ax
+        for _ax in ax[1:1]
                 _ax.legend()
         end
         fig.tight_layout()
