@@ -117,8 +117,7 @@ function sine_gordon(d, tspan)
         mc_sample = NormalSampling(σ_sampling/sqrt(2f0)) # uniform distrib in u_domain
 
         # defining the problem
-        prob    = PIDEProblem(g, f, μ_f, σ_f, X0, tspan,
-                                )
+        prob    = PIDEProblem(g, f, μ_f, σ_f, X0, tspan)
         prob, mc_sample
 end
 

@@ -1,3 +1,5 @@
+using CUDA
+CUDA.device!(6)
 using HighDimPDE
 using Random
 using Test
