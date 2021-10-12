@@ -11,8 +11,8 @@ plotting = true
 ##############################
 ####### Global parameters ####
 ##############################
-tspan = (0f0,1f-4)
-dt = 1f-4 # time step
+tspan = (0f0,2f-1)
+dt = 1f-1 # time step
 d = 5
 U = 5f-1
 u_domain = repeat([-U,U]', d, 1)
@@ -21,8 +21,8 @@ u_domain = repeat([-U,U]', d, 1)
 ####### Neural Network #######
 ##############################
 batch_size = 5000
-train_steps = 10000
-K = 200
+train_steps = 5000
+K = 1
 
 hls = d + 50 #hidden layer size
 
@@ -38,7 +38,7 @@ nn_batch = Flux.Chain(
 opt = Flux.Optimiser(ExpDecay(1e-1,
                 1e-2,
                 1000,
-                1e-6),
+                1e-4),
                 ADAM() )#optimiser
 
 ##########################
@@ -79,21 +79,10 @@ if plotting
         for i in 1:length(sol)
                 ax.scatter(xgrid1, reduce(vcat,sol[i].(xgrid)), s = .2, label="t = $(dt * (i-1))")
         end
-        gcf()
-
+        
         ax.set_title("DeepSplitting")
         ax.legend()
-        
-        gcf()
-        savefig("hamel_$(d)d.pdf")
-
-        #####
-        # other DimensionMismatch
-        #####
-        if false
-                dx = 0.05
-                x = u_domain[1,1]:dx:u_domain[1,2]
-                plt.contourf(x,x,g.(repeat(x,2)))
-        end
+                
+        savefig("fisher_kpp_$(d)d.pdf")
 end
 gcf()

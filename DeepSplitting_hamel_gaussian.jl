@@ -6,6 +6,7 @@ using Flux
 using Revise
 using PyPlot
 using UnPack
+using Functors
 plotting = true
 
 tspan = (0f0,2f-1)
@@ -21,23 +22,29 @@ u_domain = repeat([-U,U]', d, 1)
 ####### Neural Network #######
 ##############################
 batch_size = 2000
-train_steps = 5000
+train_steps = 4000
 K = 1
 
 hls = d + 50 #hidden layer size
 
-nn_batch = Flux.Chain(
-        BatchNorm(d, affine = true, dim = 1),
-        Dense(d, hls, tanh),
-        BatchNorm(hls, affine = true, dim = 1),
-        Dense(hls, hls, tanh),
-        BatchNorm(hls, affine = true, dim = 1),
-        Dense(hls, 1, relu)) # Neural network used by the scheme, with batch normalisation
+struct GaussianApprox
+        ρ
+        μ
+        σ
+end
+
+@functor GaussianApprox
+
+(f::GaussianApprox)(x) = sum(f.ρ) / prod(f.σ) * exp.(-5f-1 * sum(((x .- f.μ) ./ f.σ).^2, dims=1)) 
+
+nn_batch = GaussianApprox(Float32[(2*π)^(-d/2)], 
+                        fill(0f0,d),
+                        fill(sqrt(ss0),d)) # Neural network used by the scheme, with batch normalisation
 
 opt = Flux.Optimiser(ExpDecay(
+                        1f0,
                         1f-1,
-                        1f-1,
-                        1000,
+                        500,
                         1f-4),
                         ADAM() )#optimiser
 alg = DeepSplitting(nn_batch, K=K, opt = opt, mc_sample = UniformSampling(u_domain[:,1], u_domain[:,2]) )
@@ -59,7 +66,7 @@ prob = PIDEProblem(g, f, μ, σ, tspan,
                 alg, 
                 dt, 
                 verbose = true, 
-                abstol = 2f-1,
+                abstol = 1f-5,
                 maxiters = train_steps,
                 batch_size = batch_size,
                 use_cuda = true
@@ -107,7 +114,7 @@ if plotting
         ax[1].set_title("DeepSplitting")
 
         for _a in ax
-                _a.legend()
+                # _a.legend()
         end
         gcf()
         savefig("hamel_$(d)d.pdf")

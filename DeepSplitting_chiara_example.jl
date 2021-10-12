@@ -79,9 +79,9 @@ nn_batch = Flux.Chain(
                 Dense(hls, 1, relu)) # Neural network used by the scheme, with batch normalisation
 
 opt = Flux.Optimiser(ExpDecay(1f-2,
-                10.0,
+                1f-1,
                 1000,
-                1f-6),
+                1f-4),
                 ADAM() )#optimiser
 mc_sample = UniformSampling(u_domain[1,:],u_domain[2,:], [1]) # not integrating first dimension
 alg = DeepSplitting(nn_batch, K=K, opt = opt, mc_sample = mc_sample )

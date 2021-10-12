@@ -30,8 +30,8 @@ nn_batch = Flux.Chain(
         BatchNorm(d,affine = true, dim = 1),
         Dense(d, hls, tanh),
         BatchNorm(hls,affine = true, dim = 1),
-        Dense(hls,hls,tanh),
-        BatchNorm(hls, affine = true, dim = 1),
+        # Dense(hls,hls,tanh),
+        # BatchNorm(hls, affine = true, dim = 1),
         # Dense(hls,hls,relu),
         Dense(hls, 1, relu)) # Neural network used by the scheme, with batch normalisation
 
@@ -62,7 +62,7 @@ prob = PIDEProblem(g, f, μ, σ, tspan,
                 abstol = 1f0,
                 maxiters = train_steps,
                 batch_size = batch_size,
-                use_cuda = false
+                use_cuda = true
                 )
 
 ###############################

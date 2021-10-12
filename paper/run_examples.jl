@@ -1,4 +1,6 @@
 cd(@__DIR__)
+using CUDA
+CUDA.device!(4)
 using Statistics
 using HighDimPDE
 using Flux
@@ -13,26 +15,23 @@ mydir = "results2"
 isdir(mydir) ? nothing : mkdir(mydir)
 
 include("examples.jl")
-examples = [#
-            :fisher_kpp, 
-            :hamel, 
-            # :merton, 
-            :mirrahimi, 
+examples = [ 
             :nonlocal_comp, 
-            :sine_gordon,
-            :allen_cahn_nonlocal, 
-            :fisher_kpp_reflected,
+            # :fisher_kpp, 
+            # :hamel, 
+            # :merton, 
+            # :mirrahimi, 
+            # :sine_gordon,
+            # :allen_cahn_nonlocal, 
+            # :fisher_kpp_reflected,
             ]
-ds = [1,2,5,10] # [1]
-Ts = [1/5, 1/2, 1] # [1/5]
+ds = [5] # [1, 2, 5, 10]
+Ts = [1/5] # [1/5, 1/2, 1]
 
 # Deepsplitting
-N = 10
-maxiters = 8000
+N = 3
+maxiters = 2000
 batch_size = 32000
-
-# MLP
-L = 5
 
 for (i,ex) in enumerate(examples)
     try
@@ -43,50 +42,38 @@ for (i,ex) in enumerate(examples)
         df_mlp = DataFrame(); [df_mlp[!,names_df[i]] = [Int64[], Int64[], Int64[], Float64[], Float64[], Float64[] ][i] for i in 1:length(names_df)]
         dfu_mlp = DataFrame(); [dfu_mlp[!,c] = Float64[] for c in ["d","T","K","u","time_simu"]]
         for d in ds, T in Ts
-
                 u_ds = []
                 u_mlp = [ ]
                 dt = T / N
                 tspan = (0f0,T)
-
-                hls = d + 50 #hidden layer size
-
-                nn = Flux.Chain(Dense(d,hls,tanh),
-                                Dense(hls,hls,tanh),
-                                Dense(hls,1)) # Neural network used by the scheme
-
-                opt = Flux.Optimiser(ExpDecay(0.1,
-                                    0.1,
-                                    2000,
-                                    1e-4),
-                                    ADAM() )#optimiser   
                 # solving         
                 for i in 1:5
-                ##################
-                # Deep Splitting #
-                ##################
+                    ##################
+                    # Deep Splitting #
+                    ##################
                     println("d=",d," T=",T," i=",i)
                     println("DeepSplitting")
-                    prob, mc_sample = eval(ex)(d, tspan)
-                    alg_ds = DeepSplitting(nn, K = 2, opt = opt, mc_sample = mc_sample )
-                    sol_ds = @timed solve(prob, alg_ds,
-                                            dt=dt,
-                                            verbose = false,
-                                            abstol=1e-6,
+                    prob, mc_sample, alg_ds = eval(ex)(d, tspan, :DS)
+                    sol_ds = @timed solve(prob, 
+                                            alg_ds,
+                                            dt,
+                                            verbose = true,
+                                            abstol=5e-6,
                                             maxiters = maxiters,
                                             batch_size = batch_size,
                                             use_cuda = true)
-                    push!(u_ds,[sol_ds.value.u[end],sol_ds.time])
+                    @show sol_ds
+                    push!(u_ds,[sol_ds.value[3][end],sol_ds.time])
                     push!(dfu_ds,(d, T, N, u_ds[end][1],u_ds[end][2]))
                     CSV.write(mydir*"/$(String(ex))_ds.csv", dfu_ds)
-                ################
-                ##### MLP ######
-                ################
+                    ################
+                    ##### MLP ######
+                    ################
                     println("MLP")
-                    prob, mc_sample = eval(ex)(d, tspan)
+                    prob, mc_sample, nn = eval(ex)(d, tspan, :MLP)
                     alg_mlp = MLP(M = L, K = 10, L = L, mc_sample = mc_sample )
                     sol_mlp = @timed solve(prob, alg_mlp, multithreading=true)
-                    push!(u_mlp, [sol_mlp.value, sol_mlp.time])
+                    push!(u_mlp, [sol_mlp.value[3][end], sol_mlp.time])
                     push!(dfu_mlp,(d, T, N, u_mlp[end][1], u_mlp[end][2]))
                     CSV.write(mydir*"/$(String(ex))_mlp.csv", dfu_mlp)
                 end
