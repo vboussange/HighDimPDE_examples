@@ -31,7 +31,7 @@ function MLP_fisherkpp_neumann(d, T, dt)
                 )
 end
 
-if true
+if false
         d = 5
         dt = 1f-1 # time step
         T = 3f-1
