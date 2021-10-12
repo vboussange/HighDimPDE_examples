@@ -7,7 +7,7 @@ using Flux
 using Revise
 using PyPlot
 
-function DeepSplitting_fisherkpp_neumann(d, T, dt)
+function DeepSplitting_allencahn_neumann(d, T, dt)
         tspan = (0f0,T)
         ##############################
         ####### Neural Network #######
@@ -32,12 +32,13 @@ function DeepSplitting_fisherkpp_neumann(d, T, dt)
         x0 = fill(0f0,d) # initial point
         μ(X,p,t) = 0f0 # advection coefficients
         σ(X,p,t) = 1f-1 # diffusion coefficients
-        g(x) = exp.(-0.25f0 * sum(x.^2, dims = 1))   # initial condition
-        f(y,z,v_y,v_z,∇v_y,∇v_z, p, t) = max.(0f0, v_y) .* ( 1f0 .- max.(0f0,v_y) ) 
+        g(x) = exp.(-0.25f0 * sum(x.^2, dims = 1)) # initial condition
+        a(u) = u - u^3
+        f(y,z,v_y,v_z,∇v_y,∇v_z, p, t) = a.(v_y) .- a.(v_z)
 
         # defining the problem
-        alg = DeepSplitting(nn_batch, K=K, opt = opt)
-        prob = PIDEProblem(g, f, μ, σ, tspan, neumann = u_domain, x = x0)
+        alg = DeepSplitting(nn_batch, K=K, opt = opt, mc_sample=UniformSampling(u_domain[1],u_domain[2]))
+        prob = PIDEProblem(g, f, μ, σ, tspan, x = x0, neumann = u_domain)
 
         # solving
         solve(prob, 
@@ -55,6 +56,6 @@ if false
         d = 5
         dt = 1f-1 # time step
         T = 2f-1
-        xgrid,ts,sol = DeepSplitting_fisherkpp_neumann(d, T, dt)
+        xgrid,ts,sol = DeepSplitting_allencahn_neumann(d, T, dt)
         @show sol[end]
 end

@@ -13,7 +13,8 @@ function MLP_fisherkpp_neumann(d, T, dt)
         ##########################
         ###### PDE Problem #######
         ##########################
-        u_domain = [-5f-1, 5f-1]
+        U = 5f-1
+        u_domain = (fill(-U, d), fill(U, d))
         x0 = fill(0e0,d) # initial point
         μ(X,p,t) = 0e0 # advection coefficients
         σ(X,p,t) = 1e-1 # diffusion coefficients

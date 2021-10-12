@@ -56,7 +56,7 @@ function DeepSplitting_rep_mut(d, T, dt)
                 )
 end
 
-if true
+if false
         d = 5
         dt = 1f-1 # time step
         T = 3f-1

@@ -17,19 +17,26 @@ isdir(mydir) ? nothing : mkdir(mydir)
 include("DeepSplitting_nonlocal_comp.jl")
 include("DeepSplitting_nonlocal_sinegordon.jl")
 include("DeepSplitting_fisherkpp_neumann.jl")
+include("DeepSplitting_rep_mut.jl")
+include("DeepSplitting_allencahn_neumann.jl")
 
 include("MLP_nonlocal_comp.jl")
 include("MLP_nonlocal_sinegordon.jl")
 include("MLP_fisherkpp_neumann.jl")
+include("MLP_rep_mut.jl")
+include("MLP_allencahn_neumann.jl")
 
 examples = [ 
-            # :nonlocal_comp, 
-            # :nonlocal_sinegordon,
+            :nonlocal_comp, 
+            :nonlocal_sinegordon,
             :fisherkpp_neumann,
-            # :allen_cahn_nonlocal, 
+            :rep_mut,
+            :allencahn_neumann, 
             ]
-ds = [5] # [1, 2, 5, 10]
-Ts = [1/5] # [1/5, 1/2, 1]
+# ds = [5] 
+ds = [1, 2, 5, 10]
+# Ts = [1/5] 
+Ts = [1/5, 1/2, 1]
 
 # Deepsplitting
 N = 3
