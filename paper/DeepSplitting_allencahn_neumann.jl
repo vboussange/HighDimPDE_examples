@@ -5,7 +5,6 @@ using Random
 using Test
 using Flux
 using Revise
-using PyPlot
 
 function DeepSplitting_allencahn_neumann(d, T, dt)
         tspan = (0f0,T)

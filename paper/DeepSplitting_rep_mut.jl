@@ -5,7 +5,6 @@ using Random
 using Test
 using Flux
 using Revise
-using PyPlot
 
 function DeepSplitting_rep_mut(d, T, dt)
         tspan = (0f0,T)
@@ -67,6 +66,7 @@ if false
         ###############################
 
         if false
+                using PyPlot
                 fig, ax = plt.subplots(1,2, sharey = true)
                 map(a -> a.clear(), ax)
 

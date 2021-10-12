@@ -3,7 +3,6 @@ using Random
 using Test
 using Flux
 using Revise
-using PyPlot
 
 function MLP_nonlocal_comp(d, T, dt)
         tspan = (0f0,T)

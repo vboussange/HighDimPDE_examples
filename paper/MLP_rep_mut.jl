@@ -5,7 +5,6 @@ using Random
 using Test
 using Flux
 using Revise
-using PyPlot
 
 function MLP_rep_mut(d, T, dt)
         tspan = (0e0,T)
