@@ -8,7 +8,7 @@ using Revise
 
 function MLP_fisherkpp_neumann(d, T, dt)
         tspan = (0e0,T)
-        L = 4
+        L = 5
         ##########################
         ###### PDE Problem #######
         ##########################

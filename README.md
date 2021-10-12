@@ -1,2 +1,2 @@
 # HighDimPDE_examples
-Examples for HighDimPDE.jl
+Some examples for HighDimPDE.jl

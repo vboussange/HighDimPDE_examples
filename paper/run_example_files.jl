@@ -27,7 +27,7 @@ include("MLP_rep_mut.jl")
 include("MLP_allencahn_neumann.jl")
 
 examples = [ 
-            :nonlocal_comp, 
+            # :nonlocal_comp, 
             :nonlocal_sinegordon,
             :fisherkpp_neumann,
             :rep_mut,

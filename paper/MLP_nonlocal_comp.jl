@@ -6,7 +6,7 @@ using Revise
 
 function MLP_nonlocal_comp(d, T, dt)
         tspan = (0f0,T)
-        L = 4
+        L = 5
         ##########################
         ###### PDE Problem #######
         ##########################

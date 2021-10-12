@@ -8,7 +8,7 @@ using Revise
 
 function MLP_nonlocal_sinegordon(d, T, dt)
         tspan = (0e0,T)
-        L = 4
+        L = 5
         ##########################
         ###### PDE Problem #######
         ##########################
