@@ -6,9 +6,8 @@ using Test
 using Flux
 using Revise
 
-function MLP_fisherkpp_neumann(d, T, dt)
+function MLP_fisherkpp_neumann(d, T, dt, L)
         tspan = (0e0,T)
-        L = 5
         ##########################
         ###### PDE Problem #######
         ##########################
@@ -25,16 +24,17 @@ function MLP_fisherkpp_neumann(d, T, dt)
         prob = PIDEProblem(g, f, μ, σ, tspan, neumann = u_domain, x = x0)
 
         # solving
-        solve(prob, 
+        xs,ts,sol = solve(prob, 
                 alg, 
                 multithreading=true
                 )
+        return sol[end]
 end
 
 if false
         d = 5
         dt = 1f-1 # time step
         T = 3f-1
-        xgrid,ts,sol = MLP_fisherkpp_neumann(d, T, dt)
-        @show sol[end]
+        L = 5
+        @show MLP_fisherkpp_neumann(d, T, dt, L)
 end

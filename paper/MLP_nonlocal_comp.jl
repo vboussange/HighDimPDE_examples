@@ -4,9 +4,8 @@ using Test
 using Flux
 using Revise
 
-function MLP_nonlocal_comp(d, T, dt)
+function MLP_nonlocal_comp(d, T, dt, L)
         tspan = (0f0,T)
-        L = 5
         ##########################
         ###### PDE Problem #######
         ##########################
@@ -21,15 +20,17 @@ function MLP_nonlocal_comp(d, T, dt)
         prob = PIDEProblem(g_mlp, f_mlp, μ_mlp, σ_mlp, tspan, x = x0)
         alg = MLP(M = L, K = 10, L = L, mc_sample = mc_sample )
         # solving
-        solve(prob, 
+        xs,ts,sol = solve(prob, 
                 alg, 
                 multithreading=true
                 )
+        return sol[end]
 end
 
 if false
         d = 1
         dt = 1f-1 # time step
         T = 3f-1
-        xgrid,ts,sol = MLP_nonlocal_comp(d, T, dt)
+        L = 4
+        @show MLP_nonlocal_comp(d, T, dt, L)
 end

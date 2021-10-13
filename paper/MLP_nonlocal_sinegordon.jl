@@ -6,9 +6,8 @@ using Test
 using Flux
 using Revise
 
-function MLP_nonlocal_sinegordon(d, T, dt)
+function MLP_nonlocal_sinegordon(d, T, dt, L)
         tspan = (0e0,T)
-        L = 5
         ##########################
         ###### PDE Problem #######
         ##########################
@@ -25,15 +24,17 @@ function MLP_nonlocal_sinegordon(d, T, dt)
         prob = PIDEProblem(g, f, μ, σ, tspan, x = x0)
 
         # solving
-        solve(prob, 
+        xs,ts,sol = solve(prob, 
                 alg, 
                 multithreading=true
                 )
+        return sol[end]
 end
 
 if false
         d = 5
         dt = 1f-1 # time step
         T = 3f-1
-        xgrid,ts,sol = MLP_nonlocal_sinegordon(d, T, dt)
+        L = 4
+        @show MLP_nonlocal_sinegordon(d, T, dt, L)
 end

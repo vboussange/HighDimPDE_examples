@@ -28,20 +28,23 @@ include("MLP_allencahn_neumann.jl")
 
 examples = [ 
             # :nonlocal_comp, 
-            :nonlocal_sinegordon,
-            :fisherkpp_neumann,
-            :rep_mut,
+            # :nonlocal_sinegordon,
+            # :fisherkpp_neumann,
+            # :rep_mut,
             :allencahn_neumann, 
             ]
-# ds = [5] 
 ds = [1, 2, 5, 10]
-# Ts = [1/5] 
 Ts = [1/5, 1/2, 1]
+
+# for testing:
+# ds = [5] 
+# Ts = [1/5] 
 
 # Deepsplitting
 N = 3
-maxiters = 2000
-batch_size = 32000
+
+# MLP
+L = 4
 
 for (i,ex) in enumerate(examples)
     try
@@ -72,7 +75,7 @@ for (i,ex) in enumerate(examples)
                     ##### MLP ######
                     ################
                     println("MLP")
-                    sol_mlp = @timed eval(string("MLP_", ex) |> Symbol)(d, T, dt)
+                    sol_mlp = @timed eval(string("MLP_", ex) |> Symbol)(d, T, dt, L)
                     @show sol_mlp.value
                     push!(u_mlp, [sol_mlp.value[3][end], sol_mlp.time])
                     push!(dfu_mlp,(d, T, N, u_mlp[end][1], u_mlp[end][2]))

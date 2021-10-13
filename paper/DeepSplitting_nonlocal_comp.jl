@@ -41,20 +41,21 @@ function DeepSplitting_nonlocal_comp(d, T, dt)
                         # u_domain = u_domain,
                         x = x0)
         # solving
-        solve(prob, 
-                alg, 
-                dt, 
-                verbose = true, 
-                abstol=1f-7,
-                maxiters = maxiters,
-                batch_size = batch_size,
-                use_cuda = false,
-                )
+        xs,ts,sol = solve(prob, 
+                        alg, 
+                        dt, 
+                        verbose = true, 
+                        abstol=1f-7,
+                        maxiters = maxiters,
+                        batch_size = batch_size,
+                        use_cuda = false,
+                        )
+        return sol[end]
 end
 
 if false
         d = 5
         dt = 1f-1 # time step
         T = 2f-1
-        xgrid,ts,sol = DeepSplitting_nonlocal_comp(d, T, dt)
+        @show DeepSplitting_nonlocal_comp(d, T, dt)
 end

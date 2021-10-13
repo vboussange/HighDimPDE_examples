@@ -39,21 +39,21 @@ function DeepSplitting_fisherkpp_neumann(d, T, dt)
         prob = PIDEProblem(g, f, μ, σ, tspan, neumann = u_domain, x = x0)
 
         # solving
-        solve(prob, 
-                alg, 
-                dt, 
-                verbose = true, 
-                abstol=1f-7,
-                maxiters = maxiters,
-                batch_size = batch_size,
-                use_cuda = false,
-                )
+        xs,ts,sol = solve(prob, 
+                        alg, 
+                        dt, 
+                        verbose = true, 
+                        abstol=1f-7,
+                        maxiters = maxiters,
+                        batch_size = batch_size,
+                        use_cuda = false,
+                        )
+        return sol[end]
 end
 
 if false
         d = 5
         dt = 1f-1 # time step
         T = 2f-1
-        xgrid,ts,sol = DeepSplitting_fisherkpp_neumann(d, T, dt)
-        @show sol[end]
+        @show DeepSplitting_fisherkpp_neumann(d, T, dt)
 end

@@ -6,9 +6,8 @@ using Test
 using Flux
 using Revise
 
-function MLP_rep_mut(d, T, dt)
+function MLP_rep_mut(d, T, dt, L)
         tspan = (0e0,T)
-        L = 5
         ##########################
         ###### PDE Problem #######
         ##########################
@@ -28,18 +27,20 @@ function MLP_rep_mut(d, T, dt)
         prob = PIDEProblem(g, f, μ, σ, tspan, x = x0)
 
         # solving
-        solve(prob, 
-                alg, 
-                multithreading=true
-                )
+        xs,ts,sol = solve(prob, 
+                        alg, 
+                        multithreading=true
+                        )
+        return sol[end]
 end
 
 if false
         d = 5
         dt = 1f-1 # time step
         T = 3f-1
-        xgrid,ts,sol = MLP_rep_mut(d, T, dt)
-        @show sol[end]
+        L = 4
+        @show MLP_rep_mut(d, T, dt, L)
+        
         
         # Analytic sol
         ss0 = 1e-2#std g0
@@ -56,5 +57,5 @@ if false
                 d = length(x)
                 return (2*π)^(-d/2) * prod(_SS(x, t, p) .^(-1/2)) * exp(-0.5 *sum(x .^2 ./ _SS(x, t, p)) )
         end
-        @show uanal(xgrid, ts[end], nothing)
+        @show uanal(zeros(d), T, nothing)
 end

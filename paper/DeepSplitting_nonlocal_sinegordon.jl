@@ -39,7 +39,7 @@ function DeepSplitting_nonlocal_sinegordon(d, T, dt)
         prob = PIDEProblem(g, f, μ, σ, tspan, x = x0)
 
         # solving
-        solve(prob, 
+        xs,ts,sol = solve(prob, 
                 alg, 
                 dt, 
                 verbose = true, 
@@ -48,11 +48,12 @@ function DeepSplitting_nonlocal_sinegordon(d, T, dt)
                 batch_size = batch_size,
                 use_cuda = false,
                 )
+        return sol[end]
 end
 
 if false
         d = 5
         dt = 1f-1 # time step
         T = 3f-1
-        xgrid,ts,sol = DeepSplitting_nonlocal_sinegordon(d, T, dt)
+        @show DeepSplitting_nonlocal_sinegordon(d, T, dt)
 end

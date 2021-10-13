@@ -40,7 +40,7 @@ function DeepSplitting_allencahn_neumann(d, T, dt)
         prob = PIDEProblem(g, f, μ, σ, tspan, x = x0, neumann = u_domain)
 
         # solving
-        solve(prob, 
+        xs,ts,sol = solve(prob, 
                 alg, 
                 dt, 
                 verbose = true, 
@@ -49,12 +49,12 @@ function DeepSplitting_allencahn_neumann(d, T, dt)
                 batch_size = batch_size,
                 use_cuda = false,
                 )
+        return sol[end]
 end
 
 if false
         d = 5
         dt = 1f-1 # time step
         T = 2f-1
-        xgrid,ts,sol = DeepSplitting_allencahn_neumann(d, T, dt)
-        @show sol[end]
+        @show DeepSplitting_allencahn_neumann(d, T, dt)
 end
