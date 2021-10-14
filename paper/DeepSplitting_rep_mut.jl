@@ -51,12 +51,12 @@ function DeepSplitting_rep_mut(d, T, dt)
                 abstol=3f-6,
                 maxiters = maxiters,
                 batch_size = batch_size,
-                use_cuda = false
+                use_cuda = false,
                 )
         return sol[end](zeros(d))
 end
 
-if true
+if false
         d = 5
         dt = 1f-1 # time step
         T = 3f-1

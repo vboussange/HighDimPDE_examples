@@ -1,6 +1,6 @@
 cd(@__DIR__)
 using CUDA
-CUDA.device!(6)
+# CUDA.device!(6)
 using Statistics
 using HighDimPDE
 using Flux
@@ -27,10 +27,10 @@ include("MLP_rep_mut.jl")
 include("MLP_allencahn_neumann.jl")
 
 examples = [ 
-            # :nonlocal_comp, 
-            # :nonlocal_sinegordon,
-            # :fisherkpp_neumann,
-            # :rep_mut,
+            :nonlocal_comp, 
+            :nonlocal_sinegordon,
+            :fisherkpp_neumann,
+            :rep_mut,
             :allencahn_neumann, 
             ]
 ds = [1, 2, 5, 10]
@@ -68,7 +68,7 @@ for (i,ex) in enumerate(examples)
                     println("DeepSplitting")
                     sol_ds = @timed eval(string("DeepSplitting_", ex) |> Symbol)(d, T, dt)
                     @show sol_ds.value
-                    push!(u_ds,[sol_ds.value[3][end],sol_ds.time])
+                    push!(u_ds,[sol_ds.value,sol_ds.time])
                     push!(dfu_ds,(d, T, N, u_ds[end][1],u_ds[end][2]))
                     CSV.write(mydir*"/$(String(ex))_ds.csv", dfu_ds)
                     ################
@@ -77,7 +77,7 @@ for (i,ex) in enumerate(examples)
                     println("MLP")
                     sol_mlp = @timed eval(string("MLP_", ex) |> Symbol)(d, T, dt, L)
                     @show sol_mlp.value
-                    push!(u_mlp, [sol_mlp.value[3][end], sol_mlp.time])
+                    push!(u_mlp, [sol_mlp.value, sol_mlp.time])
                     push!(dfu_mlp,(d, T, N, u_mlp[end][1], u_mlp[end][2]))
                     CSV.write(mydir*"/$(String(ex))_mlp.csv", dfu_mlp)
                 end
