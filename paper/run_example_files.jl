@@ -41,10 +41,10 @@ Ts = [1/5, 1/2, 1]
 # Ts = [1/5] 
 
 # Deepsplitting
-N = 3
+N = 10
 
 # MLP
-L = 4
+L = 5
 
 for (i,ex) in enumerate(examples)
     try

@@ -46,7 +46,7 @@ function DeepSplitting_nonlocal_sinegordon(d, T, dt)
                 abstol=3f-6,
                 maxiters = maxiters,
                 batch_size = batch_size,
-                use_cuda = false,
+                use_cuda = true,
                 )
         return sol[end]
 end

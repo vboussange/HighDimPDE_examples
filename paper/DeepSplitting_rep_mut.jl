@@ -12,7 +12,7 @@ function DeepSplitting_rep_mut(d, T, dt)
         ####### Neural Network #######
         ##############################
         maxiters = 2000
-        batch_size = 10000
+        batch_size = 16000
         K = 10
 
         hls = d + 50 #hidden layer size
@@ -51,7 +51,7 @@ function DeepSplitting_rep_mut(d, T, dt)
                 abstol=3f-6,
                 maxiters = maxiters,
                 batch_size = batch_size,
-                use_cuda = false,
+                use_cuda = true,
                 )
         return sol[end](zeros(d))
 end

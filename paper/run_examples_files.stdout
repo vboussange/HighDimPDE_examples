@@ -1,1629 +1,2403 @@
 Example nonlocal_comp
 d=1 T=0.2 i=1
 DeepSplitting
-Step 1 / 3 
-Current loss is: 1.0467169
-Current loss is: 2.4240004e-5
-Current loss is: 3.4746574e-7
-Current loss is: 3.3769504e-7
-Current loss is: 3.3349528e-7
-Current loss is: 3.471397e-7
-Current loss is: 3.708653e-7
-Current loss is: 3.4419594e-7
-Current loss is: 3.387651e-7
-Current loss is: 3.3323786e-7
-Current loss is: 3.3324707e-7
-Current loss is: 3.1532622e-7
-Current loss is: 3.196269e-7
-Current loss is: 3.4001727e-7
-Current loss is: 3.4843978e-7
-Current loss is: 3.4005816e-7
-Current loss is: 3.5161537e-7
-Current loss is: 3.2610205e-7
-Current loss is: 3.285401e-7
-Current loss is: 3.4407037e-7
-Current loss is: 3.1563255e-7
-Step 2 / 3 
-Current loss is: 0.0139927175
-Current loss is: 9.4681646e-8
-Step 3 / 3 
-Current loss is: 0.00014173557
-Current loss is: 5.5562793e-8
-sol_ds.value = 1.1711267f0
+Step 1 / 10 
+Current loss is: 0.9811344
+Current loss is: 2.2853188e-5
+Current loss is: 2.2852161e-7
+Current loss is: 2.3525232e-7
+Current loss is: 2.2594938e-7
+Current loss is: 2.515993e-7
+Current loss is: 2.3348217e-7
+Current loss is: 2.481556e-7
+Current loss is: 2.384322e-7
+Current loss is: 2.2090167e-7
+Current loss is: 2.4478874e-7
+Current loss is: 2.3080645e-7
+Current loss is: 2.2619238e-7
+Current loss is: 2.2315797e-7
+Current loss is: 2.4228697e-7
+Current loss is: 2.2619392e-7
+Current loss is: 2.3515386e-7
+Current loss is: 2.3912176e-7
+Current loss is: 2.2532356e-7
+Current loss is: 2.6244413e-7
+Current loss is: 2.4178544e-7
+Step 2 / 10 
+Current loss is: 0.0010362956
+Current loss is: 4.570009e-8
+Step 3 / 10 
+Current loss is: 0.0012515804
+Current loss is: 5.1203887e-8
+Step 4 / 10 
+Current loss is: 0.0014954834
+Current loss is: 1.5043348e-8
+Step 5 / 10 
+Current loss is: 0.0017859284
+Current loss is: 5.1526246e-8
+Step 6 / 10 
+Current loss is: 0.0019729554
+Current loss is: 1.4918136e-8
+Step 7 / 10 
+Current loss is: 0.0020992584
+Current loss is: 5.358021e-8
+Step 8 / 10 
+Current loss is: 0.0021526942
+Current loss is: 9.250129e-8
+Step 9 / 10 
+Current loss is: 0.002213508
+Current loss is: 6.133946e-8
+Step 10 / 10 
+Current loss is: 0.0021329997
+Current loss is: 1.01296486e-7
+Current loss is: 1.4207235e-9
+sol_ds.value = 1.1734405f0
 MLP
-sol_mlp.value = 1.151444417976549
+sol_mlp.value = 1.1759977965568345
 d=1 T=0.2 i=2
 DeepSplitting
-Step 1 / 3 
-Current loss is: 1.0385163
-Current loss is: 9.3190965e-6
-Current loss is: 3.5126848e-7
-Current loss is: 3.5605478e-7
-Current loss is: 3.6154012e-7
-Current loss is: 3.8098e-7
-Current loss is: 3.5133536e-7
-Current loss is: 3.54904e-7
-Current loss is: 3.4612205e-7
-Current loss is: 3.6300122e-7
-Current loss is: 3.460453e-7
-Current loss is: 3.4156895e-7
-Current loss is: 3.9437376e-7
-Current loss is: 3.6834948e-7
-Current loss is: 3.480305e-7
-Current loss is: 3.2470592e-7
-Current loss is: 3.6295526e-7
-Current loss is: 3.25325e-7
-Current loss is: 3.5116923e-7
-Current loss is: 3.6820296e-7
-Current loss is: 3.8021318e-7
-Step 2 / 3 
-Current loss is: 0.017907469
-Current loss is: 2.4851263e-6
-Current loss is: 5.375403e-8
-Step 3 / 3 
-Current loss is: 0.00012911284
-Current loss is: 1.4397709e-8
-sol_ds.value = 1.1708685f0
+Step 1 / 10 
+Current loss is: 0.9363435
+Current loss is: 7.257725e-6
+Current loss is: 2.3356759e-7
+Current loss is: 2.398702e-7
+Current loss is: 2.4906862e-7
+Current loss is: 2.371866e-7
+Current loss is: 2.289719e-7
+Current loss is: 2.3889933e-7
+Current loss is: 2.439679e-7
+Current loss is: 2.2987815e-7
+Current loss is: 2.1575683e-7
+Current loss is: 2.2191294e-7
+Current loss is: 2.4792087e-7
+Current loss is: 2.4176575e-7
+Current loss is: 2.3806021e-7
+Current loss is: 2.2344138e-7
+Current loss is: 2.3463316e-7
+Current loss is: 1.3910034e-6
+Current loss is: 2.4076965e-7
+Current loss is: 0.0016609338
+Current loss is: 3.6029243e-7
+Step 2 / 10 
+Current loss is: 0.0019933109
+Current loss is: 1.2613563e-7
+Current loss is: 1.5474383e-8
+Step 3 / 10 
+Current loss is: 0.0020744042
+Current loss is: 1.6204687e-7
+Current loss is: 1.4570656e-8
+Step 4 / 10 
+Current loss is: 0.00206937
+Current loss is: 1.4781824e-7
+Current loss is: 1.1746777e-8
+Step 5 / 10 
+Current loss is: 0.002109092
+Current loss is: 1.2897385e-7
+Current loss is: 1.0051794e-8
+Step 6 / 10 
+Current loss is: 0.0020872692
+Current loss is: 5.5568336e-8
+Step 7 / 10 
+Current loss is: 0.0017702301
+Current loss is: 5.7096667e-8
+Step 8 / 10 
+Current loss is: 0.0018870729
+Current loss is: 6.6415716e-8
+Step 9 / 10 
+Current loss is: 0.0017935387
+Current loss is: 3.0498462e-9
+Step 10 / 10 
+Current loss is: 0.0018184268
+Current loss is: 5.402361e-8
+sol_ds.value = 1.173278f0
 MLP
-sol_mlp.value = 1.1499176253796712
+sol_mlp.value = 1.1768277825822615
 d=1 T=0.2 i=3
 DeepSplitting
-Step 1 / 3 
-Current loss is: 1.0350678
-Current loss is: 4.0550235e-6
-Current loss is: 4.3306042e-7
-Current loss is: 4.3095525e-7
-Current loss is: 4.3119653e-7
-Current loss is: 4.0299278e-7
-Current loss is: 4.3834677e-7
-Current loss is: 4.1819803e-7
-Current loss is: 4.2627613e-7
-Current loss is: 4.3048516e-7
-Current loss is: 4.0401787e-7
-Current loss is: 4.5896996e-7
-Current loss is: 4.3747954e-7
-Current loss is: 4.790046e-7
-Current loss is: 4.347745e-7
-Current loss is: 4.5873892e-7
-Current loss is: 4.1214975e-7
-Current loss is: 4.580804e-7
-Current loss is: 4.559764e-7
-Current loss is: 4.2593678e-7
-Current loss is: 3.8760734e-7
-Step 2 / 3 
-Current loss is: 0.017147392
-Current loss is: 2.0787522e-7
-Current loss is: 1.5948052e-8
-Step 3 / 3 
-Current loss is: 0.00013943555
-Current loss is: 7.71619e-8
-sol_ds.value = 1.1707109f0
+Step 1 / 10 
+Current loss is: 0.9521914
+Current loss is: 1.1467653e-5
+Current loss is: 2.2693759e-7
+Current loss is: 2.3578978e-7
+Current loss is: 2.246982e-7
+Current loss is: 2.2854218e-7
+Current loss is: 2.2135737e-7
+Current loss is: 2.0979672e-7
+Current loss is: 2.2431533e-7
+Current loss is: 2.3568394e-7
+Current loss is: 2.1256106e-7
+Current loss is: 2.4974656e-7
+Current loss is: 2.3042617e-7
+Current loss is: 2.2566202e-7
+Current loss is: 2.3270849e-7
+Current loss is: 2.3658758e-7
+Current loss is: 2.2670677e-7
+Current loss is: 2.573671e-7
+Current loss is: 4.7993913e-6
+Current loss is: 2.4031723e-7
+Current loss is: 2.538557e-7
+Step 2 / 10 
+Current loss is: 0.0022687772
+Current loss is: 2.7847068e-7
+Current loss is: 1.784949e-8
+Step 3 / 10 
+Current loss is: 0.0015899595
+Current loss is: 7.0927626e-8
+Step 4 / 10 
+Current loss is: 0.001735576
+Current loss is: 5.3020685e-8
+Step 5 / 10 
+Current loss is: 0.001897639
+Current loss is: 8.865605e-8
+Step 6 / 10 
+Current loss is: 0.0019417489
+Current loss is: 1.7894255e-8
+Step 7 / 10 
+Current loss is: 0.0019011868
+Current loss is: 7.680168e-8
+Step 8 / 10 
+Current loss is: 0.0018692487
+Current loss is: 5.4959783e-9
+Step 9 / 10 
+Current loss is: 0.001920289
+Current loss is: 5.831821e-8
+Step 10 / 10 
+Current loss is: 0.001975446
+Current loss is: 7.492329e-8
+sol_ds.value = 1.1736763f0
 MLP
-sol_mlp.value = 1.146367171427232
+sol_mlp.value = 1.176432158363534
 d=1 T=0.2 i=4
 DeepSplitting
-Step 1 / 3 
-Current loss is: 1.0570798
-Current loss is: 3.0571987e-6
-Current loss is: 4.103841e-7
-Current loss is: 4.3851313e-7
-Current loss is: 4.4772247e-7
-Current loss is: 4.557165e-7
-Current loss is: 4.225698e-7
-Current loss is: 4.3959724e-7
-Current loss is: 4.5348284e-7
-Current loss is: 4.1183216e-7
-Current loss is: 4.2089354e-7
-Current loss is: 4.5112884e-7
-Current loss is: 4.3448517e-7
-Current loss is: 4.132349e-7
-Current loss is: 4.555039e-7
-Current loss is: 4.456317e-7
-Current loss is: 4.728122e-7
-Current loss is: 4.3930632e-7
-Current loss is: 4.2388044e-7
-Current loss is: 3.9616572e-7
-Current loss is: 4.254569e-7
-Step 2 / 3 
-Current loss is: 0.012087797
-Current loss is: 2.3581818e-7
-Current loss is: 1.3182034e-8
-Step 3 / 3 
-Current loss is: 0.002587601
-Current loss is: 1.4756674e-7
-Current loss is: 3.726414e-9
-sol_ds.value = 1.1709851f0
+Step 1 / 10 
+Current loss is: 0.98108006
+Current loss is: 1.1474768e-5
+Current loss is: 2.561816e-7
+Current loss is: 2.4872674e-7
+Current loss is: 2.6284664e-7
+Current loss is: 2.912394e-7
+Current loss is: 2.5303328e-7
+Current loss is: 2.647334e-7
+Current loss is: 2.6114748e-7
+Current loss is: 2.3884448e-7
+Current loss is: 2.5268255e-7
+Current loss is: 2.6932963e-7
+Current loss is: 2.731639e-7
+Current loss is: 2.5590373e-7
+Current loss is: 2.8591984e-7
+Current loss is: 2.463948e-7
+Current loss is: 2.483677e-7
+Current loss is: 2.4838693e-7
+Current loss is: 2.391018e-7
+Current loss is: 2.561842e-7
+Current loss is: 2.538184e-7
+Step 2 / 10 
+Current loss is: 0.0011973403
+Current loss is: 1.3689921e-8
+Step 3 / 10 
+Current loss is: 0.0014674756
+Current loss is: 1.1473445e-8
+Step 4 / 10 
+Current loss is: 0.0017416594
+Current loss is: 7.080814e-8
+Step 5 / 10 
+Current loss is: 0.0020396898
+Current loss is: 1.1584097e-7
+Current loss is: 9.059417e-9
+Step 6 / 10 
+Current loss is: 0.0024362556
+Current loss is: 1.6987369e-7
+Current loss is: 7.668945e-9
+Step 7 / 10 
+Current loss is: 0.0019971419
+Current loss is: 8.167307e-8
+Step 8 / 10 
+Current loss is: 0.0021764564
+Current loss is: 4.8368964e-8
+Step 9 / 10 
+Current loss is: 0.002200459
+Current loss is: 4.815445e-8
+Step 10 / 10 
+Current loss is: 0.0021491789
+Current loss is: 1.03239884e-7
+Current loss is: 8.9595265e-10
+sol_ds.value = 1.1741885f0
 MLP
-sol_mlp.value = 1.1467348505288253
+sol_mlp.value = 1.1768627029643808
 d=1 T=0.2 i=5
 DeepSplitting
-Step 1 / 3 
-Current loss is: 1.0436668
-Current loss is: 3.0441388e-5
-Current loss is: 3.9064602e-7
-Current loss is: 3.749523e-7
-Current loss is: 3.7431124e-7
-Current loss is: 3.81811e-7
-Current loss is: 3.832423e-7
-Current loss is: 3.7072118e-7
-Current loss is: 3.6515857e-7
-Current loss is: 3.4556115e-7
-Current loss is: 3.7246136e-7
-Current loss is: 3.729487e-7
-Current loss is: 3.703146e-7
-Current loss is: 3.6760483e-7
-Current loss is: 3.505908e-7
-Current loss is: 3.7247887e-7
-Current loss is: 3.7711143e-7
-Current loss is: 3.4745352e-7
-Current loss is: 3.7971193e-7
-Current loss is: 3.8934104e-7
-Current loss is: 3.6955308e-7
-Step 2 / 3 
-Current loss is: 0.0101082
-Current loss is: 3.5649975e-7
-Current loss is: 4.4606054e-8
-Step 3 / 3 
-Current loss is: 0.011099032
-Current loss is: 5.2268075e-7
-Current loss is: 1.3047475e-8
-sol_ds.value = 1.171011f0
+Step 1 / 10 
+Current loss is: 0.9736994
+Current loss is: 6.752051e-6
+Current loss is: 2.976983e-7
+Current loss is: 3.003514e-7
+Current loss is: 2.8193276e-7
+Current loss is: 2.667923e-7
+Current loss is: 3.10153e-7
+Current loss is: 2.9752331e-7
+Current loss is: 3.097362e-7
+Current loss is: 2.9490798e-7
+Current loss is: 2.6802581e-7
+Current loss is: 2.946052e-7
+Current loss is: 2.9816175e-7
+Current loss is: 2.9638142e-7
+Current loss is: 2.9630326e-7
+Current loss is: 2.8268423e-7
+Current loss is: 2.789031e-7
+Current loss is: 2.9584785e-7
+Current loss is: 2.7193587e-7
+Current loss is: 2.9774566e-7
+Current loss is: 2.879039e-7
+Step 2 / 10 
+Current loss is: 0.0006551297
+Current loss is: 1.8729855e-8
+Step 3 / 10 
+Current loss is: 0.0008607041
+Current loss is: 2.3200128e-8
+Step 4 / 10 
+Current loss is: 0.0011158069
+Current loss is: 8.996239e-9
+Step 5 / 10 
+Current loss is: 0.0013640966
+Current loss is: 4.6720146e-8
+Step 6 / 10 
+Current loss is: 0.0016081206
+Current loss is: 3.62002e-8
+Step 7 / 10 
+Current loss is: 0.0018637057
+Current loss is: 5.0791717e-9
+Step 8 / 10 
+Current loss is: 0.0021192627
+Current loss is: 3.1262775e-8
+Step 9 / 10 
+Current loss is: 0.0022066187
+Current loss is: 9.948464e-8
+Step 10 / 10 
+Current loss is: 0.0022729966
+Current loss is: 1.7933571e-8
+sol_ds.value = 1.1740798f0
 MLP
-sol_mlp.value = 1.1483744128573625
+sol_mlp.value = 1.1764204912033895
 d=1 T=0.5 i=1
 DeepSplitting
-Step 1 / 3 
-Current loss is: 1.2379493
-Current loss is: 2.4368087e-6
-Current loss is: 2.4085778e-6
-Current loss is: 2.523139e-6
-Current loss is: 2.666438e-6
-Current loss is: 2.2829095e-6
-Current loss is: 2.5741172e-6
-Current loss is: 2.5497395e-6
-Current loss is: 2.6758123e-6
-Current loss is: 2.5234012e-6
-Current loss is: 2.398983e-6
-Current loss is: 2.1846183e-6
-Current loss is: 2.3461607e-6
-Current loss is: 2.3581717e-6
-Current loss is: 2.449085e-6
-Current loss is: 2.3851032e-6
-Current loss is: 2.4880896e-6
-Current loss is: 2.7871051e-6
-Current loss is: 3.4604625e-6
-Current loss is: 1.0815209e-5
-Current loss is: 0.0001006034
-Step 2 / 3 
-Current loss is: 0.26822883
-Current loss is: 1.2047085e-5
-Current loss is: 9.4192416e-7
-Current loss is: 1.0466046e-6
-Current loss is: 9.919636e-7
-Current loss is: 9.760458e-7
-Current loss is: 1.0235718e-6
-Current loss is: 8.9807156e-7
-Current loss is: 9.391806e-7
-Current loss is: 8.993786e-7
-Current loss is: 9.457239e-7
-Current loss is: 9.6382e-7
-Current loss is: 9.288593e-7
-Current loss is: 1.0347177e-6
-Current loss is: 9.763851e-7
-Current loss is: 9.971913e-7
-Current loss is: 9.826838e-7
-Current loss is: 1.0255656e-6
-Current loss is: 1.0112816e-6
-Current loss is: 9.698115e-7
-Current loss is: 9.2420123e-7
-Step 3 / 3 
-Current loss is: 0.017478848
-Current loss is: 1.4655641e-6
-Current loss is: 6.334126e-7
-Current loss is: 6.6350026e-7
-Current loss is: 7.002613e-7
-Current loss is: 6.890389e-7
-Current loss is: 6.694465e-7
-Current loss is: 7.068917e-7
-Current loss is: 6.4230807e-7
-Current loss is: 6.275255e-7
-Current loss is: 6.737668e-7
-Current loss is: 6.193746e-7
-Current loss is: 6.908183e-7
-Current loss is: 6.967381e-7
-Current loss is: 6.327998e-7
-Current loss is: 6.7382956e-7
-Current loss is: 6.8494364e-7
-Current loss is: 6.417481e-7
-Current loss is: 7.6664924e-7
-Current loss is: 1.25256e-6
-Current loss is: 4.1894764e-6
-sol_ds.value = 1.4626493f0
+Step 1 / 10 
+Current loss is: 0.99595994
+Current loss is: 2.3465702e-6
+Current loss is: 1.684995e-6
+Current loss is: 1.8752729e-6
+Current loss is: 1.8155514e-6
+Current loss is: 1.8106012e-6
+Current loss is: 1.6587404e-6
+Current loss is: 1.8146959e-6
+Current loss is: 1.6756363e-6
+Current loss is: 1.6518421e-6
+Current loss is: 1.6815119e-6
+Current loss is: 1.6593707e-6
+Current loss is: 1.8081649e-6
+Current loss is: 1.6993816e-6
+Current loss is: 1.8196827e-6
+Current loss is: 1.7644611e-6
+Current loss is: 1.8199348e-6
+Current loss is: 3.3397216e-6
+Current loss is: 7.2921894e-6
+Current loss is: 2.487986e-6
+Current loss is: 1.9494673e-6
+Step 2 / 10 
+Current loss is: 0.015664134
+Current loss is: 4.1577096e-6
+Current loss is: 8.984905e-8
+Step 3 / 10 
+Current loss is: 0.0007295915
+Current loss is: 1.2583276e-7
+Current loss is: 4.9431293e-8
+Step 4 / 10 
+Current loss is: 0.0015597065
+Current loss is: 1.1111047e-7
+Current loss is: 4.446658e-8
+Step 5 / 10 
+Current loss is: 0.00281426
+Current loss is: 1.3693507e-7
+Current loss is: 4.167882e-8
+Step 6 / 10 
+Current loss is: 0.0044781324
+Current loss is: 7.932009e-8
+Step 7 / 10 
+Current loss is: 0.0054158657
+Current loss is: 8.631091e-8
+Step 8 / 10 
+Current loss is: 0.0059591103
+Current loss is: 5.991553e-8
+Step 9 / 10 
+Current loss is: 0.0066301357
+Current loss is: 2.0083228e-8
+Step 10 / 10 
+Current loss is: 0.0070151305
+Current loss is: 9.6523124e-8
+sol_ds.value = 1.4694974f0
 MLP
-sol_mlp.value = 1.4099892313968594
+sol_mlp.value = 1.4835982189552324
 d=1 T=0.5 i=2
 DeepSplitting
-Step 1 / 3 
-Current loss is: 1.2141812
-Current loss is: 1.6497284e-5
-Current loss is: 2.784398e-6
-Current loss is: 2.7961764e-6
-Current loss is: 2.8123366e-6
-Current loss is: 2.5197614e-6
-Current loss is: 2.9428427e-6
-Current loss is: 2.74843e-6
-Current loss is: 2.7853127e-6
-Current loss is: 2.7460223e-6
-Current loss is: 2.7509045e-6
-Current loss is: 2.8791737e-6
-Current loss is: 2.6118987e-6
-Current loss is: 2.9189187e-6
-Current loss is: 2.7195806e-6
-Current loss is: 2.582032e-6
-Current loss is: 2.7557871e-6
-Current loss is: 2.799262e-6
-Current loss is: 2.718679e-6
-Current loss is: 2.8139323e-6
-Current loss is: 2.795301e-6
-Step 2 / 3 
-Current loss is: 0.10073947
-Current loss is: 8.269228e-6
-Current loss is: 2.9140577e-7
-Current loss is: 2.781023e-7
-Current loss is: 3.107788e-7
-Current loss is: 2.7733978e-7
-Current loss is: 2.9132673e-7
-Current loss is: 3.0579244e-7
-Current loss is: 2.9791767e-7
-Current loss is: 2.979703e-7
-Current loss is: 2.82583e-7
-Current loss is: 2.8595414e-7
-Current loss is: 2.9248687e-7
-Current loss is: 3.009439e-7
-Current loss is: 2.9202928e-7
-Current loss is: 2.8812252e-7
-Current loss is: 2.8924603e-7
-Current loss is: 2.892811e-7
-Current loss is: 2.9938235e-7
-Current loss is: 2.8562832e-7
-Current loss is: 3.1178305e-7
-Step 3 / 3 
-Current loss is: 0.017830856
-Current loss is: 7.8822137e-7
-Current loss is: 4.3569706e-8
-sol_ds.value = 1.4524213f0
+Step 1 / 10 
+Current loss is: 1.0056385
+Current loss is: 2.2372089e-5
+Current loss is: 1.8502375e-6
+Current loss is: 1.8552389e-6
+Current loss is: 1.7502715e-6
+Current loss is: 1.9350828e-6
+Current loss is: 1.6713409e-6
+Current loss is: 1.7643565e-6
+Current loss is: 1.9201716e-6
+Current loss is: 1.7600522e-6
+Current loss is: 1.7542665e-6
+Current loss is: 1.7558584e-6
+Current loss is: 1.7121239e-6
+Current loss is: 1.6811605e-6
+Current loss is: 1.5758964e-6
+Current loss is: 1.7976404e-6
+Current loss is: 1.643661e-6
+Current loss is: 1.6735838e-6
+Current loss is: 1.5200404e-6
+Current loss is: 1.5989198e-6
+Current loss is: 1.4632922e-6
+Step 2 / 10 
+Current loss is: 0.009989027
+Current loss is: 5.8188886e-7
+Current loss is: 9.2170474e-8
+Step 3 / 10 
+Current loss is: 0.008135411
+Current loss is: 2.4161561e-6
+Current loss is: 8.791089e-8
+Step 4 / 10 
+Current loss is: 0.0013770638
+Current loss is: 7.752648e-8
+Step 5 / 10 
+Current loss is: 0.002118435
+Current loss is: 1.5607785e-7
+Current loss is: 6.7325466e-8
+Step 6 / 10 
+Current loss is: 0.0036518602
+Current loss is: 1.2532945e-7
+Current loss is: 5.6496976e-8
+Step 7 / 10 
+Current loss is: 0.005686375
+Current loss is: 1.7536948e-7
+Current loss is: 4.5857742e-8
+Step 8 / 10 
+Current loss is: 0.00801975
+Current loss is: 2.2043156e-7
+Current loss is: 3.24527e-8
+Step 9 / 10 
+Current loss is: 0.008616587
+Current loss is: 9.958213e-8
+Step 10 / 10 
+Current loss is: 0.00711281
+Current loss is: 4.9871403e-8
+sol_ds.value = 1.4702213f0
 MLP
-sol_mlp.value = 1.4131004312757949
+sol_mlp.value = 1.4836300118798056
 d=1 T=0.5 i=3
 DeepSplitting
-Step 1 / 3 
-Current loss is: 1.2066333
-Current loss is: 1.02027e-5
-Current loss is: 2.7638237e-6
-Current loss is: 2.4788192e-6
-Current loss is: 2.6399164e-6
-Current loss is: 2.6877165e-6
-Current loss is: 2.5792708e-6
-Current loss is: 2.8316827e-6
-Current loss is: 2.7821777e-6
-Current loss is: 2.7718525e-6
-Current loss is: 2.6851021e-6
-Current loss is: 2.8144575e-6
-Current loss is: 2.7635406e-6
-Current loss is: 2.5352638e-6
-Current loss is: 2.8002348e-6
-Current loss is: 2.8515421e-6
-Current loss is: 2.8433312e-6
-Current loss is: 2.7415572e-6
-Current loss is: 2.5418476e-6
-Current loss is: 2.8279194e-6
-Current loss is: 2.40225e-6
-Step 2 / 3 
-Current loss is: 0.097113915
-Current loss is: 3.6565525e-6
-Current loss is: 4.387061e-7
-Current loss is: 4.5791478e-7
-Current loss is: 4.2948048e-7
-Current loss is: 4.4134035e-7
-Current loss is: 4.5518044e-7
-Current loss is: 4.34384e-7
-Current loss is: 4.3923313e-7
-Current loss is: 4.250045e-7
-Current loss is: 4.4514996e-7
-Current loss is: 4.5774473e-7
-Current loss is: 4.7538586e-7
-Current loss is: 4.3050002e-7
-Current loss is: 4.4624136e-7
-Current loss is: 3.9669e-7
-Current loss is: 4.52129e-7
-Current loss is: 3.9316436e-7
-Current loss is: 4.2694785e-7
-Current loss is: 4.2979846e-7
-Current loss is: 4.3913877e-7
-Step 3 / 3 
-Current loss is: 0.028867118
-Current loss is: 6.82157e-7
-Current loss is: 5.0688904e-8
-sol_ds.value = 1.45255f0
+Step 1 / 10 
+Current loss is: 0.9883462
+Current loss is: 1.2560387e-5
+Current loss is: 2.05564e-6
+Current loss is: 1.9713113e-6
+Current loss is: 1.990528e-6
+Current loss is: 2.0280593e-6
+Current loss is: 1.9614702e-6
+Current loss is: 2.0162609e-6
+Current loss is: 2.017968e-6
+Current loss is: 2.0088455e-6
+Current loss is: 1.9440763e-6
+Current loss is: 2.107728e-6
+Current loss is: 2.0453172e-6
+Current loss is: 1.8098766e-6
+Current loss is: 2.2568843e-6
+Current loss is: 3.4932423e-6
+Current loss is: 5.4753978e-6
+Current loss is: 0.0028705865
+Current loss is: 1.8965654e-6
+Current loss is: 2.4624926e-5
+Current loss is: 9.457249e-6
+Step 2 / 10 
+Current loss is: 0.01531516
+Current loss is: 8.387621e-8
+Step 3 / 10 
+Current loss is: 6.9702e-5
+Current loss is: 3.6716994e-8
+Step 4 / 10 
+Current loss is: 0.0002716536
+Current loss is: 2.8702814e-8
+Step 5 / 10 
+Current loss is: 0.00053388363
+Current loss is: 5.647848e-8
+Step 6 / 10 
+Current loss is: 0.0009037383
+Current loss is: 9.298002e-8
+Step 7 / 10 
+Current loss is: 0.0013870271
+Current loss is: 8.869653e-8
+Step 8 / 10 
+Current loss is: 0.001971771
+Current loss is: 4.1117737e-8
+Step 9 / 10 
+Current loss is: 0.002643668
+Current loss is: 5.160745e-8
+Step 10 / 10 
+Current loss is: 0.0033006668
+Current loss is: 2.0564881e-8
+sol_ds.value = 1.4664886f0
 MLP
-sol_mlp.value = 1.408675201590693
+sol_mlp.value = 1.4851473400833983
 d=1 T=0.5 i=4
 DeepSplitting
-Step 1 / 3 
-Current loss is: 1.2033434
-Current loss is: 1.756144e-5
-Current loss is: 2.860915e-6
-Current loss is: 2.720623e-6
-Current loss is: 2.6593034e-6
-Current loss is: 2.7762862e-6
-Current loss is: 2.8425377e-6
-Current loss is: 2.7530489e-6
-Current loss is: 2.7245708e-6
-Current loss is: 2.5913132e-6
-Current loss is: 2.6597884e-6
-Current loss is: 2.5551092e-6
-Current loss is: 2.7349809e-6
-Current loss is: 2.6393923e-6
-Current loss is: 2.5720526e-6
-Current loss is: 2.705867e-6
-Current loss is: 2.9906587e-6
-Current loss is: 2.7027306e-6
-Current loss is: 2.6468033e-6
-Current loss is: 2.712441e-6
-Current loss is: 2.7326107e-6
-Step 2 / 3 
-Current loss is: 0.110883385
-Current loss is: 4.9527927e-7
-Current loss is: 3.3801072e-7
-Current loss is: 3.4976412e-7
-Current loss is: 3.3214397e-7
-Current loss is: 3.4523376e-7
-Current loss is: 3.4560153e-7
-Current loss is: 3.581699e-7
-Current loss is: 3.4690962e-7
-Current loss is: 3.2915904e-7
-Current loss is: 3.3775217e-7
-Current loss is: 3.492379e-7
-Current loss is: 3.489003e-7
-Current loss is: 3.7114722e-7
-Current loss is: 3.1695552e-7
-Current loss is: 3.418252e-7
-Current loss is: 3.557022e-7
-Current loss is: 3.4353786e-7
-Current loss is: 3.5291646e-7
-Current loss is: 3.3715935e-7
-Current loss is: 3.524703e-7
-Step 3 / 3 
-Current loss is: 0.035395075
-Current loss is: 2.9394442e-7
-Current loss is: 3.4284117e-8
-sol_ds.value = 1.4525287f0
+Step 1 / 10 
+Current loss is: 0.9979976
+Current loss is: 1.5087712e-5
+Current loss is: 1.8487654e-6
+Current loss is: 1.9746587e-6
+Current loss is: 1.8740913e-6
+Current loss is: 1.8747426e-6
+Current loss is: 2.0292289e-6
+Current loss is: 1.9534616e-6
+Current loss is: 1.9784106e-6
+Current loss is: 1.8550955e-6
+Current loss is: 1.8607055e-6
+Current loss is: 1.7193754e-6
+Current loss is: 1.9587878e-6
+Current loss is: 1.8474376e-6
+Current loss is: 1.580576e-6
+Current loss is: 1.7773842e-6
+Current loss is: 1.7033664e-6
+Current loss is: 1.8402189e-6
+Current loss is: 1.922943e-6
+Current loss is: 4.7264502e-6
+Current loss is: 1.8983833e-6
+Step 2 / 10 
+Current loss is: 0.015888572
+Current loss is: 1.2232658e-7
+Current loss is: 8.626312e-8
+Step 3 / 10 
+Current loss is: 0.0006818404
+Current loss is: 7.047346e-8
+Step 4 / 10 
+Current loss is: 0.0011418366
+Current loss is: 1.2866131e-7
+Current loss is: 5.845542e-8
+Step 5 / 10 
+Current loss is: 0.0021094563
+Current loss is: 7.821233e-8
+Step 6 / 10 
+Current loss is: 0.0028885845
+Current loss is: 5.917453e-8
+Step 7 / 10 
+Current loss is: 0.003604548
+Current loss is: 8.960688e-8
+Step 8 / 10 
+Current loss is: 0.004227955
+Current loss is: 1.07566024e-7
+Current loss is: 2.8959127e-8
+Step 9 / 10 
+Current loss is: 0.0059460946
+Current loss is: 1.395425e-7
+Current loss is: 1.6971615e-8
+Step 10 / 10 
+Current loss is: 0.0074777706
+Current loss is: 1.2318429e-8
+sol_ds.value = 1.4700238f0
 MLP
-sol_mlp.value = 1.4049086640316688
+sol_mlp.value = 1.4814071397983328
 d=1 T=0.5 i=5
 DeepSplitting
-Step 1 / 3 
-Current loss is: 1.2071012
-Current loss is: 2.5403375e-5
-Current loss is: 2.6423543e-6
-Current loss is: 2.491699e-6
-Current loss is: 2.4189364e-6
-Current loss is: 2.6541027e-6
-Current loss is: 2.4506164e-6
-Current loss is: 2.7719166e-6
-Current loss is: 2.6326713e-6
-Current loss is: 2.750317e-6
-Current loss is: 2.5667714e-6
-Current loss is: 2.5848917e-6
-Current loss is: 2.5382992e-6
-Current loss is: 2.7970336e-6
-Current loss is: 2.6661896e-6
-Current loss is: 2.5379331e-6
-Current loss is: 2.6922057e-6
-Current loss is: 2.6683372e-6
-Current loss is: 2.611077e-6
-Current loss is: 2.7741069e-6
-Current loss is: 2.6303212e-6
-Step 2 / 3 
-Current loss is: 0.13351074
-Current loss is: 9.187926e-7
-Current loss is: 3.8966112e-7
-Current loss is: 4.3940906e-7
-Current loss is: 3.980361e-7
-Current loss is: 3.9349533e-7
-Current loss is: 4.115409e-7
-Current loss is: 4.086762e-7
-Current loss is: 3.9825153e-7
-Current loss is: 4.174392e-7
-Current loss is: 4.317268e-7
-Current loss is: 3.7772534e-7
-Current loss is: 3.7325037e-7
-Current loss is: 4.1601535e-7
-Current loss is: 3.9689326e-7
-Current loss is: 3.7745494e-7
-Current loss is: 3.9694118e-7
-Current loss is: 4.0547837e-7
-Current loss is: 4.222198e-7
-Current loss is: 3.9802188e-7
-Current loss is: 4.155325e-7
-Step 3 / 3 
-Current loss is: 0.106410705
-Current loss is: 2.975013e-7
-Current loss is: 1.0681266e-7
-Current loss is: 9.7416304e-8
-sol_ds.value = 1.452534f0
+Step 1 / 10 
+Current loss is: 1.0009238
+Current loss is: 1.47045275e-5
+Current loss is: 1.7362552e-6
+Current loss is: 1.8500934e-6
+Current loss is: 1.6613426e-6
+Current loss is: 1.7418827e-6
+Current loss is: 1.7695852e-6
+Current loss is: 1.6826034e-6
+Current loss is: 1.7993149e-6
+Current loss is: 1.8280409e-6
+Current loss is: 1.8091264e-6
+Current loss is: 1.7389888e-6
+Current loss is: 1.4799938e-6
+Current loss is: 1.7495437e-6
+Current loss is: 1.6931345e-6
+Current loss is: 1.695769e-6
+Current loss is: 1.614619e-6
+Current loss is: 1.5665889e-6
+Current loss is: 1.5319847e-6
+Current loss is: 1.5165112e-6
+Current loss is: 1.5154283e-6
+Step 2 / 10 
+Current loss is: 0.012998205
+Current loss is: 1.2453695e-6
+Current loss is: 1.1702258e-7
+Current loss is: 1.12202095e-7
+Current loss is: 1.1417019e-7
+Current loss is: 1.1598713e-7
+Current loss is: 1.10692774e-7
+Current loss is: 1.1201998e-7
+Current loss is: 1.15300274e-7
+Current loss is: 1.1209385e-7
+Current loss is: 1.100629e-7
+Current loss is: 1.1168093e-7
+Current loss is: 1.09314065e-7
+Current loss is: 1.2889608e-7
+Current loss is: 1.912605e-5
+Current loss is: 1.1465238e-7
+Current loss is: 2.0626885e-6
+Current loss is: 4.0566712e-7
+Current loss is: 1.81115e-7
+Current loss is: 1.3728379e-7
+Current loss is: 1.0793028e-5
+Step 3 / 10 
+Current loss is: 0.016170403
+Current loss is: 3.450086e-7
+Current loss is: 2.1781919e-7
+Current loss is: 2.36351e-7
+Current loss is: 2.2707285e-7
+Current loss is: 2.1946748e-7
+Current loss is: 2.0886252e-7
+Current loss is: 2.0781229e-7
+Current loss is: 2.236929e-7
+Current loss is: 2.2369431e-7
+Current loss is: 2.3685432e-7
+Current loss is: 2.1474037e-7
+Current loss is: 2.1029543e-7
+Current loss is: 2.2524506e-7
+Current loss is: 2.1589024e-7
+Current loss is: 2.0568403e-7
+Current loss is: 2.1667516e-7
+Current loss is: 2.0734707e-7
+Current loss is: 2.0089635e-7
+Current loss is: 2.1434934e-7
+Current loss is: 2.2615127e-7
+Step 4 / 10 
+Current loss is: 0.014679876
+Current loss is: 1.6348266e-6
+Current loss is: 3.9676356e-9
+Step 5 / 10 
+Current loss is: 5.1758747e-5
+Current loss is: 6.560985e-8
+Step 6 / 10 
+Current loss is: 9.110987e-5
+Current loss is: 1.9487494e-9
+Step 7 / 10 
+Current loss is: 0.00020985071
+Current loss is: 4.333829e-8
+Step 8 / 10 
+Current loss is: 0.00041047073
+Current loss is: 9.48664e-8
+Step 9 / 10 
+Current loss is: 0.00069611636
+Current loss is: 2.5445114e-8
+Step 10 / 10 
+Current loss is: 0.0010533992
+Current loss is: 7.0765644e-8
+sol_ds.value = 1.4655296f0
 MLP
-sol_mlp.value = 1.4122917687510737
+sol_mlp.value = 1.4885378015203163
 d=1 T=1.0 i=1
 DeepSplitting
-Step 1 / 3 
-Current loss is: 1.5104551
-Current loss is: 5.2438547e-5
-Current loss is: 1.4254558e-5
-Current loss is: 1.3741784e-5
-Current loss is: 1.2228212e-5
-Current loss is: 1.3529616e-5
-Current loss is: 1.3503249e-5
-Current loss is: 1.3836277e-5
-Current loss is: 1.246217e-5
-Current loss is: 1.4428919e-5
-Current loss is: 1.4372955e-5
-Current loss is: 1.3903031e-5
-Current loss is: 1.275555e-5
-Current loss is: 1.4051204e-5
-Current loss is: 1.2819764e-5
-Current loss is: 1.2576112e-5
-Current loss is: 1.2279965e-5
-Current loss is: 1.2754043e-5
-Current loss is: 1.2894586e-5
-Current loss is: 1.2598748e-5
-Current loss is: 1.2740694e-5
-Step 2 / 3 
-Current loss is: 0.74116164
-Current loss is: 1.9601168e-6
-Current loss is: 1.7118384e-6
-Current loss is: 1.7496552e-6
-Current loss is: 1.6176679e-6
-Current loss is: 1.6648662e-6
-Current loss is: 1.7921507e-6
-Current loss is: 1.5502274e-6
-Current loss is: 1.7323143e-6
-Current loss is: 1.6836447e-6
-Current loss is: 1.6427845e-6
-Current loss is: 1.7108719e-6
-Current loss is: 1.6592732e-6
-Current loss is: 1.6232858e-6
-Current loss is: 1.7919978e-6
-Current loss is: 1.6765817e-6
-Current loss is: 1.692695e-6
-Current loss is: 1.6490162e-6
-Current loss is: 1.6257052e-6
-Current loss is: 1.6911765e-6
-Current loss is: 1.5766242e-6
-Step 3 / 3 
-Current loss is: 0.39750695
-Current loss is: 6.0713305e-6
-Current loss is: 4.4300265e-7
-Current loss is: 4.678513e-7
-Current loss is: 4.4167047e-7
-Current loss is: 4.1386213e-7
-Current loss is: 4.8080227e-7
-Current loss is: 4.5430463e-7
-Current loss is: 4.3735358e-7
-Current loss is: 4.3916975e-7
-Current loss is: 4.4060948e-7
-Current loss is: 4.260804e-7
-Current loss is: 4.3828305e-7
-Current loss is: 4.334712e-7
-Current loss is: 4.2376294e-7
-Current loss is: 4.3730353e-7
-Current loss is: 4.517468e-7
-Current loss is: 4.1684717e-7
-Current loss is: 4.9293936e-7
-Current loss is: 4.5559037e-7
-Current loss is: 4.57859e-7
-sol_ds.value = 1.9818678f0
+Step 1 / 10 
+Current loss is: 1.0990074
+Current loss is: 1.1233437e-5
+Current loss is: 9.224363e-6
+Current loss is: 9.109062e-6
+Current loss is: 9.3403405e-6
+Current loss is: 8.832337e-6
+Current loss is: 8.406777e-6
+Current loss is: 9.748004e-6
+Current loss is: 9.043703e-6
+Current loss is: 8.80129e-6
+Current loss is: 9.002351e-6
+Current loss is: 8.194405e-6
+Current loss is: 8.798246e-6
+Current loss is: 8.115251e-6
+Current loss is: 8.828231e-6
+Current loss is: 8.237942e-6
+Current loss is: 8.649625e-6
+Current loss is: 8.059613e-6
+Current loss is: 7.526206e-6
+Current loss is: 7.4281443e-6
+Current loss is: 7.63237e-6
+Step 2 / 10 
+Current loss is: 0.05725329
+Current loss is: 7.397696e-5
+Current loss is: 3.086566e-7
+Current loss is: 3.1134263e-7
+Current loss is: 3.2608062e-7
+Current loss is: 3.1863243e-7
+Current loss is: 3.412282e-7
+Current loss is: 3.187357e-7
+Current loss is: 3.2828322e-7
+Current loss is: 3.1647727e-7
+Current loss is: 3.3708733e-7
+Current loss is: 3.392105e-7
+Current loss is: 3.266784e-7
+Current loss is: 3.354125e-7
+Current loss is: 3.305548e-7
+Current loss is: 3.699418e-7
+Current loss is: 3.381647e-7
+Current loss is: 3.163456e-7
+Current loss is: 3.1857851e-7
+Current loss is: 3.2186742e-7
+Current loss is: 3.0957227e-7
+Step 3 / 10 
+Current loss is: 0.00024641416
+Current loss is: 4.4642505e-7
+Current loss is: 3.0438133e-7
+Current loss is: 3.061991e-7
+Current loss is: 3.161892e-7
+Current loss is: 3.0713198e-7
+Current loss is: 3.165437e-7
+Current loss is: 3.1033034e-7
+Current loss is: 3.1769596e-7
+Current loss is: 3.2911672e-7
+Current loss is: 3.18389e-7
+Current loss is: 3.3299773e-7
+Current loss is: 3.4622536e-7
+Current loss is: 3.3505935e-7
+Current loss is: 3.1041867e-7
+Current loss is: 3.264031e-7
+Current loss is: 3.3367937e-7
+Current loss is: 3.1114917e-7
+Current loss is: 3.2118646e-7
+Current loss is: 3.087182e-7
+Current loss is: 3.0622778e-7
+Step 4 / 10 
+Current loss is: 0.057011105
+Current loss is: 2.7605395e-6
+Current loss is: 3.2414323e-7
+Current loss is: 3.3091905e-7
+Current loss is: 3.580985e-7
+Current loss is: 3.2977536e-7
+Current loss is: 3.1171967e-7
+Current loss is: 3.2107948e-7
+Current loss is: 3.2377764e-7
+Current loss is: 3.0812822e-7
+Current loss is: 3.1412765e-7
+Current loss is: 3.231804e-7
+Current loss is: 3.2789228e-7
+Current loss is: 2.944229e-7
+Current loss is: 3.1890127e-7
+Current loss is: 3.089994e-7
+Current loss is: 3.0119654e-7
+Current loss is: 2.8542235e-7
+Current loss is: 3.0720173e-7
+Current loss is: 3.027918e-7
+Current loss is: 3.1250315e-7
+Step 5 / 10 
+Current loss is: 0.018733311
+Current loss is: 6.629187e-7
+Current loss is: 2.9596046e-7
+Current loss is: 2.8581516e-7
+Current loss is: 3.0329483e-7
+Current loss is: 3.1450531e-7
+Current loss is: 2.705611e-7
+Current loss is: 2.998844e-7
+Current loss is: 3.020697e-7
+Current loss is: 3.104177e-7
+Current loss is: 2.9518284e-7
+Current loss is: 2.9481822e-7
+Current loss is: 3.0388884e-7
+Current loss is: 3.0449465e-7
+Current loss is: 2.9238586e-7
+Current loss is: 2.8570983e-7
+Current loss is: 1.0027992e-5
+Current loss is: 5.1261634e-7
+Current loss is: 2.6177488e-6
+Current loss is: 2.7156977e-7
+Current loss is: 9.36935e-5
+Step 6 / 10 
+Current loss is: 0.09833437
+Current loss is: 1.36788685e-5
+Current loss is: 9.909099e-7
+Current loss is: 8.729199e-7
+Current loss is: 7.1295364e-7
+Current loss is: 6.1996974e-7
+Current loss is: 5.361426e-7
+Current loss is: 5.1152205e-7
+Current loss is: 4.8383095e-7
+Current loss is: 4.562089e-7
+Current loss is: 4.441662e-7
+Current loss is: 4.3267244e-7
+Current loss is: 4.2462722e-7
+Current loss is: 4.2376445e-7
+Current loss is: 4.2167906e-7
+Current loss is: 4.0393493e-7
+Current loss is: 4.112599e-7
+Current loss is: 4.0138727e-7
+Current loss is: 4.1351515e-7
+Current loss is: 4.0272937e-7
+Current loss is: 3.8979522e-7
+Step 7 / 10 
+Current loss is: 2.0323285e-5
+Current loss is: 4.35763e-7
+Current loss is: 3.7958768e-7
+Current loss is: 4.2171783e-7
+Current loss is: 4.0127944e-7
+Current loss is: 3.8702242e-7
+Current loss is: 3.9663644e-7
+Current loss is: 3.896941e-7
+Current loss is: 4.1398857e-7
+Current loss is: 3.7763579e-7
+Current loss is: 4.018096e-7
+Current loss is: 4.0731544e-7
+Current loss is: 3.9276588e-7
+Current loss is: 4.2557448e-7
+Current loss is: 4.075674e-7
+Current loss is: 4.1498313e-7
+Current loss is: 4.1890175e-7
+Current loss is: 4.1464367e-7
+Current loss is: 3.87137e-7
+Current loss is: 3.9884327e-7
+Current loss is: 3.7543262e-7
+Step 8 / 10 
+Current loss is: 0.033235677
+Current loss is: 8.967803e-7
+Current loss is: 3.622916e-7
+Current loss is: 3.4572832e-7
+Current loss is: 3.4437258e-7
+Current loss is: 3.7673846e-7
+Current loss is: 3.2724972e-7
+Current loss is: 3.4770355e-7
+Current loss is: 3.6351383e-7
+Current loss is: 3.5685719e-7
+Current loss is: 3.6161904e-7
+Current loss is: 3.5252182e-7
+Current loss is: 3.36974e-7
+Current loss is: 3.2367666e-7
+Current loss is: 3.741528e-7
+Current loss is: 3.5531727e-7
+Current loss is: 3.7144443e-7
+Current loss is: 3.7188082e-7
+Current loss is: 3.8409217e-7
+Current loss is: 3.5201154e-7
+Current loss is: 3.613933e-7
+Step 9 / 10 
+Current loss is: 0.085032865
+Current loss is: 8.088996e-6
+Current loss is: 2.6469007e-7
+Current loss is: 2.89193e-7
+Current loss is: 3.0188494e-7
+Current loss is: 2.7506243e-7
+Current loss is: 2.8193875e-7
+Current loss is: 2.8592655e-7
+Current loss is: 3.030846e-7
+Current loss is: 3.0247102e-7
+Current loss is: 2.741663e-7
+Current loss is: 2.8767968e-7
+Current loss is: 2.975698e-7
+Current loss is: 2.7444304e-7
+Current loss is: 2.8316083e-7
+Current loss is: 2.8348288e-7
+Current loss is: 2.8491962e-7
+Current loss is: 2.8608628e-7
+Current loss is: 3.0501297e-7
+Current loss is: 2.8345264e-7
+Current loss is: 2.957883e-7
+Step 10 / 10 
+Current loss is: 0.0007529624
+Current loss is: 2.9175558e-7
+Current loss is: 2.261338e-7
+Current loss is: 2.209222e-7
+Current loss is: 2.1950734e-7
+Current loss is: 2.1868397e-7
+Current loss is: 2.1208248e-7
+Current loss is: 2.4611592e-7
+Current loss is: 2.200674e-7
+Current loss is: 2.1530933e-7
+Current loss is: 2.2619066e-7
+Current loss is: 2.2614084e-7
+Current loss is: 2.188104e-7
+Current loss is: 2.1609189e-7
+Current loss is: 2.0496425e-7
+Current loss is: 2.2586683e-7
+Current loss is: 2.2190864e-7
+Current loss is: 2.1529091e-7
+Current loss is: 2.2690541e-7
+Current loss is: 2.2402041e-7
+Current loss is: 2.0473357e-7
+sol_ds.value = 2.0625908f0
 MLP
-sol_mlp.value = 1.9466554509055884
+sol_mlp.value = 2.1088517785562777
 d=1 T=1.0 i=2
 DeepSplitting
-Step 1 / 3 
-Current loss is: 1.5090739
-Current loss is: 4.2051666e-5
-Current loss is: 1.4786705e-5
-Current loss is: 1.3883782e-5
-Current loss is: 1.394227e-5
-Current loss is: 1.441041e-5
-Current loss is: 1.414522e-5
-Current loss is: 1.3892281e-5
-Current loss is: 1.4134856e-5
-Current loss is: 1.4768423e-5
-Current loss is: 1.4250626e-5
-Current loss is: 1.4089068e-5
-Current loss is: 1.39996855e-5
-Current loss is: 1.4406552e-5
-Current loss is: 1.4724336e-5
-Current loss is: 1.4195497e-5
-Current loss is: 1.33165895e-5
-Current loss is: 1.3799349e-5
-Current loss is: 1.3971722e-5
-Current loss is: 1.402767e-5
-Current loss is: 1.34120455e-5
-Step 2 / 3 
-Current loss is: 1.3536735
-Current loss is: 5.630866e-5
-Current loss is: 1.1646974e-6
-Current loss is: 1.070654e-6
-Current loss is: 1.0258105e-6
-Current loss is: 1.0154386e-6
-Current loss is: 1.0337242e-6
-Current loss is: 1.084363e-6
-Current loss is: 1.1099524e-6
-Current loss is: 1.0726225e-6
-Current loss is: 1.1256553e-6
-Current loss is: 9.926187e-7
-Current loss is: 1.045527e-6
-Current loss is: 1.0947399e-6
-Current loss is: 1.0060471e-6
-Current loss is: 1.0222027e-6
-Current loss is: 1.0629982e-6
-Current loss is: 1.0230741e-6
-Current loss is: 1.0638774e-6
-Current loss is: 1.0663567e-6
-Current loss is: 1.052409e-6
-Step 3 / 3 
-Current loss is: 0.13996248
-Current loss is: 4.399405e-7
-Current loss is: 1.9242675e-7
-Current loss is: 1.8733323e-7
-Current loss is: 2.0371793e-7
-Current loss is: 1.991084e-7
-Current loss is: 2.0721993e-7
-Current loss is: 2.1668039e-7
-Current loss is: 1.8636506e-7
-Current loss is: 1.953081e-7
-Current loss is: 1.8142565e-7
-Current loss is: 2.0235771e-7
-Current loss is: 1.8812588e-7
-Current loss is: 2.0402689e-7
-Current loss is: 2.0447862e-7
-Current loss is: 2.146163e-7
-Current loss is: 1.8850457e-7
-Current loss is: 2.5201834e-7
-Current loss is: 0.0002095359
-Current loss is: 2.3597153e-7
-Current loss is: 0.0013730142
-sol_ds.value = 1.944642f0
+Step 1 / 10 
+Current loss is: 1.096043
+Current loss is: 1.2472093e-5
+Current loss is: 7.439185e-6
+Current loss is: 7.1417617e-6
+Current loss is: 7.740644e-6
+Current loss is: 7.913833e-6
+Current loss is: 7.290861e-6
+Current loss is: 8.281098e-6
+Current loss is: 7.5368757e-6
+Current loss is: 7.0081956e-6
+Current loss is: 6.7734136e-6
+Current loss is: 7.382429e-6
+Current loss is: 6.5760846e-6
+Current loss is: 6.3701336e-6
+Current loss is: 6.462797e-6
+Current loss is: 6.8052636e-6
+Current loss is: 6.605162e-6
+Current loss is: 6.353647e-6
+Current loss is: 6.6098596e-6
+Current loss is: 6.0623606e-6
+Current loss is: 5.999288e-6
+Step 2 / 10 
+Current loss is: 0.039524354
+Current loss is: 1.3322436e-5
+Current loss is: 1.6583626e-6
+Current loss is: 1.5744953e-6
+Current loss is: 1.5818632e-6
+Current loss is: 1.510321e-6
+Current loss is: 1.4100393e-6
+Current loss is: 1.3841574e-6
+Current loss is: 1.497508e-6
+Current loss is: 1.4798567e-6
+Current loss is: 1.6058704e-6
+Current loss is: 1.3983389e-6
+Current loss is: 1.4760218e-6
+Current loss is: 1.3803029e-6
+Current loss is: 1.2696875e-6
+Current loss is: 1.2678919e-6
+Current loss is: 1.2390406e-6
+Current loss is: 1.1780894e-6
+Current loss is: 1.1528277e-6
+Current loss is: 1.2570118e-6
+Current loss is: 1.2725129e-6
+Step 3 / 10 
+Current loss is: 0.0011540122
+Current loss is: 1.8565372e-7
+Current loss is: 1.360191e-7
+Current loss is: 1.3257154e-7
+Current loss is: 1.356508e-7
+Current loss is: 1.3925677e-7
+Current loss is: 1.4247422e-7
+Current loss is: 1.4439375e-7
+Current loss is: 1.423038e-7
+Current loss is: 1.447391e-7
+Current loss is: 1.3864896e-7
+Current loss is: 1.3139731e-7
+Current loss is: 1.4478837e-7
+Current loss is: 1.3827147e-7
+Current loss is: 1.3868204e-7
+Current loss is: 1.371357e-7
+Current loss is: 1.4335498e-7
+Current loss is: 1.3487487e-7
+Current loss is: 1.4706872e-7
+Current loss is: 1.434466e-7
+Current loss is: 1.5655773e-7
+Step 4 / 10 
+Current loss is: 0.06041752
+Current loss is: 3.1888038e-7
+Current loss is: 2.2079043e-7
+Current loss is: 2.2160012e-7
+Current loss is: 2.0797842e-7
+Current loss is: 2.3030312e-7
+Current loss is: 2.0939218e-7
+Current loss is: 2.1839514e-7
+Current loss is: 1.8990067e-7
+Current loss is: 1.963928e-7
+Current loss is: 2.0146382e-7
+Current loss is: 1.857945e-7
+Current loss is: 1.758644e-7
+Current loss is: 1.7354738e-7
+Current loss is: 1.7958058e-7
+Current loss is: 1.5598064e-7
+Current loss is: 1.7036311e-7
+Current loss is: 1.619598e-7
+Current loss is: 1.6608564e-7
+Current loss is: 1.5763021e-7
+Current loss is: 1.6239431e-7
+Step 5 / 10 
+Current loss is: 0.046262
+Current loss is: 0.00027002333
+Current loss is: 3.4442646e-6
+Current loss is: 3.1295438e-6
+Current loss is: 2.974317e-6
+Current loss is: 2.8668692e-6
+Current loss is: 2.8017269e-6
+Current loss is: 2.4156188e-6
+Current loss is: 2.513316e-6
+Current loss is: 2.2294428e-6
+Current loss is: 2.1960295e-6
+Current loss is: 2.2610743e-6
+Current loss is: 2.1020476e-6
+Current loss is: 1.9056364e-6
+Current loss is: 1.6434749e-6
+Current loss is: 1.7330642e-6
+Current loss is: 1.6576521e-6
+Current loss is: 1.4413015e-6
+Current loss is: 1.3882876e-6
+Current loss is: 1.289437e-6
+Current loss is: 1.2757137e-6
+Step 6 / 10 
+Current loss is: 0.00030541065
+Current loss is: 1.2904163e-6
+Current loss is: 9.639422e-7
+Current loss is: 8.861675e-7
+Current loss is: 8.917679e-7
+Current loss is: 9.3447426e-7
+Current loss is: 9.70864e-7
+Current loss is: 9.062043e-7
+Current loss is: 9.131402e-7
+Current loss is: 9.0001083e-7
+Current loss is: 9.231699e-7
+Current loss is: 9.628028e-7
+Current loss is: 8.9101945e-7
+Current loss is: 9.675816e-7
+Current loss is: 8.999711e-7
+Current loss is: 9.443723e-7
+Current loss is: 8.7737044e-7
+Current loss is: 8.7194945e-7
+Current loss is: 9.081213e-7
+Current loss is: 8.2987043e-7
+Current loss is: 8.555073e-7
+Step 7 / 10 
+Current loss is: 0.07545696
+Current loss is: 4.0678606e-6
+Current loss is: 1.3276083e-6
+Current loss is: 1.2383899e-6
+Current loss is: 1.2389255e-6
+Current loss is: 1.2497187e-6
+Current loss is: 1.2958479e-6
+Current loss is: 1.1669055e-6
+Current loss is: 1.3190859e-6
+Current loss is: 1.1592267e-6
+Current loss is: 1.1708458e-6
+Current loss is: 1.1565986e-6
+Current loss is: 1.1869344e-6
+Current loss is: 1.2010279e-6
+Current loss is: 1.339703e-6
+Current loss is: 1.1514201e-6
+Current loss is: 1.1663693e-6
+Current loss is: 1.1776544e-6
+Current loss is: 1.2460262e-6
+Current loss is: 1.1167924e-6
+Current loss is: 1.2483274e-6
+Step 8 / 10 
+Current loss is: 0.0662886
+Current loss is: 1.4640045e-6
+Current loss is: 9.076285e-8
+Step 9 / 10 
+Current loss is: 0.008866946
+Current loss is: 2.1059861e-8
+Step 10 / 10 
+Current loss is: 0.009177442
+Current loss is: 4.3559805e-8
+sol_ds.value = 2.0491905f0
 MLP
-sol_mlp.value = 1.9618352064213744
+sol_mlp.value = 2.1024554115291916
 d=1 T=1.0 i=3
 DeepSplitting
-Step 1 / 3 
-Current loss is: 1.542345
-Current loss is: 3.4053213e-5
-Current loss is: 1.4464738e-5
-Current loss is: 1.1863247e-5
-Current loss is: 1.34943175e-5
-Current loss is: 1.3871397e-5
-Current loss is: 1.3804175e-5
-Current loss is: 1.2466669e-5
-Current loss is: 1.2855945e-5
-Current loss is: 1.2499963e-5
-Current loss is: 1.4730424e-5
-Current loss is: 1.3556172e-5
-Current loss is: 1.2968991e-5
-Current loss is: 1.2741702e-5
-Current loss is: 1.3590073e-5
-Current loss is: 1.315911e-5
-Current loss is: 1.34772945e-5
-Current loss is: 1.2615559e-5
-Current loss is: 1.3890403e-5
-Current loss is: 6.735698e-5
-Current loss is: 0.0010604684
-Step 2 / 3 
-Current loss is: 2.2010765
-Current loss is: 0.000120723904
-Current loss is: 1.9082818e-6
-Current loss is: 1.8816758e-6
-Current loss is: 1.8574538e-6
-Current loss is: 1.9044386e-6
-Current loss is: 1.932973e-6
-Current loss is: 2.029595e-6
-Current loss is: 1.9937272e-6
-Current loss is: 1.981725e-6
-Current loss is: 1.8649738e-6
-Current loss is: 1.963008e-6
-Current loss is: 1.8165498e-6
-Current loss is: 1.912926e-6
-Current loss is: 1.9075578e-6
-Current loss is: 1.8396203e-6
-Current loss is: 1.9120546e-6
-Current loss is: 2.0423688e-6
-Current loss is: 1.9131442e-6
-Current loss is: 1.8382192e-6
-Current loss is: 1.8325876e-6
-Step 3 / 3 
-Current loss is: 0.013724756
-Current loss is: 5.8204428e-6
-Current loss is: 1.2952659e-6
-Current loss is: 1.2763816e-6
-Current loss is: 1.3272285e-6
-Current loss is: 1.3104755e-6
-Current loss is: 1.2253266e-6
-Current loss is: 1.2732347e-6
-Current loss is: 1.3454643e-6
-Current loss is: 1.2412083e-6
-Current loss is: 1.3602897e-6
-Current loss is: 1.2740003e-6
-Current loss is: 1.2591839e-6
-Current loss is: 1.3340303e-6
-Current loss is: 1.2119607e-6
-Current loss is: 1.211392e-6
-Current loss is: 1.3235475e-6
-Current loss is: 1.3042977e-6
-Current loss is: 1.2735138e-6
-Current loss is: 1.3499508e-6
-Current loss is: 1.3942584e-6
-sol_ds.value = 2.0255566f0
+Step 1 / 10 
+Current loss is: 1.0995318
+Current loss is: 1.4113345e-5
+Current loss is: 9.845694e-6
+Current loss is: 9.493953e-6
+Current loss is: 9.08583e-6
+Current loss is: 8.868714e-6
+Current loss is: 8.458088e-6
+Current loss is: 8.730491e-6
+Current loss is: 8.566784e-6
+Current loss is: 7.790456e-6
+Current loss is: 1.001412e-5
+Current loss is: 8.923395e-6
+Current loss is: 8.455788e-6
+Current loss is: 8.667514e-6
+Current loss is: 8.144623e-6
+Current loss is: 8.519135e-6
+Current loss is: 7.974917e-6
+Current loss is: 7.916653e-6
+Current loss is: 7.2158614e-6
+Current loss is: 7.847462e-6
+Current loss is: 7.5242438e-6
+Step 2 / 10 
+Current loss is: 0.0561705
+Current loss is: 1.4391212e-5
+Current loss is: 7.676853e-7
+Current loss is: 7.075899e-7
+Current loss is: 7.5214297e-7
+Current loss is: 7.3093565e-7
+Current loss is: 7.692412e-7
+Current loss is: 7.043976e-7
+Current loss is: 6.8761454e-7
+Current loss is: 6.8453e-7
+Current loss is: 7.2475996e-7
+Current loss is: 7.4425736e-7
+Current loss is: 6.635604e-7
+Current loss is: 7.2963275e-7
+Current loss is: 6.6249885e-7
+Current loss is: 7.102935e-7
+Current loss is: 6.557412e-7
+Current loss is: 6.288749e-7
+Current loss is: 6.511781e-7
+Current loss is: 6.072418e-7
+Current loss is: 6.4788736e-7
+Step 3 / 10 
+Current loss is: 0.00055092404
+Current loss is: 3.5434783e-7
+Current loss is: 9.467628e-8
+Step 4 / 10 
+Current loss is: 0.0010700873
+Current loss is: 3.8738742e-7
+Current loss is: 9.1204456e-8
+Step 5 / 10 
+Current loss is: 0.0021801228
+Current loss is: 1.658144e-7
+Current loss is: 9.1459135e-8
+Step 6 / 10 
+Current loss is: 0.0036686442
+Current loss is: 5.4857486e-7
+Current loss is: 7.847158e-8
+Step 7 / 10 
+Current loss is: 0.0052625285
+Current loss is: 5.0397114e-7
+Current loss is: 7.13964e-8
+Step 8 / 10 
+Current loss is: 0.006716511
+Current loss is: 6.624379e-8
+Step 9 / 10 
+Current loss is: 0.0060404083
+Current loss is: 4.5612805e-7
+Current loss is: 4.398312e-8
+Step 10 / 10 
+Current loss is: 0.007521821
+Current loss is: 2.8229192e-7
+Current loss is: 1.8988565e-8
+sol_ds.value = 2.0493977f0
 MLP
-sol_mlp.value = 1.970467806640884
+sol_mlp.value = 2.098851875126586
 d=1 T=1.0 i=4
 DeepSplitting
-Step 1 / 3 
-Current loss is: 1.5119632
-Current loss is: 4.580182e-5
-Current loss is: 1.3276132e-5
-Current loss is: 1.2772873e-5
-Current loss is: 1.340463e-5
-Current loss is: 1.3520733e-5
-Current loss is: 1.36745775e-5
-Current loss is: 1.3085114e-5
-Current loss is: 1.2920014e-5
-Current loss is: 1.3167903e-5
-Current loss is: 1.2319855e-5
-Current loss is: 1.3371331e-5
-Current loss is: 1.2782517e-5
-Current loss is: 1.3639124e-5
-Current loss is: 1.3346675e-5
-Current loss is: 1.254726e-5
-Current loss is: 1.3585634e-5
-Current loss is: 1.2815601e-5
-Current loss is: 1.2719609e-5
-Current loss is: 1.2585411e-5
-Current loss is: 1.2772521e-5
-Step 2 / 3 
-Current loss is: 1.0527791
-Current loss is: 1.3602276e-5
-Current loss is: 1.7956164e-6
-Current loss is: 1.70715e-6
-Current loss is: 1.9672484e-6
-Current loss is: 1.7752518e-6
-Current loss is: 2.0690297e-6
-Current loss is: 1.8841203e-6
-Current loss is: 1.8523217e-6
-Current loss is: 1.783073e-6
-Current loss is: 1.822605e-6
-Current loss is: 1.924538e-6
-Current loss is: 1.9146776e-6
-Current loss is: 1.8486821e-6
-Current loss is: 1.9439217e-6
-Current loss is: 1.9356628e-6
-Current loss is: 1.8860412e-6
-Current loss is: 1.8552308e-6
-Current loss is: 1.9625306e-6
-Current loss is: 2.049232e-6
-Current loss is: 1.8760388e-6
-Step 3 / 3 
-Current loss is: 0.044943675
-Current loss is: 3.6000467e-6
-Current loss is: 4.6044937e-7
-Current loss is: 4.360797e-7
-Current loss is: 4.3534044e-7
-Current loss is: 4.4974854e-7
-Current loss is: 4.6945402e-7
-Current loss is: 4.632628e-7
-Current loss is: 4.626123e-7
-Current loss is: 4.5469505e-7
-Current loss is: 4.7209133e-7
-Current loss is: 4.3792238e-7
-Current loss is: 4.8230095e-7
-Current loss is: 4.657567e-7
-Current loss is: 4.5537192e-7
-Current loss is: 4.0604303e-7
-Current loss is: 4.5352232e-7
-Current loss is: 4.3840407e-7
-Current loss is: 4.9140436e-7
-Current loss is: 4.885076e-7
-Current loss is: 4.342891e-7
-sol_ds.value = 1.9826349f0
+Step 1 / 10 
+Current loss is: 1.0890718
+Current loss is: 2.2269665e-5
+Current loss is: 6.9649805e-6
+Current loss is: 7.437669e-6
+Current loss is: 7.5007006e-6
+Current loss is: 7.282662e-6
+Current loss is: 7.0283613e-6
+Current loss is: 7.4981313e-6
+Current loss is: 7.160905e-6
+Current loss is: 6.998966e-6
+Current loss is: 7.0059777e-6
+Current loss is: 7.0588844e-6
+Current loss is: 6.5630525e-6
+Current loss is: 6.377539e-6
+Current loss is: 6.3215784e-6
+Current loss is: 6.6527805e-6
+Current loss is: 5.895377e-6
+Current loss is: 5.6133917e-6
+Current loss is: 5.4799802e-6
+Current loss is: 5.3400317e-6
+Current loss is: 5.473086e-6
+Step 2 / 10 
+Current loss is: 0.06353993
+Current loss is: 1.6032438e-5
+Current loss is: 8.176987e-7
+Current loss is: 7.5863704e-7
+Current loss is: 7.6445997e-7
+Current loss is: 7.92608e-7
+Current loss is: 8.049379e-7
+Current loss is: 8.2669857e-7
+Current loss is: 7.805012e-7
+Current loss is: 7.770746e-7
+Current loss is: 7.9561676e-7
+Current loss is: 8.108945e-7
+Current loss is: 7.5292036e-7
+Current loss is: 7.8213833e-7
+Current loss is: 8.1878557e-7
+Current loss is: 7.411923e-7
+Current loss is: 7.469796e-7
+Current loss is: 7.3467197e-7
+Current loss is: 7.257997e-7
+Current loss is: 7.404382e-7
+Current loss is: 7.579109e-7
+Step 3 / 10 
+Current loss is: 0.00047126404
+Current loss is: 9.570902e-7
+Current loss is: 8.4626504e-7
+Current loss is: 8.4278696e-7
+Current loss is: 8.691672e-7
+Current loss is: 8.5696826e-7
+Current loss is: 8.67265e-7
+Current loss is: 8.510719e-7
+Current loss is: 8.56984e-7
+Current loss is: 8.5456657e-7
+Current loss is: 8.8921684e-7
+Current loss is: 8.205942e-7
+Current loss is: 8.310252e-7
+Current loss is: 8.8178615e-7
+Current loss is: 8.697219e-7
+Current loss is: 9.197669e-7
+Current loss is: 8.8183583e-7
+Current loss is: 8.335104e-7
+Current loss is: 8.656165e-7
+Current loss is: 8.91738e-7
+Current loss is: 8.729273e-7
+Step 4 / 10 
+Current loss is: 0.073864795
+Current loss is: 6.7562287e-6
+Current loss is: 9.060539e-7
+Current loss is: 8.614205e-7
+Current loss is: 8.983972e-7
+Current loss is: 8.6362195e-7
+Current loss is: 8.3304303e-7
+Current loss is: 8.6630274e-7
+Current loss is: 8.299236e-7
+Current loss is: 8.5033537e-7
+Current loss is: 8.3343e-7
+Current loss is: 8.350924e-7
+Current loss is: 8.126953e-7
+Current loss is: 7.8337564e-7
+Current loss is: 7.828108e-7
+Current loss is: 8.9548104e-7
+Current loss is: 8.356064e-7
+Current loss is: 7.9672674e-7
+Current loss is: 8.1281246e-7
+Current loss is: 8.2723733e-7
+Current loss is: 8.893587e-7
+Step 5 / 10 
+Current loss is: 0.011278052
+Current loss is: 8.933075e-7
+Current loss is: 8.269754e-7
+Current loss is: 7.5704685e-7
+Current loss is: 7.6077157e-7
+Current loss is: 7.3375446e-7
+Current loss is: 8.142277e-7
+Current loss is: 8.353063e-7
+Current loss is: 8.234835e-7
+Current loss is: 7.48257e-7
+Current loss is: 7.729631e-7
+Current loss is: 7.7405144e-7
+Current loss is: 8.2397526e-7
+Current loss is: 7.76479e-7
+Current loss is: 8.1737835e-7
+Current loss is: 7.905011e-7
+Current loss is: 0.00025929845
+Current loss is: 2.0196617e-6
+Current loss is: 1.3814022e-6
+Current loss is: 3.3821503e-5
+Current loss is: 2.395443e-6
+Step 6 / 10 
+Current loss is: 0.10483616
+Current loss is: 2.9112691e-6
+Current loss is: 7.2662874e-7
+Current loss is: 6.8508695e-7
+Current loss is: 7.0601305e-7
+Current loss is: 6.896798e-7
+Current loss is: 7.0923585e-7
+Current loss is: 6.883711e-7
+Current loss is: 6.8279354e-7
+Current loss is: 7.0283187e-7
+Current loss is: 6.782282e-7
+Current loss is: 6.795235e-7
+Current loss is: 6.7979647e-7
+Current loss is: 6.8960566e-7
+Current loss is: 6.850536e-7
+Current loss is: 7.265106e-7
+Current loss is: 7.2149805e-7
+Current loss is: 6.9094665e-7
+Current loss is: 7.291864e-7
+Current loss is: 6.976197e-7
+Current loss is: 7.806259e-7
+Step 7 / 10 
+Current loss is: 0.02484315
+Current loss is: 1.0847632e-6
+Current loss is: 1.0279282e-6
+Current loss is: 1.0070468e-6
+Current loss is: 9.713945e-7
+Current loss is: 8.329276e-7
+Current loss is: 7.947518e-7
+Current loss is: 7.7423533e-7
+Current loss is: 7.173943e-7
+Current loss is: 6.6750613e-7
+Current loss is: 6.1797294e-7
+Current loss is: 6.2136405e-7
+Current loss is: 5.7733683e-7
+Current loss is: 6.106283e-7
+Current loss is: 6.406789e-7
+Current loss is: 6.1039543e-7
+Current loss is: 6.4686435e-7
+Current loss is: 0.00026674103
+Current loss is: 5.770264e-7
+Current loss is: 5.86609e-7
+Current loss is: 1.3119926e-5
+Step 8 / 10 
+Current loss is: 0.09679961
+Current loss is: 2.4090355e-6
+Current loss is: 5.1257723e-7
+Current loss is: 5.1150573e-7
+Current loss is: 4.5727234e-7
+Current loss is: 4.7904933e-7
+Current loss is: 5.012256e-7
+Current loss is: 4.659293e-7
+Current loss is: 4.928095e-7
+Current loss is: 4.364832e-7
+Current loss is: 4.5903758e-7
+Current loss is: 4.6152869e-7
+Current loss is: 4.6280866e-7
+Current loss is: 4.861587e-7
+Current loss is: 4.5331439e-7
+Current loss is: 4.5027835e-7
+Current loss is: 4.482281e-7
+Current loss is: 4.7980916e-7
+Current loss is: 4.8497617e-7
+Current loss is: 4.68184e-7
+Current loss is: 4.2023188e-7
+Step 9 / 10 
+Current loss is: 0.016535088
+Current loss is: 6.1402034e-7
+Current loss is: 3.257938e-7
+Current loss is: 3.0365504e-7
+Current loss is: 3.163682e-7
+Current loss is: 3.09336e-7
+Current loss is: 3.2368482e-7
+Current loss is: 2.8735425e-7
+Current loss is: 3.0677248e-7
+Current loss is: 3.0932532e-7
+Current loss is: 3.2829973e-7
+Current loss is: 3.001771e-7
+Current loss is: 3.290458e-7
+Current loss is: 3.1460823e-7
+Current loss is: 2.8821992e-7
+Current loss is: 3.1284375e-7
+Current loss is: 3.0752926e-7
+Current loss is: 3.157601e-7
+Current loss is: 3.0709037e-7
+Current loss is: 3.097996e-7
+Current loss is: 2.7094413e-7
+Step 10 / 10 
+Current loss is: 0.09367735
+Current loss is: 2.0116411e-5
+Current loss is: 1.13100455e-7
+Current loss is: 1.1981618e-7
+Current loss is: 1.245396e-7
+Current loss is: 1.0638265e-7
+Current loss is: 1.1884459e-7
+Current loss is: 1.1515392e-7
+Current loss is: 1.1981024e-7
+Current loss is: 1.1496249e-7
+Current loss is: 1.2190172e-7
+Current loss is: 1.13047676e-7
+Current loss is: 1.209521e-7
+Current loss is: 1.1399774e-7
+Current loss is: 1.1217567e-7
+Current loss is: 1.1107989e-7
+Current loss is: 1.1727208e-7
+Current loss is: 1.3068362e-7
+Current loss is: 1.2061801e-7
+Current loss is: 1.2275841e-7
+Current loss is: 1.14131794e-7
+sol_ds.value = 2.0552745f0
 MLP
-sol_mlp.value = 1.9612000447236237
+sol_mlp.value = 2.103934539863616
 d=1 T=1.0 i=5
 DeepSplitting
-Step 1 / 3 
-Current loss is: 1.5084354
-Current loss is: 3.5487737e-5
-Current loss is: 1.4909744e-5
-Current loss is: 1.3884147e-5
-Current loss is: 1.487252e-5
-Current loss is: 1.3879841e-5
-Current loss is: 1.2817266e-5
-Current loss is: 1.4453796e-5
-Current loss is: 1.3625155e-5
-Current loss is: 1.4042353e-5
-Current loss is: 1.3713874e-5
-Current loss is: 1.3692923e-5
-Current loss is: 1.4908905e-5
-Current loss is: 1.3939036e-5
-Current loss is: 1.3277213e-5
-Current loss is: 1.4247e-5
-Current loss is: 1.4121064e-5
-Current loss is: 1.4317233e-5
-Current loss is: 1.25389015e-5
-Current loss is: 1.41399105e-5
-Current loss is: 1.3392821e-5
-Step 2 / 3 
-Current loss is: 1.5243164
-Current loss is: 9.077315e-6
-Current loss is: 1.1720203e-6
-Current loss is: 1.1041212e-6
-Current loss is: 1.12803e-6
-Current loss is: 1.1600312e-6
-Current loss is: 1.1697231e-6
-Current loss is: 1.1574758e-6
-Current loss is: 1.2014336e-6
-Current loss is: 1.1784643e-6
-Current loss is: 1.0873677e-6
-Current loss is: 1.1026339e-6
-Current loss is: 1.1094788e-6
-Current loss is: 1.2081796e-6
-Current loss is: 1.1872335e-6
-Current loss is: 1.1098656e-6
-Current loss is: 1.1445985e-6
-Current loss is: 1.1742735e-6
-Current loss is: 1.1387524e-6
-Current loss is: 1.1961712e-6
-Current loss is: 1.1298328e-6
-Step 3 / 3 
-Current loss is: 0.3348669
-Current loss is: 1.176275e-6
-Current loss is: 4.1194255e-7
-Current loss is: 4.0778602e-7
-Current loss is: 3.9855306e-7
-Current loss is: 4.357018e-7
-Current loss is: 4.0345535e-7
-Current loss is: 3.8074862e-7
-Current loss is: 3.6031247e-7
-Current loss is: 4.2665516e-7
-Current loss is: 3.937743e-7
-Current loss is: 3.9102247e-7
-Current loss is: 3.8957418e-7
-Current loss is: 4.0964548e-7
-Current loss is: 3.9838e-7
-Current loss is: 4.2235052e-7
-Current loss is: 3.8757113e-7
-Current loss is: 3.7217242e-7
-Current loss is: 3.930244e-7
-Current loss is: 3.75471e-7
-Current loss is: 4.079513e-7
-sol_ds.value = 1.9829944f0
+Step 1 / 10 
+Current loss is: 1.0558196
+Current loss is: 1.7487564e-5
+Current loss is: 8.183552e-6
+Current loss is: 8.828393e-6
+Current loss is: 8.328842e-6
+Current loss is: 8.465572e-6
+Current loss is: 8.300855e-6
+Current loss is: 8.671215e-6
+Current loss is: 8.983736e-6
+Current loss is: 8.584095e-6
+Current loss is: 8.067449e-6
+Current loss is: 8.104427e-6
+Current loss is: 9.3054905e-6
+Current loss is: 8.017763e-6
+Current loss is: 7.629799e-6
+Current loss is: 9.249379e-6
+Current loss is: 8.138603e-6
+Current loss is: 9.4087205e-5
+Current loss is: 0.0007338869
+Current loss is: 9.7154865e-5
+Current loss is: 0.00018264183
+Step 2 / 10 
+Current loss is: 0.062179077
+Current loss is: 5.6417156e-7
+Current loss is: 3.6538316e-7
+Current loss is: 3.618891e-7
+Current loss is: 3.6909086e-7
+Current loss is: 3.9071745e-7
+Current loss is: 3.5990632e-7
+Current loss is: 3.6886436e-7
+Current loss is: 3.5909977e-7
+Current loss is: 3.5464703e-7
+Current loss is: 3.8020954e-7
+Current loss is: 3.7463616e-7
+Current loss is: 3.81016e-7
+Current loss is: 3.5645076e-7
+Current loss is: 3.6945073e-7
+Current loss is: 3.77479e-7
+Current loss is: 3.8173027e-7
+Current loss is: 3.425847e-7
+Current loss is: 3.712488e-7
+Current loss is: 3.608773e-7
+Current loss is: 3.5013468e-7
+Step 3 / 10 
+Current loss is: 0.006247902
+Current loss is: 4.317965e-7
+Current loss is: 4.1522335e-7
+Current loss is: 4.4259374e-7
+Current loss is: 4.0984776e-7
+Current loss is: 4.2317706e-7
+Current loss is: 4.0107395e-7
+Current loss is: 4.6297006e-7
+Current loss is: 4.3632812e-7
+Current loss is: 4.1685036e-7
+Current loss is: 4.405141e-7
+Current loss is: 4.0840365e-7
+Current loss is: 4.358774e-7
+Current loss is: 3.9565407e-7
+Current loss is: 4.0118954e-7
+Current loss is: 4.5143355e-7
+Current loss is: 0.0001192231
+Current loss is: 5.116901e-7
+Current loss is: 0.001132975
+Current loss is: 4.4464352e-7
+Current loss is: 4.987232e-5
+Step 4 / 10 
+Current loss is: 0.0938809
+Current loss is: 1.6855238e-6
+Current loss is: 1.1845112e-6
+Current loss is: 1.254137e-6
+Current loss is: 1.2436641e-6
+Current loss is: 1.1240253e-6
+Current loss is: 1.1532007e-6
+Current loss is: 1.2616923e-6
+Current loss is: 1.0440157e-6
+Current loss is: 1.0359144e-6
+Current loss is: 1.077194e-6
+Current loss is: 1.0624632e-6
+Current loss is: 1.0782205e-6
+Current loss is: 9.95331e-7
+Current loss is: 1.0220393e-6
+Current loss is: 9.527149e-7
+Current loss is: 8.9755207e-7
+Current loss is: 8.308369e-7
+Current loss is: 7.681871e-7
+Current loss is: 7.1703846e-7
+Current loss is: 6.8196294e-7
+Step 5 / 10 
+Current loss is: 0.014105297
+Current loss is: 2.5788427e-7
+Current loss is: 2.1723942e-7
+Current loss is: 2.3521322e-7
+Current loss is: 2.1499413e-7
+Current loss is: 2.2907804e-7
+Current loss is: 2.2519613e-7
+Current loss is: 2.2434179e-7
+Current loss is: 2.2871225e-7
+Current loss is: 2.2358013e-7
+Current loss is: 2.3329969e-7
+Current loss is: 2.2201687e-7
+Current loss is: 2.2469635e-7
+Current loss is: 2.2307128e-7
+Current loss is: 2.1814351e-7
+Current loss is: 2.3402869e-7
+Current loss is: 2.2291928e-7
+Current loss is: 2.5632058e-5
+Current loss is: 2.2328139e-7
+Current loss is: 7.0479507e-7
+Current loss is: 2.5640961e-6
+Step 6 / 10 
+Current loss is: 0.08021509
+Current loss is: 2.1237167e-6
+Current loss is: 2.6967936e-7
+Current loss is: 2.5255008e-7
+Current loss is: 2.3636505e-7
+Current loss is: 2.1920357e-7
+Current loss is: 2.195652e-7
+Current loss is: 2.1557358e-7
+Current loss is: 2.0562659e-7
+Current loss is: 2.0425978e-7
+Current loss is: 2.0944657e-7
+Current loss is: 2.1007553e-7
+Current loss is: 2.0276792e-7
+Current loss is: 2.0277616e-7
+Current loss is: 2.0300565e-7
+Current loss is: 2.162202e-7
+Current loss is: 2.186491e-7
+Current loss is: 1.9683601e-7
+Current loss is: 2.0833134e-7
+Current loss is: 1.9948446e-7
+Current loss is: 1.9712189e-7
+Step 7 / 10 
+Current loss is: 0.027251499
+Current loss is: 5.654213e-7
+Current loss is: 1.8105128e-7
+Current loss is: 1.838967e-7
+Current loss is: 1.9291207e-7
+Current loss is: 1.9151139e-7
+Current loss is: 1.9662323e-7
+Current loss is: 1.975403e-7
+Current loss is: 1.9413342e-7
+Current loss is: 1.9851312e-7
+Current loss is: 2.10384e-7
+Current loss is: 1.958494e-7
+Current loss is: 1.9926968e-7
+Current loss is: 2.0201915e-7
+Current loss is: 1.932556e-7
+Current loss is: 1.9267925e-7
+Current loss is: 2.0610021e-7
+Current loss is: 1.9948449e-7
+Current loss is: 3.232298e-7
+Current loss is: 2.0371264e-7
+Current loss is: 1.5500851e-5
+Step 8 / 10 
+Current loss is: 0.08570026
+Current loss is: 1.5890869e-7
+Current loss is: 8.273824e-8
+Step 9 / 10 
+Current loss is: 0.0030404667
+Current loss is: 6.2116364e-8
+Step 10 / 10 
+Current loss is: 0.0028449134
+Current loss is: 2.412999e-7
+Current loss is: 3.1139546e-8
+sol_ds.value = 2.0323682f0
 MLP
-sol_mlp.value = 1.9260763973819652
+sol_mlp.value = 2.0885502682263883
 d=2 T=0.2 i=1
 DeepSplitting
-Step 1 / 3 
-Current loss is: 1.0729643
-Current loss is: 9.105586e-6
-Current loss is: 8.464333e-7
-Current loss is: 8.1334156e-7
-Current loss is: 8.2526316e-7
-Current loss is: 8.6594946e-7
-Current loss is: 8.528705e-7
-Current loss is: 8.8409007e-7
-Current loss is: 9.3347313e-7
-Current loss is: 8.4679266e-7
-Current loss is: 8.2775114e-7
-Current loss is: 8.798031e-7
-Current loss is: 8.3578874e-7
-Current loss is: 8.499203e-7
-Current loss is: 8.818354e-7
-Current loss is: 8.8787317e-7
-Current loss is: 8.787741e-7
-Current loss is: 8.962519e-7
-Current loss is: 8.563845e-7
-Current loss is: 8.6085197e-7
-Current loss is: 8.154768e-7
-Step 2 / 3 
-Current loss is: 0.018333897
-Current loss is: 3.1477617e-7
-Current loss is: 4.9372932e-8
-Step 3 / 3 
-Current loss is: 0.0014011776
-Current loss is: 2.0028158e-7
-Current loss is: 1.0371795e-8
-sol_ds.value = 1.2048053f0
+Step 1 / 10 
+Current loss is: 0.9683527
+Current loss is: 1.4886307e-5
+Current loss is: 5.303528e-7
+Current loss is: 5.2157776e-7
+Current loss is: 4.887968e-7
+Current loss is: 4.9064016e-7
+Current loss is: 4.996472e-7
+Current loss is: 5.25998e-7
+Current loss is: 5.16094e-7
+Current loss is: 4.9707813e-7
+Current loss is: 5.137778e-7
+Current loss is: 4.943439e-7
+Current loss is: 5.5170256e-7
+Current loss is: 5.14179e-7
+Current loss is: 4.967201e-7
+Current loss is: 4.99602e-7
+Current loss is: 5.0317266e-7
+Current loss is: 4.7262435e-7
+Current loss is: 4.735726e-7
+Current loss is: 4.890252e-7
+Current loss is: 5.2471165e-7
+Step 2 / 10 
+Current loss is: 0.002179485
+Current loss is: 5.995561e-8
+Step 3 / 10 
+Current loss is: 0.0023863122
+Current loss is: 1.1612122e-7
+Current loss is: 3.415109e-8
+Step 4 / 10 
+Current loss is: 0.003114563
+Current loss is: 1.7299988e-7
+Current loss is: 2.7044152e-8
+Step 5 / 10 
+Current loss is: 0.0028627624
+Current loss is: 3.1771137e-8
+Step 6 / 10 
+Current loss is: 0.0027860724
+Current loss is: 2.4278673e-8
+Step 7 / 10 
+Current loss is: 0.0027471804
+Current loss is: 5.2217764e-8
+Step 8 / 10 
+Current loss is: 0.0028508364
+Current loss is: 6.945708e-8
+Step 9 / 10 
+Current loss is: 0.0027218484
+Current loss is: 1.0324233e-7
+Current loss is: 5.8983955e-9
+Step 10 / 10 
+Current loss is: 0.003280693
+Current loss is: 6.2248084e-8
+sol_ds.value = 1.2097577f0
 MLP
-sol_mlp.value = 1.1827347120518037
+sol_mlp.value = 1.2140872857017906
 d=2 T=0.2 i=2
 DeepSplitting
-Step 1 / 3 
-Current loss is: 1.0513436
-Current loss is: 1.660703e-5
-Current loss is: 8.617039e-7
-Current loss is: 7.7978007e-7
-Current loss is: 8.177032e-7
-Current loss is: 8.597849e-7
-Current loss is: 8.209868e-7
-Current loss is: 8.0326697e-7
-Current loss is: 8.1769673e-7
-Current loss is: 8.330874e-7
-Current loss is: 8.4428103e-7
-Current loss is: 8.746098e-7
-Current loss is: 7.9775236e-7
-Current loss is: 8.4271795e-7
-Current loss is: 8.6951707e-7
-Current loss is: 8.3720107e-7
-Current loss is: 8.3241855e-7
-Current loss is: 8.3886096e-7
-Current loss is: 8.940474e-7
-Current loss is: 8.5903594e-7
-Current loss is: 1.098263e-6
-Step 2 / 3 
-Current loss is: 0.04200572
-Current loss is: 3.144745e-5
-Current loss is: 7.5941585e-8
-Step 3 / 3 
-Current loss is: 0.0016372274
-Current loss is: 1.0047861e-7
-Current loss is: 8.595507e-9
-sol_ds.value = 1.205434f0
+Step 1 / 10 
+Current loss is: 0.96236944
+Current loss is: 1.4122312e-6
+Current loss is: 5.436319e-7
+Current loss is: 5.321321e-7
+Current loss is: 5.507965e-7
+Current loss is: 5.870105e-7
+Current loss is: 5.409316e-7
+Current loss is: 5.543269e-7
+Current loss is: 5.537928e-7
+Current loss is: 5.1531174e-7
+Current loss is: 5.5099434e-7
+Current loss is: 5.641684e-7
+Current loss is: 5.438393e-7
+Current loss is: 5.451985e-7
+Current loss is: 5.61244e-7
+Current loss is: 5.54042e-7
+Current loss is: 5.940912e-7
+Current loss is: 5.6700884e-7
+Current loss is: 5.4491795e-7
+Current loss is: 0.00032923612
+Current loss is: 6.2198694e-7
+Step 2 / 10 
+Current loss is: 0.0027694148
+Current loss is: 1.0331852e-7
+Current loss is: 2.8040946e-8
+Step 3 / 10 
+Current loss is: 0.002824737
+Current loss is: 1.5696638e-7
+Current loss is: 2.2600338e-8
+Step 4 / 10 
+Current loss is: 0.0028729537
+Current loss is: 1.6445023e-7
+Current loss is: 1.8698833e-8
+Step 5 / 10 
+Current loss is: 0.002876245
+Current loss is: 7.788926e-8
+Step 6 / 10 
+Current loss is: 0.002466172
+Current loss is: 4.9067506e-8
+Step 7 / 10 
+Current loss is: 0.0025407418
+Current loss is: 1.1984431e-8
+Step 8 / 10 
+Current loss is: 0.0024269342
+Current loss is: 2.2724707e-8
+Step 9 / 10 
+Current loss is: 0.0024955864
+Current loss is: 3.741947e-9
+Step 10 / 10 
+Current loss is: 0.0023866207
+Current loss is: 4.107441e-9
+sol_ds.value = 1.2093316f0
 MLP
-sol_mlp.value = 1.1795912638121016
+sol_mlp.value = 1.2136388648207972
 d=2 T=0.2 i=3
 DeepSplitting
-Step 1 / 3 
-Current loss is: 1.0751904
-Current loss is: 1.6173956e-6
-Current loss is: 7.7423385e-7
-Current loss is: 7.6283754e-7
-Current loss is: 7.4786664e-7
-Current loss is: 8.016682e-7
-Current loss is: 7.865527e-7
-Current loss is: 8.1022364e-7
-Current loss is: 7.6537384e-7
-Current loss is: 7.911213e-7
-Current loss is: 8.0294063e-7
-Current loss is: 7.805463e-7
-Current loss is: 7.656043e-7
-Current loss is: 7.944604e-7
-Current loss is: 7.4304074e-7
-Current loss is: 7.936906e-7
-Current loss is: 7.855903e-7
-Current loss is: 8.17864e-7
-Current loss is: 8.084946e-7
-Current loss is: 7.881372e-7
-Current loss is: 8.18968e-7
-Step 2 / 3 
-Current loss is: 0.02493463
-Current loss is: 8.633344e-6
-Current loss is: 1.06911806e-7
-Current loss is: 1.17809435e-7
-Current loss is: 1.17419305e-7
-Current loss is: 1.13286156e-7
-Current loss is: 1.0991361e-7
-Current loss is: 1.1111805e-7
-Current loss is: 1.1170956e-7
-Current loss is: 1.2142392e-7
-Current loss is: 1.1041479e-7
-Current loss is: 1.15091964e-7
-Current loss is: 1.1398186e-7
-Current loss is: 1.1828561e-7
-Current loss is: 1.0692442e-7
-Current loss is: 1.1686199e-7
-Current loss is: 1.1428696e-7
-Current loss is: 1.09885846e-7
-Current loss is: 1.1407002e-7
-Current loss is: 1.1816323e-7
-Current loss is: 1.1815327e-7
-Step 3 / 3 
-Current loss is: 0.0029847005
-Current loss is: 2.2390245e-7
-Current loss is: 2.0860611e-8
-sol_ds.value = 1.2047985f0
+Step 1 / 10 
+Current loss is: 0.95599014
+Current loss is: 1.7126916e-6
+Current loss is: 4.3158528e-7
+Current loss is: 4.186521e-7
+Current loss is: 4.6229363e-7
+Current loss is: 4.5532377e-7
+Current loss is: 4.125163e-7
+Current loss is: 4.2640153e-7
+Current loss is: 4.5234924e-7
+Current loss is: 4.2569832e-7
+Current loss is: 4.500782e-7
+Current loss is: 4.2093282e-7
+Current loss is: 4.3268477e-7
+Current loss is: 4.1382842e-7
+Current loss is: 4.913991e-7
+Current loss is: 4.5005717e-7
+Current loss is: 4.5685078e-7
+Current loss is: 1.209376e-6
+Current loss is: 4.781211e-7
+Current loss is: 3.2596845e-6
+Current loss is: 7.0529444e-7
+Step 2 / 10 
+Current loss is: 0.0027067724
+Current loss is: 5.534646e-8
+Step 3 / 10 
+Current loss is: 0.002297559
+Current loss is: 1.2321105e-7
+Current loss is: 4.4996597e-8
+Step 4 / 10 
+Current loss is: 0.002851889
+Current loss is: 1.00945336e-7
+Current loss is: 3.8771343e-8
+Step 5 / 10 
+Current loss is: 0.0027915325
+Current loss is: 6.286477e-8
+Step 6 / 10 
+Current loss is: 0.0023877502
+Current loss is: 7.751061e-8
+Step 7 / 10 
+Current loss is: 0.00240032
+Current loss is: 8.426428e-8
+Step 8 / 10 
+Current loss is: 0.0024425853
+Current loss is: 1.04114235e-7
+Current loss is: 1.2838927e-8
+Step 9 / 10 
+Current loss is: 0.002781076
+Current loss is: 1.9003402e-8
+Step 10 / 10 
+Current loss is: 0.0025249617
+Current loss is: 1.1020117e-8
+sol_ds.value = 1.2090365f0
 MLP
-sol_mlp.value = 1.1828644571871096
+sol_mlp.value = 1.215291026394716
 d=2 T=0.2 i=4
 DeepSplitting
-Step 1 / 3 
-Current loss is: 1.0519676
-Current loss is: 1.5051849e-5
-Current loss is: 8.4016983e-7
-Current loss is: 8.1090445e-7
-Current loss is: 7.8544053e-7
-Current loss is: 8.533326e-7
-Current loss is: 8.2339955e-7
-Current loss is: 8.171098e-7
-Current loss is: 8.0547034e-7
-Current loss is: 8.478823e-7
-Current loss is: 8.4740947e-7
-Current loss is: 8.0190483e-7
-Current loss is: 8.6428224e-7
-Current loss is: 7.9724657e-7
-Current loss is: 8.4536134e-7
-Current loss is: 8.0785895e-7
-Current loss is: 8.5767203e-7
-Current loss is: 8.753374e-7
-Current loss is: 7.934278e-7
-Current loss is: 9.004855e-7
-Current loss is: 0.0024233768
-Step 2 / 3 
-Current loss is: 0.009259489
-Current loss is: 3.6073888e-7
-Current loss is: 2.7309557e-7
-Current loss is: 2.6998637e-7
-Current loss is: 2.5943686e-7
-Current loss is: 2.6197463e-7
-Current loss is: 0.0023724094
-Current loss is: 2.7855867e-7
-Current loss is: 0.00045350433
-Current loss is: 2.5947318e-7
-Current loss is: 2.7319118e-6
-Current loss is: 3.9203752e-7
-Current loss is: 3.2921884e-7
-Current loss is: 2.4380051e-6
-Current loss is: 3.5965385e-7
-Current loss is: 0.00094356807
-Current loss is: 3.5053236e-7
-Current loss is: 2.6217464e-7
-Current loss is: 2.701828e-5
-Current loss is: 2.73759e-7
-Current loss is: 2.254329e-6
-Step 3 / 3 
-Current loss is: 0.04720571
-Current loss is: 1.5015619e-5
-Current loss is: 2.5913675e-7
-Current loss is: 2.6761188e-7
-Current loss is: 2.6793285e-7
-Current loss is: 2.615153e-7
-Current loss is: 2.6747725e-7
-Current loss is: 2.5608296e-7
-Current loss is: 2.6055744e-7
-Current loss is: 2.577139e-7
-Current loss is: 2.559721e-7
-Current loss is: 2.4977334e-7
-Current loss is: 2.516696e-7
-Current loss is: 2.6152415e-7
-Current loss is: 2.53113e-7
-Current loss is: 2.6216486e-7
-Current loss is: 2.6646302e-7
-Current loss is: 2.6695966e-7
-Current loss is: 2.6609624e-7
-Current loss is: 2.6067744e-7
-Current loss is: 2.5431348e-7
-sol_ds.value = 1.1477951f0
+Step 1 / 10 
+Current loss is: 0.9595651
+Current loss is: 1.0882337e-5
+Current loss is: 5.857167e-7
+Current loss is: 6.492908e-7
+Current loss is: 5.731504e-7
+Current loss is: 6.13102e-7
+Current loss is: 6.0332917e-7
+Current loss is: 5.536093e-7
+Current loss is: 5.967208e-7
+Current loss is: 5.9222964e-7
+Current loss is: 5.842471e-7
+Current loss is: 5.7439246e-7
+Current loss is: 5.3868115e-7
+Current loss is: 5.7275486e-7
+Current loss is: 5.744163e-7
+Current loss is: 5.511954e-7
+Current loss is: 5.667453e-7
+Current loss is: 5.8334047e-7
+Current loss is: 6.874679e-7
+Current loss is: 1.3836212e-6
+Current loss is: 6.369912e-6
+Step 2 / 10 
+Current loss is: 0.0018897664
+Current loss is: 6.083872e-8
+Step 3 / 10 
+Current loss is: 0.0027350045
+Current loss is: 2.5619444e-8
+Step 4 / 10 
+Current loss is: 0.002557746
+Current loss is: 2.834036e-8
+Step 5 / 10 
+Current loss is: 0.0025419684
+Current loss is: 1.1919081e-7
+Current loss is: 2.0881926e-8
+Step 6 / 10 
+Current loss is: 0.0030666105
+Current loss is: 1.6887145e-7
+Current loss is: 2.1332974e-8
+Step 7 / 10 
+Current loss is: 0.0029809403
+Current loss is: 1.7665565e-8
+Step 8 / 10 
+Current loss is: 0.0025767905
+Current loss is: 9.792238e-8
+Step 9 / 10 
+Current loss is: 0.0025139851
+Current loss is: 9.8559795e-8
+Step 10 / 10 
+Current loss is: 0.0026291625
+Current loss is: 5.7347037e-8
+sol_ds.value = 1.2067958f0
 MLP
-sol_mlp.value = 1.1821746754527005
+sol_mlp.value = 1.2146764732807847
 d=2 T=0.2 i=5
 DeepSplitting
-Step 1 / 3 
-Current loss is: 1.0645171
-Current loss is: 1.6771211e-5
-Current loss is: 8.1494915e-7
-Current loss is: 7.664201e-7
-Current loss is: 8.327345e-7
-Current loss is: 8.1374964e-7
-Current loss is: 8.522861e-7
-Current loss is: 8.192e-7
-Current loss is: 8.0265437e-7
-Current loss is: 7.857042e-7
-Current loss is: 7.817825e-7
-Current loss is: 7.893286e-7
-Current loss is: 7.9898933e-7
-Current loss is: 7.600873e-7
-Current loss is: 8.242768e-7
-Current loss is: 8.06789e-7
-Current loss is: 7.841317e-7
-Current loss is: 7.864488e-7
-Current loss is: 8.0398314e-7
-Current loss is: 8.7128325e-7
-Current loss is: 7.534904e-7
-Step 2 / 3 
-Current loss is: 0.012491595
-Current loss is: 2.5352e-7
-Current loss is: 7.343033e-8
-Step 3 / 3 
-Current loss is: 0.018093491
-Current loss is: 9.0176066e-8
-sol_ds.value = 1.2050798f0
+Step 1 / 10 
+Current loss is: 0.9723257
+Current loss is: 2.1118163e-5
+Current loss is: 3.9714575e-7
+Current loss is: 4.13317e-7
+Current loss is: 3.9686537e-7
+Current loss is: 3.9171044e-7
+Current loss is: 4.008379e-7
+Current loss is: 4.1451452e-7
+Current loss is: 4.0924954e-7
+Current loss is: 4.248954e-7
+Current loss is: 4.0565936e-7
+Current loss is: 3.688525e-7
+Current loss is: 3.9525486e-7
+Current loss is: 3.7691836e-7
+Current loss is: 4.069257e-7
+Current loss is: 3.95064e-7
+Current loss is: 3.6986955e-7
+Current loss is: 3.8800582e-7
+Current loss is: 3.8873438e-7
+Current loss is: 4.0471326e-7
+Current loss is: 3.7756368e-7
+Step 2 / 10 
+Current loss is: 0.0020652828
+Current loss is: 5.651212e-8
+Step 3 / 10 
+Current loss is: 0.0023663468
+Current loss is: 1.1030777e-7
+Current loss is: 4.9352742e-8
+Step 4 / 10 
+Current loss is: 0.0030154155
+Current loss is: 2.0715358e-7
+Current loss is: 4.3419153e-8
+Step 5 / 10 
+Current loss is: 0.0029903946
+Current loss is: 1.702118e-7
+Current loss is: 3.5549203e-8
+Step 6 / 10 
+Current loss is: 0.0031094977
+Current loss is: 1.3706273e-7
+Current loss is: 2.6362235e-8
+Step 7 / 10 
+Current loss is: 0.0030555672
+Current loss is: 1.6745135e-7
+Current loss is: 2.0801572e-8
+Step 8 / 10 
+Current loss is: 0.003096629
+Current loss is: 1.02785826e-7
+Current loss is: 1.4859461e-8
+Step 9 / 10 
+Current loss is: 0.0030419559
+Current loss is: 1.81885e-8
+Step 10 / 10 
+Current loss is: 0.0025390466
+Current loss is: 7.079646e-9
+sol_ds.value = 1.2096958f0
 MLP
-sol_mlp.value = 1.1802809341361584
+sol_mlp.value = 1.2134031495929793
 d=2 T=0.5 i=1
 DeepSplitting
-Step 1 / 3 
-Current loss is: 1.2966617
-Current loss is: 2.6462225e-5
-Current loss is: 6.3118637e-6
-Current loss is: 6.0517787e-6
-Current loss is: 6.1346564e-6
-Current loss is: 5.8620185e-6
-Current loss is: 6.1231676e-6
-Current loss is: 5.928082e-6
-Current loss is: 6.17119e-6
-Current loss is: 6.037077e-6
-Current loss is: 5.8204805e-6
-Current loss is: 6.1154724e-6
-Current loss is: 6.0794887e-6
-Current loss is: 5.985328e-6
-Current loss is: 5.845336e-6
-Current loss is: 6.0044354e-6
-Current loss is: 5.790087e-6
-Current loss is: 5.9216e-6
-Current loss is: 5.937013e-6
-Current loss is: 7.016413e-6
-Current loss is: 6.2324893e-6
-Step 2 / 3 
-Current loss is: 0.41808704
-Current loss is: 8.012874e-6
-Current loss is: 6.719924e-7
-Current loss is: 6.788025e-7
-Current loss is: 6.672336e-7
-Current loss is: 6.3582826e-7
-Current loss is: 7.042278e-7
-Current loss is: 6.7238415e-7
-Current loss is: 6.830354e-7
-Current loss is: 6.554246e-7
-Current loss is: 6.817833e-7
-Current loss is: 6.6164324e-7
-Current loss is: 7.030664e-7
-Current loss is: 6.830336e-7
-Current loss is: 6.4813986e-7
-Current loss is: 6.8123563e-7
-Current loss is: 6.954046e-7
-Current loss is: 6.4233e-7
-Current loss is: 6.628733e-7
-Current loss is: 6.82792e-7
-Current loss is: 6.874268e-7
-Step 3 / 3 
-Current loss is: 0.095620155
-Current loss is: 8.5330674e-7
-Current loss is: 3.336769e-7
-Current loss is: 3.370524e-7
-Current loss is: 3.7437053e-7
-Current loss is: 3.6003587e-7
-Current loss is: 3.2170567e-7
-Current loss is: 3.6470513e-7
-Current loss is: 3.3724805e-7
-Current loss is: 3.489051e-7
-Current loss is: 3.6406388e-7
-Current loss is: 3.6051995e-7
-Current loss is: 3.487453e-7
-Current loss is: 3.5608943e-7
-Current loss is: 3.325243e-7
-Current loss is: 3.4646854e-7
-Current loss is: 3.535992e-7
-Current loss is: 3.6376613e-7
-Current loss is: 3.5984866e-7
-Current loss is: 3.8339633e-7
-Current loss is: 3.79921e-7
-sol_ds.value = 1.5599371f0
+Step 1 / 10 
+Current loss is: 1.0068319
+Current loss is: 1.3815191e-5
+Current loss is: 3.6530655e-6
+Current loss is: 3.878293e-6
+Current loss is: 3.911175e-6
+Current loss is: 3.9775155e-6
+Current loss is: 3.617394e-6
+Current loss is: 4.0552436e-6
+Current loss is: 3.9553065e-6
+Current loss is: 3.8899375e-6
+Current loss is: 3.7344912e-6
+Current loss is: 3.9143947e-6
+Current loss is: 4.0142227e-6
+Current loss is: 3.4963614e-6
+Current loss is: 3.7807536e-6
+Current loss is: 4.217192e-6
+Current loss is: 6.593718e-6
+Current loss is: 0.0002561231
+Current loss is: 0.0004047978
+Current loss is: 9.511571e-6
+Current loss is: 4.705099e-6
+Step 2 / 10 
+Current loss is: 0.022474289
+Current loss is: 1.9018668e-6
+Current loss is: 3.2798619e-7
+Current loss is: 3.6459588e-7
+Current loss is: 3.2430816e-7
+Current loss is: 3.2747425e-7
+Current loss is: 3.5741954e-7
+Current loss is: 3.2868084e-7
+Current loss is: 3.1933658e-7
+Current loss is: 3.6003655e-7
+Current loss is: 3.4229834e-7
+Current loss is: 3.3722117e-7
+Current loss is: 3.2418583e-7
+Current loss is: 3.2565208e-7
+Current loss is: 3.2395027e-7
+Current loss is: 3.0780686e-7
+Current loss is: 3.2845105e-7
+Current loss is: 3.2333432e-7
+Current loss is: 3.1210607e-7
+Current loss is: 3.087968e-7
+Current loss is: 3.0611204e-7
+Step 3 / 10 
+Current loss is: 0.006292456
+Current loss is: 8.103447e-8
+Step 4 / 10 
+Current loss is: 0.006037674
+Current loss is: 7.589193e-8
+Step 5 / 10 
+Current loss is: 0.006092266
+Current loss is: 8.444983e-8
+Step 6 / 10 
+Current loss is: 0.0058884937
+Current loss is: 8.39227e-8
+Step 7 / 10 
+Current loss is: 0.005817515
+Current loss is: 5.4903698e-8
+Step 8 / 10 
+Current loss is: 0.0056684786
+Current loss is: 8.486277e-8
+Step 9 / 10 
+Current loss is: 0.0058332887
+Current loss is: 2.1020307e-7
+Current loss is: 2.0296667e-8
+Step 10 / 10 
+Current loss is: 0.007132923
+Current loss is: 2.3794188e-7
+Current loss is: 7.988104e-9
+sol_ds.value = 1.5968184f0
 MLP
-sol_mlp.value = 1.5431112600616936
+sol_mlp.value = 1.6302844738797033
 d=2 T=0.5 i=2
 DeepSplitting
-Step 1 / 3 
-Current loss is: 1.251173
-Current loss is: 2.9625658e-5
-Current loss is: 6.240657e-6
-Current loss is: 6.249983e-6
-Current loss is: 6.066826e-6
-Current loss is: 5.9042436e-6
-Current loss is: 6.115994e-6
-Current loss is: 6.0893085e-6
-Current loss is: 5.9499034e-6
-Current loss is: 6.2663953e-6
-Current loss is: 6.2789754e-6
-Current loss is: 5.8317946e-6
-Current loss is: 6.3631032e-6
-Current loss is: 6.0722978e-6
-Current loss is: 6.292986e-6
-Current loss is: 5.984787e-6
-Current loss is: 5.8766077e-6
-Current loss is: 5.9282943e-6
-Current loss is: 6.448064e-6
-Current loss is: 6.0824e-6
-Current loss is: 5.781302e-6
-Step 2 / 3 
-Current loss is: 0.27008638
-Current loss is: 8.135411e-5
-Current loss is: 6.698021e-7
-Current loss is: 6.7869956e-7
-Current loss is: 6.883652e-7
-Current loss is: 6.6583493e-7
-Current loss is: 6.7814983e-7
-Current loss is: 6.9637287e-7
-Current loss is: 6.6721066e-7
-Current loss is: 6.504335e-7
-Current loss is: 6.389292e-7
-Current loss is: 6.6106224e-7
-Current loss is: 6.7854864e-7
-Current loss is: 6.670353e-7
-Current loss is: 6.569365e-7
-Current loss is: 6.780066e-7
-Current loss is: 6.685545e-7
-Current loss is: 6.552271e-7
-Current loss is: 6.455701e-7
-Current loss is: 6.7396354e-7
-Current loss is: 6.6614865e-7
-Step 3 / 3 
-Current loss is: 0.0010117434
-Current loss is: 1.4685992e-6
-Current loss is: 5.1363395e-7
-Current loss is: 5.0588176e-7
-Current loss is: 4.929394e-7
-Current loss is: 5.0586834e-7
-Current loss is: 4.5525633e-7
-Current loss is: 4.9797774e-7
-Current loss is: 4.663855e-7
-Current loss is: 4.7385498e-7
-Current loss is: 4.952645e-7
-Current loss is: 4.789136e-7
-Current loss is: 4.868964e-7
-Current loss is: 4.956605e-7
-Current loss is: 4.867598e-7
-Current loss is: 4.9350615e-7
-Current loss is: 4.4690745e-7
-Current loss is: 4.907988e-7
-Current loss is: 4.7898146e-7
-Current loss is: 4.9380407e-7
-Current loss is: 4.4790391e-7
-sol_ds.value = 1.5590677f0
+Step 1 / 10 
+Current loss is: 1.0219762
+Current loss is: 1.2459328e-5
+Current loss is: 3.7444265e-6
+Current loss is: 4.297242e-6
+Current loss is: 4.380712e-6
+Current loss is: 4.0526184e-6
+Current loss is: 4.1864314e-6
+Current loss is: 3.771706e-6
+Current loss is: 4.2182187e-6
+Current loss is: 3.995789e-6
+Current loss is: 3.9841934e-6
+Current loss is: 4.0493583e-6
+Current loss is: 3.974417e-6
+Current loss is: 3.6124047e-6
+Current loss is: 3.6662234e-6
+Current loss is: 4.158756e-6
+Current loss is: 3.7613513e-6
+Current loss is: 3.878366e-6
+Current loss is: 3.7464335e-6
+Current loss is: 3.6185713e-6
+Current loss is: 3.7246039e-6
+Step 2 / 10 
+Current loss is: 0.015714904
+Current loss is: 2.1193891e-7
+Current loss is: 1.9004855e-7
+Current loss is: 1.8786841e-7
+Current loss is: 1.8264336e-7
+Current loss is: 1.8992174e-7
+Current loss is: 1.8610565e-7
+Current loss is: 1.89882e-7
+Current loss is: 1.9023878e-7
+Current loss is: 1.8031747e-7
+Current loss is: 1.7642043e-7
+Current loss is: 1.9358218e-7
+Current loss is: 1.720201e-7
+Current loss is: 1.8463061e-7
+Current loss is: 1.833214e-7
+Current loss is: 1.759558e-7
+Current loss is: 1.7791189e-7
+Current loss is: 1.9602874e-7
+Current loss is: 1.7195637e-7
+Current loss is: 1.8115458e-7
+Current loss is: 1.7435494e-7
+Step 3 / 10 
+Current loss is: 0.01715014
+Current loss is: 1.3573646e-6
+Current loss is: 2.4385196e-7
+Current loss is: 2.2614606e-7
+Current loss is: 2.563847e-7
+Current loss is: 2.3032072e-7
+Current loss is: 2.4654017e-7
+Current loss is: 2.3926532e-7
+Current loss is: 2.2097062e-7
+Current loss is: 2.1920002e-7
+Current loss is: 2.3439142e-7
+Current loss is: 2.329196e-7
+Current loss is: 2.3663576e-7
+Current loss is: 2.1714611e-7
+Current loss is: 2.3005549e-7
+Current loss is: 2.1107881e-7
+Current loss is: 2.0592597e-7
+Current loss is: 2.1738458e-7
+Current loss is: 2.2970508e-7
+Current loss is: 2.092551e-7
+Current loss is: 1.9463167e-7
+Step 4 / 10 
+Current loss is: 0.024803841
+Current loss is: 2.3983339e-5
+Current loss is: 2.9575315e-7
+Current loss is: 2.9348158e-7
+Current loss is: 2.7315036e-7
+Current loss is: 2.9049647e-7
+Current loss is: 2.4791436e-7
+Current loss is: 2.5487628e-7
+Current loss is: 2.4322094e-7
+Current loss is: 2.3268578e-7
+Current loss is: 2.3897255e-7
+Current loss is: 2.1051251e-7
+Current loss is: 2.1312758e-7
+Current loss is: 1.9678008e-7
+Current loss is: 2.021876e-7
+Current loss is: 1.9431656e-7
+Current loss is: 1.9261253e-7
+Current loss is: 1.8028575e-7
+Current loss is: 1.6892393e-7
+Current loss is: 1.5999805e-7
+Current loss is: 1.4940977e-7
+Step 5 / 10 
+Current loss is: 2.9178445e-6
+Current loss is: 1.3189543e-7
+Current loss is: 1.3150502e-7
+Current loss is: 1.2743897e-7
+Current loss is: 1.3218747e-7
+Current loss is: 1.3254152e-7
+Current loss is: 1.2363444e-7
+Current loss is: 1.3239323e-7
+Current loss is: 1.2320604e-7
+Current loss is: 1.2619655e-7
+Current loss is: 1.245055e-7
+Current loss is: 1.3173991e-7
+Current loss is: 1.298375e-7
+Current loss is: 1.2689738e-7
+Current loss is: 1.2382417e-7
+Current loss is: 1.2590267e-7
+Current loss is: 1.270051e-7
+Current loss is: 1.3203925e-7
+Current loss is: 1.2851248e-7
+Current loss is: 1.308715e-7
+Current loss is: 1.3008842e-7
+Step 6 / 10 
+Current loss is: 0.014390403
+Current loss is: 1.4038812e-7
+Current loss is: 1.1713596e-7
+Current loss is: 1.1698261e-7
+Current loss is: 1.1979456e-7
+Current loss is: 1.164166e-7
+Current loss is: 1.1872704e-7
+Current loss is: 1.1874949e-7
+Current loss is: 1.2031997e-7
+Current loss is: 1.15181884e-7
+Current loss is: 1.1163428e-7
+Current loss is: 1.3192708e-7
+Current loss is: 1.1231395e-7
+Current loss is: 1.2421346e-7
+Current loss is: 0.0003627134
+Current loss is: 1.1067148e-7
+Current loss is: 1.3922751e-7
+Current loss is: 1.3934692e-7
+Current loss is: 6.9111945e-7
+Current loss is: 1.17654366e-7
+Current loss is: 2.2650788e-7
+Step 7 / 10 
+Current loss is: 0.03614977
+Current loss is: 2.271369e-6
+Current loss is: 1.9266022e-7
+Current loss is: 1.6343586e-7
+Current loss is: 1.4020596e-7
+Current loss is: 1.3059866e-7
+Current loss is: 1.1423934e-7
+Current loss is: 1.1676164e-7
+Current loss is: 1.16776924e-7
+Current loss is: 1.03219044e-7
+Current loss is: 1.0863626e-7
+Current loss is: 1.0278007e-7
+Current loss is: 1.0193191e-7
+Current loss is: 9.8857235e-8
+Step 8 / 10 
+Current loss is: 0.0011339056
+Current loss is: 1.8870097e-7
+Current loss is: 7.97799e-8
+Step 9 / 10 
+Current loss is: 0.001475282
+Current loss is: 2.179543e-7
+Current loss is: 4.8696236e-8
+Step 10 / 10 
+Current loss is: 0.0020889551
+Current loss is: 2.1896454e-7
+Current loss is: 1.7128315e-8
+sol_ds.value = 1.5942532f0
 MLP
-sol_mlp.value = 1.5377176867207107
+sol_mlp.value = 1.62923875589581
 d=2 T=0.5 i=3
 DeepSplitting
-Step 1 / 3 
-Current loss is: 1.2424922
-Current loss is: 2.5547388e-5
-Current loss is: 5.8157293e-6
-Current loss is: 5.947525e-6
-Current loss is: 5.982837e-6
-
-signal (2): Interrupt
-in expression starting at /home/victorb/projects/stochanal/HighDimPDE_examples/paper/run_example_files.jl:49
-pthread_cond_wait at /lib/x86_64-linux-gnu/libpthread.so.0 (unknown line)
-uv_cond_wait at /workspace/srcdir/libuv/src/unix/thread.c:847
-jl_task_get_next at /buildworker/worker/package_linux64/build/src/partr.c:508
-poptask at ./task.jl:760
-wait at ./task.jl:768 [inlined]
-task_done_hook at ./task.jl:494
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-jl_apply at /buildworker/worker/package_linux64/build/src/julia.h:1703 [inlined]
-jl_finish_task at /buildworker/worker/package_linux64/build/src/task.c:208
-start_task at /buildworker/worker/package_linux64/build/src/task.c:850
-unknown function (ip: (nil))
-unknown function (ip: (nil))
-pthread_cond_wait at /lib/x86_64-linux-gnu/libpthread.so.0 (unknown line)
-uv_cond_wait at /workspace/srcdir/libuv/src/unix/thread.c:847
-jl_task_get_next at /buildworker/worker/package_linux64/build/src/partr.c:508
-poptask at ./task.jl:760
-wait at ./task.jl:768 [inlined]
-task_done_hook at ./task.jl:494
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-jl_apply at /buildworker/worker/package_linux64/build/src/julia.h:1703 [inlined]
-jl_finish_task at /buildworker/worker/package_linux64/build/src/task.c:208
-start_task at /buildworker/worker/package_linux64/build/src/task.c:850
-unknown function (ip: (nil))
-unknown function (ip: (nil))
-pthread_cond_wait at /lib/x86_64-linux-gnu/libpthread.so.0 (unknown line)
-uv_cond_wait at /workspace/srcdir/libuv/src/unix/thread.c:847
-jl_task_get_next at /buildworker/worker/package_linux64/build/src/partr.c:508
-poptask at ./task.jl:760
-wait at ./task.jl:768 [inlined]
-task_done_hook at ./task.jl:494
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-jl_apply at /buildworker/worker/package_linux64/build/src/julia.h:1703 [inlined]
-jl_finish_task at /buildworker/worker/package_linux64/build/src/task.c:208
-start_task at /buildworker/worker/package_linux64/build/src/task.c:850
-unknown function (ip: (nil))
-unknown function (ip: (nil))
-pthread_cond_wait at /lib/x86_64-linux-gnu/libpthread.so.0 (unknown line)
-uv_cond_wait at /workspace/srcdir/libuv/src/unix/thread.c:847
-jl_task_get_next at /buildworker/worker/package_linux64/build/src/partr.c:508
-poptask at ./task.jl:760
-wait at ./task.jl:768 [inlined]
-task_done_hook at ./task.jl:494
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-jl_apply at /buildworker/worker/package_linux64/build/src/julia.h:1703 [inlined]
-jl_finish_task at /buildworker/worker/package_linux64/build/src/task.c:208
-start_task at /buildworker/worker/package_linux64/build/src/task.c:850
-unknown function (ip: (nil))
-unknown function (ip: (nil))
-pthread_cond_wait at /lib/x86_64-linux-gnu/libpthread.so.0 (unknown line)
-uv_cond_wait at /workspace/srcdir/libuv/src/unix/thread.c:847
-jl_task_get_next at /buildworker/worker/package_linux64/build/src/partr.c:508
-poptask at ./task.jl:760
-wait at ./task.jl:768 [inlined]
-task_done_hook at ./task.jl:494
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-jl_apply at /buildworker/worker/package_linux64/build/src/julia.h:1703 [inlined]
-jl_finish_task at /buildworker/worker/package_linux64/build/src/task.c:208
-start_task at /buildworker/worker/package_linux64/build/src/task.c:850
-unknown function (ip: (nil))
-unknown function (ip: (nil))
-pthread_cond_wait at /lib/x86_64-linux-gnu/libpthread.so.0 (unknown line)
-uv_cond_wait at /workspace/srcdir/libuv/src/unix/thread.c:847
-jl_task_get_next at /buildworker/worker/package_linux64/build/src/partr.c:508
-poptask at ./task.jl:760
-wait at ./task.jl:768 [inlined]
-task_done_hook at ./task.jl:494
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-jl_apply at /buildworker/worker/package_linux64/build/src/julia.h:1703 [inlined]
-jl_finish_task at /buildworker/worker/package_linux64/build/src/task.c:208
-start_task at /buildworker/worker/package_linux64/build/src/task.c:850
-unknown function (ip: (nil))
-unknown function (ip: (nil))
-pthread_cond_wait at /lib/x86_64-linux-gnu/libpthread.so.0 (unknown line)
-uv_cond_wait at /workspace/srcdir/libuv/src/unix/thread.c:847
-jl_task_get_next at /buildworker/worker/package_linux64/build/src/partr.c:508
-poptask at ./task.jl:760
-wait at ./task.jl:768 [inlined]
-task_done_hook at ./task.jl:494
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-jl_apply at /buildworker/worker/package_linux64/build/src/julia.h:1703 [inlined]
-jl_finish_task at /buildworker/worker/package_linux64/build/src/task.c:208
-start_task at /buildworker/worker/package_linux64/build/src/task.c:850
-unknown function (ip: (nil))
-unknown function (ip: (nil))
-pthread_cond_wait at /lib/x86_64-linux-gnu/libpthread.so.0 (unknown line)
-uv_cond_wait at /workspace/srcdir/libuv/src/unix/thread.c:847
-jl_task_get_next at /buildworker/worker/package_linux64/build/src/partr.c:508
-poptask at ./task.jl:760
-wait at ./task.jl:768 [inlined]
-task_done_hook at ./task.jl:494
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-jl_apply at /buildworker/worker/package_linux64/build/src/julia.h:1703 [inlined]
-jl_finish_task at /buildworker/worker/package_linux64/build/src/task.c:208
-start_task at /buildworker/worker/package_linux64/build/src/task.c:850
-unknown function (ip: (nil))
-unknown function (ip: (nil))
-pthread_cond_wait at /lib/x86_64-linux-gnu/libpthread.so.0 (unknown line)
-uv_cond_wait at /workspace/srcdir/libuv/src/unix/thread.c:847
-jl_task_get_next at /buildworker/worker/package_linux64/build/src/partr.c:508
-poptask at ./task.jl:760
-wait at ./task.jl:768 [inlined]
-task_done_hook at ./task.jl:494
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-jl_apply at /buildworker/worker/package_linux64/build/src/julia.h:1703 [inlined]
-jl_finish_task at /buildworker/worker/package_linux64/build/src/task.c:208
-start_task at /buildworker/worker/package_linux64/build/src/task.c:850
-unknown function (ip: (nil))
-unknown function (ip: (nil))
-pthread_cond_wait at /lib/x86_64-linux-gnu/libpthread.so.0 (unknown line)
-uv_cond_wait at /workspace/srcdir/libuv/src/unix/thread.c:847
-jl_task_get_next at /buildworker/worker/package_linux64/build/src/partr.c:508
-poptask at ./task.jl:760
-wait at ./task.jl:768 [inlined]
-task_done_hook at ./task.jl:494
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-jl_apply at /buildworker/worker/package_linux64/build/src/julia.h:1703 [inlined]
-jl_finish_task at /buildworker/worker/package_linux64/build/src/task.c:208
-start_task at /buildworker/worker/package_linux64/build/src/task.c:850
-unknown function (ip: (nil))
-unknown function (ip: (nil))
-pthread_cond_wait at /lib/x86_64-linux-gnu/libpthread.so.0 (unknown line)
-uv_cond_wait at /workspace/srcdir/libuv/src/unix/thread.c:847
-jl_task_get_next at /buildworker/worker/package_linux64/build/src/partr.c:508
-poptask at ./task.jl:760
-wait at ./task.jl:768 [inlined]
-task_done_hook at ./task.jl:494
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-jl_apply at /buildworker/worker/package_linux64/build/src/julia.h:1703 [inlined]
-jl_finish_task at /buildworker/worker/package_linux64/build/src/task.c:208
-start_task at /buildworker/worker/package_linux64/build/src/task.c:850
-unknown function (ip: (nil))
-unknown function (ip: (nil))
-pthread_cond_wait at /lib/x86_64-linux-gnu/libpthread.so.0 (unknown line)
-uv_cond_wait at /workspace/srcdir/libuv/src/unix/thread.c:847
-jl_task_get_next at /buildworker/worker/package_linux64/build/src/partr.c:508
-poptask at ./task.jl:760
-wait at ./task.jl:768 [inlined]
-task_done_hook at ./task.jl:494
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-jl_apply at /buildworker/worker/package_linux64/build/src/julia.h:1703 [inlined]
-jl_finish_task at /buildworker/worker/package_linux64/build/src/task.c:208
-start_task at /buildworker/worker/package_linux64/build/src/task.c:850
-unknown function (ip: (nil))
-unknown function (ip: (nil))
-pthread_cond_wait at /lib/x86_64-linux-gnu/libpthread.so.0 (unknown line)
-uv_cond_wait at /workspace/srcdir/libuv/src/unix/thread.c:847
-jl_task_get_next at /buildworker/worker/package_linux64/build/src/partr.c:508
-poptask at ./task.jl:760
-wait at ./task.jl:768 [inlined]
-task_done_hook at ./task.jl:494
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-jl_apply at /buildworker/worker/package_linux64/build/src/julia.h:1703 [inlined]
-jl_finish_task at /buildworker/worker/package_linux64/build/src/task.c:208
-start_task at /buildworker/worker/package_linux64/build/src/task.c:850
-unknown function (ip: (nil))
-unknown function (ip: (nil))
-pthread_cond_wait at /lib/x86_64-linux-gnu/libpthread.so.0 (unknown line)
-uv_cond_wait at /workspace/srcdir/libuv/src/unix/thread.c:847
-jl_task_get_next at /buildworker/worker/package_linux64/build/src/partr.c:508
-poptask at ./task.jl:760
-wait at ./task.jl:768 [inlined]
-task_done_hook at ./task.jl:494
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-jl_apply at /buildworker/worker/package_linux64/build/src/julia.h:1703 [inlined]
-jl_finish_task at /buildworker/worker/package_linux64/build/src/task.c:208
-start_task at /buildworker/worker/package_linux64/build/src/task.c:850
-unknown function (ip: (nil))
-unknown function (ip: (nil))
-pthread_cond_wait at /lib/x86_64-linux-gnu/libpthread.so.0 (unknown line)
-uv_cond_wait at /workspace/srcdir/libuv/src/unix/thread.c:847
-jl_task_get_next at /buildworker/worker/package_linux64/build/src/partr.c:508
-poptask at ./task.jl:760
-wait at ./task.jl:768 [inlined]
-task_done_hook at ./task.jl:494
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-jl_apply at /buildworker/worker/package_linux64/build/src/julia.h:1703 [inlined]
-jl_finish_task at /buildworker/worker/package_linux64/build/src/task.c:208
-start_task at /buildworker/worker/package_linux64/build/src/task.c:850
-unknown function (ip: (nil))
-unknown function (ip: (nil))
-pthread_cond_wait at /lib/x86_64-linux-gnu/libpthread.so.0 (unknown line)
-uv_cond_wait at /workspace/srcdir/libuv/src/unix/thread.c:847
-jl_task_get_next at /buildworker/worker/package_linux64/build/src/partr.c:508
-poptask at ./task.jl:760
-wait at ./task.jl:768 [inlined]
-task_done_hook at ./task.jl:494
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-jl_apply at /buildworker/worker/package_linux64/build/src/julia.h:1703 [inlined]
-jl_finish_task at /buildworker/worker/package_linux64/build/src/task.c:208
-start_task at /buildworker/worker/package_linux64/build/src/task.c:850
-unknown function (ip: (nil))
-unknown function (ip: (nil))
-pthread_cond_wait at /lib/x86_64-linux-gnu/libpthread.so.0 (unknown line)
-uv_cond_wait at /workspace/srcdir/libuv/src/unix/thread.c:847
-jl_task_get_next at /buildworker/worker/package_linux64/build/src/partr.c:508
-poptask at ./task.jl:760
-wait at ./task.jl:768 [inlined]
-task_done_hook at ./task.jl:494
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-jl_apply at /buildworker/worker/package_linux64/build/src/julia.h:1703 [inlined]
-jl_finish_task at /buildworker/worker/package_linux64/build/src/task.c:208
-start_task at /buildworker/worker/package_linux64/build/src/task.c:850
-unknown function (ip: (nil))
-unknown function (ip: (nil))
-pthread_cond_wait at /lib/x86_64-linux-gnu/libpthread.so.0 (unknown line)
-uv_cond_wait at /workspace/srcdir/libuv/src/unix/thread.c:847
-jl_task_get_next at /buildworker/worker/package_linux64/build/src/partr.c:508
-poptask at ./task.jl:760
-wait at ./task.jl:768 [inlined]
-task_done_hook at ./task.jl:494
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-jl_apply at /buildworker/worker/package_linux64/build/src/julia.h:1703 [inlined]
-jl_finish_task at /buildworker/worker/package_linux64/build/src/task.c:208
-start_task at /buildworker/worker/package_linux64/build/src/task.c:850
-unknown function (ip: (nil))
-unknown function (ip: (nil))
-pthread_cond_wait at /lib/x86_64-linux-gnu/libpthread.so.0 (unknown line)
-uv_cond_wait at /workspace/srcdir/libuv/src/unix/thread.c:847
-jl_task_get_next at /buildworker/worker/package_linux64/build/src/partr.c:508
-poptask at ./task.jl:760
-wait at ./task.jl:768 [inlined]
-task_done_hook at ./task.jl:494
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-jl_apply at /buildworker/worker/package_linux64/build/src/julia.h:1703 [inlined]
-jl_finish_task at /buildworker/worker/package_linux64/build/src/task.c:208
-start_task at /buildworker/worker/package_linux64/build/src/task.c:850
-unknown function (ip: (nil))
-unknown function (ip: (nil))
-pthread_cond_wait at /lib/x86_64-linux-gnu/libpthread.so.0 (unknown line)
-uv_cond_wait at /workspace/srcdir/libuv/src/unix/thread.c:847
-jl_task_get_next at /buildworker/worker/package_linux64/build/src/partr.c:508
-poptask at ./task.jl:760
-wait at ./task.jl:768 [inlined]
-task_done_hook at ./task.jl:494
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-jl_apply at /buildworker/worker/package_linux64/build/src/julia.h:1703 [inlined]
-jl_finish_task at /buildworker/worker/package_linux64/build/src/task.c:208
-start_task at /buildworker/worker/package_linux64/build/src/task.c:850
-unknown function (ip: (nil))
-unknown function (ip: (nil))
-pthread_cond_wait at /lib/x86_64-linux-gnu/libpthread.so.0 (unknown line)
-uv_cond_wait at /workspace/srcdir/libuv/src/unix/thread.c:847
-jl_task_get_next at /buildworker/worker/package_linux64/build/src/partr.c:508
-poptask at ./task.jl:760
-wait at ./task.jl:768 [inlined]
-task_done_hook at ./task.jl:494
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-jl_apply at /buildworker/worker/package_linux64/build/src/julia.h:1703 [inlined]
-jl_finish_task at /buildworker/worker/package_linux64/build/src/task.c:208
-start_task at /buildworker/worker/package_linux64/build/src/task.c:850
-unknown function (ip: (nil))
-unknown function (ip: (nil))
-pthread_cond_wait at /lib/x86_64-linux-gnu/libpthread.so.0 (unknown line)
-uv_cond_wait at /workspace/srcdir/libuv/src/unix/thread.c:847
-jl_task_get_next at /buildworker/worker/package_linux64/build/src/partr.c:508
-poptask at ./task.jl:760
-wait at ./task.jl:768 [inlined]
-task_done_hook at ./task.jl:494
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-jl_apply at /buildworker/worker/package_linux64/build/src/julia.h:1703 [inlined]
-jl_finish_task at /buildworker/worker/package_linux64/build/src/task.c:208
-start_task at /buildworker/worker/package_linux64/build/src/task.c:850
-unknown function (ip: (nil))
-unknown function (ip: (nil))
-pthread_cond_wait at /lib/x86_64-linux-gnu/libpthread.so.0 (unknown line)
-uv_cond_wait at /workspace/srcdir/libuv/src/unix/thread.c:847
-jl_task_get_next at /buildworker/worker/package_linux64/build/src/partr.c:508
-poptask at ./task.jl:760
-wait at ./task.jl:768 [inlined]
-task_done_hook at ./task.jl:494
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-jl_apply at /buildworker/worker/package_linux64/build/src/julia.h:1703 [inlined]
-jl_finish_task at /buildworker/worker/package_linux64/build/src/task.c:208
-start_task at /buildworker/worker/package_linux64/build/src/task.c:850
-unknown function (ip: (nil))
-unknown function (ip: (nil))
-pthread_cond_wait at /lib/x86_64-linux-gnu/libpthread.so.0 (unknown line)
-uv_cond_wait at /workspace/srcdir/libuv/src/unix/thread.c:847
-jl_task_get_next at /buildworker/worker/package_linux64/build/src/partr.c:508
-poptask at ./task.jl:760
-wait at ./task.jl:768 [inlined]
-task_done_hook at ./task.jl:494
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-jl_apply at /buildworker/worker/package_linux64/build/src/julia.h:1703 [inlined]
-jl_finish_task at /buildworker/worker/package_linux64/build/src/task.c:208
-start_task at /buildworker/worker/package_linux64/build/src/task.c:850
-unknown function (ip: (nil))
-unknown function (ip: (nil))
-__sched_yield at /lib/x86_64-linux-gnu/libc.so.6 (unknown line)
-exec_blas_async_wait at /home/victorb/utils/julia-1.6.1/bin/../lib/julia/libopenblas64_.so (unknown line)
-exec_blas at /home/victorb/utils/julia-1.6.1/bin/../lib/julia/libopenblas64_.so (unknown line)
-gemm_driver at /home/victorb/utils/julia-1.6.1/bin/../lib/julia/libopenblas64_.so (unknown line)
-sgemm_thread_tn at /home/victorb/utils/julia-1.6.1/bin/../lib/julia/libopenblas64_.so (unknown line)
-sgemm_64_ at /home/victorb/utils/julia-1.6.1/bin/../lib/julia/libopenblas64_.so (unknown line)
-gemm! at /buildworker/worker/package_linux64/build/usr/share/julia/stdlib/v1.6/LinearAlgebra/src/blas.jl:1458
-gemm_wrapper! at /buildworker/worker/package_linux64/build/usr/share/julia/stdlib/v1.6/LinearAlgebra/src/matmul.jl:671
-mul! at /buildworker/worker/package_linux64/build/usr/share/julia/stdlib/v1.6/LinearAlgebra/src/matmul.jl:377 [inlined]
-mul! at /buildworker/worker/package_linux64/build/usr/share/julia/stdlib/v1.6/LinearAlgebra/src/matmul.jl:444 [inlined]
-mul! at /buildworker/worker/package_linux64/build/usr/share/julia/stdlib/v1.6/LinearAlgebra/src/matmul.jl:275 [inlined]
-* at /buildworker/worker/package_linux64/build/usr/share/julia/stdlib/v1.6/LinearAlgebra/src/matmul.jl:153 [inlined]
-#1262 at /home/victorb/.julia/packages/ChainRules/RyXef/src/rulesets/Base/arraymath.jl:56 [inlined]
-unthunk at /home/victorb/.julia/packages/ChainRulesCore/MhCRV/src/tangent_types/thunks.jl:194 [inlined]
-unthunk at /home/victorb/.julia/packages/ChainRulesCore/MhCRV/src/tangent_types/thunks.jl:217 [inlined]
-wrap_chainrules_output at /home/victorb/.julia/packages/Zygote/Lw5Kf/src/compiler/chainrules.jl:104 [inlined]
-map at ./tuple.jl:215 [inlined]
-wrap_chainrules_output at /home/victorb/.julia/packages/Zygote/Lw5Kf/src/compiler/chainrules.jl:105 [inlined]
-ZBack at /home/victorb/.julia/packages/Zygote/Lw5Kf/src/compiler/chainrules.jl:168 [inlined]
-Pullback at /home/victorb/.julia/packages/Flux/ZnXxS/src/layers/basic.jl:158 [inlined]
-Pullback at /home/victorb/.julia/packages/Zygote/Lw5Kf/src/compiler/interface2.jl:0
-Pullback at /home/victorb/.julia/packages/Flux/ZnXxS/src/layers/basic.jl:161 [inlined]
-Pullback at /home/victorb/.julia/packages/Flux/ZnXxS/src/layers/basic.jl:47 [inlined]
-Pullback at /home/victorb/.julia/packages/Zygote/Lw5Kf/src/compiler/interface2.jl:0
-Pullback at /home/victorb/.julia/packages/Flux/ZnXxS/src/layers/basic.jl:49 [inlined]
-Pullback at /home/victorb/.julia/packages/Zygote/Lw5Kf/src/compiler/interface2.jl:0
-unknown function (ip: 0x7fb51811e04f)
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-Pullback at /home/victorb/projects/HighDimPDE.jl/src/DeepSplitting.jl:91 [inlined]
-Pullback at /home/victorb/.julia/packages/Zygote/Lw5Kf/src/compiler/interface2.jl:0
-Pullback at /home/victorb/projects/HighDimPDE.jl/src/DeepSplitting.jl:96 [inlined]
-Pullback at /home/victorb/.julia/packages/Zygote/Lw5Kf/src/compiler/interface2.jl:0
-Pullback at /home/victorb/projects/HighDimPDE.jl/src/DeepSplitting.jl:137 [inlined]
-Pullback at /home/victorb/.julia/packages/Zygote/Lw5Kf/src/compiler/interface2.jl:0
-#84 at /home/victorb/.julia/packages/Zygote/Lw5Kf/src/compiler/interface.jl:343
-unknown function (ip: 0x7fb5180ed03f)
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-gradient at /home/victorb/.julia/packages/Zygote/Lw5Kf/src/compiler/interface.jl:76
-unknown function (ip: 0x7fb59c1007fe)
-#solve#7 at /home/victorb/projects/HighDimPDE.jl/src/DeepSplitting.jl:136
-solve##kw at /home/victorb/projects/HighDimPDE.jl/src/DeepSplitting.jl:33
-unknown function (ip: 0x7fb59c0ee989)
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-DeepSplitting_nonlocal_comp at /home/victorb/projects/stochanal/HighDimPDE_examples/paper/DeepSplitting_nonlocal_comp.jl:44
-unknown function (ip: 0x7fb59c0e9862)
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-jl_apply at /buildworker/worker/package_linux64/build/src/julia.h:1703 [inlined]
-do_call at /buildworker/worker/package_linux64/build/src/interpreter.c:115
-eval_value at /buildworker/worker/package_linux64/build/src/interpreter.c:204
-eval_body at /buildworker/worker/package_linux64/build/src/interpreter.c:435
-eval_body at /buildworker/worker/package_linux64/build/src/interpreter.c:490
-jl_interpret_toplevel_thunk at /buildworker/worker/package_linux64/build/src/interpreter.c:670
-jl_toplevel_eval_flex at /buildworker/worker/package_linux64/build/src/toplevel.c:877
-jl_toplevel_eval_flex at /buildworker/worker/package_linux64/build/src/toplevel.c:825
-jl_toplevel_eval_in at /buildworker/worker/package_linux64/build/src/toplevel.c:929
-eval at ./boot.jl:360 [inlined]
-include_string at ./loading.jl:1094
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-_include at ./loading.jl:1148
-include at ./Base.jl:386
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-exec_options at ./client.jl:285
-_start at ./client.jl:485
-jfptr__start_34289.clone_1 at /home/victorb/utils/julia-1.6.1/lib/julia/sys.so (unknown line)
-_jl_invoke at /buildworker/worker/package_linux64/build/src/gf.c:2237 [inlined]
-jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2419
-jl_apply at /buildworker/worker/package_linux64/build/src/julia.h:1703 [inlined]
-true_main at /buildworker/worker/package_linux64/build/src/jlapi.c:560
-repl_entrypoint at /buildworker/worker/package_linux64/build/src/jlapi.c:702
-main at /buildworker/worker/package_linux64/build/cli/loader_exe.c:51
-__libc_start_main at /lib/x86_64-linux-gnu/libc.so.6 (unknown line)
-_start at /home/victorb/utils/julia-1.6.1/bin/julia (unknown line)
-unknown function (ip: (nil))
-Allocations: 352138520 (Pool: 351742205; Big: 396315); GC: 72169
-[ Info: Training on CPU
-[ Info: Training on CPU
-[ Info: Training on CPU
-[ Info: Training on CPU
-[ Info: Training on CPU
-[ Info: Training on CPU
-[ Info: Training on CPU
-[ Info: Training on CPU
-[ Info: Training on CPU
-[ Info: Training on CPU
-[ Info: Training on CPU
-[ Info: Training on CPU
-[ Info: Training on CPU
-[ Info: Training on CPU
-[ Info: Training on CPU
-[ Info: Training on CPU
-[ Info: Training on CPU
-[ Info: Training on CPU
-[ Info: Training on CPU
-[ Info: Training on CPU
-[ Info: Training on CPU
-[ Info: Training on CPU
-[ Info: Training on CPU
-Current loss is: 5.966772e-6
-Current loss is: 6.2846652e-6
-Current loss is: 6.359335e-6
-Current loss is: 6.0525126e-6
-Current loss is: 6.2005906e-6
-Current loss is: 5.7690936e-6
-Current loss is: 5.977475e-6
-Current loss is: 5.8946634e-6
-Current loss is: 5.795187e-6
-Current loss is: 5.969518e-6
-Current loss is: 5.8358814e-6
-Current loss is: 5.8083e-6
-Current loss is: 5.9931403e-6
-Current loss is: 5.8794462e-6
-Current loss is: 6.04231e-6
-Current loss is: 5.4244138e-6
-Step 2 / 3 
-Current loss is: 0.38498917
-Current loss is: 3.7950475e-5
-Current loss is: 1.0760224e-6
-Current loss is: 1.1832768e-6
-Current loss is: 1.1660763e-6
+Step 1 / 10 
+Current loss is: 1.0101417
+Current loss is: 1.7164084e-5
+Current loss is: 4.5676693e-6
+Current loss is: 4.350085e-6
+Current loss is: 4.5243596e-6
+Current loss is: 4.38616e-6
+Current loss is: 4.551473e-6
+Current loss is: 4.182446e-6
+Current loss is: 4.4029307e-6
+Current loss is: 4.4418985e-6
+Current loss is: 4.2076504e-6
+Current loss is: 4.3435307e-6
+Current loss is: 4.2538563e-6
+Current loss is: 4.3744485e-6
+Current loss is: 4.1934672e-6
+Current loss is: 4.3068944e-6
+Current loss is: 4.2965335e-6
+Current loss is: 5.7755362e-5
+Current loss is: 4.5877564e-6
+Current loss is: 0.0003739506
+Current loss is: 4.2325078e-6
+Step 2 / 10 
+Current loss is: 0.02307411
+Current loss is: 5.1942443e-6
+Current loss is: 2.2969395e-7
+Current loss is: 2.4698872e-7
+Current loss is: 2.3802308e-7
+Current loss is: 2.3522442e-7
+Current loss is: 2.1320764e-7
+Current loss is: 2.0649057e-7
+Current loss is: 2.3888526e-7
+Current loss is: 2.4227188e-7
+Current loss is: 2.2260645e-7
+Current loss is: 2.1559407e-7
+Current loss is: 2.262749e-7
+Current loss is: 1.9973761e-7
+Current loss is: 2.0358293e-7
+Current loss is: 2.1568064e-7
+Current loss is: 1.9774136e-7
+Current loss is: 2.1057716e-7
+Current loss is: 2.143515e-7
+Current loss is: 2.1435493e-7
+Current loss is: 2.056004e-7
+Step 3 / 10 
+Current loss is: 0.0009159384
+Current loss is: 4.2398277e-8
+Step 4 / 10 
+Current loss is: 0.0011142371
+Current loss is: 7.280459e-8
+Step 5 / 10 
+Current loss is: 0.0014703118
+Current loss is: 1.5476972e-7
+Current loss is: 3.606728e-8
+Step 6 / 10 
+Current loss is: 0.002554838
+Current loss is: 1.2455595e-7
+Current loss is: 3.337846e-8
+Step 7 / 10 
+Current loss is: 0.0038812517
+Current loss is: 1.3182049e-7
+Current loss is: 3.0377482e-8
+Step 8 / 10 
+Current loss is: 0.005408708
+Current loss is: 6.912904e-8
+Step 9 / 10 
+Current loss is: 0.0057772216
+Current loss is: 8.789747e-8
+Step 10 / 10 
+Current loss is: 0.0059912484
+Current loss is: 2.4604745e-7
+Current loss is: 1.6844686e-8
+sol_ds.value = 1.5947661f0
+MLP
+sol_mlp.value = 1.6096095862988775
+d=2 T=0.5 i=4
+DeepSplitting
+Step 1 / 10 
+Current loss is: 0.99844176
+Current loss is: 1.0483038e-5
+Current loss is: 3.3393294e-6
+Current loss is: 3.37208e-6
+Current loss is: 3.490954e-6
+Current loss is: 3.7550801e-6
+Current loss is: 3.4171637e-6
+Current loss is: 3.4550062e-6
+Current loss is: 3.3797205e-6
+Current loss is: 3.3791177e-6
+Current loss is: 3.6153863e-6
+Current loss is: 3.5375886e-6
+Current loss is: 3.4279017e-6
+Current loss is: 3.1586258e-6
+Current loss is: 3.3375068e-6
+Current loss is: 3.8846624e-6
+Current loss is: 8.676324e-5
+Current loss is: 3.276149e-6
+Current loss is: 2.997767e-5
+Current loss is: 3.176943e-6
+Current loss is: 3.5114933e-6
+Step 2 / 10 
+Current loss is: 0.020944173
+Current loss is: 3.4448117e-6
+Current loss is: 3.260893e-7
+Current loss is: 3.6208365e-7
+Current loss is: 3.658428e-7
+Current loss is: 3.507204e-7
+Current loss is: 3.2452786e-7
+Current loss is: 3.4603966e-7
+Current loss is: 3.4004498e-7
+Current loss is: 3.629474e-7
+Current loss is: 3.239592e-7
+Current loss is: 3.3726707e-7
+Current loss is: 3.3884413e-7
+Current loss is: 3.4169122e-7
+Current loss is: 3.4520488e-7
+Current loss is: 3.3712377e-7
+Current loss is: 3.2190482e-7
+Current loss is: 3.353027e-7
+Current loss is: 3.2628367e-7
+Current loss is: 3.4536058e-7
+Current loss is: 3.5754545e-7
+Step 3 / 10 
+Current loss is: 0.0061012395
+Current loss is: 2.6072868e-7
+Current loss is: 1.8195443e-7
+Current loss is: 1.9931424e-7
+Current loss is: 1.946796e-7
+Current loss is: 1.869482e-7
+Current loss is: 1.945981e-7
+Current loss is: 2.0064643e-7
+Current loss is: 1.9898052e-7
+Current loss is: 1.9883349e-7
+Current loss is: 1.9667996e-7
+Current loss is: 2.0033389e-7
+Current loss is: 2.0162474e-7
+Current loss is: 1.98298e-7
+Current loss is: 2.7120326e-5
+Current loss is: 2.1777359e-7
+Current loss is: 3.970912e-7
+Current loss is: 1.7770858e-6
+Current loss is: 2.2880167e-7
+Current loss is: 1.86671e-6
+Current loss is: 1.9609148e-7
+Step 4 / 10 
+Current loss is: 0.024825338
+Current loss is: 1.6756389e-6
+Current loss is: 4.3653864e-7
+Current loss is: 4.3371747e-7
+Current loss is: 4.4549762e-7
+Current loss is: 4.630503e-7
+Current loss is: 4.3030562e-7
+Current loss is: 4.1694852e-7
+Current loss is: 4.5163247e-7
+Current loss is: 4.0748924e-7
+Current loss is: 4.10118e-7
+Current loss is: 3.9799392e-7
+Current loss is: 3.6037468e-7
+Current loss is: 3.8817439e-7
+Current loss is: 3.8364965e-7
+Current loss is: 3.488504e-7
+Current loss is: 3.770698e-7
+Current loss is: 3.630402e-7
+Current loss is: 3.4588925e-7
+Current loss is: 3.3114495e-7
+Current loss is: 3.3484645e-7
+Step 5 / 10 
+Current loss is: 0.01326172
+Current loss is: 0.000102446036
+Current loss is: 7.697012e-8
+Step 6 / 10 
+Current loss is: 0.00085198076
+Current loss is: 5.367566e-8
+Step 7 / 10 
+Current loss is: 0.00070767634
+Current loss is: 1.4245343e-7
+Current loss is: 4.488703e-8
+Step 8 / 10 
+Current loss is: 0.00041824387
+Current loss is: 6.294133e-8
+Step 9 / 10 
+Current loss is: 0.0002478805
+Current loss is: 2.7169493e-8
+Step 10 / 10 
+Current loss is: 9.143239e-5
+Current loss is: 1.5877818e-8
+sol_ds.value = 1.5938699f0
+MLP
+sol_mlp.value = 1.6146001499125298
+d=2 T=0.5 i=5
+DeepSplitting
+Step 1 / 10 
+Current loss is: 1.0211279
+Current loss is: 6.765061e-6
+Current loss is: 3.611115e-6
+Current loss is: 3.758955e-6
+Current loss is: 3.5855323e-6
+Current loss is: 3.628826e-6
+Current loss is: 3.7095901e-6
+Current loss is: 3.4693762e-6
+Current loss is: 3.5017556e-6
+Current loss is: 3.615951e-6
+Current loss is: 3.5136093e-6
+Current loss is: 3.4701864e-6
+Current loss is: 3.331453e-6
+Current loss is: 3.2267822e-6
+Current loss is: 3.4090622e-6
+Current loss is: 3.242137e-6
+Current loss is: 3.265476e-6
+Current loss is: 3.3211224e-6
+Current loss is: 3.379558e-6
+Current loss is: 3.2085577e-6
+Current loss is: 3.0901954e-6
+Step 2 / 10 
+Current loss is: 0.022242304
+Current loss is: 2.1190522e-6
+Current loss is: 7.1030996e-7
+Current loss is: 6.5752477e-7
+Current loss is: 6.593894e-7
+Current loss is: 6.3890104e-7
+Current loss is: 6.5615734e-7
+Current loss is: 6.482879e-7
+Current loss is: 6.2066897e-7
+Current loss is: 5.991642e-7
+Current loss is: 6.347403e-7
+Current loss is: 6.3817964e-7
+Current loss is: 6.037494e-7
+Current loss is: 6.26979e-7
+Current loss is: 6.036903e-7
+Current loss is: 6.204523e-7
+Current loss is: 6.383602e-7
+Current loss is: 6.101296e-7
+Current loss is: 6.13089e-7
+Current loss is: 6.169994e-7
+Current loss is: 5.7015194e-7
+Step 3 / 10 
+Current loss is: 0.00077276904
+Current loss is: 1.07520684e-7
+Current loss is: 4.1867644e-8
+Step 4 / 10 
+Current loss is: 0.0013241337
+Current loss is: 5.1569202e-8
+Step 5 / 10 
+Current loss is: 0.0017195824
+Current loss is: 5.375909e-8
+Step 6 / 10 
+Current loss is: 0.0021780296
+Current loss is: 4.329901e-8
+Step 7 / 10 
+Current loss is: 0.0028403625
+Current loss is: 8.58171e-8
+Step 8 / 10 
+Current loss is: 0.0034814524
+Current loss is: 1.7313054e-7
+Current loss is: 2.030848e-8
+Step 9 / 10 
+Current loss is: 0.005218273
+Current loss is: 2.2634964e-7
+Current loss is: 1.3572439e-8
+Step 10 / 10 
+Current loss is: 0.0070246896
+Current loss is: 1.9595706e-7
+Current loss is: 5.5254605e-9
+sol_ds.value = 1.5954018f0
+MLP
+sol_mlp.value = 1.6365700187786554
+d=2 T=1.0 i=1
+DeepSplitting
+Step 1 / 10 
+Current loss is: 1.1164083
+Current loss is: 2.0396768e-5
+Current loss is: 1.7480163e-5
+Current loss is: 1.8866265e-5
+Current loss is: 1.867757e-5
+Current loss is: 1.7578528e-5
+Current loss is: 1.709681e-5
+Current loss is: 1.7121582e-5
+Current loss is: 1.6516024e-5
+Current loss is: 1.6410895e-5
+Current loss is: 1.5894784e-5
+Current loss is: 1.5614125e-5
+Current loss is: 1.5661064e-5
+Current loss is: 1.5917618e-5
+Current loss is: 1.591234e-5
+Current loss is: 1.4729142e-5
+Current loss is: 1.4510525e-5
+Current loss is: 1.4229929e-5
+Current loss is: 1.3265297e-5
+Current loss is: 1.5159932e-5
+Current loss is: 1.369706e-5
+Step 2 / 10 
+Current loss is: 0.11394519
+Current loss is: 2.6953892e-6
+Current loss is: 2.0456062e-6
+Current loss is: 1.9979927e-6
+Current loss is: 1.8537679e-6
+Current loss is: 2.0034145e-6
+Current loss is: 1.7714091e-6
+Current loss is: 1.9399824e-6
+Current loss is: 1.8339688e-6
+Current loss is: 1.8313256e-6
+Current loss is: 1.7688454e-6
+Current loss is: 1.755325e-6
+Current loss is: 1.6480454e-6
+Current loss is: 1.7047596e-6
+Current loss is: 1.7144662e-6
+Current loss is: 1.6657099e-6
+Current loss is: 1.6882199e-6
+Current loss is: 1.7300754e-6
+Current loss is: 1.5868221e-6
+Current loss is: 1.7519087e-6
+Current loss is: 1.7070429e-6
+Step 3 / 10 
+Current loss is: 0.048593037
+Current loss is: 3.7346135e-6
+Current loss is: 2.5408574e-6
+Current loss is: 2.4426406e-6
+Current loss is: 2.3807359e-6
+Current loss is: 2.1294625e-6
+Current loss is: 2.0673192e-6
+Current loss is: 1.8797605e-6
+Current loss is: 2.0260347e-6
+Current loss is: 1.833384e-6
+Current loss is: 1.6949268e-6
+Current loss is: 1.7244946e-6
+Current loss is: 1.7779054e-6
+Current loss is: 1.5301515e-6
+Current loss is: 1.5816776e-6
+Current loss is: 1.5407159e-6
+Current loss is: 1.5762856e-6
+Current loss is: 1.6166408e-6
+Current loss is: 1.5974464e-6
+Current loss is: 1.5715988e-6
+Current loss is: 1.590673e-6
+Step 4 / 10 
+Current loss is: 0.11131137
+Current loss is: 2.151244e-6
+Current loss is: 1.5675524e-6
+Current loss is: 1.5584613e-6
+Current loss is: 1.5646724e-6
+Current loss is: 1.5969214e-6
+Current loss is: 1.552765e-6
+Current loss is: 1.5411138e-6
+Current loss is: 1.6300602e-6
+Current loss is: 1.5938856e-6
+Current loss is: 1.5288801e-6
+Current loss is: 1.5948763e-6
+Current loss is: 1.5445938e-6
+Current loss is: 1.6331053e-6
+Current loss is: 1.6343398e-6
+Current loss is: 1.541251e-6
+Current loss is: 1.6083211e-6
+Current loss is: 1.4433265e-6
+Current loss is: 1.5032866e-6
+Current loss is: 1.4658456e-6
+Current loss is: 1.6102163e-6
+Step 5 / 10 
+Current loss is: 0.13512832
+Current loss is: 8.612418e-6
+Current loss is: 1.7530747e-6
+Current loss is: 1.9077015e-6
+Current loss is: 1.7677318e-6
+Current loss is: 1.7890483e-6
+Current loss is: 1.7063992e-6
+Current loss is: 1.6411201e-6
+Current loss is: 1.7470269e-6
+Current loss is: 1.688419e-6
+Current loss is: 1.6456381e-6
+Current loss is: 1.7329542e-6
+Current loss is: 1.6800317e-6
+Current loss is: 1.5725999e-6
+Current loss is: 1.5852484e-6
+Current loss is: 1.5918346e-6
+Current loss is: 1.6539975e-6
+Current loss is: 1.6330195e-6
+Current loss is: 1.4792352e-6
+Current loss is: 1.6093062e-6
+Current loss is: 1.5838546e-6
+Step 6 / 10 
+Current loss is: 0.05618526
+Current loss is: 2.3513549e-6
+Current loss is: 1.6413087e-6
+Current loss is: 1.5646743e-6
+Current loss is: 1.4949491e-6
+Current loss is: 1.5173579e-6
+Current loss is: 1.5028194e-6
+Current loss is: 1.5061398e-6
+Current loss is: 1.3781125e-6
+Current loss is: 1.5735995e-6
+Current loss is: 1.6009125e-6
+Current loss is: 1.5244387e-6
+Current loss is: 1.4325416e-6
+Current loss is: 1.4933732e-6
+Current loss is: 1.3364203e-6
+Current loss is: 1.4741639e-6
+Current loss is: 1.8654829e-6
+Current loss is: 6.509499e-5
+Current loss is: 1.5786168e-6
+Current loss is: 1.6793653e-6
+Current loss is: 1.845489e-5
+Step 7 / 10 
+Current loss is: 0.17575553
+Current loss is: 7.3933494e-5
+Current loss is: 8.332085e-6
