@@ -53,7 +53,7 @@ function DeepSplitting_rep_mut(d, T, dt)
                 batch_size = batch_size,
                 use_cuda = true,
                 )
-        return sol[end](zeros(d))
+        return sol[end](zeros(d))[]
 end
 
 if false

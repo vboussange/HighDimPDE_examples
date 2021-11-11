@@ -11,7 +11,7 @@ function MLP_rep_mut(d, T, dt, L)
         ##########################
         ###### PDE Problem #######
         ##########################
-        ss0 = 1e-2#std g0
+        ss0 = 5e-2#std g0
         U = 5f-1
         u_domain = (fill(-U, d), fill(U, d))
         x0 = fill(0e0,d) # initial point
