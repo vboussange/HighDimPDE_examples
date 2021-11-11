@@ -37,7 +37,7 @@ function DeepSplitting_allencahn_neumann(d, T, dt)
 
         # defining the problem
         alg = DeepSplitting(nn_batch, K=K, opt = opt, mc_sample=UniformSampling(u_domain[1],u_domain[2]))
-        prob = PIDEProblem(g, f, μ, σ, tspan, x = x0, neumann = u_domain)
+        prob = PIDEProblem(g, f, μ, σ, tspan, neumann = u_domain, u_domain = u_domain)
 
         # solving
         xs,ts,sol = solve(prob, 
@@ -49,7 +49,7 @@ function DeepSplitting_allencahn_neumann(d, T, dt)
                 batch_size = batch_size,
                 use_cuda = true,
                 )
-        return sol[end]
+                return sol[end](zeros(d))[]
 end
 
 if false

@@ -1,5 +1,3 @@
-using CUDA
-CUDA.device!(6)
 using HighDimPDE
 using Random
 using Test
@@ -20,7 +18,7 @@ function MLP_fisherkpp_neumann(d, T, dt, L)
         f(y,z,v_y,v_z,∇v_y,∇v_z, p, t) = max.(0e0, v_y) .* ( 1e0 .- max.(0e0,v_y) )
 
         # defining the problem
-        alg = MLP(M = L, K = 10, L = L)
+        alg = MLP(M = L, K = 1, L = L)
         prob = PIDEProblem(g, f, μ, σ, tspan, neumann = u_domain, x = x0)
 
         # solving
@@ -34,7 +32,7 @@ end
 if false
         d = 5
         dt = 1f-1 # time step
-        T = 3f-1
+        T = 2f0
         L = 5
         @show MLP_fisherkpp_neumann(d, T, dt, L)
 end
