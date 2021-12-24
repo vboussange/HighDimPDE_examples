@@ -17,10 +17,12 @@ function MLP_rep_mut(d, T, dt, L)
         x0 = fill(0e0,d) # initial point
         μ(X,p,t) = 0e0 # advection coefficients
         σ(X,p,t) = 1e-1 # diffusion coefficients
-        g(x) = (2*π)^(-d/2) * ss0^(- d * 5e-1) * exp.(-5e-1 *sum(x .^2e0 / ss0)) # initial condition
+        g(x) = (2*π)^(-d/2) * ss0^(- d * 5e-1) * 
+                exp.(-5e-1 *sum(x .^2e0 / ss0)) # initial condition
         m(x) = - 5e-1 * sum(x.^2)
         vol = prod(u_domain[2] - u_domain[1])
-        f(y, z, v_y, v_z, ∇v_y, ∇v_z, p, t) = max(0.0, v_y) * (m(y) -  vol * max(0.0, v_z) * m(z)) # nonlocal nonlinear part of the
+        f(y, z, v_y, v_z, ∇v_y, ∇v_z, p, t) = max(0.0, v_y) * 
+                (m(y) -  vol * max(0.0, v_z) * m(z))
 
         # defining the problem
         alg = MLP(M = L, K = 10, L = L, mc_sample = UniformSampling(u_domain...))
@@ -49,13 +51,15 @@ if false
         function _SS(x, t, p)
                 d = length(x)
                 MM = σ(x, p, t) * ones(d)
-                SSt = MM .* ((MM .* sinh.(MM *t) .+ ss0 .* cosh.( MM * t)) ./ (MM .* cosh.(MM * t ) .+ ss0 .* sinh.(MM * t)))
+                SSt = MM .* ((MM .* sinh.(MM *t) .+ ss0 .* 
+                        cosh.( MM * t)) ./ (MM .* cosh.(MM * t ) .+ ss0 .* sinh.(MM * t)))
                 return SSt
         end
 
         function uanal(x, t, p)
                 d = length(x)
-                return (2*π)^(-d/2) * prod(_SS(x, t, p) .^(-1/2)) * exp(-0.5 *sum(x .^2 ./ _SS(x, t, p)) )
+                return (2*π)^(-d/2) * prod(_SS(x, t, p) .^(-1/2)) * 
+                        exp(-0.5 *sum(x .^2 ./ _SS(x, t, p)) )
         end
         @show uanal(zeros(d), T, nothing)
 end

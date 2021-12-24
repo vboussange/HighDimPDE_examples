@@ -17,10 +17,10 @@ function DeepSplitting_allencahn_neumann(d, T, dt)
 
         hls = d + 50 #hidden layer size
 
-
+        # Neural network used by the scheme, with batch normalisation
         nn_batch = Flux.Chain(Dense(d,hls,tanh),
                                 Dense(hls,hls,tanh),
-                                Dense(hls, 1, x->x^2)) # Neural network used by the scheme, with batch normalisation
+                                Dense(hls, 1, x->x^2))
 
         opt = Flux.ADAM(1e-2) #optimiser
 
@@ -36,7 +36,8 @@ function DeepSplitting_allencahn_neumann(d, T, dt)
         f(y,z,v_y,v_z,∇v_y,∇v_z, p, t) = a.(v_y) .- a.(v_z)
 
         # defining the problem
-        alg = DeepSplitting(nn_batch, K=K, opt = opt, mc_sample=UniformSampling(u_domain[1],u_domain[2]))
+        alg = DeepSplitting(nn_batch, K=K, opt = opt, 
+                mc_sample=UniformSampling(u_domain[1],u_domain[2]))
         prob = PIDEProblem(g, f, μ, σ, tspan, neumann = u_domain, u_domain = u_domain)
 
         # solving

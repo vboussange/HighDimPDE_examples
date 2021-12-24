@@ -18,7 +18,8 @@ function MLP_allencahn_neumann(d, T, dt, L)
         σ_mlp(X,p,t) = 1e-1 # diffusion coefficients
         mc_sample = UniformSampling(neumann...) # uniform distrib in u_domain
         # defining the problem
-        prob = PIDEProblem(g_mlp, f_mlp, μ_mlp, σ_mlp, tspan, x = x0, neumann = neumann)
+        prob = PIDEProblem(g_mlp, f_mlp, μ_mlp, σ_mlp, tspan, x = x0, 
+                neumann = neumann)
         alg = MLP(M = L, K = 10, L = L, mc_sample = mc_sample )
         # solving
         xs,ts,sol = solve(prob, 

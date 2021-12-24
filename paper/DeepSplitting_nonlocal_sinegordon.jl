@@ -17,10 +17,10 @@ function DeepSplitting_nonlocal_sinegordon(d, T, dt)
 
         hls = d + 50 #hidden layer size
 
-
+        # Neural network used by the scheme, with batch normalisation
         nn_batch = Flux.Chain(Dense(d,hls,tanh),
                                 Dense(hls,hls,tanh),
-                                Dense(hls, 1)) # Neural network used by the scheme, with batch normalisation
+                                Dense(hls, 1)) 
 
         opt = Flux.ADAM(1e-3) #optimiser
 
@@ -31,11 +31,13 @@ function DeepSplitting_nonlocal_sinegordon(d, T, dt)
         x0 = fill(0f0,d) # initial point
         μ(X,p,t) = 0f0 # advection coefficients
         σ(X,p,t) = 1f-1 # diffusion coefficients
-        g(x) = exp.(-0.25f0 * sum(x.^2, dims = 1))   # initial condition
-        f(y,z,v_y,v_z,∇v_y,∇v_z, p, t) = sin.(v_y) .- v_z * Float32(π^(d/2) * σ_sampling^d) #.* Float32(π^(d/2)) * σ_sampling^d .* exp.(sum(z.^2, dims = 1) / σ_sampling^2) # nonlocal nonlinear part of the
+        g(x) = exp.(-0.25f0 * sum(x.^2, dims = 1)) #initial condition
+        f(y,z,v_y,v_z,∇v_y,∇v_z, p, t) = sin.(v_y) .- v_z * 
+                Float32(π^(d/2) * σ_sampling^d)
 
         # defining the problem
-        alg = DeepSplitting(nn_batch, K=K, opt = opt, mc_sample = NormalSampling(σ_sampling, true))
+        alg = DeepSplitting(nn_batch, K=K, opt = opt, 
+                mc_sample = NormalSampling(σ_sampling, true))
         prob = PIDEProblem(g, f, μ, σ, tspan, x = x0)
 
         # solving

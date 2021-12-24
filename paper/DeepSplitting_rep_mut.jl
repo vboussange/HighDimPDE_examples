@@ -17,10 +17,10 @@ function DeepSplitting_rep_mut(d, T, dt)
 
         hls = d + 50 #hidden layer size
 
-
+        # Neural network used by the scheme, with batch normalisation
         nn_batch = Flux.Chain(Dense(d,hls,tanh),
                                 Dense(hls,hls,tanh),
-                                Dense(hls, 1, x->x^2)) # Neural network used by the scheme, with batch normalisation
+                                Dense(hls, 1, x->x^2)) 
 
         opt = Flux.ADAM(1e-3) #optimiser
 
@@ -35,13 +35,15 @@ function DeepSplitting_rep_mut(d, T, dt)
 
         μ(X,p,t) = 0f0 # advection coefficients
         σ(X,p,t) = 1f-1 # diffusion coefficients
-        g(x) = Float32((2*π)^(-d/2)) * ss0^(- Float32(d) * 5f-1) * exp.(-5f-1 *sum(x .^2f0 / ss0, dims = 1)) # initial condition
+        g(x) = Float32((2*π)^(-d/2)) * ss0^(- Float32(d) * 5f-1) * 
+                exp.(-5f-1 *sum(x .^2f0 / ss0, dims = 1)) # initial condition
         m(x) = - 5f-1 * sum(x.^2, dims=1)
         vol = prod(u_domain[2] - u_domain[1])
-        f(y, z, v_y, v_z, ∇v_y, ∇v_z, p, t) =  v_y .* (m(y) .- vol * v_z .* m(z) ) # nonlocal nonlinear part of the
+        f(y, z, v_y, v_z, ∇v_y, ∇v_z, p, t) =  v_y .* (m(y) .- vol * v_z .* m(z))
 
         # defining the problem
-        alg = DeepSplitting(nn_batch, K=K, opt = opt, mc_sample = UniformSampling(u_domain[1], u_domain[2]) )
+        alg = DeepSplitting(nn_batch, K=K, opt = opt, 
+                mc_sample = UniformSampling(u_domain[1], u_domain[2]) )
         prob = PIDEProblem(g, f, μ, σ, tspan, u_domain = u_domain)
         # solving
         xs,ts,sol = solve(prob, 
@@ -78,13 +80,15 @@ if false
                 function _SS(x, t, p)
                         d = length(x)
                         MM = σ(x, p, t) * ones(d)
-                        SSt = MM .* ((MM .* sinh.(MM *t) .+ ss0 .* cosh.( MM * t)) ./ (MM .* cosh.(MM * t ) .+ ss0 .* sinh.(MM * t)))
+                        SSt = MM .* ((MM .* sinh.(MM *t) .+ ss0 .* 
+                                cosh.( MM * t)) ./ (MM .* cosh.(MM * t ) .+ ss0 .* sinh.(MM * t)))
                         return SSt
                 end
 
                 function uanal(x, t, p)
                         d = length(x)
-                        return (2*π)^(-d/2) * prod(_SS(x, t, p) .^(-1/2)) * exp(-0.5 *sum(x .^2 ./ _SS(x, t, p)) )
+                        return (2*π)^(-d/2) * prod(_SS(x, t, p) .^(-1/2)) * 
+                                exp(-0.5 *sum(x .^2 ./ _SS(x, t, p)) )
                 end
 
                 # ax[2].plot(xgrid1, reduce(hcat,g.(xgrid))[:], label = "g(x)")
@@ -98,7 +102,8 @@ if false
 
                 #Deepsplitting sol
                 for i in 1:length(sol)
-                        ax[1].scatter(xgrid1, reduce(vcat,sol[i].(xgrid)), s = .2, label = "t = $(dt * (i-1))")
+                        ax[1].scatter(xgrid1, reduce(vcat,sol[i].(xgrid)), 
+                        s = .2, label = "t = $(dt * (i-1))")
                 end
                 gcf()
 

@@ -17,10 +17,10 @@ function DeepSplitting_nonlocal_comp(d, T, dt)
 
         hls = d + 50 #hidden layer size
 
-
+        # Neural network used by the scheme, with batch normalisation
         nn_batch = Flux.Chain(Dense(d,hls,tanh),
                                 Dense(hls,hls,tanh),
-                                Dense(hls, 1, x->x^2)) # Neural network used by the scheme, with batch normalisation
+                                Dense(hls, 1, x->x^2)) 
 
         opt = Flux.ADAM(1e-2) #optimiser
 
@@ -33,10 +33,12 @@ function DeepSplitting_nonlocal_comp(d, T, dt)
         σ(X,p,t) = 1f-1 # diffusion coefficients
         g(x) = exp.(-0.25f0 * sum(x.^2, dims = 1))   # initial condition
 
-        f(y, z, v_y, v_z, ∇v_y ,∇v_z, p, t) =  max.(0f0, v_y) .* (1f0 .- max.(0f0, v_z) * Float32((2 * π )^(d/2) * σ_sampling^d))
+        f(y, z, v_y, v_z, ∇v_y ,∇v_z, p, t) =  max.(0f0, v_y) .* 
+                (1f0 .- max.(0f0, v_z) * Float32((2 * π )^(d/2) * σ_sampling^d))
 
         # defining the problem
-        alg = DeepSplitting(nn_batch, K=K, opt = opt, mc_sample = NormalSampling(σ_sampling, true))
+        alg = DeepSplitting(nn_batch, K=K, opt = opt, 
+                mc_sample = NormalSampling(σ_sampling, true))
         prob = PIDEProblem(g, f, μ, σ, tspan, 
                         # u_domain = u_domain,
                         x = x0)
