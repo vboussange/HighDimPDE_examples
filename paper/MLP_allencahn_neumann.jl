@@ -13,7 +13,7 @@ function MLP_allencahn_neumann(d, T, dt, L)
         x0 = fill(0e0,d) # initial point
         g_mlp(X) = exp.(-0.25e0 * sum(X.^2))   # initial condition
         a(u) = u - u^3
-        f_mlp(y, z, v_y, v_z, ∇v_y ,∇v_z, p, t) = a.(v_y) .- a.(v_z)
+        f_mlp(y, z, v_y, v_z, ∇v_y ,∇v_z, p, t) = a.(max.(0f0, v_y)) .- a.(max.(0f0, v_z))
         μ_mlp(X,p,t) = 0.0e0 # advection coefficients
         σ_mlp(X,p,t) = 1e-1 # diffusion coefficients
         mc_sample = UniformSampling(neumann...) # uniform distrib in u_domain
