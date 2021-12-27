@@ -17,10 +17,10 @@ function DeepSplitting_allencahn_neumann(d, T, dt)
 
         hls = d + 50 #hidden layer size
 
-        # Neural network used by the scheme, with batch normalisation
+        # Neural network used by the scheme
         nn_batch = Flux.Chain(Dense(d,hls,tanh),
                                 Dense(hls,hls,tanh),
-                                Dense(hls, 1))
+                                Dense(hls, 1, x->x^2)) 
 
         opt = Flux.ADAM(1e-2) #optimiser
 
