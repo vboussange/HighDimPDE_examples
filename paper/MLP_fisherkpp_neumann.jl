@@ -4,7 +4,7 @@ using Test
 using Flux
 using Revise
 
-function MLP_fisherkpp_neumann(d, T, dt, L)
+function MLP_fisherkpp_neumann(d, T, L)
         tspan = (0e0,T)
         ##########################
         ###### PDE Problem #######
@@ -33,8 +33,7 @@ end
 
 if false
         d = 5
-        dt = 1f-1 # time step
         T = 2f0
         L = 5
-        @show MLP_fisherkpp_neumann(d, T, dt, L)
+        @show MLP_fisherkpp_neumann(d, T, L)
 end

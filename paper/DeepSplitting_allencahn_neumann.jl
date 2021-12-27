@@ -11,7 +11,7 @@ function DeepSplitting_allencahn_neumann(d, T, dt)
         ##############################
         ####### Neural Network #######
         ##############################
-        maxiters = 2000
+        maxiters = 5000
         batch_size = 16000
         K = 10
 
@@ -20,7 +20,7 @@ function DeepSplitting_allencahn_neumann(d, T, dt)
         # Neural network used by the scheme, with batch normalisation
         nn_batch = Flux.Chain(Dense(d,hls,tanh),
                                 Dense(hls,hls,tanh),
-                                Dense(hls, 1, x->x^2))
+                                Dense(hls, 1))
 
         opt = Flux.ADAM(1e-2) #optimiser
 
@@ -45,7 +45,7 @@ function DeepSplitting_allencahn_neumann(d, T, dt)
                 alg, 
                 dt, 
                 verbose = true, 
-                abstol=1f-7,
+                abstol=1f-6,
                 maxiters = maxiters,
                 batch_size = batch_size,
                 use_cuda = true,
@@ -54,8 +54,8 @@ function DeepSplitting_allencahn_neumann(d, T, dt)
 end
 
 if false
-        d = 5
+        d = 10
         dt = 1f-1 # time step
-        T = 2f-1
+        T = 5f-1
         @show DeepSplitting_allencahn_neumann(d, T, dt)
 end

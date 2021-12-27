@@ -4,7 +4,7 @@ using Test
 using Flux
 using Revise
 
-function MLP_nonlocal_comp(d, T, dt, L)
+function MLP_nonlocal_comp(d, T, L)
         tspan = (0f0,T)
         ##########################
         ###### PDE Problem #######
@@ -30,8 +30,7 @@ end
 
 if false
         d = 1
-        dt = 1f-1 # time step
         T = 3f-1
         L = 4
-        @show MLP_nonlocal_comp(d, T, dt, L)
+        @show MLP_nonlocal_comp(d, T, L)
 end

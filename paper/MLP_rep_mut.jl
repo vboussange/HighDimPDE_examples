@@ -6,13 +6,13 @@ using Test
 using Flux
 using Revise
 
-function MLP_rep_mut(d, T, dt, L)
+function MLP_rep_mut(d, T, L)
         tspan = (0e0,T)
         ##########################
         ###### PDE Problem #######
         ##########################
         ss0 = 5e-2#std g0
-        U = 5f-1
+        U = 5e-1
         u_domain = (fill(-U, d), fill(U, d))
         x0 = fill(0e0,d) # initial point
         μ(X,p,t) = 0e0 # advection coefficients
@@ -38,14 +38,13 @@ end
 
 if false
         d = 5
-        dt = 1f-1 # time step
-        T = 3f-1
+        T = 5e-1
         L = 4
         @show MLP_rep_mut(d, T, dt, L)
         
         
         # Analytic sol
-        ss0 = 1e-2#std g0
+        ss0 = 5e-2#std g0
         μ(X,p,t) = 0e0 # advection coefficients
         σ(X,p,t) = 1e-1 # diffusion coefficients
         function _SS(x, t, p)

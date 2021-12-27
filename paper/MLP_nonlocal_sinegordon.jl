@@ -6,7 +6,7 @@ using Test
 using Flux
 using Revise
 
-function MLP_nonlocal_sinegordon(d, T, dt, L)
+function MLP_nonlocal_sinegordon(d, T, L)
         tspan = (0e0,T)
         ##########################
         ###### PDE Problem #######
@@ -34,8 +34,7 @@ end
 
 if false
         d = 5
-        dt = 1f-1 # time step
         T = 3f-1
         L = 4
-        @show MLP_nonlocal_sinegordon(d, T, dt, L)
+        @show MLP_nonlocal_sinegordon(d, T, L)
 end

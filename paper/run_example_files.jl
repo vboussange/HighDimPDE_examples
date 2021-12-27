@@ -27,9 +27,9 @@ include("MLP_rep_mut.jl")
 include("MLP_allencahn_neumann.jl")
 
 examples = [ 
-            :nonlocal_comp, 
-            :nonlocal_sinegordon,
-            :fisherkpp_neumann,
+            # :nonlocal_comp, 
+            # :nonlocal_sinegordon,
+            # :fisherkpp_neumann,
             :rep_mut,
             :allencahn_neumann, 
             ]
@@ -75,7 +75,7 @@ for (i,ex) in enumerate(examples)
                     ##### MLP ######
                     ################
                     println("MLP")
-                    sol_mlp = @timed eval(string("MLP_", ex) |> Symbol)(d, T, dt, L)
+                    sol_mlp = @timed eval(string("MLP_", ex) |> Symbol)(d, T, L)
                     @show sol_mlp.value
                     push!(u_mlp, [sol_mlp.value, sol_mlp.time])
                     push!(dfu_mlp,(d, T, N, u_mlp[end][1], u_mlp[end][2]))
