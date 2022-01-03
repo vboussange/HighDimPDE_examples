@@ -11,18 +11,18 @@ function DeepSplitting_allencahn_neumann(d, T, dt)
         ##############################
         ####### Neural Network #######
         ##############################
-        maxiters = 5000
-        batch_size = 16000
+        maxiters = 10000
+        batch_size = 32000
         K = 10
 
         hls = d + 50 #hidden layer size
 
         # Neural network used by the scheme
-        nn_batch = Flux.Chain(Dense(d,hls,tanh),
-                                Dense(hls,hls,tanh),
+        nn_batch = Flux.Chain(Dense(d,hls,relu),
+                                Dense(hls,hls,relu),
                                 Dense(hls, 1, x->x^2)) 
 
-        opt = Flux.ADAM(1e-2) #optimiser
+        opt = Flux.ADAM(1e-3) #optimiser
 
         ##########################
         ###### PDE Problem #######
@@ -54,7 +54,7 @@ function DeepSplitting_allencahn_neumann(d, T, dt)
 end
 
 if false
-        d = 10
+        d = 5
         dt = 1f-1 # time step
         T = 5f-1
         @show DeepSplitting_allencahn_neumann(d, T, dt)
