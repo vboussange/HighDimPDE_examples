@@ -30,7 +30,7 @@ examples = [
             # :nonlocal_comp, 
             # :nonlocal_sinegordon,
             # :fisherkpp_neumann,
-            :rep_mut,
+            # :rep_mut,
             :allencahn_neumann, 
             ]
 ds = [1, 2, 5, 10]
