@@ -39,7 +39,7 @@ function DeepSplitting_fisherkpp_neumann(d, T, dt)
         prob = PIDEProblem(g, f, μ, σ, tspan, neumann = u_domain, x = x0)
 
         # solving
-        xs,ts,sol = solve(prob, 
+        xs,ts,sol,lossmax = solve(prob, 
                         alg, 
                         dt, 
                         verbose = true, 
@@ -48,7 +48,7 @@ function DeepSplitting_fisherkpp_neumann(d, T, dt)
                         batch_size = batch_size,
                         use_cuda = true,
                         )
-        return sol[end]
+        return sol[end], lossmax
 end
 
 if false

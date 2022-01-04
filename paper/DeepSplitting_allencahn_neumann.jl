@@ -11,8 +11,8 @@ function DeepSplitting_allencahn_neumann(d, T, dt)
         ##############################
         ####### Neural Network #######
         ##############################
-        maxiters = 10000
-        batch_size = 32000
+        maxiters = 2000
+        batch_size = 16000
         K = 10
 
         hls = d + 50 #hidden layer size
@@ -41,7 +41,7 @@ function DeepSplitting_allencahn_neumann(d, T, dt)
         prob = PIDEProblem(g, f, μ, σ, tspan, neumann = u_domain, u_domain = u_domain)
 
         # solving
-        xs,ts,sol = solve(prob, 
+        xs,ts,sol,lossmax = solve(prob, 
                 alg, 
                 dt, 
                 verbose = true, 
@@ -50,7 +50,7 @@ function DeepSplitting_allencahn_neumann(d, T, dt)
                 batch_size = batch_size,
                 use_cuda = true,
                 )
-                return sol[end](zeros(d))[]
+                return sol[end](zeros(d))[], lossmax
 end
 
 if false

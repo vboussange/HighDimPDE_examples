@@ -46,7 +46,7 @@ function DeepSplitting_rep_mut(d, T, dt)
                 mc_sample = UniformSampling(u_domain[1], u_domain[2]) )
         prob = PIDEProblem(g, f, μ, σ, tspan, u_domain = u_domain)
         # solving
-        xs,ts,sol = solve(prob, 
+        xs,ts,sol,lossmax = solve(prob, 
                 alg, 
                 dt, 
                 verbose = true, 
@@ -55,14 +55,14 @@ function DeepSplitting_rep_mut(d, T, dt)
                 batch_size = batch_size,
                 use_cuda = true,
                 )
-        return sol[end](zeros(d))[]
+        return sol[end](zeros(d))[],lossmax
 end
 
 if false
         d = 5
         dt = 1f-1 # time step
         T = 3f-1
-        @show DeepSplitting_rep_mut(d, T, dt)
+        @show sol, lossmax = DeepSplitting_rep_mut(d, T, dt)
 
         ###############################
         ######### Plotting ############

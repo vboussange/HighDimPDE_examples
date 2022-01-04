@@ -43,7 +43,7 @@ function DeepSplitting_nonlocal_comp(d, T, dt)
                         # u_domain = u_domain,
                         x = x0)
         # solving
-        xs,ts,sol = solve(prob, 
+        xs,ts,sol,lossmax = solve(prob, 
                         alg, 
                         dt, 
                         verbose = true, 
@@ -52,7 +52,7 @@ function DeepSplitting_nonlocal_comp(d, T, dt)
                         batch_size = batch_size,
                         use_cuda = true,
                         )
-        return sol[end]
+        return sol[end],lossmax
 end
 
 if false

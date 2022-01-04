@@ -48,7 +48,6 @@ L = 5
 
 for (i,ex) in enumerate(examples)
     try
-        println("Example ", String(ex))
         names_df = [L"d",L"T",L"N","Mean","Std. dev.", "avg. runtime (s)"]
         df_ds = DataFrame(); [df_ds[!,names_df[i]] = [Int64[], Int64[], Int64[], Float64[], Float64[], Float64[] ][i] for i in 1:length(names_df)]
         dfu_ds = DataFrame(); [dfu_ds[!,c] = Float64[] for c in ["d","T","N","u","time_simu"]]
@@ -64,11 +63,17 @@ for (i,ex) in enumerate(examples)
                     ##################
                     # Deep Splitting #
                     ##################
+                    println("Example ", String(ex))
                     println("d=",d," T=",T," i=",i)
                     println("DeepSplitting")
                     sol_ds = @timed eval(string("DeepSplitting_", ex) |> Symbol)(d, T, dt)
-                    @show sol_ds.value
-                    push!(u_ds,[sol_ds.value,sol_ds.time])
+                    lossmax = sol_ds.value[2]
+                    while lossmax > 2e-5
+                        sol_ds = @timed eval(string("DeepSplitting_", ex) |> Symbol)(d, T, dt)
+                        lossmax = sol_ds.value[2]
+                    end
+                    @show sol_ds.value[1]
+                    push!(u_ds,[sol_ds.value[1],sol_ds.time])
                     push!(dfu_ds,(d, T, N, u_ds[end][1],u_ds[end][2]))
                     CSV.write(mydir*"/$(String(ex))_ds.csv", dfu_ds)
                     ################
