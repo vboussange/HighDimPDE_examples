@@ -11,7 +11,7 @@ function DeepSplitting_allencahn_neumann(d, T, dt)
         ##############################
         ####### Neural Network #######
         ##############################
-        maxiters = 2000
+        maxiters = 4000
         batch_size = 16000
         K = 10
 
@@ -54,8 +54,8 @@ function DeepSplitting_allencahn_neumann(d, T, dt)
 end
 
 if false
-        d = 5
+        d = 10
         dt = 1f-1 # time step
-        T = 5f-1
+        T = 1f-1
         @show DeepSplitting_allencahn_neumann(d, T, dt)
 end

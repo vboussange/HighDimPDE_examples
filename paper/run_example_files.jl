@@ -68,9 +68,11 @@ for (i,ex) in enumerate(examples)
                     println("DeepSplitting")
                     sol_ds = @timed eval(string("DeepSplitting_", ex) |> Symbol)(d, T, dt)
                     lossmax = sol_ds.value[2]
-                    while lossmax > 2e-5
+                    iter = 1
+                    while (lossmax > 2e-4) && iter < 10 #this is to make sure that the approximation at the first step has converged
                         sol_ds = @timed eval(string("DeepSplitting_", ex) |> Symbol)(d, T, dt)
                         lossmax = sol_ds.value[2]
+                        iter += 1
                     end
                     @show sol_ds.value[1]
                     push!(u_ds,[sol_ds.value[1],sol_ds.time])
