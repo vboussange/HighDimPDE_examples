@@ -48,10 +48,10 @@ L = 5
 
 for (i,ex) in enumerate(examples)
     try
-        names_df = [L"d",L"T",L"N","Mean","Std. dev.", "avg. runtime (s)"]
-        df_ds = DataFrame(); [df_ds[!,names_df[i]] = [Int64[], Int64[], Int64[], Float64[], Float64[], Float64[] ][i] for i in 1:length(names_df)]
+        names_df = [L"d", L"T", L"N", "Mean", "Std. dev.", "Ref. value", L"L^1-"*"approx. error", "Std. dev. error", "avg. runtime (s)"]
+        df_ds = DataFrame(); [df_ds[!,names_df[i]] = [Int64[], Int64[], Int64[], Float64[], Float64[], Float64[], Float64[], Float64[], Float64[] ][i] for i in 1:length(names_df)]
         dfu_ds = DataFrame(); [dfu_ds[!,c] = Float64[] for c in ["d","T","N","u","time_simu"]]
-        df_mlp = DataFrame(); [df_mlp[!,names_df[i]] = [Int64[], Int64[], Int64[], Float64[], Float64[], Float64[] ][i] for i in 1:length(names_df)]
+        df_mlp = DataFrame(); [df_mlp[!,names_df[i]] = [Int64[], Int64[], Int64[], Float64[], Float64[], Float64[], Float64[], Float64[], Float64[] ][i] for i in 1:length(names_df)]
         dfu_mlp = DataFrame(); [dfu_mlp[!,c] = Float64[] for c in ["d","T","K","u","time_simu"]]
         for d in ds, T in Ts
                 u_ds = []
@@ -88,8 +88,8 @@ for (i,ex) in enumerate(examples)
                     push!(dfu_mlp,(d, T, N, u_mlp[end][1], u_mlp[end][2]))
                     CSV.write(mydir*"/$(String(ex))_mlp.csv", dfu_mlp)
                 end
-                push!(df_ds, (d, T, N, mean(u_ds)[1], std(u_ds)[1], mean(u_ds)[2] ))
-                push!(df_mlp, (d, T, L, mean(u_mlp)[1], std(u_mlp)[1],mean(u_mlp)[2] ))
+                push!(df_ds, (d, T, N, mean(u_ds)[1], std(u_ds)[1], mean(u_mlp)[1], mean(abs.((u_ds .- mean(u_mlp)[1]) / mean(u_mlp)[1])), std(abs.((u_ds .- mean(u_mlp)[1]) / mean(u_mlp)[1])), mean(u_ds)[2] ))
+                push!(df_mlp, (d, T, L, mean(u_mlp)[1], std(u_mlp)[1], mean(u_ds)[1], mean(abs.((u_mlp .- mean(u_ds)[1]) / mean(u_ds)[1])), std(abs.((u_mlp .- mean(u_ds)[1]) / mean(u_ds)[1])), mean(u_mlp)[2] ))
         end
         #ds
         tab_ds = latexify(df_ds,env=:tabular,fmt="%.7f") #|> String
