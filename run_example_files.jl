@@ -11,7 +11,7 @@ using DataFrames
 using Latexify
 using LaTeXStrings
 using CSV
-mydir = "results2"
+mydir = "results"
 isdir(mydir) ? nothing : mkdir(mydir)
 
 include("DeepSplitting_nonlocal_comp.jl")
@@ -27,10 +27,10 @@ include("MLP_rep_mut.jl")
 include("MLP_allencahn_neumann.jl")
 
 examples = [ 
-            # :nonlocal_comp, 
-            # :nonlocal_sinegordon,
-            # :fisherkpp_neumann,
-            # :rep_mut,
+            :nonlocal_comp, 
+            :nonlocal_sinegordon,
+            :fisherkpp_neumann,
+            :rep_mut,
             :allencahn_neumann, 
             ]
 ds = [1, 2, 5, 10]
@@ -54,8 +54,8 @@ for (i,ex) in enumerate(examples)
         df_mlp = DataFrame(); [df_mlp[!,names_df[i]] = [Int64[], Int64[], Int64[], Float64[], Float64[], Float64[], Float64[], Float64[], Float64[] ][i] for i in 1:length(names_df)]
         dfu_mlp = DataFrame(); [dfu_mlp[!,c] = Float64[] for c in ["d","T","K","u","time_simu"]]
         for d in ds, T in Ts
-                u_ds = []
-                u_mlp = [ ]
+                u_ds = DataFrame("value" => Float64[], "time" => Float64[])
+                u_mlp = DataFrame("value" => Float64[], "time" => Float64[])
                 dt = T / N
                 tspan = (0f0,T)
                 # solving         
@@ -76,7 +76,7 @@ for (i,ex) in enumerate(examples)
                     end
                     @show sol_ds.value[1]
                     push!(u_ds,[sol_ds.value[1],sol_ds.time])
-                    push!(dfu_ds,(d, T, N, u_ds[end][1],u_ds[end][2]))
+                    push!(dfu_ds,(d, T, N, u_ds.value[end],u_ds.time[end]))
                     CSV.write(mydir*"/$(String(ex))_ds.csv", dfu_ds)
                     ################
                     ##### MLP ######
@@ -85,11 +85,11 @@ for (i,ex) in enumerate(examples)
                     sol_mlp = @timed eval(string("MLP_", ex) |> Symbol)(d, T, L)
                     @show sol_mlp.value
                     push!(u_mlp, [sol_mlp.value, sol_mlp.time])
-                    push!(dfu_mlp,(d, T, N, u_mlp[end][1], u_mlp[end][2]))
+                    push!(dfu_mlp,(d, T, N, u_mlp.value[end], u_mlp.time[end]))
                     CSV.write(mydir*"/$(String(ex))_mlp.csv", dfu_mlp)
                 end
-                push!(df_ds, (d, T, N, mean(u_ds)[1], std(u_ds)[1], mean(u_mlp)[1], mean(abs.((u_ds .- mean(u_mlp)[1]) / mean(u_mlp)[1])), std(abs.((u_ds .- mean(u_mlp)[1]) / mean(u_mlp)[1])), mean(u_ds)[2] ))
-                push!(df_mlp, (d, T, L, mean(u_mlp)[1], std(u_mlp)[1], mean(u_ds)[1], mean(abs.((u_mlp .- mean(u_ds)[1]) / mean(u_ds)[1])), std(abs.((u_mlp .- mean(u_ds)[1]) / mean(u_ds)[1])), mean(u_mlp)[2] ))
+                push!(df_ds, (d, T, N, mean(u_ds.value), std(u_ds.value), mean(u_mlp.value), mean(abs.((u_ds.value .- mean(u_mlp.value)) / mean(u_mlp.value))), std(abs.((u_ds.value .- mean(u_mlp.value)) / mean(u_mlp.value))), mean(u_ds.time)))
+                push!(df_mlp, (d, T, L, mean(u_mlp.value), std(u_mlp.value), mean(u_ds.value), mean(abs.((u_mlp.value .- mean(u_ds.value)) / mean(u_ds.value))), std(abs.((u_mlp.value .- mean(u_ds.value)) / mean(u_ds.value))), mean(u_mlp.time)))
         end
         #ds
         tab_ds = latexify(df_ds,env=:tabular,fmt="%.7f") #|> String
