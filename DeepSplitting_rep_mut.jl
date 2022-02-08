@@ -3,7 +3,8 @@ CUDA.device!(6)
 using HighDimPDE
 using Random
 using Test
-using Flux
+import Flux
+import Flux.tanh, Flux.relu, Flux.Dense
 using Revise
 
 function DeepSplitting_rep_mut(d, T, dt)
@@ -18,9 +19,9 @@ function DeepSplitting_rep_mut(d, T, dt)
         hls = d + 50 #hidden layer size
 
         # Neural network used by the scheme
-        nn_batch = Flux.Chain(Dense(d,hls,tanh),
-                                Dense(hls,hls,tanh),
-                                Dense(hls, 1, x->x^2)) 
+        nn_batch = Flux.Chain(Dense(d,hls,relu),
+                              Dense(hls,hls,relu),
+                              Dense(hls, 1, x->x^2)) 
 
         opt = Flux.ADAM(1e-3) #optimiser
 
@@ -41,6 +42,22 @@ function DeepSplitting_rep_mut(d, T, dt)
         vol = prod(u_domain[2] - u_domain[1])
         f(y, z, v_y, v_z, ∇v_y, ∇v_z, p, t) =  v_y .* (m(y) .- vol * v_z .* m(z))
 
+        # reference solution
+        function _SS(x, t, p)
+                ss0 = 5f-2#std g0
+                d = length(x)
+                MM = σ(x, p, t) * ones(d)
+                SSt = MM .* ((MM .* sinh.(MM *t) .+ ss0 .* 
+                        cosh.( MM * t)) ./ (MM .* cosh.(MM * t ) .+ ss0 .* sinh.(MM * t)))
+                return SSt
+        end
+        
+        function rep_mut_anal(x, t, p)
+                d = length(x)
+                return (2*π)^(-d/2) * prod(_SS(x, t, p) .^(-1/2)) * 
+                        exp(-0.5 *sum(x .^2 ./ _SS(x, t, p)) )
+        end
+
         # defining the problem
         alg = DeepSplitting(nn_batch, K=K, opt = opt, 
                 mc_sample = UniformSampling(u_domain[1], u_domain[2]) )
@@ -55,13 +72,13 @@ function DeepSplitting_rep_mut(d, T, dt)
                 batch_size = batch_size,
                 use_cuda = true,
                 )
-        return sol[end](zeros(d))[],lossmax
+        return sol[end](zeros(d))[], lossmax, rep_mut_anal(zeros(d), T, Dict())
 end
 
 if false
-        d = 5
+        d = 10
         dt = 1f-1 # time step
-        T = 3f-1
+        T = 2f-1
         @show sol, lossmax = DeepSplitting_rep_mut(d, T, dt)
 
         ###############################
@@ -75,21 +92,6 @@ if false
 
                 xgrid1 = collect((-U:5f-3:U))
                 xgrid = [reshape(vcat(x, fill(0f0,d-1)),:,1) for x in xgrid1] 
-
-                # Analytic sol
-                function _SS(x, t, p)
-                        d = length(x)
-                        MM = σ(x, p, t) * ones(d)
-                        SSt = MM .* ((MM .* sinh.(MM *t) .+ ss0 .* 
-                                cosh.( MM * t)) ./ (MM .* cosh.(MM * t ) .+ ss0 .* sinh.(MM * t)))
-                        return SSt
-                end
-
-                function uanal(x, t, p)
-                        d = length(x)
-                        return (2*π)^(-d/2) * prod(_SS(x, t, p) .^(-1/2)) * 
-                                exp(-0.5 *sum(x .^2 ./ _SS(x, t, p)) )
-                end
 
                 # ax[2].plot(xgrid1, reduce(hcat,g.(xgrid))[:], label = "g(x)")
 

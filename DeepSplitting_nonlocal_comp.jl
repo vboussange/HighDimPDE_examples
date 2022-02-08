@@ -52,7 +52,7 @@ function DeepSplitting_nonlocal_comp(d, T, dt)
                         batch_size = batch_size,
                         use_cuda = true,
                         )
-        return sol[end],lossmax
+        return sol[end],lossmax, nothing
 end
 
 if false

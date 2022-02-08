@@ -10,7 +10,7 @@ using Random
 using DataFrames
 using Latexify
 using LaTeXStrings
-using CSV
+using CSV, JLD2
 mydir = "results"
 isdir(mydir) ? nothing : mkdir(mydir)
 
@@ -50,11 +50,11 @@ for (i,ex) in enumerate(examples)
     try
         names_df = [L"d", L"T", L"N", "Mean", "Std. dev.", "Ref. value", L"L^1-"*"approx. error", "Std. dev. error", "avg. runtime (s)"]
         df_ds = DataFrame(); [df_ds[!,names_df[i]] = [Int64[], Int64[], Int64[], Float64[], Float64[], Float64[], Float64[], Float64[], Float64[] ][i] for i in 1:length(names_df)]
-        dfu_ds = DataFrame(); [dfu_ds[!,c] = Float64[] for c in ["d","T","N","u","time_simu"]]
+        dfu_ds = DataFrame(); [dfu_ds[!,c] = Float64[] for c in ["d","T","N","u","time_simu"]]; dfu_ds[!,"ref_value"] = []
         df_mlp = DataFrame(); [df_mlp[!,names_df[i]] = [Int64[], Int64[], Int64[], Float64[], Float64[], Float64[], Float64[], Float64[], Float64[] ][i] for i in 1:length(names_df)]
-        dfu_mlp = DataFrame(); [dfu_mlp[!,c] = Float64[] for c in ["d","T","K","u","time_simu"]]
+        dfu_mlp = DataFrame(); [dfu_mlp[!,c] = Float64[] for c in ["d","T","K","u","time_simu"]]; dfu_mlp[!,"ref_value"] = []
         for d in ds, T in Ts
-                u_ds = DataFrame("value" => Float64[], "time" => Float64[])
+                u_ds = DataFrame("value" => Float64[], "time" => Float64[], "ref_value" => [])
                 u_mlp = DataFrame("value" => Float64[], "time" => Float64[])
                 dt = T / N
                 tspan = (0f0,T)
@@ -75,9 +75,10 @@ for (i,ex) in enumerate(examples)
                         iter += 1
                     end
                     @show sol_ds.value[1]
-                    push!(u_ds,[sol_ds.value[1],sol_ds.time])
-                    push!(dfu_ds,(d, T, N, u_ds.value[end],u_ds.time[end]))
+                    push!(u_ds,[sol_ds.value[1],sol_ds.time,sol_ds.value[3]])
+                    push!(dfu_ds,(d, T, N, u_ds[end]...))
                     CSV.write(mydir*"/$(String(ex))_ds.csv", dfu_ds)
+                    JLD2.save(mydir*"/$(String(ex))_mlp.jld2", dfu_ds)
                     ################
                     ##### MLP ######
                     ################
@@ -85,12 +86,17 @@ for (i,ex) in enumerate(examples)
                     sol_mlp = @timed eval(string("MLP_", ex) |> Symbol)(d, T, L)
                     @show sol_mlp.value
                     push!(u_mlp, [sol_mlp.value, sol_mlp.time])
-                    push!(dfu_mlp,(d, T, N, u_mlp.value[end], u_mlp.time[end]))
+                    push!(dfu_mlp,(d, T, N, u_ds[end]...))
                     CSV.write(mydir*"/$(String(ex))_mlp.csv", dfu_mlp)
+                    JLD2.save(mydir*"/$(String(ex))_mlp.jld2", dfu_mlp)
                 end
-                push!(df_ds, (d, T, N, mean(u_ds.value), std(u_ds.value), mean(u_mlp.value), mean(abs.((u_ds.value .- mean(u_mlp.value)) / mean(u_mlp.value))), std(abs.((u_ds.value .- mean(u_mlp.value)) / mean(u_mlp.value))), mean(u_ds.time)))
-                push!(df_mlp, (d, T, L, mean(u_mlp.value), std(u_mlp.value), mean(u_ds.value), mean(abs.((u_mlp.value .- mean(u_ds.value)) / mean(u_ds.value))), std(abs.((u_mlp.value .- mean(u_ds.value)) / mean(u_ds.value))), mean(u_mlp.time)))
+                isnothing(u_ds.ref_value[1]) ? ref_v = mean(u_mlp.value) : ref_v = u_ds.ref_value[1]
+                push!(df_ds, (d, T, N, mean(u_ds.value), std(u_ds.value), ref_v, mean(abs.((u_ds.value .- ref_v) / ref_v)), std(abs.((u_ds.value .- ref_v) / ref_v)), mean(u_ds.time)))
+                # reference values are only returned by deep splitting function
+                isnothing(u_mlp.ref_value[1]) ? ref_v = mean(u_ds.value) : ref_v = u_ds.ref_value[1]
+                push!(df_mlp, (d, T, L, mean(u_mlp.value), std(u_mlp.value), ref_v, mean(abs.((u_mlp.value .- ref_v) / ref_v)), std(abs.((u_mlp.value .- ref_v) / ref_v)), mean(u_mlp.time)))
         end
+        sort!(df_ds, L"T"); sort!(df_mlp, L"T")
         #ds
         tab_ds = latexify(df_ds,env=:tabular,fmt="%.7f") #|> String
         io = open(mydir*"/$(String(ex))_ds.tex", "w")
