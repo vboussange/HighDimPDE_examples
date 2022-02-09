@@ -48,7 +48,7 @@ function DeepSplitting_fisherkpp_neumann(d, T, dt)
                         batch_size = batch_size,
                         use_cuda = true,
                         )
-        return sol[end], lossmax, nothing
+        return sol[end], lossmax, missing
 end
 
 if false

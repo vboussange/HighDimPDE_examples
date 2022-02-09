@@ -50,7 +50,7 @@ function DeepSplitting_allencahn_neumann(d, T, dt)
                 batch_size = batch_size,
                 use_cuda = true,
                 )
-                return sol[end](zeros(d))[], lossmax, nothing
+                return sol[end](zeros(d))[], lossmax, missing
 end
 
 if false

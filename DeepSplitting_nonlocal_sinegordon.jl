@@ -50,7 +50,7 @@ function DeepSplitting_nonlocal_sinegordon(d, T, dt)
                 batch_size = batch_size,
                 use_cuda = true,
                 )
-        return sol[end],lossmax, nothing
+        return sol[end],lossmax, missing
 end
 
 if false
