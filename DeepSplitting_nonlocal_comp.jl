@@ -12,7 +12,7 @@ function DeepSplitting_nonlocal_comp(d, T, dt)
         ####### Neural Network #######
         ##############################
         maxiters = 2000
-        batch_size = 16000
+        batch_size = 8000
         K = 10
 
         hls = d + 50 #hidden layer size

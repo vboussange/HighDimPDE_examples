@@ -10,7 +10,7 @@ using Random
 using DataFrames
 using Latexify
 using LaTeXStrings
-using CSV, JLD2
+using CSV, JLD2, ProgressMeter
 mydir = "results"
 isdir(mydir) ? nothing : mkdir(mydir)
 
@@ -26,11 +26,11 @@ include("MLP_fisherkpp_neumann.jl")
 include("MLP_rep_mut.jl")
 include("MLP_allencahn_neumann.jl")
 
-examples = [ 
+examples = [
+            :rep_mut,
             :nonlocal_comp, 
             :nonlocal_sinegordon,
             :fisherkpp_neumann,
-            :rep_mut,
             :allencahn_neumann, 
             ]
 ds = [1, 2, 5, 10]
@@ -46,6 +46,8 @@ N = 10
 # MLP
 L = 5
 
+nruns = 5 #number of runs per example
+progr = Progress(length(examples) * length(ds) * length(Ts) * nruns, showspeed = true, barlen = 10)
 for ex in examples
     # try
         names_df = [L"d", L"T", L"N", "Mean", "Std. dev.", "Ref. value", L"L^1-"*"approx. error", "Std. dev. error", "avg. runtime (s)"]
@@ -59,7 +61,11 @@ for ex in examples
                 dt = T / N
                 tspan = (0f0,T)
                 # solving         
-                for i in 1:5
+                # running for precompilation
+                eval(string("DeepSplitting_", ex) |> Symbol)(d, T, dt);
+                eval(string("MLP_", ex) |> Symbol)(d, T, L);
+                # sarting the timing
+                for i in 1:nruns
                     ##################
                     # Deep Splitting #
                     ##################
@@ -95,6 +101,7 @@ for ex in examples
                 # reference values are only returned by deep splitting function
                 ismissing(u_ds.ref_value[1]) ? ref_v = mean(u_ds.value) : ref_v = u_ds.ref_value[1]
                 push!(df_mlp, (d, T, L, mean(u_mlp.value), std(u_mlp.value), ref_v, mean(abs.((u_mlp.value .- ref_v) / ref_v)), std(abs.((u_mlp.value .- ref_v) / ref_v)), mean(u_mlp.time)))
+        next!(progr)
         end
         sort!(df_ds, L"T"); sort!(df_mlp, L"T")
         #ds

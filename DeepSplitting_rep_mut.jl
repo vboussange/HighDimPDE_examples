@@ -13,24 +13,22 @@ function DeepSplitting_rep_mut(d, T, dt)
         ####### Neural Network #######
         ##############################
         maxiters = 2000
-        batch_size = 16000
-        K = 10
+        batch_size = 8000
+        K = 1
 
         hls = d + 50 #hidden layer size
 
         # Neural network used by the scheme
-        nn_batch = Flux.Chain(Dense(d,hls,relu),
-                              Dense(hls,hls,relu),
-                              Dense(hls, 1, x->x^2)) 
+        nn_batch = Flux.Chain(Dense(d, hls, tanh),
+                                Dense(hls,hls,tanh),
+                                Dense(hls, 1, x->x^2))
 
         opt = Flux.ADAM(5e-3) #optimiser
-
-
 
         ##########################
         ###### PDE Problem #######
         ##########################
-        U = 25f-2
+        U = 5f-1
         u_domain = (fill(-U, d), fill(U, d))
         ss0 = 5f-2#std g0
 
@@ -80,50 +78,4 @@ if false
         dt = 5f-2 # time step
         T = 2f-1
         @show sol, lossmax = DeepSplitting_rep_mut(d, T, dt)
-
-        ###############################
-        ######### Plotting ############
-        ###############################
-
-        if false
-                using PyPlot
-                fig, ax = plt.subplots(1,2, sharey = true)
-                map(a -> a.clear(), ax)
-
-                xgrid1 = collect((-U:5f-3:U))
-                xgrid = [reshape(vcat(x, fill(0f0,d-1)),:,1) for x in xgrid1] 
-
-                # ax[2].plot(xgrid1, reduce(hcat,g.(xgrid))[:], label = "g(x)")
-
-                for t in collect(tspan[1]: dt : tspan[2])
-                        ys = uanal.(xgrid, t, Ref(Dict()))
-                        ax[2].plot(xgrid1, reduce(hcat,ys)[:], label = "t = $t")
-                end
-                ax[2].set_title("Analytical solution")
-                gcf()
-
-                #Deepsplitting sol
-                for i in 1:length(sol)
-                        ax[1].scatter(xgrid1, reduce(vcat,sol[i].(xgrid)), 
-                        s = .2, label = "t = $(dt * (i-1))")
-                end
-                gcf()
-
-                ax[1].set_title("DeepSplitting")
-
-                for _a in ax
-                        _a.legend()
-                end
-                gcf()
-                savefig("hamel_$(d)d.pdf")
-
-                #####
-                # other DimensionMismatch
-                #####
-                if false
-                        dx = 0.05
-                        x = u_domain[1,1]:dx:u_domain[1,2]
-                        plt.contourf(x,x,g.(repeat(x,2)))
-                end
-        end
 end

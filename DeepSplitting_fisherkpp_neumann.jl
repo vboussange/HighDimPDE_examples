@@ -12,7 +12,7 @@ function DeepSplitting_fisherkpp_neumann(d, T, dt)
         ####### Neural Network #######
         ##############################
         maxiters = 2000
-        batch_size = 16000
+        batch_size = 8000
         K = 1
 
         hls = d + 50 #hidden layer size
