@@ -47,12 +47,12 @@ N = 10
 L = 5
 
 for ex in examples
-    try
+    # try
         names_df = [L"d", L"T", L"N", "Mean", "Std. dev.", "Ref. value", L"L^1-"*"approx. error", "Std. dev. error", "avg. runtime (s)"]
         df_ds = DataFrame(); [df_ds[!,names_df[i]] = [Int64[], Int64[], Int64[], Float64[], Float64[], Float64[], Float64[], Float64[], Float64[] ][i] for i in 1:length(names_df)]
         dfu_ds = DataFrame(); [dfu_ds[!,c] = Float64[] for c in ["d","T","N","u","time_simu"]]; dfu_ds[!,"ref_value"] = []
         df_mlp = DataFrame(); [df_mlp[!,names_df[i]] = [Int64[], Int64[], Int64[], Float64[], Float64[], Float64[], Float64[], Float64[], Float64[] ][i] for i in 1:length(names_df)]
-        dfu_mlp = DataFrame(); [dfu_mlp[!,c] = Float64[] for c in ["d","T","K","u","time_simu"]]; dfu_mlp[!,"ref_value"] = []
+        dfu_mlp = DataFrame(); [dfu_mlp[!,c] = Float64[] for c in ["d","T","K","u","time_simu"]];
         for d in ds, T in Ts
                 u_ds = DataFrame("value" => Float64[], "time" => Float64[], "ref_value" => [])
                 u_mlp = DataFrame("value" => Float64[], "time" => Float64[])
@@ -107,8 +107,8 @@ for ex in examples
         io = open(mydir*"/$(String(ex))_mlp.tex", "w")
         write(io,tab_mlp);
         close(io)
-    catch e
-        println("Error with example ", String(ex))
-        println(e)
-    end
+    # catch e
+    #     println("Error with example ", String(ex))
+    #     println(e)
+    # end
 end

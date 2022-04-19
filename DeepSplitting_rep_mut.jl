@@ -23,20 +23,20 @@ function DeepSplitting_rep_mut(d, T, dt)
                               Dense(hls,hls,relu),
                               Dense(hls, 1, x->x^2)) 
 
-        opt = Flux.ADAM(1e-3) #optimiser
+        opt = Flux.ADAM(5e-3) #optimiser
 
 
 
         ##########################
         ###### PDE Problem #######
         ##########################
-        U = 5f-1
+        U = 25f-2
         u_domain = (fill(-U, d), fill(U, d))
         ss0 = 5f-2#std g0
 
         μ(X,p,t) = 0f0 # advection coefficients
         σ(X,p,t) = 1f-1 # diffusion coefficients
-        g(x) = Float32((2*π)^(-d/2)) * ss0^(- Float32(d) * 5f-1) * 
+        g(x) = Float32((2f0*π)^(-d/2f0)) * ss0^(- Float32(d) * 5f-1) * 
                 exp.(-5f-1 *sum(x .^2f0 / ss0, dims = 1)) # initial condition
         m(x) = - 5f-1 * sum(x.^2, dims=1)
         vol = prod(u_domain[2] - u_domain[1])
@@ -76,8 +76,8 @@ function DeepSplitting_rep_mut(d, T, dt)
 end
 
 if false
-        d = 10
-        dt = 1f-1 # time step
+        d = 5
+        dt = 5f-2 # time step
         T = 2f-1
         @show sol, lossmax = DeepSplitting_rep_mut(d, T, dt)
 
