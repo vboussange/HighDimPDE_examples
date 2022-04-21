@@ -1,5 +1,5 @@
 using CUDA
-CUDA.device!(1)
+# CUDA.device!(1)
 using HighDimPDE
 using Random
 using Test
@@ -19,11 +19,11 @@ function DeepSplitting_rep_mut(d, T, dt)
         hls = d + 50 #hidden layer size
 
         # Neural network used by the scheme
-        nn_batch = Flux.Chain(Dense(d, hls, tanh),
-                                Dense(hls,hls,tanh),
-                                Dense(hls, 1, x->x^2))
+        nn = Flux.Chain(Dense(d, hls, tanh),
+                        Dense(hls,hls,tanh),
+                        Dense(hls, 1, x->x^2))
 
-        opt = Flux.ADAM(5e-3) #optimiser
+        opt = Flux.ADAM() #optimiser
 
         ##########################
         ###### PDE Problem #######
@@ -42,7 +42,6 @@ function DeepSplitting_rep_mut(d, T, dt)
 
         # reference solution
         function _SS(x, t, p)
-                ss0 = 5f-2#std g0
                 d = length(x)
                 MM = σ(x, p, t) * ones(d)
                 SSt = MM .* ((MM .* sinh.(MM *t) .+ ss0 .* 
@@ -57,7 +56,7 @@ function DeepSplitting_rep_mut(d, T, dt)
         end
 
         # defining the problem
-        alg = DeepSplitting(nn_batch, K=K, opt = opt, 
+        alg = DeepSplitting(nn, K=K, opt = opt, λs = [1e-2,1e-3],
                 mc_sample = UniformSampling(u_domain[1], u_domain[2]) )
         prob = PIDEProblem(g, f, μ, σ, tspan, u_domain = u_domain)
         # solving
@@ -65,7 +64,7 @@ function DeepSplitting_rep_mut(d, T, dt)
                 alg, 
                 dt, 
                 verbose = true, 
-                abstol=3f-6,
+                abstol=1f-99,
                 maxiters = maxiters,
                 batch_size = batch_size,
                 use_cuda = true,
@@ -73,7 +72,7 @@ function DeepSplitting_rep_mut(d, T, dt)
         return sol[end](zeros(d))[], lossmax, rep_mut_anal(zeros(d), T, Dict())
 end
 
-if true
+if false
         d = 10
         dt = 1f-5 # time step
         T = 1f-5

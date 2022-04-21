@@ -37,7 +37,7 @@ if simu
 
         nn_batch = Flux.Chain(Dense(d, hls, tanh),
                                 Dense(hls,hls,tanh),
-                                Dense(hls, 1, x->x^2)) # Neural network used by the scheme, with batch normalisation
+                                Dense(hls, 1, x->x^2)) # Neural network used by the scheme
 
         opt = Flux.ADAM(5e-3)#optimiser
         alg = DeepSplitting(nn_batch, K=K, opt = opt, mc_sample = UniformSampling(u_domain[1],u_domain[2]) )

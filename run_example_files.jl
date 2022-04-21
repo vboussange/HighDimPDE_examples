@@ -17,7 +17,7 @@ isdir(mydir) ? nothing : mkdir(mydir)
 include("DeepSplitting_nonlocal_comp.jl")
 include("DeepSplitting_nonlocal_sinegordon.jl")
 include("DeepSplitting_fisherkpp_neumann.jl")
-# include("DeepSplitting_rep_mut.jl")
+include("DeepSplitting_rep_mut.jl")
 include("DeepSplitting_allencahn_neumann.jl")
 
 include("MLP_nonlocal_comp.jl")
@@ -27,7 +27,7 @@ include("MLP_rep_mut.jl")
 include("MLP_allencahn_neumann.jl")
 
 examples = [
-            # :rep_mut,
+            :rep_mut,
             :nonlocal_comp, 
             :nonlocal_sinegordon,
             :fisherkpp_neumann,

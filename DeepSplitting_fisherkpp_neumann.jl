@@ -1,5 +1,5 @@
 using CUDA
-CUDA.device!(6)
+# CUDA.device!(6)
 using HighDimPDE
 using Random
 using Test
@@ -18,7 +18,7 @@ function DeepSplitting_fisherkpp_neumann(d, T, dt)
         hls = d + 50 #hidden layer size
 
         # Neural network used by the scheme
-        nn_batch = Flux.Chain(Dense(d,hls,tanh),
+        nn = Flux.Chain(Dense(d,hls,tanh),
                                 Dense(hls,hls,tanh),
                                 Dense(hls, 1, x->x^2)) 
 
@@ -35,7 +35,7 @@ function DeepSplitting_fisherkpp_neumann(d, T, dt)
         f(y,z,v_y,v_z,∇v_y,∇v_z, p, t) = max.(0f0, v_y) .* ( 1f0 .- max.(0f0,v_y) ) 
 
         # defining the problem
-        alg = DeepSplitting(nn_batch, K=K, opt = opt)
+        alg = DeepSplitting(nn, K=K, opt = opt)
         prob = PIDEProblem(g, f, μ, σ, tspan, neumann = u_domain, x = x0)
 
         # solving
@@ -43,7 +43,7 @@ function DeepSplitting_fisherkpp_neumann(d, T, dt)
                         alg, 
                         dt, 
                         verbose = true, 
-                        abstol=1f-7,
+                        abstol=1f-99,
                         maxiters = maxiters,
                         batch_size = batch_size,
                         use_cuda = true,
