@@ -1,5 +1,5 @@
 using CUDA
-CUDA.device!(6)
+CUDA.device!(1)
 using HighDimPDE
 using Random
 using Test
@@ -12,9 +12,9 @@ function DeepSplitting_rep_mut(d, T, dt)
         ##############################
         ####### Neural Network #######
         ##############################
-        maxiters = 2000
+        maxiters = 4000
         batch_size = 8000
-        K = 1
+        K = 10
 
         hls = d + 50 #hidden layer size
 
@@ -73,9 +73,10 @@ function DeepSplitting_rep_mut(d, T, dt)
         return sol[end](zeros(d))[], lossmax, rep_mut_anal(zeros(d), T, Dict())
 end
 
-if false
-        d = 5
-        dt = 5f-2 # time step
-        T = 2f-1
-        @show sol, lossmax = DeepSplitting_rep_mut(d, T, dt)
+if true
+        d = 10
+        dt = 1f-5 # time step
+        T = 1f-5
+        sol, lossmax, truesol = DeepSplitting_rep_mut(d, T, dt)
+        println("True solution: $truesol, Deep splitting approximation = $(sol)")
 end

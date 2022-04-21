@@ -1,5 +1,5 @@
 using CUDA
-CUDA.device!(6)
+CUDA.device!(2)
 using HighDimPDE
 using Random
 using Test
@@ -11,8 +11,8 @@ function DeepSplitting_allencahn_neumann(d, T, dt)
         ##############################
         ####### Neural Network #######
         ##############################
-        maxiters = 4000
-        batch_size = 16000
+        maxiters = 2000
+        batch_size = 8000
         K = 10
 
         hls = d + 50 #hidden layer size
@@ -42,15 +42,15 @@ function DeepSplitting_allencahn_neumann(d, T, dt)
 
         # solving
         xs,ts,sol,lossmax = solve(prob, 
-                alg, 
-                dt, 
-                verbose = true, 
-                abstol=1f-6,
-                maxiters = maxiters,
-                batch_size = batch_size,
-                use_cuda = true,
-                )
-                return sol[end](zeros(d))[], lossmax, missing
+                                alg, 
+                                dt, 
+                                verbose = true, 
+                                abstol=1f-6,
+                                maxiters = maxiters,
+                                batch_size = batch_size,
+                                use_cuda = true,
+                                )
+        return sol[end](zeros(d))[], lossmax, missing
 end
 
 if false
