@@ -1,6 +1,6 @@
 cd(@__DIR__)
 using CUDA
-# CUDA.device!(6)
+CUDA.device!(1)
 using Statistics
 using HighDimPDE
 using Flux
@@ -11,13 +11,13 @@ using DataFrames
 using Latexify
 using LaTeXStrings
 using CSV, JLD2, ProgressMeter
-mydir = "results"
+mydir = "results-21-04-2022"
 isdir(mydir) ? nothing : mkdir(mydir)
 
 include("DeepSplitting_nonlocal_comp.jl")
 include("DeepSplitting_nonlocal_sinegordon.jl")
 include("DeepSplitting_fisherkpp_neumann.jl")
-include("DeepSplitting_rep_mut.jl")
+# include("DeepSplitting_rep_mut.jl")
 include("DeepSplitting_allencahn_neumann.jl")
 
 include("MLP_nonlocal_comp.jl")
@@ -27,7 +27,7 @@ include("MLP_rep_mut.jl")
 include("MLP_allencahn_neumann.jl")
 
 examples = [
-            :rep_mut,
+            # :rep_mut,
             :nonlocal_comp, 
             :nonlocal_sinegordon,
             :fisherkpp_neumann,
@@ -48,6 +48,7 @@ L = 5
 
 nruns = 5 #number of runs per example
 progr = Progress(length(examples) * length(ds) * length(Ts) * nruns, showspeed = true, barlen = 10)
+println("Experiment started.")
 for ex in examples
     # try
         names_df = [L"d", L"T", L"N", "Mean", "Std. dev.", "Ref. value", L"L^1-"*"approx. error", "Std. dev. error", "avg. runtime (s)"]
@@ -62,8 +63,8 @@ for ex in examples
                 tspan = (0f0,T)
                 # solving         
                 # running for precompilation
-                eval(string("DeepSplitting_", ex) |> Symbol)(d, T, dt);
-                eval(string("MLP_", ex) |> Symbol)(d, T, L);
+                eval(string("DeepSplitting_", ex) |> Symbol)(d, 1f-5, 1f-5);
+                eval(string("MLP_", ex) |> Symbol)(d, 1f-5, L);
                 # sarting the timing
                 for i in 1:nruns
                     ##################
@@ -74,11 +75,15 @@ for ex in examples
                     println("DeepSplitting")
                     sol_ds = @timed eval(string("DeepSplitting_", ex) |> Symbol)(d, T, dt)
                     lossmax = sol_ds.value[2]
-                    iter = 1
-                    while (lossmax > 2e-4) && iter < 10 #this is to make sure that the approximation at the first step has converged
-                        sol_ds = @timed eval(string("DeepSplitting_", ex) |> Symbol)(d, T, dt)
-                        lossmax = sol_ds.value[2]
-                        iter += 1
+                    # this is to make sure that the approximation at the first step has converged
+                    # used for allen cahn.
+                    if ex == :allencahn_neumann 
+                        iter = 1 
+                        while (lossmax > 2e-4) && iter < 10 
+                            sol_ds = @timed eval(string("DeepSplitting_", ex) |> Symbol)(d, T, dt)
+                            lossmax = sol_ds.value[2]
+                            iter += 1
+                        end
                     end
                     @show sol_ds.value[1]
                     push!(u_ds,[sol_ds.value[1],sol_ds.time,sol_ds.value[3]])
@@ -95,13 +100,15 @@ for ex in examples
                     push!(dfu_mlp,(d, T, N, u_mlp[end,:]...))
                     CSV.write(mydir*"/$(String(ex))_mlp.csv", dfu_mlp)
                     JLD2.save(mydir*"/$(String(ex))_mlp.jld2", Dict("dfu_mlp" => dfu_mlp))
+
+                    # logging
+                    next!(progr)
                 end
                 ismissing(u_ds.ref_value[1]) ? ref_v = mean(u_mlp.value) : ref_v = u_ds.ref_value[1]
                 push!(df_ds, (d, T, N, mean(u_ds.value), std(u_ds.value), ref_v, mean(abs.((u_ds.value .- ref_v) / ref_v)), std(abs.((u_ds.value .- ref_v) / ref_v)), mean(u_ds.time)))
                 # reference values are only returned by deep splitting function
                 ismissing(u_ds.ref_value[1]) ? ref_v = mean(u_ds.value) : ref_v = u_ds.ref_value[1]
                 push!(df_mlp, (d, T, L, mean(u_mlp.value), std(u_mlp.value), ref_v, mean(abs.((u_mlp.value .- ref_v) / ref_v)), std(abs.((u_mlp.value .- ref_v) / ref_v)), mean(u_mlp.time)))
-        next!(progr)
         end
         sort!(df_ds, L"T"); sort!(df_mlp, L"T")
         #ds
@@ -119,3 +126,4 @@ for ex in examples
     #     println(e)
     # end
 end
+println("All results saved in $mydir")
