@@ -13,7 +13,7 @@ function DeepSplitting_rep_mut(d, T, dt)
         ####### Neural Network #######
         ##############################
         maxiters = 4000
-        batch_size = 8000
+        batch_size = 16000
         K = 10
 
         hls = d + 50 #hidden layer size
@@ -56,7 +56,7 @@ function DeepSplitting_rep_mut(d, T, dt)
         end
 
         # defining the problem
-        alg = DeepSplitting(nn, K=K, opt = opt, λs = [1e-2,1e-3],
+        alg = DeepSplitting(nn, K=K, opt = opt, λs = [5e-3,1e-3],
                 mc_sample = UniformSampling(u_domain[1], u_domain[2]) )
         prob = PIDEProblem(g, f, μ, σ, tspan, u_domain = u_domain)
         # solving

@@ -21,7 +21,7 @@ tspan = (0f0,1f-6)
 dt = 1f-6 # time step
 μ(X,p,t) = 0f0 # advection coefficients
 σ(X,p,t) = 1f-1 # diffusion coefficients
-d = 5
+d = 10
 ss0 = 5f-2#std g0
 U = 5f-1
 u_domain = (fill(-U, d), fill(U, d))
@@ -29,7 +29,7 @@ u_domain = (fill(-U, d), fill(U, d))
 ##############################
 ####### Neural Network #######
 ##############################
-batch_size = 8000
+batch_size = 16000
 train_steps = 4000
 K = 10
 
@@ -37,22 +37,23 @@ hls = d + 50 #hidden layer size
 
 const sf = Float32((2*π*ss0)^(-d/2))
 nn = Flux.Chain(Dense(d, hls, tanh),
-                        Dense(hls, hls, tanh),
-                        Dense(hls, 1, x -> x^2)) # Neural network used by the scheme
+                # Dense(hls, hls, tanh),
+                Dense(hls, hls, tanh),
+                Dense(hls, 1, x -> x^2)) # Neural network used by the scheme
 nn_batch = Flux.Chain(Dense(d, hls),
                         BatchNorm(hls, tanh),
                         Dense(hls,hls),
                         BatchNorm(hls, tanh),
                         Dense(hls, 1, x -> x^2))
 opt = ADAM()
-alg = DeepSplitting(nn, K=K, opt = opt, λs = [1e-2,1e-3], mc_sample = UniformSampling(u_domain[1],u_domain[2]) )
+alg = DeepSplitting(nn, K=K, opt = opt, λs = [5e-3, 1e-3], mc_sample = UniformSampling(u_domain[1],u_domain[2]) )
 
 ##########################
 ###### PDE Problem #######
 ##########################
 g(x) = sf * exp.(-5f-1 *sum(x .^2f0 / ss0, dims = 1)) # initial condition
 m(x) = - 5f-1 * sum(x.^2, dims=1)
-vol = prod(u_domain[2] - u_domain[1])
+const vol = prod(u_domain[2] - u_domain[1])
 f(y, z, v_y, v_z, ∇v_y, ∇v_z, p, t) =  v_y .* (m(y) .- vol * v_z .* m(z)) # nonlocal nonlinear part of the
 
 # defining the problem

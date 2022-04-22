@@ -1,6 +1,12 @@
+#= 
+run examples and save statistics as latex files.
+
+* Version
+- 2 : similar to 1, but we use it to launch examples in parallel
+=#
 cd(@__DIR__)
 using CUDA
-CUDA.device!(4)
+CUDA.device!(3)
 using Statistics
 using HighDimPDE
 using Flux
@@ -27,11 +33,11 @@ include("MLP_rep_mut.jl")
 include("MLP_allencahn_neumann.jl")
 
 examples = [
-            :rep_mut,
-            # :nonlocal_comp, 
-            # :nonlocal_sinegordon,
-            # :fisherkpp_neumann,
-            :allencahn_neumann, 
+            # :rep_mut,
+            :nonlocal_comp, 
+            :nonlocal_sinegordon,
+            :fisherkpp_neumann,
+            # :allencahn_neumann, 
             ]
 ds = [1, 2, 5, 10]
 Ts = [1/5, 1/2, 1]
