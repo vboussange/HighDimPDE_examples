@@ -7,7 +7,7 @@ import Flux
 import Flux.tanh, Flux.relu, Flux.Dense
 using Revise
 
-function DeepSplitting_rep_mut(d, T, dt)
+function DeepSplitting_rep_mut(d, T, dt, cuda_device)
         tspan = (0f0,T)
         ##############################
         ####### Neural Network #######
@@ -68,6 +68,7 @@ function DeepSplitting_rep_mut(d, T, dt)
                 maxiters = maxiters,
                 batch_size = batch_size,
                 use_cuda = true,
+                cuda_device = cuda_device
                 )
         return sol[end](zeros(d))[], lossmax, rep_mut_anal(zeros(d), T, Dict())
 end

@@ -6,7 +6,7 @@ using Test
 using Flux
 using Revise
 
-function DeepSplitting_nonlocal_comp(d, T, dt)
+function DeepSplitting_nonlocal_comp(d, T, dt, cuda_device)
         tspan = (0f0,T)
         ##############################
         ####### Neural Network #######
@@ -51,6 +51,7 @@ function DeepSplitting_nonlocal_comp(d, T, dt)
                         maxiters = maxiters,
                         batch_size = batch_size,
                         use_cuda = true,
+                        cuda_device = cuda_device
                         )
         return sol[end],lossmax, missing
 end

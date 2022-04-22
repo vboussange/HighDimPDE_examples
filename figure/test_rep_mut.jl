@@ -7,7 +7,6 @@ test file to find the right neural network architecture for rep mu
 cd(@__DIR__)
 using HighDimPDE
 using CUDA
-CUDA.device!(2)
 using Random
 using Test
 using Flux
@@ -68,7 +67,8 @@ prob = PIDEProblem(g, f, μ, σ, tspan,
                 # abstol = 1f0,
                 maxiters = train_steps,
                 batch_size = batch_size,
-                use_cuda = true
+                use_cuda = true,
+                cuda_device = 0
                 )
 
 ###############################
