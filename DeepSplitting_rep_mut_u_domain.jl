@@ -13,8 +13,8 @@ function DeepSplitting_rep_mut(d, T, dt, cuda_device)
         ####### Neural Network #######
         ##############################
         maxiters = 4000
-        batch_size = 800
-        K = 100
+        batch_size = 8000
+        K = 1
 
         hls = d + 50 #hidden layer size
 
@@ -23,22 +23,22 @@ function DeepSplitting_rep_mut(d, T, dt, cuda_device)
                         Dense(hls,hls,tanh),
                         Dense(hls, 1, x->x^2))
 
-        opt = Flux.ADAM(1e-3) #optimiser
+        opt = Flux.ADAM() #optimiser
 
         ##########################
         ###### PDE Problem #######
         ##########################
-        σ_sampling = 1f0
-        x0 = fill(0f0,d) .+ eps()# initial point
+        U = 5f-1
+        u_domain = (fill(-U, d), fill(U, d))
         ss0 = 5f-2#std g0
 
         μ(X,p,t) = 0f0 # advection coefficients
         σ(X,p,t) = 1f-1 # diffusion coefficients
         g(x) = Float32((2f0*π)^(-d/2f0)) * ss0^(- Float32(d) * 5f-1) * 
-                exp.(-5f-1 *sum(x .^2 / ss0, dims = 1)) # initial condition
+                exp.(-5f-1 *sum(x .^2f0 / ss0, dims = 1)) # initial condition
         m(x) = - 5f-1 * sum(x.^2, dims=1)
-        int_scale = Float32((2 * π )^(d/2) * σ_sampling^d)
-        f(y, z, v_y, v_z, p, t) =  v_y .* (m(y) .- int_scale * v_z .* m(z))
+        vol = prod(u_domain[2] - u_domain[1])
+        f(y, z, v_y, v_z, p, t) =  v_y .* (m(y) .- vol * v_z .* m(z))
 
         # reference solution
         function _SS(x, t, p)
@@ -56,9 +56,9 @@ function DeepSplitting_rep_mut(d, T, dt, cuda_device)
         end
 
         # defining the problem
-        alg = DeepSplitting(nn, K=K, opt = opt,
-                mc_sample = NormalSampling(σ_sampling, false))
-        prob = PIDEProblem(g, f, μ, σ, tspan, x=x0)
+        alg = DeepSplitting(nn, K=K, opt = opt, λs = [5e-3,1e-3],
+                mc_sample = UniformSampling(u_domain[1], u_domain[2]) )
+        prob = PIDEProblem(g, f, μ, σ, tspan, u_domain = u_domain)
         # solving
         xs,ts,sol,lossmax = solve(prob, 
                 alg, 
@@ -70,13 +70,13 @@ function DeepSplitting_rep_mut(d, T, dt, cuda_device)
                 use_cuda = true,
                 cuda_device = cuda_device
                 )
-        return sol[end], lossmax, rep_mut_anal(zeros(d), T, Dict())
+        return sol[end](zeros(d))[], lossmax, rep_mut_anal(zeros(d), T, Dict())
 end
 
-if true
+if false
         d = 10
-        dt = 1f-1 # time step
-        T = 1f-1
-        sol, lossmax, truesol = DeepSplitting_rep_mut(d, T, dt, 1)
+        dt = 1f-5 # time step
+        T = 1f-5
+        sol, lossmax, truesol = DeepSplitting_rep_mut(d, T, dt)
         println("True solution: $truesol, Deep splitting approximation = $(sol)")
 end

@@ -13,7 +13,7 @@ function DeepSplitting_nonlocal_sinegordon(d, T, dt, cuda_device)
         ##############################
         maxiters = 2000
         batch_size = 8000
-        K = 10
+        K = 1
 
         hls = d + 50 #hidden layer size
 

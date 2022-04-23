@@ -14,10 +14,10 @@ for d in [1,2,5,10]
     # const sf = Float32((2*π*ss0)^(-d/2))
     # g(x) = sf * exp.(-5f-1 *sum(x .^2f0 / ss0, dims = 1)) # function to be approximated
 
-    hls = d+5 #hidden layer size
+    hls = d+50 #hidden layer size
     nn = Flux.Chain(Dense(d, hls, tanh),
                     Dense(hls, hls, tanh),
-                    Dense(hls, hls, tanh),
+                    # Dense(hls, hls, tanh),
                     Dense(hls, 1)) |> gpu # Neural network
 
     function loss(x)

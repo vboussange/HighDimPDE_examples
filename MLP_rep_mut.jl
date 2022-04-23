@@ -21,7 +21,7 @@ function MLP_rep_mut(d, T, L)
                 exp.(-5e-1 *sum(x .^2e0 / ss0)) # initial condition
         m(x) = - 5e-1 * sum(x.^2)
         vol = prod(u_domain[2] - u_domain[1])
-        f(y, z, v_y, v_z, ∇v_y, ∇v_z, p, t) = max(0.0, v_y) * 
+        f(y, z, v_y, v_z, p, t) = max(0.0, v_y) * 
                 (m(y) -  vol * max(0.0, v_z) * m(z))
 
         # defining the problem

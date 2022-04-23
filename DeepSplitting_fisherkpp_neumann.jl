@@ -19,8 +19,8 @@ function DeepSplitting_fisherkpp_neumann(d, T, dt, cuda_device)
 
         # Neural network used by the scheme
         nn = Flux.Chain(Dense(d,hls,tanh),
-                                Dense(hls,hls,tanh),
-                                Dense(hls, 1, x->x^2)) 
+                        Dense(hls,hls,tanh),
+                        Dense(hls, 1, x->x^2)) 
 
         opt = Flux.ADAM(1e-2) #optimiser
 
