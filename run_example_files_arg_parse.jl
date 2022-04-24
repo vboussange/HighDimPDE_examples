@@ -18,7 +18,7 @@ using DataFrames
 using Latexify
 using LaTeXStrings
 using CSV, JLD2, ProgressMeter
-mydir = "results-22-04-2022"
+mydir = "results-24-04-2022"
 isdir(mydir) ? nothing : mkdir(mydir)
 
 include("DeepSplitting_nonlocal_comp.jl")
