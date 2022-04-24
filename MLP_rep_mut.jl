@@ -13,34 +13,31 @@ function MLP_rep_mut(d, T, L)
         ##########################
         ss0 = 5e-2#std g0
         U = 5e-1
-        u_domain = (fill(-U, d), fill(U, d))
+        mc_sample_∂ = (fill(-U, d), fill(U, d))
         x0 = fill(0e0,d) # initial point
         μ(X,p,t) = 0e0 # advection coefficients
         σ(X,p,t) = 1e-1 # diffusion coefficients
         g(x) = (2*π)^(-d/2) * ss0^(- d * 5e-1) * 
                 exp.(-5e-1 *sum(x .^2e0 / ss0)) # initial condition
         m(x) = - 5e-1 * sum(x.^2)
-        vol = prod(u_domain[2] - u_domain[1])
+        vol = prod(mc_sample_∂[2] - mc_sample_∂[1])
         f(y, z, v_y, v_z, p, t) = max(0.0, v_y) * 
                 (m(y) -  vol * max(0.0, v_z) * m(z))
 
         # defining the problem
-        alg = MLP(M = L, K = 10, L = L, mc_sample = UniformSampling(u_domain...))
-        prob = PIDEProblem(g, f, μ, σ, tspan, x = x0)
+        alg = MLP(M = L, K = 10, L = L, mc_sample = UniformSampling(mc_sample_∂...))
+        prob = PIDEProblem(g, f, μ, σ, x0, tspan)
 
         # solving
-        xs,ts,sol = solve(prob, 
-                        alg, 
-                        multithreading=true
-                        )
-        return sol[end]
+        sol = solve(prob, alg, multithreading=true )
+        return sol.us[end]
 end
 
 if false
         d = 5
         T = 5e-1
         L = 4
-        @show MLP_rep_mut(d, T, dt, L)
+        @show MLP_rep_mut(d, T, L)
         
         
         # Analytic sol

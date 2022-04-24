@@ -12,9 +12,9 @@ function DeepSplitting_rep_mut(d, T, dt, cuda_device)
         ##############################
         ####### Neural Network #######
         ##############################
-        maxiters = 4000
-        batch_size = 800
-        K = 100
+        maxiters = 1000
+        batch_size = 8000
+        K = 5
 
         hls = d + 50 #hidden layer size
 
@@ -23,13 +23,13 @@ function DeepSplitting_rep_mut(d, T, dt, cuda_device)
                         Dense(hls,hls,tanh),
                         Dense(hls, 1, x->x^2))
 
-        opt = Flux.ADAM(1e-3) #optimiser
+        opt = Flux.ADAM(1e-2) #optimiser
 
         ##########################
         ###### PDE Problem #######
         ##########################
-        σ_sampling = 1f0
-        x0 = fill(0f0,d) .+ eps()# initial point
+        σ_sampling = 2f-1
+        x0 = fill(0f0,d) # initial point
         ss0 = 5f-2#std g0
 
         μ(X,p,t) = 0f0 # advection coefficients
@@ -58,9 +58,10 @@ function DeepSplitting_rep_mut(d, T, dt, cuda_device)
         # defining the problem
         alg = DeepSplitting(nn, K=K, opt = opt,
                 mc_sample = NormalSampling(σ_sampling, false))
-        prob = PIDEProblem(g, f, μ, σ, tspan, x=x0)
+        prob = PIDEProblem(g, f, μ, σ,  x0, tspan,
+                        x0_sample = NoSampling())
         # solving
-        xs,ts,sol,lossmax = solve(prob, 
+        sol = solve(prob, 
                 alg, 
                 dt, 
                 verbose = true, 
@@ -70,13 +71,14 @@ function DeepSplitting_rep_mut(d, T, dt, cuda_device)
                 use_cuda = true,
                 cuda_device = cuda_device
                 )
-        return sol[end], lossmax, rep_mut_anal(zeros(d), T, Dict())
+        lossmax = maximum(maximum.(sol.losses[2:end]))
+        return sol.us[end], lossmax, rep_mut_anal(zeros(d), T, Dict())
 end
 
-if true
+if false
         d = 10
         dt = 1f-1 # time step
-        T = 1f-1
+        T = 2f-1
         sol, lossmax, truesol = DeepSplitting_rep_mut(d, T, dt, 1)
         println("True solution: $truesol, Deep splitting approximation = $(sol)")
 end

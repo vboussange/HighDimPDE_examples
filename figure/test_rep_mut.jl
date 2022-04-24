@@ -23,7 +23,7 @@ dt = 1f-6 # time step
 d = 10
 ss0 = 5f-2#std g0
 U = 5f-1
-u_domain = (fill(-U, d), fill(U, d))
+x0_sample = (fill(-U, d), fill(U, d))
 
 ##############################
 ####### Neural Network #######
@@ -45,19 +45,19 @@ nn_batch = Flux.Chain(Dense(d, hls),
                         BatchNorm(hls, tanh),
                         Dense(hls, 1, x -> x^2))
 opt = ADAM()
-alg = DeepSplitting(nn, K=K, opt = opt, λs = [5e-3, 1e-3], mc_sample = UniformSampling(u_domain[1],u_domain[2]) )
+alg = DeepSplitting(nn, K=K, opt = opt, λs = [5e-3, 1e-3], mc_sample = UniformSampling(x0_sample[1],x0_sample[2]) )
 
 ##########################
 ###### PDE Problem #######
 ##########################
 g(x) = sf * exp.(-5f-1 *sum(x .^2f0 / ss0, dims = 1)) # initial condition
 m(x) = - 5f-1 * sum(x.^2, dims=1)
-const vol = prod(u_domain[2] - u_domain[1])
+const vol = prod(x0_sample[2] - x0_sample[1])
 f(y, z, v_y, v_z, p, t) =  v_y .* (m(y) .- vol * v_z .* m(z)) # nonlocal nonlinear part of the
 
 # defining the problem
 prob = PIDEProblem(g, f, μ, σ, tspan, 
-                u_domain = u_domain
+                x0_sample = x0_sample
                 )
 # solving
 @time xgrid,ts,sol = solve(prob, 

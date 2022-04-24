@@ -11,9 +11,9 @@ function DeepSplitting_nonlocal_sinegordon(d, T, dt, cuda_device)
         ##############################
         ####### Neural Network #######
         ##############################
-        maxiters = 2000
+        maxiters = 500
         batch_size = 8000
-        K = 1
+        K = 5
 
         hls = d + 50 #hidden layer size
 
@@ -32,16 +32,16 @@ function DeepSplitting_nonlocal_sinegordon(d, T, dt, cuda_device)
         μ(X,p,t) = 0f0 # advection coefficients
         σ(X,p,t) = 1f-1 # diffusion coefficients
         g(x) = exp.(-0.25f0 * sum(x.^2, dims = 1)) #initial condition
-        f(y,z,v_y,v_z,∇v_y,∇v_z, p, t) = sin.(v_y) .- v_z * 
-                Float32(π^(d/2) * σ_sampling^d)
+        f(y, z, v_y, v_z, p, t) = sin.(v_y) .- v_z * 
+                Float32(2*π^(d/2) * σ_sampling^d)
 
         # defining the problem
         alg = DeepSplitting(nn, K=K, opt = opt, 
                 mc_sample = NormalSampling(σ_sampling, true))
-        prob = PIDEProblem(g, f, μ, σ, tspan, x = x0)
+        prob = PIDEProblem(g, f, μ, σ, x0, tspan)
 
         # solving
-        xs,ts,sol,lossmax = solve(prob, 
+        sol = solve(prob, 
                 alg, 
                 dt, 
                 verbose = true, 
@@ -51,12 +51,13 @@ function DeepSplitting_nonlocal_sinegordon(d, T, dt, cuda_device)
                 use_cuda = true,
                 cuda_device = cuda_device
                 )
-        return sol[end],lossmax, missing
+        lossmax = maximum(maximum.(sol.losses[2:end]))
+        return sol.us[end],lossmax, missing
 end
 
 if false
-        d = 5
+        d = 10
         dt = 1f-1 # time step
         T = 3f-1
-        @show DeepSplitting_nonlocal_sinegordon(d, T, dt)
+        @show DeepSplitting_nonlocal_sinegordon(d, T, dt, 1)
 end

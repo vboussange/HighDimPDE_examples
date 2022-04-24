@@ -9,24 +9,21 @@ function MLP_allencahn_neumann(d, T, L)
         ##########################
         ###### PDE Problem #######
         ##########################
-        neumann = (fill(-5f-1, d), fill(5f-1, d))
+        neumann_bc = [fill(-5e-1, d), fill(5e-1, d)]
         x0 = fill(0e0,d) # initial point
         g_mlp(X) = exp.(-0.25e0 * sum(X.^2))   # initial condition
         a(u) = u - u^3
-        f_mlp(y, z, v_y, v_z, ∇v_y ,∇v_z, p, t) = a.(max.(0f0, v_y)) .- a.(max.(0f0, v_z))
+        f_mlp(y, z, v_y, v_z, p, t) = a.(max.(0f0, v_y)) .- a.(max.(0f0, v_z))
         μ_mlp(X,p,t) = 0.0e0 # advection coefficients
         σ_mlp(X,p,t) = 1e-1 # diffusion coefficients
-        mc_sample = UniformSampling(neumann...) # uniform distrib in u_domain
+        mc_sample = UniformSampling(neumann_bc...) # uniform distrib in x0_sample
         # defining the problem
-        prob = PIDEProblem(g_mlp, f_mlp, μ_mlp, σ_mlp, tspan, x = x0, 
-                neumann = neumann)
+        prob = PIDEProblem(g_mlp, f_mlp, μ_mlp, σ_mlp, x0, tspan,
+                           neumann_bc = neumann_bc)
         alg = MLP(M = L, K = 10, L = L, mc_sample = mc_sample )
         # solving
-        xs,ts,sol = solve(prob, 
-                alg, 
-                multithreading=true
-                )
-        return sol[end]
+        sol = solve(prob, alg, multithreading=true)
+        return sol.us[end]
 end
 
 if false

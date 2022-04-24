@@ -11,9 +11,9 @@ function DeepSplitting_nonlocal_comp(d, T, dt, cuda_device)
         ##############################
         ####### Neural Network #######
         ##############################
-        maxiters = 2000
+        maxiters = 500
         batch_size = 8000
-        K = 1
+        K = 5
 
         hls = d + 50 #hidden layer size
 
@@ -33,32 +33,31 @@ function DeepSplitting_nonlocal_comp(d, T, dt, cuda_device)
         σ(X,p,t) = 1f-1 # diffusion coefficients
         g(x) = exp.(-0.25f0 * sum(x.^2, dims = 1))   # initial condition
 
-        f(y, z, v_y, v_z, ∇v_y ,∇v_z, p, t) =  max.(0f0, v_y) .* 
+        f(y, z, v_y, v_z, p, t) =  max.(0f0, v_y) .* 
                 (1f0 .- max.(0f0, v_z) * Float32((2 * π )^(d/2) * σ_sampling^d))
 
         # defining the problem
         alg = DeepSplitting(nn, K=K, opt = opt, 
                 mc_sample = NormalSampling(σ_sampling, true))
-        prob = PIDEProblem(g, f, μ, σ, tspan, 
-                        # u_domain = u_domain,
-                        x = x0)
+        prob = PIDEProblem(g, f, μ, σ, x0, tspan)
         # solving
-        xs,ts,sol,lossmax = solve(prob, 
-                        alg, 
-                        dt, 
-                        verbose = true, 
-                        abstol=1f-99,
-                        maxiters = maxiters,
-                        batch_size = batch_size,
-                        use_cuda = true,
-                        cuda_device = cuda_device
-                        )
-        return sol[end],lossmax, missing
+        sol = solve(prob, 
+                alg, 
+                dt, 
+                verbose = true, 
+                abstol=1f-99,
+                maxiters = maxiters,
+                batch_size = batch_size,
+                use_cuda = true,
+                cuda_device = cuda_device
+                )
+        lossmax = maximum(maximum.(sol.losses[2:end]))
+        return sol.us[end],lossmax, missing
 end
 
 if false
-        d = 5
+        d = 10
         dt = 1f-1 # time step
         T = 2f-1
-        @show DeepSplitting_nonlocal_comp(d, T, dt)
+        @show DeepSplitting_nonlocal_comp(d, T, dt, 1)
 end
