@@ -11,7 +11,7 @@ function DeepSplitting_allencahn_neumann(d, T, dt, cuda_device)
         ##############################
         ####### Neural Network #######
         ##############################
-        maxiters = 1000
+        maxiters = 500
         batch_size = 8000
         K = 5
 
@@ -20,9 +20,10 @@ function DeepSplitting_allencahn_neumann(d, T, dt, cuda_device)
         # Neural network used by the scheme
         nn = Flux.Chain(Dense(d,hls,relu),
                         Dense(hls,hls,relu),
-                        Dense(hls, 1, x->x^2)) 
+                        # Dense(hls,hls,relu),
+                        Dense(hls, 1)) 
 
-        opt = Flux.ADAM(5e-3) #optimiser
+        opt = Flux.ADAM(1e-2) #optimiser
 
         ##########################
         ###### PDE Problem #######
@@ -57,8 +58,8 @@ function DeepSplitting_allencahn_neumann(d, T, dt, cuda_device)
 end
 
 if false
-        d = 10
+        d = 1
         dt = 1f-1 # time step
         T = 2f-1
-        @show DeepSplitting_allencahn_neumann(d, T, dt, 1)
+        @show DeepSplitting_allencahn_neumann(d, T, dt, 6)
 end
