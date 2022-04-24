@@ -62,8 +62,8 @@ println("Experiment started.")
             tspan = (0f0,T)
             # solving         
             # running for precompilation
-            eval(string("DeepSplitting_", example) |> Symbol)(d, 1f-5, 1f-5, cuda_device);
-            eval(string("MLP_", example) |> Symbol)(d, 1f-5, L);
+            eval(string("DeepSplitting_", example) |> Symbol)(d, T, dt, cuda_device);
+            eval(string("MLP_", example) |> Symbol)(d, T, L);
             # sarting the timing
             for i in 1:nruns
                 ##################
@@ -76,14 +76,14 @@ println("Experiment started.")
                 lossmax = sol_ds.value[2]
                 # this is to make sure that the approximation at the first step has converged
                 # used for allen cahn.
-                if example == :allencahn_neumann 
-                    iter = 1 
-                    while (lossmax > 2e-4) && iter < 10 
-                        sol_ds = @timed eval(string("DeepSplitting_", example) |> Symbol)(d, T, dt, cuda_device)
-                        lossmax = sol_ds.value[2]
-                        iter += 1
-                    end
-                end
+                # if example == :allencahn_neumann 
+                #     iter = 1 
+                #     while (lossmax > 2e-4) && iter < 10 
+                #         sol_ds = @timed eval(string("DeepSplitting_", example) |> Symbol)(d, T, dt, cuda_device)
+                #         lossmax = sol_ds.value[2]
+                #         iter += 1
+                #     end
+                # end
                 @show sol_ds.value[1]
                 push!(u_ds,[sol_ds.value[1],sol_ds.time,sol_ds.value[3]])
                 push!(dfu_ds,(d, T, N, u_ds[end,:]...))
