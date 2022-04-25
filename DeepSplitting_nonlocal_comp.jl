@@ -32,9 +32,8 @@ function DeepSplitting_nonlocal_comp(d, T, dt, cuda_device)
         μ(X,p,t) = 0f0 # advection coefficients
         σ(X,p,t) = 1f-1 # diffusion coefficients
         g(x) = exp.(-0.25f0 * sum(x.^2, dims = 1))   # initial condition
-
-        f(y, z, v_y, v_z, p, t) =  max.(0f0, v_y) .* 
-                (1f0 .- max.(0f0, v_z) * Float32((2 * π )^(d/2) * σ_sampling^d))
+        _scale = Float32((2 * π )^(d/2) * σ_sampling^d)
+        f(y, z, v_y, v_z, p, t) =  v_y .* (1f0 .-  v_z * _scale)
 
         # defining the problem
         alg = DeepSplitting(nn, K=K, opt = opt, 

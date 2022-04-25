@@ -18,7 +18,7 @@ using DataFrames
 using Latexify
 using LaTeXStrings
 using CSV, JLD2, ProgressMeter
-mydir = "results-24-04-2022"
+mydir = "results-25-04-2022"
 isdir(mydir) ? nothing : mkdir(mydir)
 
 include("DeepSplitting_nonlocal_comp.jl")
@@ -34,7 +34,7 @@ include("MLP_rep_mut.jl")
 include("MLP_allencahn_neumann.jl")
 
 ds = [1, 2, 5, 10]
-Ts = [1/5, 1/2, 1]
+Ts = [1/10, 1/5, 1/2, 1.0]
 
 # for testing:
 # ds = [5] 
@@ -55,15 +55,19 @@ println("Experiment started.")
     dfu_ds = DataFrame(); [dfu_ds[!,c] = Float64[] for c in ["d","T","N","u","time_simu"]]; dfu_ds[!,"ref_value"] = []
     df_mlp = DataFrame(); [df_mlp[!,names_df[i]] = [Int64[], Int64[], Int64[], Float64[], Float64[], Float64[], Float64[], Float64[], Float64[] ][i] for i in 1:length(names_df)]
     dfu_mlp = DataFrame(); [dfu_mlp[!,c] = Float64[] for c in ["d","T","K","u","time_simu"]];
-    for d in ds, T in Ts
+   
+    # running for precompilation
+    for _ in 1:nruns         
+        eval(string("DeepSplitting_", example) |> Symbol)(ds[end], Ts[end], Ts[end] / N, cuda_device);
+    end
+    for _ in 1:nruns         
+        eval(string("MLP_", example) |> Symbol)(ds[end], Ts[end], L);
+    end
+
+    for T in Ts, d in ds
             u_ds = DataFrame("value" => Float64[], "time" => Float64[], "ref_value" => [])
             u_mlp = DataFrame("value" => Float64[], "time" => Float64[])
             dt = T / N
-            tspan = (0f0,T)
-            # solving         
-            # running for precompilation
-            eval(string("DeepSplitting_", example) |> Symbol)(d, T, dt, cuda_device);
-            eval(string("MLP_", example) |> Symbol)(d, T, L);
             # sarting the timing
             for i in 1:nruns
                 ##################
@@ -73,7 +77,7 @@ println("Experiment started.")
                 println("d=",d," T=",T," i=",i)
                 println("DeepSplitting")
                 sol_ds = @timed eval(string("DeepSplitting_", example) |> Symbol)(d, T, dt, cuda_device)
-                lossmax = sol_ds.value[2]
+                # lossmax = sol_ds.value[2]
                 # this is to make sure that the approximation at the first step has converged
                 # used for allen cahn.
                 # if example == :allencahn_neumann 

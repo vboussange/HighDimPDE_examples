@@ -37,8 +37,8 @@ function DeepSplitting_rep_mut(d, T, dt, cuda_device)
         g(x) = Float32((2f0*π)^(-d/2f0)) * ss0^(- Float32(d) * 5f-1) * 
                 exp.(-5f-1 *sum(x .^2 / ss0, dims = 1)) # initial condition
         m(x) = - 5f-1 * sum(x.^2, dims=1)
-        int_scale = Float32((2 * π )^(d/2) * σ_sampling^d)
-        f(y, z, v_y, v_z, p, t) =  v_y .* (m(y) .- int_scale * v_z .* m(z))
+        _scale = Float32((2 * π )^(d/2) * σ_sampling^d)
+        f(y, z, v_y, v_z, p, t) =  v_y .* (m(y) .- _scale * v_z .* m(z))
 
         # reference solution
         function _SS(x, t, p)
@@ -79,6 +79,6 @@ if false
         d = 10
         dt = 1f-1 # time step
         T = 2f-1
-        sol, lossmax, truesol = DeepSplitting_rep_mut(d, T, dt, 1)
+        @time sol, lossmax, truesol = DeepSplitting_rep_mut(d, T, dt, 7)
         println("True solution: $truesol, Deep splitting approximation = $(sol)")
 end
