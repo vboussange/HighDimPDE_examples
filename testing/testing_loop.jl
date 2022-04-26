@@ -1,6 +1,8 @@
 #= 
 Testing neural network structure 
-in approximating an gaussian function
+in approximating an gaussian function.
+
+Loops over dimensions.
 =#
 cd(@__DIR__)
 using Flux, PyPlot, LaTeXStrings

@@ -51,7 +51,7 @@ function DeepSplitting_nonlocal_sinegordon(d, T, dt, cuda_device)
                 use_cuda = true,
                 cuda_device = cuda_device
                 )
-        lossmax = maximum(maximum.(sol.losses[2:end]))
+        lossmax = maximum([loss[end] for loss in sol.losses[2:end]])
         return sol.us[end],lossmax, missing
 end
 

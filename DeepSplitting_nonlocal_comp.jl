@@ -50,13 +50,13 @@ function DeepSplitting_nonlocal_comp(d, T, dt, cuda_device)
                 use_cuda = true,
                 cuda_device = cuda_device
                 )
-        lossmax = maximum(maximum.(sol.losses[2:end]))
+        lossmax = maximum([loss[end] for loss in sol.losses[2:end]])
         return sol.us[end],lossmax, missing
 end
 
 if false
         d = 10
-        dt = 1f-1 # time step
+        dt = 1f-1
         T = 2f-1
         @show DeepSplitting_nonlocal_comp(d, T, dt, 1)
 end

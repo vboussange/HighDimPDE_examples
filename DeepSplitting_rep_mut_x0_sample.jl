@@ -14,7 +14,7 @@ function DeepSplitting_rep_mut(d, T, dt, cuda_device)
         ##############################
         maxiters = 4000
         batch_size = 8000
-        K = 1
+        K = 5
 
         hls = d + 50 #hidden layer size
 
@@ -23,7 +23,7 @@ function DeepSplitting_rep_mut(d, T, dt, cuda_device)
                         Dense(hls,hls,tanh),
                         Dense(hls, 1, x->x^2))
 
-        opt = Flux.ADAM() #optimiser
+        opt = Flux.ADAM() # optimiser
 
         ##########################
         ###### PDE Problem #######
@@ -60,7 +60,7 @@ function DeepSplitting_rep_mut(d, T, dt, cuda_device)
                 mc_sample = UniformSampling(x0_sample[1], x0_sample[2]) )
         prob = PIDEProblem(g, f, μ, σ, tspan, x0_sample = x0_sample)
         # solving
-        xs,ts,sol,lossmax = solve(prob, 
+        sol = solve(prob, 
                 alg, 
                 dt, 
                 verbose = true, 
@@ -70,7 +70,7 @@ function DeepSplitting_rep_mut(d, T, dt, cuda_device)
                 use_cuda = true,
                 cuda_device = cuda_device
                 )
-        return sol[end](zeros(d))[], lossmax, rep_mut_anal(zeros(d), T, Dict())
+        return sol.us[end], lossmax, rep_mut_anal(zeros(d), T, Dict())
 end
 
 if false
