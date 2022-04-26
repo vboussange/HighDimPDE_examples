@@ -17,7 +17,7 @@ using DataFrames
 using Latexify # we could have used PrettyTables
 using LaTeXStrings
 using CSV, JLD2, ProgressMeter
-mydir = "results-25-04-2022-burnin"
+mydir = "results-26-04-2022-burnin"
 isdir(mydir) ? nothing : mkdir(mydir)
 
 include("DeepSplitting_nonlocal_comp.jl")
