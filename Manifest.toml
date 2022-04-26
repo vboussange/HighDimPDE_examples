@@ -315,6 +315,11 @@ git-tree-sha1 = "ba475ea91facd7bde9f0f113f60e975882b4f5ca"
 uuid = "61eb1bfa-7361-4325-ad38-22787b887f55"
 version = "0.13.6"
 
+[[Glob]]
+git-tree-sha1 = "4df9f7e06108728ebf00a0a11edee4b29a482bb2"
+uuid = "c27321d9-0574-5035-807b-f59d2c89b15c"
+version = "1.3.0"
+
 [[HighDimPDE]]
 deps = ["CUDA", "DiffEqBase", "ExprTools", "Flux", "Functors", "LinearAlgebra", "Random", "Reexport", "Revise", "SparseArrays", "Statistics", "Test", "Zygote"]
 path = "/home/victorb/projects/HighDimPDE.jl"

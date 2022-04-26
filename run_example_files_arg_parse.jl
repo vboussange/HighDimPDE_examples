@@ -14,7 +14,7 @@ using Random
 # Random.seed!(100)
 # for post processes
 using DataFrames
-using Latexify
+using Latexify # we could have used PrettyTables
 using LaTeXStrings
 using CSV, JLD2, ProgressMeter
 mydir = "results-25-04-2022-burnin"
@@ -50,7 +50,7 @@ L = 5
 nruns = 5 #number of runs per example
 progr = Progress( length(ds) * length(Ts) * nruns, showspeed = true, barlen = 10)
 println("Experiment started with Ts = $Ts.")
-# try
+
 names_df = [L"d", L"T", L"N", "Mean", "Std. dev.", "Ref. value", L"L^1-"*"approx. error", "Std. dev. error", "avg. runtime (s)"]
 df_ds = DataFrame(); [df_ds[!,names_df[i]] = [Int64[], Int64[], Int64[], Float64[], Float64[], Float64[], Float64[], Float64[], Float64[] ][i] for i in 1:length(names_df)]
 dfu_ds = DataFrame(); [dfu_ds[!,c] = Float64[] for c in ["d","T","N","u","time_simu"]]; dfu_ds[!,"ref_value"] = []
@@ -65,12 +65,11 @@ for _ in 1:nruns
     mlp_fun(ds[end], Ts[end], L);
 end
 
-for _ in 1:2 #burnin
+for _ in 1:2 #burnin : first loop to heat up the gpu
     for T in Ts, d in ds
             u_ds = DataFrame("value" => Float64[], "time" => Float64[], "ref_value" => [])
             u_mlp = DataFrame("value" => Float64[], "time" => Float64[])
             dt = T / N
-            # sarting the timing
             for i in 1:nruns
                 ##################
                 # Deep Splitting #
@@ -122,8 +121,4 @@ for _ in 1:2 #burnin
     write(io,tab_mlp);
     close(io)
 end
-# catch e
-#     println("Error with example ", String(example))
-#     println(e)
-# end
 println("All results saved in $mydir")
