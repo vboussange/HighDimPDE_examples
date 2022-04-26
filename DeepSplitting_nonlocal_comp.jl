@@ -7,9 +7,8 @@ using Flux
 using Revise
 
 function DeepSplitting_nonlocal_comp(d, T, dt, cuda_device)
-        tspan = (0f0,T)
         ##############################
-        ####### Neural Network #######
+        #######   ML params    #######
         ##############################
         maxiters = 500
         batch_size = 8000
@@ -27,6 +26,7 @@ function DeepSplitting_nonlocal_comp(d, T, dt, cuda_device)
         ##########################
         ###### PDE Problem #######
         ##########################
+        tspan = (0f0,T)
         σ_sampling = 1f-1 / sqrt(2f0)
         x0 = fill(0f0,d) # initial point
         μ(X,p,t) = 0f0 # advection coefficients

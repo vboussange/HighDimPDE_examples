@@ -10,7 +10,7 @@ using Revise
 function DeepSplitting_rep_mut(d, T, dt, cuda_device)
         tspan = (0f0,T)
         ##############################
-        ####### Neural Network #######
+        ####### ML params #######
         ##############################
         maxiters = 4000
         batch_size = 8000

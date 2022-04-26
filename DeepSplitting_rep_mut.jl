@@ -3,14 +3,12 @@ using CUDA
 using HighDimPDE
 using Random
 using Test
-import Flux
-import Flux.tanh, Flux.relu, Flux.Dense
+using Flux
 using Revise
 
 function DeepSplitting_rep_mut(d, T, dt, cuda_device)
-        tspan = (0f0,T)
         ##############################
-        ####### Neural Network #######
+        #######   ML params    #######
         ##############################
         maxiters = 1000
         batch_size = 8000
@@ -28,6 +26,7 @@ function DeepSplitting_rep_mut(d, T, dt, cuda_device)
         ##########################
         ###### PDE Problem #######
         ##########################
+        tspan = (0f0,T)
         σ_sampling = 2f-1
         x0 = fill(0f0,d) # initial point
         ss0 = 5f-2#std g0
@@ -77,7 +76,7 @@ end
 
 if false
         d = 10
-        dt = 1f-1 # time step
+        dt = 1f-1
         T = 2f-1
         @time sol, lossmax, truesol = DeepSplitting_rep_mut(d, T, dt, 7)
         println("True solution: $truesol, Deep splitting approximation = $(sol)")

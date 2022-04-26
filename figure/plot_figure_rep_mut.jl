@@ -29,9 +29,9 @@ if simu
         x0 = fill(0f0,d) # initial point
 
         ##############################
-        ####### Neural Network #######
+        ####### ML params #######
         ##############################
-        maxiters = 4000
+        maxiters = 2000
         batch_size = 8000
         K = 5
 
@@ -69,7 +69,7 @@ if simu
         ###############################
         ######### Plotting ############
         ###############################
-        xgrid1 = collect((-U/2:5f-3:U/2))
+        xgrid1 = collect((-∂[1]/2:5f-3:∂[1]/2))
         xgrid = [reshape(vcat(x, fill(0f0,d-1)),:,1) for x in xgrid1] 
         # Analytic solution
         function _SS(x, t, p)
@@ -88,7 +88,7 @@ if simu
         df = DataFrame("T"=>Float64[], "u_anal" => [],  "u_approx" => [])
         for (i,t) in enumerate(collect(tspan[1]: dt : tspan[2]))
                 u_anal = uanal.(xgrid, t, Ref(Dict()))
-                u_approx = reduce(vcat,sol.ufun[i].(xgrid))
+                u_approx = reduce(vcat,sol.ufuns[i].(xgrid))
                 push!(df, (t,u_anal,u_approx))
         end
 
@@ -104,7 +104,8 @@ if plotting
 
         # plotting simulation
         fig, ax = plt.subplots(1,2, sharey = true)
-
+        
+        #Exact solution
         for (i,r) in enumerate(eachrow(df))
                 ax[2].plot(xgrid1, r.u_anal, label = latexstring("t_$(i-1) = $(@sprintf("%.2f",r.T))"))
         end

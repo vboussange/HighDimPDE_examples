@@ -7,9 +7,8 @@ using Flux
 using Revise
 
 function DeepSplitting_fisherkpp_neumann(d, T, dt, cuda_device)
-        tspan = (0f0,T)
         ##############################
-        ####### Neural Network #######
+        #######   ML params    #######
         ##############################
         maxiters = 1000
         batch_size = 400
@@ -27,8 +26,9 @@ function DeepSplitting_fisherkpp_neumann(d, T, dt, cuda_device)
         ##########################
         ###### PDE Problem #######
         ##########################
+        tspan = (0f0,T)
         neumann_bc = [fill(-5f-1, d), fill(5f-1, d)]
-        x0 = fill(0f0,d) # initial point
+        x0 = fill(0f0,d) # point where u(x,t) is approximated
         μ(X,p,t) = 0f0 # advection coefficients
         σ(X,p,t) = 1f-1 # diffusion coefficients
         g(x) = exp.(-0.25f0 * sum(x.^2, dims = 1))   # initial condition
