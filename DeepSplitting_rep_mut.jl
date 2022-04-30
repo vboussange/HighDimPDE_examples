@@ -21,13 +21,13 @@ function DeepSplitting_rep_mut(d, T, dt, cuda_device)
                         Dense(hls,hls,tanh),
                         Dense(hls, 1, x->x^2))
 
-        opt = Flux.ADAM(1e-2) #optimiser
+        opt = Flux.ADAM(1e-3) #optimiser
 
         ##########################
         ###### PDE Problem #######
         ##########################
         tspan = (0f0,T)
-        σ_sampling = 2f-1
+        σ_sampling = 2f-2
         x0 = fill(0f0,d) # initial point
         ss0 = 5f-2#std g0
 
@@ -37,7 +37,7 @@ function DeepSplitting_rep_mut(d, T, dt, cuda_device)
                 exp.(-5f-1 *sum(x .^2 / ss0, dims = 1)) # initial condition
         m(x) = - 5f-1 * sum(x.^2, dims=1)
         _scale = Float32((2 * π )^(d/2) * σ_sampling^d)
-        f(y, z, v_y, v_z, p, t) =  v_y .* (m(y) .- _scale * v_z .* m(z))
+        f(y, z, v_y, v_z, p, t) =  v_y .* (m(y) .- _scale * exp.(5f-1 * sum(z .^2, dims = 1) / σ_sampling^2 ) .* v_z .* m(z))
 
         # reference solution
         function _SS(x, t, p)
@@ -76,8 +76,8 @@ end
 
 if false
         d = 10
-        dt = 1f-1
-        T = 2f-1
+        dt = 5f-2
+        T = 5f-1
         @time sol, lossmax, truesol = DeepSplitting_rep_mut(d, T, dt, 7)
         println("True solution: $truesol, Deep splitting approximation = $(sol)")
 end
