@@ -1,5 +1,3 @@
-using CUDA
-# CUDA.device!(1)
 using HighDimPDE
 using Random
 using Test

@@ -8,9 +8,7 @@ cd(@__DIR__)
 using Latexify
 using CSV
 using Glob
-dir_tables = "25-04-2022/"
-isdir(dir_tables*"clean_tables") ? nothing : mkdir(dir_tables*"clean_tables")
-files = glob(dir_tables*"Table*.tex")
+files = glob("Table*.tex")
 
 for file in files
     name = basename(file)
@@ -20,7 +18,7 @@ for file in files
                                     "0.2000000" => "\\nicefrac{1}{5}",
                                     "0.5000000" => "\\nicefrac{1}{2}", )
     println(tex_string)
-    open(dir_tables*"clean_tables/$name", "w") do io
+    open("clean_tables/$name", "w") do io
         write(io,tex_string);
     end
 end
