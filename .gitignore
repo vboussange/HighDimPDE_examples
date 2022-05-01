@@ -1,3 +1,4 @@
 *.pdf
 *.stdout
 *.png
+Manifest.toml
