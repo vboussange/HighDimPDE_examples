@@ -4,20 +4,22 @@ in approximating an gaussian function
 =#
 cd(@__DIR__)
 using Flux, PyPlot, LaTeXStrings
+using Optim
 using CUDA
-CUDA.device!(7)
+# CUDA.device!(7)
 d = 10
-g(x) = 5. .- sum(x.^2, dims = 1) # function to be approximated
+# g(x) = 5. .- sum(x.^2, dims = 1) # function to be approximated
 
-# ss0 = 5f-2#std g0
-# const sf = Float32((2*π*ss0)^(-d/2))
-# g(x) = sf * exp.(-5f-1 *sum(x .^2f0 / ss0, dims = 1)) # function to be approximated
+ss0 = 5f-2#std g0
+const sf = Float32((2*π*ss0)^(-d/2))
+g(x) = sf * exp.(-5f-1 *sum(x .^2f0 / ss0, dims = 1)) # function to be approximated
 
-hls = d+5 #hidden layer size
-nn = Flux.Chain(Dense(d, hls, tanh),
-                Dense(hls, hls, tanh),
+hls = d + 50 #hidden layer size
+nn = Flux.Chain(Dense(d, hls, relu),
+                Dense(hls, hls, relu),
                 # Dense(hls, hls, tanh),
-                Dense(hls, 1)) |> gpu # Neural network
+                Dense(hls, hls, x -> exp(-x^2)),
+                Dense(hls,1)) |> gpu # Neural network
 
 function loss(x)
     sum((nn(x) - g(x)).^2) / length(x)
@@ -27,9 +29,9 @@ end
 # training parameters  #
 ########################
 ps = Flux.params(nn)
-maxiters = 4000
-batch_size = 1000
-optimizers = [ADAM(0.0001), ADAM(0.00001)]
+maxiters = 6000
+batch_size = 8000
+optimizers = [ADAM(0.01), ADAM(0.001)]
 losses = []
 
 for opt in optimizers
@@ -38,7 +40,7 @@ for opt in optimizers
         # x = randn(d, batch_size) * 0.05
 
         # generating uniformly distributed variables on the hypercube [-0.5,0.5]^2
-        x = CUDA.rand(d, batch_size) .- 5e-1
+        x = CUDA.rand(Float32,d, batch_size,1,1) .- 5e-1
 
         # computing gradient
         gs = Flux.gradient(ps) do
