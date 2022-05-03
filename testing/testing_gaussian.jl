@@ -1,6 +1,9 @@
 #= 
 Testing neural network structure 
 in approximating an gaussian function
+
+We should try with a convolution layer,
+But problems with respect to the number of dimensions
 =#
 cd(@__DIR__)
 using Flux, PyPlot, LaTeXStrings

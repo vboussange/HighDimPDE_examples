@@ -29,7 +29,7 @@ end
 ########################
 ps = Flux.params(nn)
 maxiters = 4000
-batch_size = 1000
+batch_size = 8000
 optimizers = [ADAM(0.01), ADAM(0.001)]
 losses = []
 
@@ -39,7 +39,7 @@ for opt in optimizers
         # x = randn(d, batch_size) * 0.05
 
         # generating uniformly distributed variables on the hypercube [-0.5,0.5]^2
-        x = CUDA.rand(d, batch_size) .- 5e-1
+        x = CUDA.rand(Float32, d, batch_size) .- 5e-1
 
         # computing gradient
         gs = Flux.gradient(ps) do
