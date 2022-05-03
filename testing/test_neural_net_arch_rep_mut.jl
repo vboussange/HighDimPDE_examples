@@ -16,59 +16,59 @@ using UnPack
 plotting = true
 simu = true
 
-tspan = (0f0,1f-6)
-dt = 1f-6 # time step
+tspan = (0f0,2f-1)
+dt = 5f-2 # time step
 μ(X,p,t) = 0f0 # advection coefficients
 σ(X,p,t) = 1f-1 # diffusion coefficients
 d = 10
 ss0 = 5f-2#std g0
 U = 5f-1
-x0_sample = (fill(-U, d), fill(U, d))
+∂ = fill(5f-1, d)
+x0_sample = UniformSampling(-∂, ∂)
+x0 = fill(0f0,d) # point where u(x,t) is approximated
 
 ##############################
 ####### Neural Network #######
 ##############################
-batch_size = 16000
-train_steps = 4000
+batch_size = 8000
+train_steps = 1000
 K = 10
 
 hls = d + 50 #hidden layer size
 
 const sf = Float32((2*π*ss0)^(-d/2))
-nn = Flux.Chain(Dense(d, hls, tanh),
+nn = Flux.Chain(Dense(d, hls, x->x^2),
+                # Dense(hls, hls, relu),
+                # Dense(hls, hls, ),
                 # Dense(hls, hls, tanh),
-                Dense(hls, hls, tanh),
-                Dense(hls, 1, x -> x^2)) # Neural network used by the scheme
+                Dense(hls, 1, x -> exp(-x)),) |> gpu # Neural network
 nn_batch = Flux.Chain(Dense(d, hls),
                         BatchNorm(hls, tanh),
                         Dense(hls,hls),
                         BatchNorm(hls, tanh),
                         Dense(hls, 1, x -> x^2))
 opt = ADAM()
-alg = DeepSplitting(nn, K=K, opt = opt, λs = [5e-3, 1e-3], mc_sample = UniformSampling(x0_sample[1],x0_sample[2]) )
 
 ##########################
 ###### PDE Problem #######
 ##########################
 g(x) = sf * exp.(-5f-1 *sum(x .^2f0 / ss0, dims = 1)) # initial condition
 m(x) = - 5f-1 * sum(x.^2, dims=1)
-const vol = prod(x0_sample[2] - x0_sample[1])
+const vol = prod(2f0*∂)
 f(y, z, v_y, v_z, p, t) =  v_y .* (m(y) .- vol * v_z .* m(z)) # nonlocal nonlinear part of the
 
-# defining the problem
-prob = PIDEProblem(g, f, μ, σ, tspan, 
-                x0_sample = x0_sample
-                )
-# solving
-@time xgrid,ts,sol = solve(prob, 
+alg = DeepSplitting(nn, K=K, opt = opt, λs = [1e-3], mc_sample = x0_sample )
+prob = PIDEProblem(g, f, μ, σ, x0, tspan, x0_sample = x0_sample)
+                # solving
+sol = solve(prob, 
                 alg, 
                 dt, 
                 verbose = true, 
-                # abstol = 1f0,
-                maxiters = train_steps,
+                abstol=1f-99,
+                maxiters = maxiters,
                 batch_size = batch_size,
                 use_cuda = true,
-                cuda_device = 0
+                # cuda_device = cuda_device
                 )
 
 ###############################
@@ -93,7 +93,7 @@ using DataFrames
 df = DataFrame("T"=>Float64[], "y_anal" => [],  "y_approx" => [])
 for (i,t) in enumerate(collect(tspan[1]: dt : tspan[2]))
         y_anal = uanal.(xgrid, t, Ref(Dict()))
-        y_approx = reduce(vcat,sol[i].(xgrid))
+        y_approx = reduce(vcat,sol.ufuns[i].(xgrid))
         push!(df, (t,y_anal,y_approx))
 end
 
@@ -118,3 +118,5 @@ ax[2].set_xlabel(L"x")
 
 fig.tight_layout()
 display(fig)
+
+fig.savefig("neural_net_arch_rep_mu_d=$d.png", dpi = 500)

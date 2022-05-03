@@ -17,12 +17,12 @@ ss0 = 5f-2#std g0
 const sf = Float32((2*π*ss0)^(-d/2))
 g(x) = sf * exp.(-5f-1 *sum(x .^2f0 / ss0, dims = 1)) # function to be approximated
 
-hls = d + 50 #hidden layer size
-nn = Flux.Chain(Dense(d, hls, relu),
-                Dense(hls, hls, relu),
+hls = d+50 #hidden layer size
+nn = Flux.Chain(Dense(d, hls, x->x^2),
+                # Dense(hls, hls, relu),
+                # Dense(hls, hls, ),
                 # Dense(hls, hls, tanh),
-                Dense(hls, hls, x -> exp(-x^2)),
-                Dense(hls,1)) |> gpu # Neural network
+                Dense(hls, 1, x -> exp(-x)),) |> gpu # Neural network
 
 function loss(x)
     sum((nn(x) - g(x)).^2) / length(x)
@@ -32,9 +32,9 @@ end
 # training parameters  #
 ########################
 ps = Flux.params(nn)
-maxiters = 6000
+maxiters = 1000
 batch_size = 8000
-optimizers = [ADAM(0.01), ADAM(0.001)]
+optimizers = [ADAM(0.001)]
 losses = []
 
 for opt in optimizers
@@ -68,7 +68,7 @@ xgrid = [[zeros(d-1);x] for x in xplot]
 
 nn_plot = nn |> cpu
 fig, axs = subplots(1,2, figsize= (8,5)); 
-axs[1].plot(xplot, g.(xgrid), label = "True function "*L"g(x) = 5 -||x||^2"); 
+axs[1].plot(xplot, g.(xgrid), label = "True function "*L"g(x) = \mathcal{N}_{0,(1/20)^2}(x)"); 
 axs[1].plot(xplot, nn_plot.(xgrid), label = "Neural network approximation"); 
 axs[1].set_xlabel(L"x_1"); axs[1].set_ylabel(L"f(x_1,0,\dots,0)")
 axs[1].legend()
@@ -80,4 +80,4 @@ axs[2].set_xlabel("Iterations")
 
 fig.tight_layout()
 display(fig)
-# fig.savefig("nn_approx_g(x)=-||x||^2+5_d=$d.png", dpi = 500)
+fig.savefig("nn_approx_g_gaussian=$d.png", dpi = 500)
