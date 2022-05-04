@@ -38,15 +38,10 @@ hls = d + 50 #hidden layer size
 
 const sf = Float32((2*π*ss0)^(-d/2))
 nn = Flux.Chain(Dense(d, hls, x->x^2),
-                # Dense(hls, hls, relu),
-                # Dense(hls, hls, ),
-                # Dense(hls, hls, tanh),
-                Dense(hls, 1, x -> exp(-x)),) |> gpu # Neural network
-nn_batch = Flux.Chain(Dense(d, hls),
-                        BatchNorm(hls, tanh),
-                        Dense(hls,hls),
-                        BatchNorm(hls, tanh),
-                        Dense(hls, 1, x -> x^2))
+                Dense(hls, 1, x -> exp(-x)),) # good network
+nn_bad = Flux.Chain(Dense(d, hls, tanh),
+                        Dense(hls,hls, tanh),
+                        Dense(hls, 1, abs2)) # bad architecture
 opt = ADAM()
 
 ##########################
@@ -65,7 +60,8 @@ sol = solve(prob,
                 dt, 
                 verbose = true, 
                 abstol=1f-99,
-                maxiters = maxiters,
+                maxiters = train_steps,
+                verbose_rate = 10,
                 batch_size = batch_size,
                 use_cuda = true,
                 # cuda_device = cuda_device
@@ -98,23 +94,30 @@ for (i,t) in enumerate(collect(tspan[1]: dt : tspan[2]))
 end
 
 # plotting simulation
-fig, ax = plt.subplots(1,2, sharey = true)
+fig, ax = plt.subplots(2,2)
 
 for (i,r) in enumerate(eachrow(df))
         ax[2].plot(xgrid1, r.y_anal, label = latexstring("t_$(i-1) = $(@sprintf("%.2f",r.T))"))
 end
-ax[2].set_title("Exact solution")
+ax[2].set_title("Exact solution\n"*L"u(T,0) = "*"$(uanal(fill(0,d),tspan[end],nothing))")
 #Deepsplitting sol
 for (i,r) in enumerate(eachrow(df))
         ax[1].scatter(xgrid1, r.y_approx, s = 1., label = latexstring("t_$(i-1) = $(@sprintf("%.2f",r.T))"))
 end
-ax[1].set_title("Approximate solution")
+ax[1].set_title("Approximate solution\n"*L"u(T,0) = "*"$(sol.us[end])")
 for _a in ax[1:1]
         _a.legend()
 end
 ax[1].set_ylabel(L"u(t,(x,0,\dots,0))")
 ax[1].set_xlabel(L"x")
 ax[2].set_xlabel(L"x")
+
+# plotting loss function
+ax[3].plot(1:10:train_steps,sol.losses[1])
+ax[3].set_ylabel("Loss of first NN trained"); ax[3].set_xlabel("Iterations")
+ax[4].axis("off")
+# ax[4].plot(sol.losses[end-1])
+
 
 fig.tight_layout()
 display(fig)

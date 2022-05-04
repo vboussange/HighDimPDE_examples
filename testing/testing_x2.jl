@@ -1,6 +1,22 @@
 #= 
 Testing neural network structure 
 in approximating a quadratic function
+
+
+We find that the simplest network working is
+
+```julia
+nn = Flux.Chain(Flux.Scale(d, bias=false, x->x^2),
+                Dense(d, 1,)) |> gpu 
+```
+and strangely, bias must be `false`.
+
+On the other hand, an architecture that seems to generalise better seems to be something like
+
+```
+nn = Flux.Chain(Dense(d, hls, x->x^2),
+                Dense(hls, 1),) |> gpu
+```
 =#
 cd(@__DIR__)
 using Flux, PyPlot, LaTeXStrings
@@ -14,10 +30,7 @@ g(x) = 5. .- sum(x.^2, dims = 1) # function to be approximated
 # g(x) = sf * exp.(-5f-1 *sum(x .^2f0 / ss0, dims = 1)) # function to be approximated
 
 hls = d+50 #hidden layer size
-nn = Flux.Chain(Dense(d, hls, relu),
-                # Dense(hls, hls, relu),
-                # Dense(hls, hls, tanh),
-                Dense(hls, hls, x ->-x^2),
+nn = Flux.Chain(Dense(d, hls, x ->-x^2),
                 Dense(hls, 1)) |> gpu # Neural network
 
 function loss(x)
@@ -28,9 +41,9 @@ end
 # training parameters  #
 ########################
 ps = Flux.params(nn)
-maxiters = 4000
+maxiters = 2000
 batch_size = 8000
-optimizers = [ADAM(0.01), ADAM(0.001)]
+optimizers = [ADAM(0.005)]
 losses = []
 
 for opt in optimizers
@@ -76,4 +89,4 @@ axs[2].set_xlabel("Iterations")
 
 fig.tight_layout()
 display(fig)
-# fig.savefig("nn_approx_g(x)=-||x||^2+5_d=$d.png", dpi = 500)
+fig.savefig("nn_approx_g(x)=-||x||^2+5_d=$d.png", dpi = 500)

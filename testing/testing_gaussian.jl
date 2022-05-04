@@ -2,8 +2,32 @@
 Testing neural network structure 
 in approximating an gaussian function
 
-We should try with a convolution layer,
-But problems with respect to the number of dimensions
+
+We find that the simplest network working is
+
+```julia
+nn = Flux.Chain(Flux.Scale(d, bias=false, x->x^2),
+                Dense(d, 1, x -> exp(-x)),) |> gpu 
+```
+and strangely, bias must be `false`.
+
+On the other hand, an architecture that seems to generalise better seems to be something like
+
+```
+nn = Flux.Chain(Dense(d, hls, x->x^2),
+                Dense(hls, 1, x -> exp(-x)),) |> gpu
+```
+
+We believe that we could also try with features,
+such as in 
+
+
+```julia
+function feature_transform(x)
+    return [x.^2; exp.(-x); exp.(x)]
+end
+```
+/!\ Such features require to be flattened, using `Flux.flatten`
 =#
 cd(@__DIR__)
 using Flux, PyPlot, LaTeXStrings
