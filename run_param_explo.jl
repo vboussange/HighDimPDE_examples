@@ -30,8 +30,8 @@ using Latexify # we could have used PrettyTables
 using LaTeXStrings
 using CSV, JLD2, ProgressMeter
 using Dates
-mydir = "results_rev_$(today())"
-isdir(mydir) ? nothing : mkdir(mydir)
+mydir = "results/results_rev_$(today())"
+isdir(mydir) ? nothing : mkpath(mydir)
 
 include("DeepSplitting_rep_mut_x0_sample.jl")
 
@@ -52,6 +52,10 @@ default_settings = Dict{Symbol,Any}()
 @pack! default_settings = d, T, N, batch_size, K
 
 explo_all = Dict("explo_K" => Dict[], "explo_batch_size" => Dict[], "explo_N" => Dict[])
+dict_results = Dict("explo_K" => Dict{String,Any}(), 
+                    "explo_batch_size" => Dict{String,Any}(), 
+                    "explo_N" => Dict{String,Any}())
+
 for K in Ks
     dict_temp = copy(default_settings)
     dict_temp[:K] = K
@@ -70,7 +74,7 @@ end
 
 # result containers
 # summary stats table
-df_ds = DataFrame("Mean" => Float64[],
+df_ds_init = DataFrame("Mean" => Float64[],
                 "Std. dev." => Float64[],
                 "Ref. value" => Float64[],
                 L"L^1-"*"approx. error" => Float64[],
@@ -79,9 +83,10 @@ df_ds = DataFrame("Mean" => Float64[],
                 (string.(keys(default_settings)) .=> [Int64[], Float64[], Int64[], Int64[], Int64[]])...)
 
 # complete table
-dfu_ds = DataFrame((string.(keys(default_settings)) .=> [Int64[], Float64[], Int64[], Int64[], Int64[]])...,
+dfu_ds_init = DataFrame((string.(keys(default_settings)) .=> [Int64[], Float64[], Int64[], Int64[], Int64[]])...,
                 "u" => Float64[],
-                "time simu" => Float64[])
+                "time simu" => Float64[],
+                "ref_value" => Float64[])
 
 simul = DeepSplitting_rep_mut
 # running for precompilation
@@ -89,7 +94,7 @@ simul = DeepSplitting_rep_mut
 #     simul(; explo_all["explo_K"][1]..., cuda_device);
 # end
 
-nruns = 1 #number of runs per example
+nruns = 5 #number of runs per example
 progr = Progress( length(Ns) * length(batch_sizes) * length(Ks) * nruns, showspeed = true, barlen = 10)
 
 println("Experiment started")
@@ -97,7 +102,10 @@ println("Experiment started")
 # TODO: modify loop with explo_all, and check that you are saving correctly in dataframes
 # for _ in 1:2 #burnin : first loop to heat up the gpu
 for scen in keys(explo_all)
-    for dic in explo_all[scen]
+    dfu_ds = copy(dfu_ds_init)
+    df_ds = copy(df_ds_init)
+
+    for dict in explo_all[scen]
         u_ds = DataFrame("value" => Float64[], 
                         "time" => Float64[], 
                         "ref_value" => [])
@@ -105,32 +113,23 @@ for scen in keys(explo_all)
             ##################
             # Deep Splitting #
             ##################
-            println(dict," i=",i)
+            println(scen," i=",i)
             sol_ds = @timed simul(;dict..., cuda_device)
 
             @show sol_ds.value[1]
             @show sol_ds.time
 
-            push!(u_ds,[sol_ds.value[1],sol_ds.time,sol_ds.value[3]])
-            push!(dfu_ds,(values(dict), u_ds[end,:]...))
-            CSV.write(mydir*"/$(String(example))_ds.csv", dfu_ds)
+            push!(u_ds,[sol_ds.value[1],sol_ds.time,sol_ds.value[2]])
+            push!(dfu_ds,(values(dict)..., u_ds[end,:]...))
+            CSV.write(mydir*"/$(String(example))_$(scen)_ds.csv", dfu_ds)
             # logging
             next!(progr)
         end
-        ismissing(u_ds.ref_value[1]) ? ref_v = mean(u_mlp.value) : ref_v = u_ds.ref_value[1]
+        ref_v = u_ds.ref_value[1]
         push!(df_ds, (values(dict)..., mean(u_ds.value), std(u_ds.value), ref_v, mean(abs.((u_ds.value .- ref_v) / ref_v)), std(abs.((u_ds.value .- ref_v) / ref_v)), mean(u_ds.time)))
     end
+    @pack! dict_results[scen] = df_ds, dfu_ds
 end
-    # sort!(df_ds, L"T"); sort!(df_mlp, L"T")
-    # #ds
-    # tab_ds = latexify(df_ds,env=:tabular,fmt="%.7f") #|> String
-    # io = open(mydir*"/$(String(example))_ds.tex", "w")
-    # write(io,tab_ds);
-    # close(io)
-    # #mlp
-    # tab_mlp = latexify(df_mlp,env=:tabular,fmt="%.7f") #|> String
-    # io = open(mydir*"/$(String(example))_mlp.tex", "w")
-    # write(io,tab_mlp);
-    # close(io)
-# end
+
+JLD2.save(mydir*"/dict_results.jld2", dict_results)
 println("All results saved in $mydir")
