@@ -68,10 +68,6 @@ for batch_size in batch_sizes
     push!(explo_all["explo_batch_size"], dict_temp)
 end
 
-
-nruns = 5 #number of runs per example
-progr = Progress( length(Ns) * length(batch_sizes) * length(Ks) * nruns, showspeed = true, barlen = 10)
-
 # result containers
 # summary stats table
 df_ds = DataFrame("Mean" => Float64[],
@@ -87,67 +83,54 @@ dfu_ds = DataFrame((string.(keys(default_settings)) .=> [Int64[], Float64[], Int
                 "u" => Float64[],
                 "time simu" => Float64[])
 
-
+simul = DeepSplitting_rep_mut
 # running for precompilation
-for _ in 1:nruns         
-    DeepSplitting_rep_mut(; explo_all["explo_K"][1]..., cuda_device);
-end
+# for _ in 1:nruns         
+#     simul(; explo_all["explo_K"][1]..., cuda_device);
+# end
+
+nruns = 1 #number of runs per example
+progr = Progress( length(Ns) * length(batch_sizes) * length(Ks) * nruns, showspeed = true, barlen = 10)
 
 println("Experiment started")
 
-for _ in 1:2 #burnin : first loop to heat up the gpu
-    for T in Ts, d in ds
-            u_ds = DataFrame("value" => Float64[], "time" => Float64[], "ref_value" => [])
-            u_mlp = DataFrame("value" => Float64[], "time" => Float64[])
-            for i in 1:nruns
-                ##################
-                # Deep Splitting #
-                ##################
-                println("Example ", String(example))
-                println("d=",d," T=",T," i=",i)
-                println("DeepSplitting")
-                sol_ds = @timed deepsplitting_fun(d, T, dt, cuda_device)
+# TODO: modify loop with explo_all, and check that you are saving correctly in dataframes
+# for _ in 1:2 #burnin : first loop to heat up the gpu
+for scen in keys(explo_all)
+    for dic in explo_all[scen]
+        u_ds = DataFrame("value" => Float64[], 
+                        "time" => Float64[], 
+                        "ref_value" => [])
+        for i in 1:nruns
+            ##################
+            # Deep Splitting #
+            ##################
+            println(dict," i=",i)
+            sol_ds = @timed simul(;dict..., cuda_device)
 
-                @show sol_ds.value[1]
-                @show sol_ds.time
+            @show sol_ds.value[1]
+            @show sol_ds.time
 
-                push!(u_ds,[sol_ds.value[1],sol_ds.time,sol_ds.value[3]])
-                push!(dfu_ds,(d, T, N, u_ds[end,:]...))
-                CSV.write(mydir*"/$(String(example))_ds.csv", dfu_ds)
-                JLD2.save(mydir*"/$(String(example))_mlp.jld2", Dict("dfu_ds" => dfu_ds))
-                ################
-                ##### MLP ######
-                ################
-                println("MLP")
-                sol_mlp = @timed mlp_fun(d, T, L)
-
-                @show sol_mlp.value
-                @show sol_mlp.time
-
-
-                push!(u_mlp, [sol_mlp.value, sol_mlp.time])
-                push!(dfu_mlp,(d, T, N, u_mlp[end,:]...))
-                CSV.write(mydir*"/$(String(example))_mlp.csv", dfu_mlp)
-                JLD2.save(mydir*"/$(String(example))_mlp.jld2", Dict("dfu_mlp" => dfu_mlp))
-                # logging
-                next!(progr)
-            end
-            ismissing(u_ds.ref_value[1]) ? ref_v = mean(u_mlp.value) : ref_v = u_ds.ref_value[1]
-            push!(df_ds, (d, T, N, mean(u_ds.value), std(u_ds.value), ref_v, mean(abs.((u_ds.value .- ref_v) / ref_v)), std(abs.((u_ds.value .- ref_v) / ref_v)), mean(u_ds.time)))
-            # reference values are only returned by deep splitting function
-            ismissing(u_ds.ref_value[1]) ? ref_v = mean(u_ds.value) : ref_v = u_ds.ref_value[1]
-            push!(df_mlp, (d, T, L, mean(u_mlp.value), std(u_mlp.value), ref_v, mean(abs.((u_mlp.value .- ref_v) / ref_v)), std(abs.((u_mlp.value .- ref_v) / ref_v)), mean(u_mlp.time)))
+            push!(u_ds,[sol_ds.value[1],sol_ds.time,sol_ds.value[3]])
+            push!(dfu_ds,(values(dict), u_ds[end,:]...))
+            CSV.write(mydir*"/$(String(example))_ds.csv", dfu_ds)
+            # logging
+            next!(progr)
+        end
+        ismissing(u_ds.ref_value[1]) ? ref_v = mean(u_mlp.value) : ref_v = u_ds.ref_value[1]
+        push!(df_ds, (values(dict)..., mean(u_ds.value), std(u_ds.value), ref_v, mean(abs.((u_ds.value .- ref_v) / ref_v)), std(abs.((u_ds.value .- ref_v) / ref_v)), mean(u_ds.time)))
     end
-    sort!(df_ds, L"T"); sort!(df_mlp, L"T")
-    #ds
-    tab_ds = latexify(df_ds,env=:tabular,fmt="%.7f") #|> String
-    io = open(mydir*"/$(String(example))_ds.tex", "w")
-    write(io,tab_ds);
-    close(io)
-    #mlp
-    tab_mlp = latexify(df_mlp,env=:tabular,fmt="%.7f") #|> String
-    io = open(mydir*"/$(String(example))_mlp.tex", "w")
-    write(io,tab_mlp);
-    close(io)
 end
+    # sort!(df_ds, L"T"); sort!(df_mlp, L"T")
+    # #ds
+    # tab_ds = latexify(df_ds,env=:tabular,fmt="%.7f") #|> String
+    # io = open(mydir*"/$(String(example))_ds.tex", "w")
+    # write(io,tab_ds);
+    # close(io)
+    # #mlp
+    # tab_mlp = latexify(df_mlp,env=:tabular,fmt="%.7f") #|> String
+    # io = open(mydir*"/$(String(example))_mlp.tex", "w")
+    # write(io,tab_mlp);
+    # close(io)
+# end
 println("All results saved in $mydir")

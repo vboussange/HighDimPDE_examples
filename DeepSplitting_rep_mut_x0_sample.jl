@@ -31,7 +31,8 @@ function DeepSplitting_rep_mut(; d, T, N, batch_size = 8000, K = 5, cuda_device)
         ###### PDE Problem #######
         ##########################
         U = 5f-1
-        x0_sample = (fill(-U, d), fill(U, d))
+        domain = (fill(-U, d), fill(U, d))
+        x0_sample = UniformSampling(domain...)
         ss0 = 5f-2#std g0
 
         μ(X,p,t) = 0f0 # advection coefficients
@@ -39,7 +40,7 @@ function DeepSplitting_rep_mut(; d, T, N, batch_size = 8000, K = 5, cuda_device)
         g(x) = Float32((2f0*π)^(-d/2f0)) * ss0^(- Float32(d) * 5f-1) * 
                 exp.(-5f-1 *sum(x .^2f0 / ss0, dims = 1)) # initial condition
         m(x) = - 5f-1 * sum(x.^2, dims=1)
-        vol = prod(x0_sample[2] - x0_sample[1])
+        vol = prod(domain[2] - domain[1])
         f(y, z, v_y, v_z, ∇u_x, ∇u_y, p, t) =  v_y .* (m(y) .- vol * v_z .* m(z))
 
         # reference solution
@@ -59,7 +60,7 @@ function DeepSplitting_rep_mut(; d, T, N, batch_size = 8000, K = 5, cuda_device)
 
         # defining the problem
         alg = DeepSplitting(nn, K=K, opt = opt, λs = [5e-3,1e-3],
-                mc_sample = UniformSampling(x0_sample[1], x0_sample[2]) )
+                mc_sample = UniformSampling(domain[1], domain[2]) )
         prob = PIDEProblem(g, f, μ, σ, zeros(Float32,d), tspan, x0_sample = x0_sample)
         # solving
         sol = solve(prob, 
@@ -72,7 +73,7 @@ function DeepSplitting_rep_mut(; d, T, N, batch_size = 8000, K = 5, cuda_device)
                 use_cuda = true,
                 cuda_device = cuda_device
                 )
-        return sol.us[end], lossmax, rep_mut_anal(zeros(d), T, Dict())
+        return sol.us[end], rep_mut_anal(zeros(d), T, Dict())
 end
 
 if false
