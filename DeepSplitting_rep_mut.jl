@@ -35,7 +35,7 @@ function DeepSplitting_rep_mut(d, T, dt, cuda_device)
                 exp.(-5f-1 *sum(x .^2 / ss0, dims = 1)) # initial condition
         m(x) = - 5f-1 * sum(x.^2, dims=1)
         _scale = Float32((2 * π )^(d/2) * σ_sampling^d)
-        f(y, z, v_y, v_z, p, t) =  v_y .* (m(y) .- _scale * exp.(5f-1 * sum(z .^2, dims = 1) / σ_sampling^2 ) .* v_z .* m(z))
+        f(y, z, v_y, v_z, ∇u_x, ∇u_y, p, t) =  v_y .* (m(y) .- _scale * exp.(5f-1 * sum(z .^2, dims = 1) / σ_sampling^2 ) .* v_z .* m(z))
 
         # reference solution
         function _SS(x, t, p)

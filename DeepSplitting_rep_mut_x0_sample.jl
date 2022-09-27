@@ -1,3 +1,8 @@
+#=
+Replicator mutator example with Deep Splitting,
+solving on the whole hypercube
+=#
+
 using HighDimPDE
 using Random
 using Test
@@ -5,14 +10,13 @@ import Flux
 import Flux.tanh, Flux.relu, Flux.Dense
 using Revise
 
-function DeepSplitting_rep_mut(d, T, dt, cuda_device)
+function DeepSplitting_rep_mut(; d, T, N, batch_size = 8000, K = 5, cuda_device)
+        dt = T / N
         tspan = (0f0,T)
         ##############################
         ####### ML params #######
         ##############################
-        maxiters = 4000
-        batch_size = 8000
-        K = 5
+        maxiters = 4000        
 
         hls = d + 50 #hidden layer size
 
@@ -36,7 +40,7 @@ function DeepSplitting_rep_mut(d, T, dt, cuda_device)
                 exp.(-5f-1 *sum(x .^2f0 / ss0, dims = 1)) # initial condition
         m(x) = - 5f-1 * sum(x.^2, dims=1)
         vol = prod(x0_sample[2] - x0_sample[1])
-        f(y, z, v_y, v_z, p, t) =  v_y .* (m(y) .- vol * v_z .* m(z))
+        f(y, z, v_y, v_z, ∇u_x, ∇u_y, p, t) =  v_y .* (m(y) .- vol * v_z .* m(z))
 
         # reference solution
         function _SS(x, t, p)
@@ -56,7 +60,7 @@ function DeepSplitting_rep_mut(d, T, dt, cuda_device)
         # defining the problem
         alg = DeepSplitting(nn, K=K, opt = opt, λs = [5e-3,1e-3],
                 mc_sample = UniformSampling(x0_sample[1], x0_sample[2]) )
-        prob = PIDEProblem(g, f, μ, σ, tspan, x0_sample = x0_sample)
+        prob = PIDEProblem(g, f, μ, σ, zeros(Float32,d), tspan, x0_sample = x0_sample)
         # solving
         sol = solve(prob, 
                 alg, 

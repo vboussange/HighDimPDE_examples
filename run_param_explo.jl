@@ -1,6 +1,11 @@
 #= 
-Run MLP and DeepSplitting examples
-with varying d and N
+Run DeepSplitting examples
+with varying K, batch size, and N
+
+We keep constant 
+- T = 0.5
+- d = 5
+
 * Arguments
 - `ARGS[1] = cuda_device::Int`
 - `ARGS[2] = example::Symbol`
@@ -17,65 +22,83 @@ using Statistics
 using HighDimPDE
 using Flux
 using Random
+using UnPack
 # Random.seed!(100)
 # for post processes
 using DataFrames
 using Latexify # we could have used PrettyTables
 using LaTeXStrings
 using CSV, JLD2, ProgressMeter
-mydir = "results-30-04-2022-burnin"
+using Dates
+mydir = "results_rev_$(today())"
 isdir(mydir) ? nothing : mkdir(mydir)
 
-include("DeepSplitting_nonlocal_comp.jl")
-include("DeepSplitting_nonlocal_sinegordon.jl")
-include("DeepSplitting_fisherkpp_neumann.jl")
-include("DeepSplitting_rep_mut.jl")
-include("DeepSplitting_allencahn_neumann.jl")
+include("DeepSplitting_rep_mut_x0_sample.jl")
 
-include("MLP_nonlocal_comp.jl")
-include("MLP_nonlocal_sinegordon.jl")
-include("MLP_fisherkpp_neumann.jl")
-include("MLP_rep_mut.jl")
-include("MLP_allencahn_neumann.jl")
+# common to all experiments
+d = 5
+T = 0.5
+# overwritten for certain experiments
+N = 5
+K = 5
+batch_size = 8000
 
-ds = [1, 2, 5, 10]
-if example == :rep_mut
-    Ts = [1/10, 1/5, 1/2]
-else
-    Ts = [1/5, 1/2, 1.0]
+# Array of params to explore
+Ns = [1, 3, 5, 7, 9]
+batch_sizes = [1000, 3000, 5000, 7000, 9000]
+Ks = [1, 3, 5, 7, 9]
+
+default_settings = Dict{Symbol,Any}()
+@pack! default_settings = d, T, N, batch_size, K
+
+explo_all = Dict("explo_K" => Dict[], "explo_batch_size" => Dict[], "explo_N" => Dict[])
+for K in Ks
+    dict_temp = copy(default_settings)
+    dict_temp[:K] = K
+    push!(explo_all["explo_K"], dict_temp)
+end
+for N in Ns
+    dict_temp = copy(default_settings)
+    dict_temp[:N] = N
+    push!(explo_all["explo_N"], dict_temp)
+end
+for batch_size in batch_sizes
+    dict_temp = copy(default_settings)
+    dict_temp[:batch_size] = batch_size
+    push!(explo_all["explo_batch_size"], dict_temp)
 end
 
-deepsplitting_fun = eval(string("DeepSplitting_", example) |> Symbol)
-mlp_fun = eval(string("MLP_", example) |> Symbol)
-# Deepsplitting
-N = 10
-
-# MLP
-L = 5
 
 nruns = 5 #number of runs per example
-progr = Progress( length(ds) * length(Ts) * nruns, showspeed = true, barlen = 10)
-println("Experiment started with Ts = $Ts.")
+progr = Progress( length(Ns) * length(batch_sizes) * length(Ks) * nruns, showspeed = true, barlen = 10)
 
-names_df = [L"d", L"T", L"N", "Mean", "Std. dev.", "Ref. value", L"L^1-"*"approx. error", "Std. dev. error", "avg. runtime (s)"]
-df_ds = DataFrame(); [df_ds[!,names_df[i]] = [Int64[], Int64[], Int64[], Float64[], Float64[], Float64[], Float64[], Float64[], Float64[] ][i] for i in 1:length(names_df)]
-dfu_ds = DataFrame(); [dfu_ds[!,c] = Float64[] for c in ["d","T","N","u","time_simu"]]; dfu_ds[!,"ref_value"] = []
-df_mlp = DataFrame(); [df_mlp[!,names_df[i]] = [Int64[], Int64[], Int64[], Float64[], Float64[], Float64[], Float64[], Float64[], Float64[] ][i] for i in 1:length(names_df)]
-dfu_mlp = DataFrame(); [dfu_mlp[!,c] = Float64[] for c in ["d","T","K","u","time_simu"]];
+# result containers
+# summary stats table
+df_ds = DataFrame("Mean" => Float64[],
+                "Std. dev." => Float64[],
+                "Ref. value" => Float64[],
+                L"L^1-"*"approx. error" => Float64[],
+                "Std. dev. error" => Float64[],
+                "avg. runtime (s)" => Float64[], 
+                (string.(keys(default_settings)) .=> [Int64[], Float64[], Int64[], Int64[], Int64[]])...)
+
+# complete table
+dfu_ds = DataFrame((string.(keys(default_settings)) .=> [Int64[], Float64[], Int64[], Int64[], Int64[]])...,
+                "u" => Float64[],
+                "time simu" => Float64[])
+
 
 # running for precompilation
 for _ in 1:nruns         
-    deepsplitting_fun(ds[end], Ts[end], Ts[end] / N, cuda_device);
+    DeepSplitting_rep_mut(; explo_all["explo_K"][1]..., cuda_device);
 end
-for _ in 1:nruns         
-    mlp_fun(ds[end], Ts[end], L);
-end
+
+println("Experiment started")
 
 for _ in 1:2 #burnin : first loop to heat up the gpu
     for T in Ts, d in ds
             u_ds = DataFrame("value" => Float64[], "time" => Float64[], "ref_value" => [])
             u_mlp = DataFrame("value" => Float64[], "time" => Float64[])
-            dt = T / N
             for i in 1:nruns
                 ##################
                 # Deep Splitting #
