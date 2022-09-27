@@ -13,7 +13,6 @@ We keep constant
 cd(@__DIR__)
 if !isempty(ARGS)
     cuda_device = parse(Int,ARGS[1])
-    example = Symbol(ARGS[2])
 else
     cuda_device = 1
     example = :rep_mut
@@ -121,7 +120,7 @@ for scen in keys(explo_all)
 
             push!(u_ds,[sol_ds.value[1],sol_ds.time,sol_ds.value[2]])
             push!(dfu_ds,(values(dict)..., u_ds[end,:]...))
-            CSV.write(mydir*"/$(String(example))_$(scen)_ds.csv", dfu_ds)
+            CSV.write(mydir*"/$(scen).csv", dfu_ds)
             # logging
             next!(progr)
         end
