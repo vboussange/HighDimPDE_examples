@@ -29,6 +29,7 @@ using Latexify # we could have used PrettyTables
 using LaTeXStrings
 using CSV, JLD2, ProgressMeter
 using Dates
+mydir = "results/results_rev_T=$(T)_$(today())"
 isdir(mydir) ? nothing : mkpath(mydir)
 
 include("DeepSplitting_rep_mut_x0_sample.jl")
@@ -40,7 +41,6 @@ T = 0.2
 N = 5
 K = 5
 batch_size = 8000
-mydir = "results/results_rev_T=$(T)_$(today())"
 
 # Array of params to explore
 Ns = [1, 3, 5, 7, 9]
@@ -120,7 +120,7 @@ for scen in keys(explo_all)
 
             push!(u_ds,[sol_ds.value[1],sol_ds.time,sol_ds.value[2]])
             push!(dfu_ds,(values(dict)..., u_ds[end,:]...))
-            CSV.write(mydir*"/$(scen).csv", dfu_ds)
+            CSV.write(mydir*"/$(scen)_DS.csv", dfu_ds)
             # logging
             next!(progr)
         end
@@ -130,5 +130,5 @@ for scen in keys(explo_all)
     @pack! dict_results[scen] = df_ds, dfu_ds
 end
 
-JLD2.save(mydir*"/dict_results.jld2", dict_results)
+JLD2.save(mydir*"/dict_results_DeepSplitting_param_explo.jld2", dict_results)
 println("All results saved in $mydir")

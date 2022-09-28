@@ -29,46 +29,47 @@ using Latexify # we could have used PrettyTables
 using LaTeXStrings
 using CSV, JLD2, ProgressMeter
 using Dates
+mydir = "results/results_rev_T=$(T)_$(today())"
 isdir(mydir) ? nothing : mkpath(mydir)
 
-include("DeepSplitting_rep_mut_x0_sample.jl")
+include("MLP_rep_mut.jl")
 
 # common to all experiments
 d = 5
 T = 0.2
 # overwritten for certain experiments
-N = 5
+M = 4
 K = 5
-batch_size = 8000
+L = 4
 mydir = "results/results_rev_T=$(T)_$(today())"
 
 # Array of params to explore
-Ns = [1, 3, 5, 7, 9]
-batch_sizes = [200, 500, 1000, 3000, 5000, 7000, 9000]
-Ks = [0, 1, 3, 5, 7, 9]
+Ms = 1:5
+Ks = [1, 3, 5, 7, 9]
+Ls = 1:5
 
 default_settings = Dict{Symbol,Any}()
-@pack! default_settings = d, T, N, batch_size, K
+@pack! default_settings = d, T, M, K, L
 
-explo_all = Dict("explo_K" => Dict[], "explo_batch_size" => Dict[], "explo_N" => Dict[])
+explo_all = Dict("explo_K" => Dict[], "explo_M" => Dict[], "explo_L" => Dict[])
 dict_results = Dict("explo_K" => Dict{String,Any}(), 
-                    "explo_batch_size" => Dict{String,Any}(), 
-                    "explo_N" => Dict{String,Any}())
+                    "explo_M" => Dict{String,Any}(), 
+                    "explo_L" => Dict{String,Any}())
 
 for K in Ks
     dict_temp = copy(default_settings)
     dict_temp[:K] = K
     push!(explo_all["explo_K"], dict_temp)
 end
-for N in Ns
+for M in Ms
     dict_temp = copy(default_settings)
-    dict_temp[:N] = N
-    push!(explo_all["explo_N"], dict_temp)
+    dict_temp[:M] = M
+    push!(explo_all["explo_M"], dict_temp)
 end
-for batch_size in batch_sizes
+for L in Ls
     dict_temp = copy(default_settings)
-    dict_temp[:batch_size] = batch_size
-    push!(explo_all["explo_batch_size"], dict_temp)
+    dict_temp[:L] = L
+    push!(explo_all["explo_L"], dict_temp)
 end
 
 # result containers
@@ -87,14 +88,14 @@ dfu_ds_init = DataFrame((string.(keys(default_settings)) .=> [Int64[], Float64[]
                 "time simu" => Float64[],
                 "ref_value" => Float64[])
 
-simul = DeepSplitting_rep_mut
+simul = MLP_rep_mut
 # running for precompilation
 # for _ in 1:nruns         
 #     simul(; explo_all["explo_K"][1]..., cuda_device);
 # end
 
 nruns = 5 #number of runs per example
-progr = Progress( length(Ns) * length(batch_sizes) * length(Ks) * nruns, showspeed = true, barlen = 10)
+progr = Progress( length(Ms) * length(Ls) * length(Ks) * nruns, showspeed = true, barlen = 10)
 
 println("Experiment started")
 
@@ -113,14 +114,14 @@ for scen in keys(explo_all)
             # Deep Splitting #
             ##################
             println(scen," i=",i)
-            sol_ds = @timed simul(;dict..., cuda_device)
+            sol_mlp = @timed simul(;dict...)
 
-            @show sol_ds.value[1]
-            @show sol_ds.time
+            @show sol_mlp.value[1]
+            @show sol_mlp.time
 
-            push!(u_ds,[sol_ds.value[1],sol_ds.time,sol_ds.value[2]])
+            push!(u_ds,[sol_mlp.value[1],sol_mlp.time,sol_mlp.value[2]])
             push!(dfu_ds,(values(dict)..., u_ds[end,:]...))
-            CSV.write(mydir*"/$(scen).csv", dfu_ds)
+            CSV.write(mydir*"/$(scen)_MLP.csv", dfu_ds)
             # logging
             next!(progr)
         end
@@ -130,5 +131,5 @@ for scen in keys(explo_all)
     @pack! dict_results[scen] = df_ds, dfu_ds
 end
 
-JLD2.save(mydir*"/dict_results.jld2", dict_results)
+JLD2.save(mydir*"/dict_results_MLP_param_explo.jld2", dict_results)
 println("All results saved in $mydir")

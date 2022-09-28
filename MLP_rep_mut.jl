@@ -4,7 +4,7 @@ using Test
 using Flux
 using Revise
 
-function MLP_rep_mut(d, T, L)
+function MLP_rep_mut(;d, T, M, L, K)
         tspan = (0e0,T)
         ##########################
         ###### PDE Problem #######
@@ -19,23 +19,41 @@ function MLP_rep_mut(d, T, L)
                 exp.(-5e-1 *sum(x .^2e0 / ss0)) # initial condition
         m(x) = - 5e-1 * sum(x.^2)
         vol = prod(mc_sample_∂[2] - mc_sample_∂[1])
-        f(y, z, v_y, v_z, p, t) = max(0.0, v_y) * 
+        f(y, z, v_y, v_z, ∇u_x, ∇u_y, p, t) = max(0.0, v_y) * 
                 (m(y) -  vol * max(0.0, v_z) * m(z))
 
         # defining the problem
-        alg = MLP(M = L, K = 10, L = L, mc_sample = UniformSampling(mc_sample_∂...))
+        alg = MLP(;M, K, L, mc_sample = UniformSampling(mc_sample_∂...))
         prob = PIDEProblem(g, f, μ, σ, x0, tspan)
 
         # solving
         sol = solve(prob, alg, multithreading=true )
-        return sol.us[end]
+
+        # reference solution
+        function _SS(x, t, p)
+                d = length(x)
+                MM = σ(x, p, t) * ones(d)
+                SSt = MM .* ((MM .* sinh.(MM *t) .+ ss0 .* 
+                        cosh.( MM * t)) ./ (MM .* cosh.(MM * t ) .+ ss0 .* sinh.(MM * t)))
+                return SSt
+        end
+        
+        function rep_mut_anal(x, t, p)
+                d = length(x)
+                return (2*π)^(-d/2) * prod(_SS(x, t, p) .^(-1/2)) * 
+                        exp(-0.5 *sum(x .^2 ./ _SS(x, t, p)) )
+        end
+
+        return sol.us[end], rep_mut_anal(zeros(d), T, Dict())
 end
 
 if false
         d = 5
         T = 5e-1
-        L = 4
-        @show MLP_rep_mut(d, T, L)
+        L = M = 4 
+        K = 5
+
+        @show MLP_rep_mut(;d, T, L, M, K)
         
         
         # Analytic sol
