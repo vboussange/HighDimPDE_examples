@@ -29,8 +29,6 @@ using Latexify # we could have used PrettyTables
 using LaTeXStrings
 using CSV, JLD2, ProgressMeter
 using Dates
-mydir = "results/results_rev_T=$(T)_$(today())"
-isdir(mydir) ? nothing : mkpath(mydir)
 
 include("DeepSplitting_rep_mut_x0_sample.jl")
 
@@ -41,6 +39,9 @@ T = 0.2
 N = 5
 K = 5
 batch_size = 8000
+
+mydir = "results/results_rev_T=$(T)_$(today())"
+isdir(mydir) ? nothing : mkpath(mydir)
 
 # Array of params to explore
 Ns = [1, 3, 5, 7, 9]

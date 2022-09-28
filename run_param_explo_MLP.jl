@@ -29,8 +29,7 @@ using Latexify # we could have used PrettyTables
 using LaTeXStrings
 using CSV, JLD2, ProgressMeter
 using Dates
-mydir = "results/results_rev_T=$(T)_$(today())"
-isdir(mydir) ? nothing : mkpath(mydir)
+
 
 include("MLP_rep_mut.jl")
 
@@ -42,6 +41,7 @@ M = 4
 K = 5
 L = 4
 mydir = "results/results_rev_T=$(T)_$(today())"
+isdir(mydir) ? nothing : mkpath(mydir)
 
 # Array of params to explore
 Ms = 1:5
