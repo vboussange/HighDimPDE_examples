@@ -9,16 +9,14 @@ and computing L1 norm on the whole hypercube
 cd(@__DIR__)
 if !isempty(ARGS)
     cuda_device = parse(Int,ARGS[1])
-    example = Symbol(ARGS[2])
 else
     cuda_device = 1
-    example = :rep_mut
 end
 using Statistics
 using HighDimPDE
 using Flux
 using Random
-# Random.seed!(100)
+Random.seed!(21)
 # for post processes
 using DataFrames
 using Latexify # we could have used PrettyTables
@@ -33,7 +31,7 @@ ds = [1, 2, 5, 10]
 
 Ts = [1/10, 1/5, 1/2]
 
-deepsplitting_fun = eval(string("DeepSplitting_", example) |> Symbol)
+deepsplitting_fun = DeepSplitting_rep_mut_L1
 # Deepsplitting
 N = 10
 
@@ -46,9 +44,9 @@ df_ds = DataFrame(); [df_ds[!,names_df[i]] = [Int64[], Int64[], Int64[], Float64
 dfu_ds = DataFrame(); [dfu_ds[!,c] = Float64[] for c in ["d","T","N","L1","time_simu"]];
 
 # running for precompilation
-# for _ in 1:nruns         
-#     deepsplitting_fun(ds[end], Ts[end], Ts[end] / N, cuda_device);
-# end
+for _ in 1:nruns         
+    deepsplitting_fun(d = ds[end], T = Ts[end], N = N, cuda_device = cuda_device);
+end
 
 
 for _ in 1:2 #burnin : first loop to heat up the gpu

@@ -40,7 +40,7 @@ T = 0.5
 M = 5
 K = 5
 L = 4
-mydir = "results/$(today())/results_rev_T=$(T)_$(today())"
+mydir = "results/$(today())/explo_param_MLP_T=$(T)"
 isdir(mydir) ? nothing : mkpath(mydir)
 
 # Array of params to explore

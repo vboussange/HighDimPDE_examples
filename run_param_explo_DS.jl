@@ -40,7 +40,7 @@ N = 2
 K = 3
 batch_size = 1000
 
-mydir = "results/$(today())/results_rev_T=$(T)_$(today())"
+mydir = "results/$(today())/explo_param_DS_T=$T"
 isdir(mydir) ? nothing : mkpath(mydir)
 
 # Array of params to explore
