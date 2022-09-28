@@ -10,7 +10,7 @@ import Flux
 import Flux.tanh, Flux.relu, Flux.Dense
 using Revise
 
-function DeepSplitting_rep_mut(; d, T, N, batch_size = 8000, K = 5, cuda_device)
+function DeepSplitting_rep_mut(; d, T, N, batch_size = 8000, K = 5, cuda_device=0)
         dt = T / N
         tspan = (0f0,T)
         ##############################
@@ -74,12 +74,13 @@ function DeepSplitting_rep_mut(; d, T, N, batch_size = 8000, K = 5, cuda_device)
                 cuda_device = cuda_device
                 )
         return sol.us[end], rep_mut_anal(zeros(d), T, Dict())
+        # return 0., rep_mut_anal(zeros(d), T, Dict())
 end
 
 if false
-        d = 10
-        dt = 1f-5 # time step
-        T = 1f-5
-        sol, lossmax, truesol = DeepSplitting_rep_mut(d, T, dt)
+        d = 5
+        N = 5 # time step
+        T = 5f-1
+        sol, truesol = DeepSplitting_rep_mut(;d, T, N, batch_size = 8000, K = 5,)
         println("True solution: $truesol, Deep splitting approximation = $(sol)")
 end

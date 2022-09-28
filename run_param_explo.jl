@@ -29,23 +29,23 @@ using Latexify # we could have used PrettyTables
 using LaTeXStrings
 using CSV, JLD2, ProgressMeter
 using Dates
-mydir = "results/results_rev_$(today())"
 isdir(mydir) ? nothing : mkpath(mydir)
 
 include("DeepSplitting_rep_mut_x0_sample.jl")
 
 # common to all experiments
 d = 5
-T = 0.5
+T = 0.2
 # overwritten for certain experiments
 N = 5
 K = 5
 batch_size = 8000
+mydir = "results/results_rev_T=$(T)_$(today())"
 
 # Array of params to explore
 Ns = [1, 3, 5, 7, 9]
-batch_sizes = [1000, 3000, 5000, 7000, 9000]
-Ks = [1, 3, 5, 7, 9]
+batch_sizes = [200, 500, 1000, 3000, 5000, 7000, 9000]
+Ks = [0, 1, 3, 5, 7, 9]
 
 default_settings = Dict{Symbol,Any}()
 @pack! default_settings = d, T, N, batch_size, K

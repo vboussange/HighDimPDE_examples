@@ -2,3 +2,4 @@
 *.stdout
 *.png
 Manifest.toml
+*.jld2
