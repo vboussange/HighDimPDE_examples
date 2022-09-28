@@ -35,9 +35,9 @@ include("MLP_rep_mut.jl")
 
 # common to all experiments
 d = 5
-T = 0.2
+T = 0.5
 # overwritten for certain experiments
-M = 4
+M = 5
 K = 5
 L = 4
 mydir = "results/results_rev_T=$(T)_$(today())"
@@ -45,7 +45,7 @@ isdir(mydir) ? nothing : mkpath(mydir)
 
 # Array of params to explore
 Ms = 1:5
-Ks = [1, 3, 5, 7, 9]
+Ks = 1:2:10
 Ls = 1:5
 
 default_settings = Dict{Symbol,Any}()
@@ -89,18 +89,12 @@ dfu_ds_init = DataFrame((string.(keys(default_settings)) .=> [Int64[], Float64[]
                 "ref_value" => Float64[])
 
 simul = MLP_rep_mut
-# running for precompilation
-# for _ in 1:nruns         
-#     simul(; explo_all["explo_K"][1]..., cuda_device);
-# end
 
 nruns = 5 #number of runs per example
 progr = Progress( length(Ms) * length(Ls) * length(Ks) * nruns, showspeed = true, barlen = 10)
 
 println("Experiment started")
 
-# TODO: modify loop with explo_all, and check that you are saving correctly in dataframes
-# for _ in 1:2 #burnin : first loop to heat up the gpu
 for scen in keys(explo_all)
     dfu_ds = copy(dfu_ds_init)
     df_ds = copy(df_ds_init)
@@ -126,7 +120,7 @@ for scen in keys(explo_all)
             next!(progr)
         end
         ref_v = u_ds.ref_value[1]
-        push!(df_ds, (values(dict)..., mean(u_ds.value), std(u_ds.value), ref_v, mean(abs.((u_ds.value .- ref_v) / ref_v)), std(abs.((u_ds.value .- ref_v) / ref_v)), mean(u_ds.time)))
+        push!(df_ds, (mean(u_ds.value), std(u_ds.value), ref_v, mean(abs.((u_ds.value .- ref_v) / ref_v)), std(abs.((u_ds.value .- ref_v) / ref_v)), mean(u_ds.time),values(dict)...))
     end
     @pack! dict_results[scen] = df_ds, dfu_ds
 end

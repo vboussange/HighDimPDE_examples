@@ -30,7 +30,7 @@ using LaTeXStrings
 using CSV, JLD2, ProgressMeter
 using Dates
 
-include("DeepSplitting_rep_mut.jl")
+include("DeepSplitting_rep_mut_x0_sample.jl")
 
 # common to all experiments
 d = 5
@@ -121,7 +121,7 @@ for scen in keys(explo_all)
 
             push!(u_ds,[sol_ds.value[1],sol_ds.time,sol_ds.value[2]])
             push!(dfu_ds,(values(dict)..., u_ds[end,:]...))
-            CSV.write(mydir*"/$(scen)_DS.csv", dfu_ds)
+            CSV.write(mydir*"/$(scen)_DS_x0_sample.csv", dfu_ds)
             # logging
             next!(progr)
         end
@@ -131,5 +131,5 @@ for scen in keys(explo_all)
     @pack! dict_results[scen] = df_ds, dfu_ds
 end
 
-JLD2.save(mydir*"/dict_results_DeepSplitting_param_explo.jld2", dict_results)
+JLD2.save(mydir*"/dict_resultsparam_explo_DS_x0_sample.jld2", dict_results)
 println("All results saved in $mydir")

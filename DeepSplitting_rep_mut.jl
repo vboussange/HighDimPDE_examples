@@ -4,13 +4,13 @@ using Test
 using Flux
 using Revise
 
-function DeepSplitting_rep_mut(d, T, dt, cuda_device)
+function DeepSplitting_rep_mut(; d, T, N, batch_size = 8000, K = 5, cuda_device=0)
+        dt = T / N
+        tspan = (0f0,T)
         ##############################
         #######   ML params    #######
         ##############################
         maxiters = 1000
-        batch_size = 8000
-        K = 5
 
         hls = d + 50 #hidden layer size
 
@@ -68,8 +68,7 @@ function DeepSplitting_rep_mut(d, T, dt, cuda_device)
                 use_cuda = true,
                 cuda_device = cuda_device
                 )
-        lossmax = maximum(maximum.(sol.losses[2:end]))
-        return sol.us[end], lossmax, rep_mut_anal(zeros(d), T, Dict())
+        return sol.us[end], rep_mut_anal(zeros(d), T, Dict())
 end
 
 if false
