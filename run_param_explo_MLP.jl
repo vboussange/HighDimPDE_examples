@@ -22,7 +22,7 @@ using HighDimPDE
 using Flux
 using Random
 using UnPack
-# Random.seed!(100)
+Random.seed!(56)
 # for post processes
 using DataFrames
 using Latexify # we could have used PrettyTables
@@ -40,7 +40,7 @@ T = 0.5
 M = 5
 K = 5
 L = 4
-mydir = "results/results_rev_T=$(T)_$(today())"
+mydir = "results/$(today())/results_rev_T=$(T)_$(today())"
 isdir(mydir) ? nothing : mkpath(mydir)
 
 # Array of params to explore
