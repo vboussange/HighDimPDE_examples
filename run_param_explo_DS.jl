@@ -15,7 +15,6 @@ if !isempty(ARGS)
     cuda_device = parse(Int,ARGS[1])
 else
     cuda_device = 2
-    example = :rep_mut
 end
 using Statistics
 using HighDimPDE

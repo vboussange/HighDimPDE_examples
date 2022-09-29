@@ -6,12 +6,13 @@ using HighDimPDE
 using PyPlot
 using JLD2
 using UnPack
+using DataFrames
 
 path_results = "../results/results_rev_T=0.5_2022-09-28/"
 
 dict_results =load(path_results*"dict_results_MLP_param_explo.jld2")
 
-fig, axs = subplots(1,3, figsize = (6,3))
+fig, axs = subplots(1,3, figsize = (8,2))
 
 ## explo K
 ax = axs[1]
@@ -60,4 +61,4 @@ ax.set_xticks(df_ds.L)
 fig.tight_layout()
 display(fig)
 
-fig.savefig("fig_MLP_param_explo.pdf", dpi=100)
+fig.savefig(path_results*"/fig_MLP_param_explo.pdf", dpi=100)

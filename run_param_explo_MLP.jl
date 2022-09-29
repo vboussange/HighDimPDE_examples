@@ -15,7 +15,6 @@ if !isempty(ARGS)
     cuda_device = parse(Int,ARGS[1])
 else
     cuda_device = 1
-    example = :rep_mut
 end
 using Statistics
 using HighDimPDE
@@ -40,12 +39,12 @@ T = 0.5
 M = 5
 K = 5
 L = 4
-mydir = "results/$(today())/explo_param_MLP_T=$(T)"
+mydir = "results/$(today())/explo_param_MLP_T=$(T)_explo_K_M_4"
 isdir(mydir) ? nothing : mkpath(mydir)
 
 # Array of params to explore
 Ms = 1:5
-Ks = 1:2:10
+Ks = 1:4:20
 Ls = 1:5
 
 default_settings = Dict{Symbol,Any}()
@@ -59,6 +58,7 @@ dict_results = Dict("explo_K" => Dict{String,Any}(),
 for K in Ks
     dict_temp = copy(default_settings)
     dict_temp[:K] = K
+    dict_temp[:M] = 4
     push!(explo_all["explo_K"], dict_temp)
 end
 for M in Ms

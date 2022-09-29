@@ -6,6 +6,7 @@ using HighDimPDE
 using PyPlot
 using JLD2
 using UnPack
+using DataFrames
 
 path_results = "../results/2022-09-28/explo_param_DS_T=0.2/"
 
@@ -61,4 +62,4 @@ ax.set_xticks(df_ds.N)
 fig.tight_layout()
 display(fig)
 
-fig.savefig(path_results*"/fig_MLP_param_explo.pdf", dpi=100)
+fig.savefig(path_results*"/fig_DS_param_explo.pdf", dpi=100)
