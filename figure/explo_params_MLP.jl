@@ -8,7 +8,8 @@ using JLD2
 using UnPack
 using DataFrames
 
-path_results = "../results/results_rev_T=0.5_2022-09-28/"
+# path_results = "../results/results_rev_T=0.5_2022-09-28/"
+path_results = "../results/2022-09-29/explo_param_MLP_T=0.5_explo_K_M_4/"
 
 dict_results =load(path_results*"dict_results_MLP_param_explo.jld2")
 
@@ -18,6 +19,7 @@ fig, axs = subplots(1,3, figsize = (8,2))
 ax = axs[1]
 scen = "explo_K"
 @unpack df_ds, dfu_ds = dict_results[scen]
+ax.set_title(L"M = %$(Int(df_ds.M[1])), L = %$(Int(df_ds.L[1]))")
 println(df_ds)
 for r in eachrow(df_ds)
     ax.errorbar(r.K, r."\$L^1-\$approx. error", yerr = r."Std. dev. error", c = "tab:blue", fmt = "o", ms = 4)
@@ -33,6 +35,7 @@ display(fig)
 ax = axs[2]
 scen = "explo_M"
 @unpack df_ds, dfu_ds = dict_results[scen]
+ax.set_title(L"K = %$(Int(df_ds.K[1])), L = %$(Int(df_ds.L[1]))")
 println(df_ds)
 # fig, ax = subplots(1)
 for r in eachrow(df_ds)
@@ -49,6 +52,7 @@ display(fig)
 ax = axs[3]
 scen = "explo_L"
 @unpack df_ds, dfu_ds = dict_results[scen]
+ax.set_title(L"M = %$(Int(df_ds.M[1])), K = %$(Int(df_ds.K[1]))")
 println(df_ds)
 # fig, ax = subplots(1)
 for r in eachrow(df_ds)

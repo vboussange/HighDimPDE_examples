@@ -44,7 +44,7 @@ isdir(mydir) ? nothing : mkpath(mydir)
 
 # Array of params to explore
 Ns = 1:5
-batch_sizes = 1:50:250
+batch_sizes = 1:10:100
 Ks = 1:5
 
 default_settings = Dict{Symbol,Any}()
@@ -62,7 +62,7 @@ for K in Ks
     push!(explo_all["explo_K"], dict_temp)
 end
 for N in Ns
-    T = 1.0
+    T = 10.0
     dict_temp = copy(default_settings)
     dict_temp[:N] = N
     push!(explo_all["explo_N"], dict_temp)

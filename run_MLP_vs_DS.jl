@@ -133,7 +133,7 @@ end
 println("DS")
 # running for precompilation
 for _ in 1:nruns         
-    simul(; explo_all["DS"][4]..., cuda_device, maxiters);
+    DeepSplitting_rep_mut(; explo_all["DS"][4]..., cuda_device, maxiters);
 end
 dfu = copy(dfu_DS_init)
 df = copy(df_DS_init)
