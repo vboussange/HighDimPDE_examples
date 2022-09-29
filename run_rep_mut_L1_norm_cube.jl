@@ -56,18 +56,17 @@ for _ in 1:2 #burnin : first loop to heat up the gpu
                 ##################
                 # Deep Splitting #
                 ##################
-                println("Example ", String(example))
                 println("d=",d," T=",T," i=",i)
                 println("DeepSplitting")
-                sol_ds = @timed deepsplitting_fun(;d, T, N, cuda_device)
+                sol_ds = @timed deepsplitting_fun(;d, T, N, cuda_device, maxiters = 1000)
                 L1err = sol_ds.value[1]
                 @show L1err
                 @show sol_ds.time
 
                 push!(u_ds,[sol_ds.value[1],sol_ds.time])
                 push!(dfu_ds,(d, T, N, u_ds[end,:]...))
-                CSV.write(mydir*"/$(String(example))_ds_x0_sample_L1.csv", dfu_ds)
-                JLD2.save(mydir*"/$(String(example))_ds_x0_sample_L1.jld2", Dict("dfu_ds" => dfu_ds))
+                CSV.write(mydir*"/rep_mut_ds_x0_sample_L1.csv", dfu_ds)
+                JLD2.save(mydir*"/rep_mut_ds_x0_sample_L1.jld2", Dict("dfu_ds" => dfu_ds))
                 next!(progr)
             end
             push!(df_ds, (d, T, N, mean(u_ds.L1), std(u_ds.L1), mean(u_ds.time)))
@@ -75,7 +74,7 @@ for _ in 1:2 #burnin : first loop to heat up the gpu
     sort!(df_ds, L"T"); sort!(df_mlp, L"T")
     #ds
     tab_ds = latexify(df_ds,env=:tabular,fmt="%.7f") #|> String
-    io = open(mydir*"/$(String(example))_ds_x0_sample_L1.tex", "w")
+    io = open(mydir*"/rep_mut_ds_x0_sample_L1.tex", "w")
     write(io,tab_ds);
     close(io)
 end
