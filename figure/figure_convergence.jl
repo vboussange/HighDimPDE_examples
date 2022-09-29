@@ -15,7 +15,7 @@ using PyPlot, Printf
 using UnPack
 using JLD2
 plotting = true
-simu = true
+simu = false
 
 if simu
     tspan = (0f0,15f-2)
@@ -84,8 +84,8 @@ for (i,loss) in enumerate(sol.losses[1:end-1])
 end
 ax.set_xlabel(L"m")
 ax.set_yscale("log")
+ax.set_ylabel("Loss")
 ax.legend()
 display(fig)
 
-
-
+fig.savefig("figure_convergence.pdf", dpi=100)
