@@ -13,10 +13,10 @@ path_results = "../results/2022-09-29/explo_param_MLP_T=0.5_explo_K_M_4/"
 
 dict_results =load(path_results*"dict_results_MLP_param_explo.jld2")
 
-fig, axs = subplots(1,3, figsize = (8,2))
+fig, axs = subplots(2,3, figsize = (8,4), sharex = "col")
 
 ## explo K
-ax = axs[1]
+ax = axs[1,1]
 scen = "explo_K"
 @unpack df_ds, dfu_ds = dict_results[scen]
 ax.set_title(L"M = %$(Int(df_ds.M[1])), L = %$(Int(df_ds.L[1]))")
@@ -26,13 +26,20 @@ for r in eachrow(df_ds)
 end
 ax.set_ylabel(L"$L^1$-approx. error")
 ax.set_xlabel(L"K")
-ax.set_xticks(df_ds.K)
 
+ax = axs[2,1]
+for r in eachrow(df_ds)
+    ax.errorbar(r.K, r."avg. runtime (s)", c = "tab:red", fmt = "o", ms = 4)
+end
+ax.set_yscale("log")
+ax.set_ylabel("avg. runtime (s)")
+ax.set_xlabel(L"K")
+ax.set_xticks(df_ds.K)
 display(fig)
 
 
 ## explo M
-ax = axs[2]
+ax = axs[1,2]
 scen = "explo_M"
 @unpack df_ds, dfu_ds = dict_results[scen]
 ax.set_title(L"K = %$(Int(df_ds.K[1])), L = %$(Int(df_ds.L[1]))")
@@ -44,12 +51,20 @@ end
 ax.set_ylabel(L"$L^1$-approx. error")
 ax.set_xlabel(L"M")
 ax.set_xticks(df_ds.M)
+# ax.set_yscale("log")
+ax = axs[2,2]
+for r in eachrow(df_ds)
+    ax.errorbar(r.M, r."avg. runtime (s)", c = "tab:red", fmt = "o", ms = 4)
+end
 ax.set_yscale("log")
+ax.set_ylabel("avg. runtime (s)")
+ax.set_xlabel(L"M")
+ax.set_xticks(df_ds.M)
 display(fig)
 
 
 ## explo L
-ax = axs[3]
+ax = axs[1,3]
 scen = "explo_L"
 @unpack df_ds, dfu_ds = dict_results[scen]
 ax.set_title(L"M = %$(Int(df_ds.M[1])), K = %$(Int(df_ds.K[1]))")
@@ -61,7 +76,14 @@ end
 ax.set_ylabel(L"$L^1$-approx. error")
 ax.set_xlabel(L"L")
 ax.set_xticks(df_ds.L)
-
+ax = axs[2,3]
+for r in eachrow(df_ds)
+    ax.errorbar(r.L, r."avg. runtime (s)", c = "tab:red", fmt = "o", ms = 4)
+end
+ax.set_ylabel("avg. runtime (s)")
+ax.set_xlabel(L"L")
+ax.set_xticks(df_ds.L)
+ax.set_yscale("log")
 fig.tight_layout()
 display(fig)
 
