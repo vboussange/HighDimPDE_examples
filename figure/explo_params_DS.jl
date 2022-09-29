@@ -1,5 +1,5 @@
 #=
-Plotting explo params MLP
+Plotting explo params DS
 =#
 cd(@__DIR__)
 using HighDimPDE
@@ -7,11 +7,11 @@ using PyPlot
 using JLD2
 using UnPack
 
-path_results = "../results/results_rev_T=0.5_2022-09-28/"
+path_results = "../results/2022-09-28/explo_param_DS_T=0.2/"
 
-dict_results =load(path_results*"dict_results_DS_param_explo.jld2")
+dict_results =load(path_results*"dict_results_DeepSplitting_param_explo.jld2")
 
-fig, axs = subplots(1,3, figsize = (6,3))
+fig, axs = subplots(1,3, figsize = (8,2))
 
 ## explo K
 ax = axs[1]
@@ -28,36 +28,37 @@ ax.set_xticks(df_ds.K)
 display(fig)
 
 
-## explo M
+## explo batch_size
 ax = axs[2]
-scen = "explo_M"
+scen = "explo_batch_size"
 @unpack df_ds, dfu_ds = dict_results[scen]
 println(df_ds)
 # fig, ax = subplots(1)
 for r in eachrow(df_ds)
-    ax.errorbar(r.M, r."\$L^1-\$approx. error", yerr = r."Std. dev. error", c = "tab:blue", fmt = "o", ms = 4)
+    ax.errorbar(r.batch_size, r."\$L^1-\$approx. error", yerr = r."Std. dev. error", c = "tab:blue", fmt = "o", ms = 4)
 end
 ax.set_ylabel(L"$L^1$-approx. error")
-ax.set_xlabel(L"M")
-ax.set_xticks(df_ds.M)
-ax.set_yscale("log")
+ax.set_xlabel(L"J_m")
+ax.set_xticks(df_ds.batch_size)
+# ax.set_yscale("log")
 display(fig)
 
 
-## explo L
+## explo N
 ax = axs[3]
-scen = "explo_L"
+scen = "explo_N"
 @unpack df_ds, dfu_ds = dict_results[scen]
 println(df_ds)
 # fig, ax = subplots(1)
 for r in eachrow(df_ds)
-    ax.errorbar(r.L, r."\$L^1-\$approx. error", yerr = r."Std. dev. error", c = "tab:blue", fmt = "o", ms = 4)
+    ax.errorbar(r.N, r."\$L^1-\$approx. error", yerr = r."Std. dev. error", c = "tab:blue", fmt = "o", ms = 4)
 end
 ax.set_ylabel(L"$L^1$-approx. error")
-ax.set_xlabel(L"L")
-ax.set_xticks(df_ds.L)
+ax.set_xlabel(L"N")
+ax.set_yscale("log")
+ax.set_xticks(df_ds.N)
 
 fig.tight_layout()
 display(fig)
 
-fig.savefig("fig_MLP_param_explo.pdf", dpi=100)
+fig.savefig(path_results*"/fig_MLP_param_explo.pdf", dpi=100)

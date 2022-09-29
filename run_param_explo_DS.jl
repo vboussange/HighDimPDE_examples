@@ -38,14 +38,14 @@ T = 0.2
 # overwritten for certain experiments
 N = 2
 K = 3
-batch_size = 1000
+batch_size = 200
 
 mydir = "results/$(today())/explo_param_DS_T=$T"
 isdir(mydir) ? nothing : mkpath(mydir)
 
 # Array of params to explore
 Ns = 1:5
-batch_sizes = collect(100:200:1000)
+batch_sizes = 1:50:250
 Ks = 1:5
 
 default_settings = Dict{Symbol,Any}()
@@ -59,9 +59,11 @@ dict_results = Dict("explo_K" => Dict{String,Any}(),
 for K in Ks
     dict_temp = copy(default_settings)
     dict_temp[:K] = K
+    batch_size = 50
     push!(explo_all["explo_K"], dict_temp)
 end
 for N in Ns
+    T = 1.0
     dict_temp = copy(default_settings)
     dict_temp[:N] = N
     push!(explo_all["explo_N"], dict_temp)
