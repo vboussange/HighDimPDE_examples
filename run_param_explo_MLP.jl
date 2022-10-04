@@ -89,6 +89,10 @@ dfu_ds_init = DataFrame((string.(keys(default_settings)) .=> [Int64[], Float64[]
                 "ref_value" => Float64[])
 
 simul = MLP_rep_mut
+# running for precompilation
+for _ in 1:nruns         
+    simul(;explo_all["explo_L"][1]...)
+end
 
 nruns = 5 #number of runs per example
 progr = Progress( length(Ms) * length(Ls) * length(Ks) * nruns, showspeed = true, barlen = 10)
