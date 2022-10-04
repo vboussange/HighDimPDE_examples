@@ -91,9 +91,9 @@ dfu_ds_init = DataFrame((string.(keys(default_settings)) .=> [Int64[], Float64[]
 
 simul = DeepSplitting_rep_mut_L1
 # running for precompilation
-# for _ in 1:nruns         
-#     simul(; explo_all["explo_K"][1]..., cuda_device);
-# end
+for _ in 1:nruns         
+    simul(; explo_all["explo_K"][1]..., cuda_device);
+end
 
 nruns = 5 #number of runs per example
 progr = Progress( length(Ns) * length(batch_sizes) * length(Ks) * nruns, showspeed = true, barlen = 10)
