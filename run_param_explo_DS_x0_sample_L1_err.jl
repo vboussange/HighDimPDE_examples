@@ -2,6 +2,8 @@
 Run DeepSplitting examples
 with varying K, batch size, and N
 
+Calculating L1 error on the whole cube.
+
 We keep constant 
 - T = 0.5
 - d = 5
@@ -14,14 +16,14 @@ cd(@__DIR__)
 if !isempty(ARGS)
     cuda_device = parse(Int,ARGS[1])
 else
-    cuda_device = 2
+    cuda_device = 1
 end
 using Statistics
 using HighDimPDE
 using Flux
 using Random
 using UnPack
-Random.seed!(58)
+Random.seed!(1001)
 # for post processes
 using DataFrames
 using Latexify # we could have used PrettyTables
@@ -29,7 +31,7 @@ using LaTeXStrings
 using CSV, JLD2, ProgressMeter
 using Dates
 
-include("DeepSplitting_rep_mut.jl")
+include("DeepSplitting_rep_mut_x0_sample_L1.jl")
 
 # common to all experiments
 d = 5
@@ -39,7 +41,7 @@ N = 2
 K = 3
 batch_size = 200
 
-mydir = "results/$(today())/explo_param_DS_T=$T"
+mydir = "results/$(today())/explo_param_DS_x0_sample_T=$(T)_L1_err"
 isdir(mydir) ? nothing : mkpath(mydir)
 
 # Array of params to explore
@@ -75,9 +77,7 @@ end
 
 # result containers
 # summary stats table
-df_ds_init = DataFrame("Mean" => Float64[],
-                "Std. dev." => Float64[],
-                "Ref. value" => Float64[],
+df_ds_init = DataFrame(
                 L"L^1-"*"approx. error" => Float64[],
                 "Std. dev. error" => Float64[],
                 "avg. runtime (s)" => Float64[], 
@@ -85,11 +85,11 @@ df_ds_init = DataFrame("Mean" => Float64[],
 
 # complete table
 dfu_ds_init = DataFrame((string.(keys(default_settings)) .=> [Int64[], Float64[], Int64[], Int64[], Int64[]])...,
-                "u" => Float64[],
+                "L1_err" => Float64[],
                 "time simu" => Float64[],
-                "ref_value" => Float64[])
+                )
 
-simul = DeepSplitting_rep_mut
+simul = DeepSplitting_rep_mut_L1
 # running for precompilation
 # for _ in 1:nruns         
 #     simul(; explo_all["explo_K"][1]..., cuda_device);
@@ -100,16 +100,15 @@ progr = Progress( length(Ns) * length(batch_sizes) * length(Ks) * nruns, showspe
 
 println("Experiment started")
 
-# TODO: modify loop with explo_all, and check that you are saving correctly in dataframes
 # for _ in 1:2 #burnin : first loop to heat up the gpu
 for scen in keys(explo_all)
     dfu_ds = copy(dfu_ds_init)
     df_ds = copy(df_ds_init)
 
     for dict in explo_all[scen]
-        u_ds = DataFrame("value" => Float64[], 
+        u_ds = DataFrame("L1_err" => Float64[], 
                         "time" => Float64[], 
-                        "ref_value" => [])
+                        )
         for i in 1:nruns
             ##################
             # Deep Splitting #
@@ -117,20 +116,19 @@ for scen in keys(explo_all)
             println(scen," i=",i)
             sol_ds = @timed simul(;dict..., cuda_device)
 
-            @show sol_ds.value[1]
+            @show sol_ds.value[]
             @show sol_ds.time
 
-            push!(u_ds,[sol_ds.value[1],sol_ds.time,sol_ds.value[2]])
+            push!(u_ds,[sol_ds.value[],sol_ds.time])
             push!(dfu_ds,(values(dict)..., u_ds[end,:]...))
-            CSV.write(mydir*"/$(scen)_DS.csv", dfu_ds)
+            CSV.write(mydir*"/$(scen)_DS_x0_sample.csv", dfu_ds)
             # logging
             next!(progr)
         end
-        ref_v = u_ds.ref_value[1]
-        push!(df_ds, (mean(u_ds.value), std(u_ds.value), ref_v, mean(abs.((u_ds.value .- ref_v) / ref_v)), std(abs.((u_ds.value .- ref_v) / ref_v)), mean(u_ds.time),values(dict)...))
+        push!(df_ds, (mean(u_ds.L1_err), std(u_ds.L1_err), mean(u_ds.time),values(dict)...))
     end
     @pack! dict_results[scen] = df_ds, dfu_ds
 end
 
-JLD2.save(mydir*"/dict_results_DeepSplitting_param_explo.jld2", dict_results)
+JLD2.save(mydir*"/dict_resultsparam_explo_DS_x0_sample.jld2", dict_results)
 println("All results saved in $mydir")

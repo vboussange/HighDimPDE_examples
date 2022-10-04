@@ -71,16 +71,16 @@ ax = axs[1,3]
 scen = "explo_N"
 @unpack df_ds = dict_results[scen]
 ax.set_title(L"J_m = %$(Int(df_ds.batch_size[1])), K = %$(Int(df_ds.K[1]))")
-println(df_ds)
+println(df_ds[2:end,:])
 # fig, ax = subplots(1)
-for r in eachrow(df_ds)
+for r in eachrow(df_ds[2:end,:])
     ax.errorbar(r.N, r."\$L^1-\$approx. error", yerr = r."Std. dev. error", c = "tab:blue", fmt = "o", ms = 4)
 end
 ax.set_ylabel(L"$L^1$-approx. error")
 ax.set_xlabel(L"N")
 # ax.set_yscale("log")
 ax = axs[2,3]
-for r in eachrow(df_ds)
+for r in eachrow(df_ds[2:end,:])
     ax.errorbar(r.N, r."avg. runtime (s)", c = "tab:red", fmt = "o", ms = 4)
 end
 ax.set_ylabel("avg. runtime (s)")
@@ -93,4 +93,4 @@ display(fig)
 fig.tight_layout()
 display(fig)
 
-fig.savefig(path_results*"/fig_DS_param_explo.pdf", dpi=100)
+# fig.savefig(path_results*"/fig_DS_param_explo.pdf", dpi=100)
