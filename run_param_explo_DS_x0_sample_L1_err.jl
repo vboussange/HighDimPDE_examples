@@ -60,13 +60,13 @@ dict_results = Dict("explo_K" => Dict{String,Any}(),
 for K in Ks
     dict_temp = copy(default_settings)
     dict_temp[:K] = K
-    batch_size = 50
+    dict_temp[:batch_size] = 50
     push!(explo_all["explo_K"], dict_temp)
 end
 for N in Ns
-    T = 10.0
     dict_temp = copy(default_settings)
     dict_temp[:N] = N
+    dict_temp[:T] = 10.0
     push!(explo_all["explo_N"], dict_temp)
 end
 for batch_size in batch_sizes
@@ -90,13 +90,13 @@ dfu_ds_init = DataFrame((string.(keys(default_settings)) .=> [Int64[], Float64[]
                 )
 
 simul = DeepSplitting_rep_mut_L1
+
+nruns = 5 #number of runs per example
+progr = Progress( length(Ns) * length(batch_sizes) * length(Ks) * nruns, showspeed = true, barlen = 10)
 # running for precompilation
 for _ in 1:nruns         
     simul(; explo_all["explo_K"][1]..., cuda_device);
 end
-
-nruns = 5 #number of runs per example
-progr = Progress( length(Ns) * length(batch_sizes) * length(Ks) * nruns, showspeed = true, barlen = 10)
 
 println("Experiment started")
 

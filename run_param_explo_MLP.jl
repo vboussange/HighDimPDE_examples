@@ -6,16 +6,8 @@ We keep constant
 - T = 0.5
 - d = 5
 
-* Arguments
-- `ARGS[1] = cuda_device::Int`
-- `ARGS[2] = example::Symbol`
 =#
 cd(@__DIR__)
-if !isempty(ARGS)
-    cuda_device = parse(Int,ARGS[1])
-else
-    cuda_device = 1
-end
 using Statistics
 using HighDimPDE
 using Flux
@@ -89,13 +81,13 @@ dfu_ds_init = DataFrame((string.(keys(default_settings)) .=> [Int64[], Float64[]
                 "ref_value" => Float64[])
 
 simul = MLP_rep_mut
+
+nruns = 5 #number of runs per example
+progr = Progress( length(Ms) * length(Ls) * length(Ks) * nruns, showspeed = true, barlen = 10)
 # running for precompilation
 for _ in 1:nruns         
     simul(;explo_all["explo_L"][1]...)
 end
-
-nruns = 5 #number of runs per example
-progr = Progress( length(Ms) * length(Ls) * length(Ks) * nruns, showspeed = true, barlen = 10)
 
 println("Experiment started")
 

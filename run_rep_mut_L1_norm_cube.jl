@@ -71,7 +71,7 @@ for _ in 1:2 #burnin : first loop to heat up the gpu
             end
             push!(df_ds, (d, T, N, mean(u_ds.L1), std(u_ds.L1), mean(u_ds.time)))
     end
-    sort!(df_ds, L"T"); sort!(df_mlp, L"T")
+    sort!(df_ds, L"T");
     #ds
     tab_ds = latexify(df_ds,env=:tabular,fmt="%.7f") #|> String
     io = open(mydir*"/rep_mut_ds_x0_sample_L1.tex", "w")
