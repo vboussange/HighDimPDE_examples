@@ -33,7 +33,7 @@ function DeepSplitting_allencahn_neumann(d, T, dt, cuda_device)
         σ(X,p,t) = 1f-1 # diffusion coefficients
         g(x) = exp.(-0.25f0 * sum(x.^2, dims = 1)) # initial condition
         a(u) = u - u^3
-        f(y, z, v_y, v_z, p, t) = a.(v_y) .- a.(v_z)
+        f(y, z, v_y, v_z, ∇u_x, ∇u_y, p, t) = a.(v_y) .- a.(v_z)
 
         # defining the problem
         alg = DeepSplitting(nn, K=K, opt = opt, mc_sample = x0_sample)
@@ -55,8 +55,9 @@ function DeepSplitting_allencahn_neumann(d, T, dt, cuda_device)
 end
 
 if false
+        using BenchmarkTools
         d = 1
         dt = 1f-1
         T = 2f-1
-        @show DeepSplitting_allencahn_neumann(d, T, dt, 6)
+        @btime DeepSplitting_allencahn_neumann(d, T, dt, 6)
 end
