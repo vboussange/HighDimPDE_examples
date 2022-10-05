@@ -9,7 +9,7 @@ using UnPack
 using DataFrames
 
 # path_results = "../results/results_rev_T=0.5_2022-09-28/"
-path_results = "../results/2022-09-29/explo_param_MLP_T=0.5_explo_K_M_4/"
+path_results = "../results/2022-10-04/explo_param_MLP_T=0.5_explo_K_M_4/"
 
 dict_results =load(path_results*"dict_results_MLP_param_explo.jld2")
 
@@ -35,6 +35,9 @@ ax.set_yscale("log")
 ax.set_ylabel("avg. runtime (s)")
 ax.set_xlabel(L"K")
 ax.set_xticks(df_ds.K)
+y_minor = matplotlib.ticker.LogLocator(base = 10.0, subs = 0.1:0.1:1, numticks = 10)
+ax.yaxis.set_minor_locator(y_minor)
+ax.yaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
 display(fig)
 
 
@@ -84,6 +87,9 @@ ax.set_ylabel("avg. runtime (s)")
 ax.set_xlabel(L"L")
 ax.set_xticks(df_ds.L)
 ax.set_yscale("log")
+y_minor = matplotlib.ticker.LogLocator(base = 10.0, subs = 0.1:0.1:1, numticks = 10)
+ax.yaxis.set_minor_locator(y_minor)
+ax.yaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
 fig.tight_layout()
 display(fig)
 
