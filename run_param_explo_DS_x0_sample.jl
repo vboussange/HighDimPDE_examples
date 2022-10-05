@@ -58,13 +58,14 @@ dict_results = Dict("explo_K" => Dict{String,Any}(),
 for K in Ks
     dict_temp = copy(default_settings)
     dict_temp[:K] = K
-    dict_temp[:batch_size] = 50
+    dict_temp[:batch_size] = 1000
     push!(explo_all["explo_K"], dict_temp)
 end
 for N in Ns
     dict_temp = copy(default_settings)
     dict_temp[:N] = N
-    dict_temp[:T] = 10.0
+    dict_temp[:batch_size] = 8000
+    dict_temp[:T] = 5.0
     push!(explo_all["explo_N"], dict_temp)
 end
 for batch_size in batch_sizes

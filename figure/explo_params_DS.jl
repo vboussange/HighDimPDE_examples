@@ -8,9 +8,12 @@ using JLD2
 using UnPack
 using DataFrames
 
-path_results = "../results/2022-10-04/explo_param_DS_T=0.2/"
+# path_results = "../results/2022-10-04/explo_param_DS_x0_sample_T=0.2_L1_err/"
+path_results = "../results/2022-10-04/explo_param_DS_x0_sample_T=0.2/"
+# path_results = "../results/2022-10-04/explo_param_DS_T=0.2/"
 
-dict_results =load(path_results*"dict_results_DeepSplitting_param_explo.jld2")
+dict_results =load(path_results*"dict_resultsparam_explo_DS_x0_sample.jld2")
+# dict_results =load(path_results*"dict_results_DeepSplitting_param_explo.jld2")
 
 fig, axs = subplots(2,3, 
                     figsize = (8,4), 
@@ -38,7 +41,8 @@ end
 ax.set_ylabel("avg. runtime (s)")
 ax.set_xlabel(L"K")
 ax.set_xticks(df_ds.K)
-ax.set_ylim(0,10)
+ax.set_ylim(0,50)
+# ax.set_ylim(0,10)
 display(fig)
 
 
@@ -62,7 +66,8 @@ ax.set_ylabel("avg. runtime (s)")
 ax.set_xlabel(L"J_m")
 ax.set_xticks(df_ds.batch_size)
 ax.set_xscale("log")
-ax.set_ylim(0,10)
+ax.set_ylim(0,50)
+# ax.set_ylim(0,10)
 display(fig)
 
 
