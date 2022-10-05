@@ -10,7 +10,7 @@ if !isempty(ARGS)
     cuda_device = parse(Int,ARGS[1])
     example = Symbol(ARGS[2])
 else
-    cuda_device = 1
+    cuda_device = 7
     example = :rep_mut
 end
 using Statistics
@@ -65,17 +65,17 @@ dfu_mlp = DataFrame(); [dfu_mlp[!,c] = Float64[] for c in ["d","T","K","u","time
 
 # running for precompilation
 for _ in 1:nruns         
-    deepsplitting_fun(ds[end], Ts[end], Ts[end] / N, cuda_device);
+    deepsplitting_fun(;d = ds[end], T = Ts[end], N = N, cuda_device = cuda_device);
 end
-for _ in 1:nruns         
-    mlp_fun(ds[end], Ts[end], L);
+for _ in 1:nruns
+    mlp_fun(d = ds[end], T = Ts[end], L = L, M = L);
 end
 
-for _ in 1:2 #burnin : first loop to heat up the gpu
+# for _ in 1:2 #burnin : first loop to heat up the gpu
     for T in Ts, d in ds
             u_ds = DataFrame("value" => Float64[], "time" => Float64[], "ref_value" => [])
             u_mlp = DataFrame("value" => Float64[], "time" => Float64[])
-            dt = T / N
+
             for i in 1:nruns
                 ##################
                 # Deep Splitting #
@@ -83,12 +83,12 @@ for _ in 1:2 #burnin : first loop to heat up the gpu
                 println("Example ", String(example))
                 println("d=",d," T=",T," i=",i)
                 println("DeepSplitting")
-                sol_ds = @timed deepsplitting_fun(d, T, dt, cuda_device)
+                sol_ds = @timed deepsplitting_fun(;d, T, N, cuda_device)
 
                 @show sol_ds.value[1]
                 @show sol_ds.time
 
-                push!(u_ds,[sol_ds.value[1],sol_ds.time,sol_ds.value[3]])
+                push!(u_ds,[sol_ds.value[1],sol_ds.time,sol_ds.value[2]])
                 push!(dfu_ds,(d, T, N, u_ds[end,:]...))
                 CSV.write(mydir*"/$(String(example))_ds.csv", dfu_ds)
                 JLD2.save(mydir*"/$(String(example))_mlp.jld2", Dict("dfu_ds" => dfu_ds))
@@ -96,13 +96,13 @@ for _ in 1:2 #burnin : first loop to heat up the gpu
                 ##### MLP ######
                 ################
                 println("MLP")
-                sol_mlp = @timed mlp_fun(d, T, L)
+                sol_mlp = @timed mlp_fun(;d, T, L, M=L)
 
                 @show sol_mlp.value
                 @show sol_mlp.time
 
 
-                push!(u_mlp, [sol_mlp.value, sol_mlp.time])
+                push!(u_mlp, [sol_mlp.value[1], sol_mlp.time])
                 push!(dfu_mlp,(d, T, N, u_mlp[end,:]...))
                 CSV.write(mydir*"/$(String(example))_mlp.csv", dfu_mlp)
                 JLD2.save(mydir*"/$(String(example))_mlp.jld2", Dict("dfu_mlp" => dfu_mlp))
@@ -126,5 +126,5 @@ for _ in 1:2 #burnin : first loop to heat up the gpu
     io = open(mydir*"/$(String(example))_mlp.tex", "w")
     write(io,tab_mlp);
     close(io)
-end
+# end
 println("All results saved in $mydir")

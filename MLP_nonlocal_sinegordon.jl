@@ -4,7 +4,7 @@ using Test
 using Flux
 using Revise
 
-function MLP_nonlocal_sinegordon(d, T, L)
+function MLP_nonlocal_sinegordon(;d, T, M, L, K=1)
         tspan = (0e0,T)
         ##########################
         ###### PDE Problem #######
@@ -18,7 +18,7 @@ function MLP_nonlocal_sinegordon(d, T, L)
 
         # defining the problem
         mc_sample = NormalSampling(σ_sampling,true)
-        alg = MLP(M = L, K = 10, L = L, mc_sample = mc_sample )
+        alg = MLP(;M, K, L, mc_sample)
         prob = PIDEProblem(g, f, μ, σ, x0, tspan)
 
         # solving

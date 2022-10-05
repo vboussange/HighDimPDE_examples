@@ -11,7 +11,7 @@ import Flux
 import Flux.tanh, Flux.relu, Flux.Dense
 using Revise
 
-function DeepSplitting_rep_mut_L1(; d, T, N, batch_size = 8000, K = 5, cuda_device=5, maxiters = 4000)
+function DeepSplitting_rep_mut_L1(; d, T, N, batch_size = 8000, K = 1, cuda_device=5, maxiters = 2000)
         dt = T / N
         tspan = (0f0,T)
         ##############################

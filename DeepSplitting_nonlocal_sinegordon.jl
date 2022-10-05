@@ -4,13 +4,11 @@ using Test
 using Flux
 using Revise
 
-function DeepSplitting_nonlocal_sinegordon(d, T, dt, cuda_device)
+function DeepSplitting_nonlocal_sinegordon(; d, T, N, batch_size = 8000, K = 1, cuda_device=5, maxiters = 500)
+        dt = T / N
         ##############################
         #######   ML params    #######
         ##############################
-        maxiters = 500
-        batch_size = 8000
-        K = 5
 
         hls = d + 50 #hidden layer size
 
@@ -32,7 +30,7 @@ function DeepSplitting_nonlocal_sinegordon(d, T, dt, cuda_device)
         σ(X,p,t) = 1f-1 # diffusion coefficients
         g(x) = exp.(-0.25f0 * sum(x.^2, dims = 1)) #initial condition
         _scale = Float32((2 * π )^(d/2) * σ_sampling^d)
-        f(y, z, v_y, v_z, p, t) = sin.(v_y) .- v_z * _scale
+        f(y, z, v_y, v_z, ∇u_x, ∇u_y, p, t) = sin.(v_y) .- v_z * _scale
 
         # defining the problem
         alg = DeepSplitting(nn, K=K, opt = opt, 
@@ -50,13 +48,12 @@ function DeepSplitting_nonlocal_sinegordon(d, T, dt, cuda_device)
                 use_cuda = true,
                 cuda_device = cuda_device
                 )
-        lossmax = maximum([loss[end] for loss in sol.losses[2:end]])
-        return sol.us[end],lossmax, missing
+        return sol.us[end], missing
 end
 
 if false
         d = 10
         dt = 1f-1
         T = 3f-1
-        @show DeepSplitting_nonlocal_sinegordon(d, T, dt, 1)
+        @time DeepSplitting_nonlocal_sinegordon(d, T, dt, 1)
 end

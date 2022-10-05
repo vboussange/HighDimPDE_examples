@@ -4,13 +4,11 @@ using Test
 using Flux
 using Revise
 
-function DeepSplitting_nonlocal_comp(d, T, dt, cuda_device)
+function DeepSplitting_nonlocal_comp(; d, T, N, batch_size = 8000, K = 1, cuda_device=5, maxiters = 500)
+        dt = T / N
         ##############################
         #######   ML params    #######
         ##############################
-        maxiters = 500
-        batch_size = 8000
-        K = 5
 
         hls = d + 50 #hidden layer size
 
@@ -48,13 +46,12 @@ function DeepSplitting_nonlocal_comp(d, T, dt, cuda_device)
                 use_cuda = true,
                 cuda_device = cuda_device
                 )
-        lossmax = maximum([loss[end] for loss in sol.losses[2:end]])
-        return sol.us[end],lossmax, missing
+        return sol.us[end], missing
 end
 
 if false
-        d = 10
+        d = 1
         dt = 1f-1
-        T = 2f-1
-        @show DeepSplitting_nonlocal_comp(d, T, dt, 1)
+        T = 1f0
+        @time DeepSplitting_nonlocal_comp(d, T, dt, 0)
 end

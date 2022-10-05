@@ -4,7 +4,7 @@ using Test
 using Flux
 using Revise
 
-function MLP_nonlocal_comp(d, T, L)
+function MLP_nonlocal_comp(;d, T, M, L, K=1)
         tspan = (0f0,T)
         ##########################
         ###### PDE Problem #######
@@ -19,7 +19,7 @@ function MLP_nonlocal_comp(d, T, L)
         mc_sample = NormalSampling(σ_sampling, true) # uniform distrib in x0_sample
         # defining the problem
         prob = PIDEProblem(g_mlp, f_mlp, μ_mlp, σ_mlp, x0, tspan)
-        alg = MLP(M = L, K = 10, L = L, mc_sample = mc_sample )
+        alg = MLP(;M, K, L, mc_sample)
         # solving
         sol = solve(prob, alg, multithreading=true)
         return sol.us[end]

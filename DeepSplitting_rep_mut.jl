@@ -4,7 +4,7 @@ using Test
 using Flux
 using Revise
 
-function DeepSplitting_rep_mut(; d, T, N, batch_size = 8000, K = 5, cuda_device=0, maxiters = 1000)
+function DeepSplitting_rep_mut(; d, T, N, batch_size = 8000, K = 1, cuda_device=0, maxiters = 1000)
         dt = T / N
         tspan = (0f0,T)
         ##############################

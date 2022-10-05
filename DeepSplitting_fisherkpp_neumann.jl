@@ -4,13 +4,13 @@ using Test
 using Flux
 using Revise
 
-function DeepSplitting_fisherkpp_neumann(d, T, dt, cuda_device)
+function DeepSplitting_fisherkpp_neumann(; d, T, N, batch_size = 8000, K = 1, cuda_device=5, maxiters = 500)
+        dt = T / N
+        tspan = (0f0,T)
+
         ##############################
         #######   ML params    #######
         ##############################
-        maxiters = 500
-        batch_size = 8000
-        K = 1
 
         hls = d + 50 #hidden layer size
 
@@ -24,13 +24,12 @@ function DeepSplitting_fisherkpp_neumann(d, T, dt, cuda_device)
         ##########################
         ###### PDE Problem #######
         ##########################
-        tspan = (0f0,T)
         neumann_bc = [fill(-5f-1, d), fill(5f-1, d)]
         x0 = fill(0f0,d) # point where u(x,t) is approximated
         μ(X,p,t) = 0f0 # advection coefficients
         σ(X,p,t) = 1f-1 # diffusion coefficients
         g(x) = exp.(-0.25f0 * sum(x.^2, dims = 1))   # initial condition
-        f(y, z, v_y, v_z, p, t) = v_y .* ( 1f0 .- v_y ) 
+        f(y, z, v_y, v_z, ∇u_x, ∇u_y, p, t) = v_y .* ( 1f0 .- v_y ) 
 
         # defining the problem
         alg = DeepSplitting(nn, K=K, opt = opt)
@@ -47,8 +46,7 @@ function DeepSplitting_fisherkpp_neumann(d, T, dt, cuda_device)
                         use_cuda = true,
                         cuda_device = cuda_device
                         )
-        lossmax = maximum([loss[end] for loss in sol.losses[2:end]])
-        return sol.us[end], lossmax, missing
+        return sol.us[end], missing
 end
 
 if false

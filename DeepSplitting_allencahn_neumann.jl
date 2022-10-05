@@ -4,13 +4,13 @@ using Test
 using Flux
 using Revise
 
-function DeepSplitting_allencahn_neumann(d, T, dt, cuda_device)
+function DeepSplitting_allencahn_neumann(; d, T, N, batch_size = 8000, K = 1, cuda_device=5, maxiters = 500)
+        dt = T / N
+        tspan = (0f0,T)
+
         ##############################
         #######   ML params    #######
         ##############################
-        maxiters = 500
-        batch_size = 8000
-        K = 5
 
         hls = d + 50 #hidden layer size
 
@@ -24,7 +24,6 @@ function DeepSplitting_allencahn_neumann(d, T, dt, cuda_device)
         ##########################
         ###### PDE Problem #######
         ##########################
-        tspan = (0f0,T)
         ∂ = fill(5f-1, d)
         x0_sample = UniformSampling(-∂, ∂)
         x0 = fill(0f0,d) # point where u(x,t) is approximated
@@ -50,14 +49,13 @@ function DeepSplitting_allencahn_neumann(d, T, dt, cuda_device)
                 use_cuda = true,
                 cuda_device = cuda_device
                 )
-        lossmax = maximum([loss[end] for loss in sol.losses[2:end]])
-        return sol.us[end], lossmax, missing
+        return sol.us[end], missing
 end
 
 if false
         using BenchmarkTools
         d = 1
         dt = 1f-1
-        T = 2f-1
-        @btime DeepSplitting_allencahn_neumann(d, T, dt, 6)
+        T = 1f0
+        @time DeepSplitting_allencahn_neumann(d, T, dt, 6)
 end

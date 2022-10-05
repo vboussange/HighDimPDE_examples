@@ -4,7 +4,7 @@ using Test
 using Flux
 using Revise
 
-function MLP_fisherkpp_neumann(d, T, L)
+function MLP_fisherkpp_neumann(;d, T, M, L, K=1)
         tspan = (0e0,T)
         ##########################
         ###### PDE Problem #######
@@ -19,7 +19,7 @@ function MLP_fisherkpp_neumann(d, T, L)
                 ( 1e0 .- max.(0e0,v_y) )
 
         # defining the problem
-        alg = MLP(M = L, K = 1, L = L)
+        alg = MLP(;M, K, L)
         prob = PIDEProblem(g, f, μ, σ, x0, tspan, neumann_bc = neumann_bc)
 
         # solving

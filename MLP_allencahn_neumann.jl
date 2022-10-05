@@ -4,7 +4,7 @@ using Test
 using Flux
 using Revise
 
-function MLP_allencahn_neumann(d, T, L)
+function MLP_allencahn_neumann(;d, T, M, L, K=1)
         tspan = (0f0,T)
         ##########################
         ###### PDE Problem #######
@@ -20,7 +20,7 @@ function MLP_allencahn_neumann(d, T, L)
         # defining the problem
         prob = PIDEProblem(g_mlp, f_mlp, μ_mlp, σ_mlp, x0, tspan,
                            neumann_bc = neumann_bc)
-        alg = MLP(M = L, K = 10, L = L, mc_sample = mc_sample )
+        alg = MLP(;M, K, L, mc_sample)
         # solving
         sol = solve(prob, alg, multithreading=true)
         return sol.us[end]
