@@ -3,3 +3,4 @@
 *.png
 Manifest.toml
 # *.jld2
+*.code-workspace
