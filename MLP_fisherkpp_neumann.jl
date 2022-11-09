@@ -15,7 +15,7 @@ function MLP_fisherkpp_neumann(;d, T, M, L, K=1)
         μ(X,p,t) = 0e0 # advection coefficients
         σ(X,p,t) = 1e-1 # diffusion coefficients
         g(x) = exp.(-0.25e0 * sum(x.^2))   # initial condition
-        f(y, z, v_y, v_z, p, t) = max.(0e0, v_y) .* 
+        f(y, z, v_y, v_z, ∇u_x, ∇u_y, p, t) = max.(0e0, v_y) .* 
                 ( 1e0 .- max.(0e0,v_y) )
 
         # defining the problem

@@ -21,8 +21,9 @@ using DataFrames
 using Latexify # we could have used PrettyTables
 using LaTeXStrings
 using CSV, JLD2, ProgressMeter
-mydir = "results/$(today())"
-isdir(mydir) ? nothing : mkdir(mydir)
+using Dates
+mydir = "results/$(today())/examples"
+isdir(mydir) ? nothing : mkpath(mydir)
 
 include("DeepSplitting_nonlocal_comp.jl")
 include("DeepSplitting_nonlocal_sinegordon.jl")
@@ -38,13 +39,16 @@ include("MLP_allencahn_neumann.jl")
 
 examples = ["rep_mut", "nonlocal_comp", "nonlocal_sinegordon", "fisherkpp_neumann", "allencahn_neumann"]
 ds = [1, 2, 5, 10]
-if example == :rep_mut
-    Ts = [1/10, 1/5, 1/2]
-else
-    Ts = [1/5, 1/2, 1.0]
-end
+
 
 for example in examples
+    
+    if example == :rep_mut
+        Ts = [1/10, 1/5, 1/2]
+    else
+        Ts = [1/5, 1/2, 1.0]
+    end
+
 println("================
     $example
 ================")
@@ -130,5 +134,6 @@ println("================
         write(io,tab_mlp);
         close(io)
     # end
-    println("All results saved in $mydir")
+    println("Results for $example saved in $mydir")
 end
+println("Loop ended successfully")

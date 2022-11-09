@@ -14,7 +14,7 @@ function MLP_nonlocal_sinegordon(;d, T, M, L, K=1)
         μ(X,p,t) = 0e0 # advection coefficients
         σ(X,p,t) = 1e-1 # diffusion coefficients
         g(x) = exp.(-0.25e0 * sum(x.^2))   # initial condition
-        f(y, z, v_y, v_z, p, t) = sin.(v_y) .- v_z * (2 * π )^(d/2) * σ_sampling^d
+        f(y, z, v_y, v_z, ∇u_x, ∇u_y, p, t) = sin.(v_y) .- v_z * (2 * π )^(d/2) * σ_sampling^d
 
         # defining the problem
         mc_sample = NormalSampling(σ_sampling,true)
