@@ -37,7 +37,9 @@ include("MLP_fisherkpp_neumann.jl")
 include("MLP_rep_mut.jl")
 include("MLP_allencahn_neumann.jl")
 
-examples = ["rep_mut", "nonlocal_comp", "nonlocal_sinegordon", "fisherkpp_neumann", "allencahn_neumann"]
+# examples = ["rep_mut", "nonlocal_comp", "nonlocal_sinegordon", "fisherkpp_neumann", "allencahn_neumann"]
+examples = ["nonlocal_comp", "nonlocal_sinegordon", "fisherkpp_neumann", "allencahn_neumann"]
+
 ds = [1, 2, 5, 10]
 
 

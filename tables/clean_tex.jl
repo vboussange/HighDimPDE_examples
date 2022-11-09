@@ -8,7 +8,7 @@ cd(@__DIR__)
 using Latexify
 using CSV
 using Glob
-files = glob("Table*.tex")
+files = glob("clean_tables_rev/raw/Table*.tex")
 
 for file in files
     name = basename(file)
@@ -18,7 +18,7 @@ for file in files
                                     "0.2000000" => "\\nicefrac{1}{5}",
                                     "0.5000000" => "\\nicefrac{1}{2}", )
     println(tex_string)
-    open("clean_tables/$name", "w") do io
+    open("clean_tables_rev/$name", "w") do io
         write(io,tex_string);
     end
 end
