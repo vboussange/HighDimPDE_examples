@@ -126,7 +126,7 @@ ax.plot([1,1],[-1,1], c = "black", linewidth=3.) # half plane
 display(fig)
 
 ax.scatter([X0[1]],[X0[2]], c = "tab:blue", zorder = 10)
-ax.annotate("a", (X0[1],X0[2]),(5e0, 5e0), textcoords="offset points",)
+ax.annotate(L"a", (X0[1],X0[2]),(5e0, 5e0), textcoords="offset points",)
 display(fig)
 
 coord_refs = []
@@ -159,4 +159,4 @@ display(fig)
 # ax.scatter([X0[1]],[X0[2]], c = "tab:blue", zorder = 10)
 
 display(fig)
-fig.savefig("reflection_cube.pdf", dpi=300)
+fig.savefig("reflection_cube.pdf", dpi=300, bbox_inches="tight")

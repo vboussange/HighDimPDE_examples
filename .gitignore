@@ -1,4 +1,4 @@
-# *.pdf
+*.pdf
 *.stdout
 *.png
 Manifest.toml
