@@ -116,30 +116,47 @@ fig, ax = plt.subplots(1)
 ax.axis("off")
 d = 2
 X0 = [-0.9,-0.3]
-X1 = X0 .+ (6, -4.4)
+X1 = X0 .+ (3.2, -3.4)
 
 # square plane
-ax.plot([-1,1],[-1,-1], c = "tab:blue") # half plane
-ax.plot([-1,1],[1,1], c = "tab:blue") # half plane
-ax.plot([-1,-1],[-1,1], c = "tab:blue") # half plane
-ax.plot([1,1],[-1,1], c = "tab:blue") # half plane
+ax.plot([-1,1],[-1,-1], c = "black", linewidth=3.) # half plane
+ax.plot([-1,1],[1,1], c = "black", linewidth=3.) # half plane
+ax.plot([-1,-1],[-1,1], c = "black", linewidth=3.) # half plane
+ax.plot([1,1],[-1,1], c = "black", linewidth=3.) # half plane
 display(fig)
 
-for r in 1:6
+ax.scatter([X0[1]],[X0[2]], c = "tab:blue", zorder = 10)
+ax.annotate("a", (X0[1],X0[2]),(5e0, 5e0), textcoords="offset points",)
+display(fig)
+
+coord_refs = []
+for r in 1:3
     X11, c = reflect_once(X0, X1, fill(-1.,d), fill(1.,d))
 
-    ax.plot([X0[1],c[1]],[X0[2],c[2]], c = "black", ) # original segment
-    display(fig)
-    # ax.plot([c[1],X11[1]],[c[2],X11[2]], c = "black", linestyle = "dashed") # reflected segment
+    ax.plot([X0[1],X1[1]],[X0[2],X1[2]], c = "tab:blue", ) # original segment
     display(fig)
 
-    # plotting dots
-    ax.scatter([X0[1]],[X0[2]], c = "tab:red", zorder = 10)
-    # ax.scatter([X1[1]],[X1[2]], c = "tab:red", zorder = 10)
-    # ax.scatter([X11[1]],[X11[2]], c = "tab:red", zorder = 10)
-    ax.scatter([c[1]],[c[2]], c = "tab:red", zorder = 10)
+    ax.scatter([X1[1]],[X1[2]], c = "tab:blue", zorder = 10)
+    push!(coord_refs, (X1[1],X1[2]))
     X0 = c
     X1 = X11
 end
+
+ax.annotate(L"b = P(\mathcal{R}_0(c,d))", coord_refs[1], (5e0, 5e0), textcoords="offset points",)
+display(fig)
+ax.annotate(L"P(\mathcal{R}_1(c,d))", coord_refs[2], (5e0, 5e0), textcoords="offset points",)
+display(fig)
+ax.annotate(L"P(\mathcal{R}_2(c,d))", coord_refs[3], (5e0, 5e0), textcoords="offset points",)
+display(fig)
+
+ax.plot([c[1],X1[1]],[c[2],X1[2]], c = "tab:blue", ) # original segment
+display(fig)
+ax.scatter([X1[1]],[X1[2]], c = "tab:blue", zorder = 10)
+ax.annotate(L"P(\mathcal{R}_4(c,d)) = R(a,b)", (X1[1],X1[2]), (-4e1, -1.5e1), textcoords="offset points",)
+display(fig)
+
+# plotting dots
+# ax.scatter([X0[1]],[X0[2]], c = "tab:blue", zorder = 10)
+
 display(fig)
 fig.savefig("reflection_cube.pdf", dpi=300)
