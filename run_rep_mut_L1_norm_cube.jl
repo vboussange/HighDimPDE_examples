@@ -1,7 +1,7 @@
 #= 
 Run DeepSplitting with rep mut
 with x0_sample
-and computing L1 norm on the whole hypercube
+and computing L2 norm on the whole hypercube
 * Arguments
 - `ARGS[1] = cuda_device::Int`
 - `ARGS[2] = example::Symbol`
@@ -22,16 +22,16 @@ using DataFrames
 using Latexify # we could have used PrettyTables
 using LaTeXStrings
 using CSV, JLD2, ProgressMeter, Dates
-mydir = "results/$(today())/results_rep_mut_x0_sample_L1"
+mydir = "results/$(today())/results_rep_mut_x0_sample_L2"
 isdir(mydir) ? nothing : mkpath(mydir)
 
-include("DeepSplitting_rep_mut_x0_sample_L1.jl")
+include("DeepSplitting_rep_mut_x0_sample_L2.jl")
 
 ds = [1, 2, 5, 10]
 
 Ts = [1/10, 1/5, 1/2]
 
-deepsplitting_fun = DeepSplitting_rep_mut_L1
+deepsplitting_fun = DeepSplitting_rep_mut_L2
 # Deepsplitting
 N = 10
 
@@ -39,9 +39,9 @@ nruns = 5 #number of runs per example
 progr = Progress( length(ds) * length(Ts) * nruns, showspeed = true, barlen = 10)
 println("Experiment started with Ts = $Ts.")
 
-names_df = [L"d", L"T", L"N", L"L^1-"*"approx. error", "Std. dev. error", "avg. runtime (s)"]
+names_df = [L"d", L"T", L"N", L"L^2-"*"approx. error", "Std. dev. error", "avg. runtime (s)"]
 df_ds = DataFrame(); [df_ds[!,names_df[i]] = [Int64[], Int64[], Int64[], Float64[], Float64[], Float64[] ][i] for i in 1:length(names_df)]
-dfu_ds = DataFrame(); [dfu_ds[!,c] = Float64[] for c in ["d","T","N","L1","time_simu"]];
+dfu_ds = DataFrame(); [dfu_ds[!,c] = Float64[] for c in ["d","T","N","L2","time_simu"]];
 
 # running for precompilation
 for _ in 1:nruns         
@@ -51,7 +51,7 @@ end
 
 for _ in 1:2 #burnin : first loop to heat up the gpu
     for T in Ts, d in ds
-            u_ds = DataFrame("L1" => Float64[], "time" => Float64[])
+            u_ds = DataFrame("L2" => Float64[], "time" => Float64[])
             for i in 1:nruns
                 ##################
                 # Deep Splitting #
@@ -59,22 +59,22 @@ for _ in 1:2 #burnin : first loop to heat up the gpu
                 println("d=",d," T=",T," i=",i)
                 println("DeepSplitting")
                 sol_ds = @timed deepsplitting_fun(;d, T, N, cuda_device, maxiters = 1000)
-                L1err = sol_ds.value[1]
-                @show L1err
+                L2err = sol_ds.value[1]
+                @show L2err
                 @show sol_ds.time
 
                 push!(u_ds,[sol_ds.value[1],sol_ds.time])
                 push!(dfu_ds,(d, T, N, u_ds[end,:]...))
-                CSV.write(mydir*"/rep_mut_ds_x0_sample_L1.csv", dfu_ds)
-                JLD2.save(mydir*"/rep_mut_ds_x0_sample_L1.jld2", Dict("dfu_ds" => dfu_ds))
+                CSV.write(mydir*"/rep_mut_ds_x0_sample_L2.csv", dfu_ds)
+                JLD2.save(mydir*"/rep_mut_ds_x0_sample_L2.jld2", Dict("dfu_ds" => dfu_ds))
                 next!(progr)
             end
-            push!(df_ds, (d, T, N, mean(u_ds.L1), std(u_ds.L1), mean(u_ds.time)))
+            push!(df_ds, (d, T, N, mean(u_ds.L2), std(u_ds.L2), mean(u_ds.time)))
     end
     sort!(df_ds, L"T");
     #ds
     tab_ds = latexify(df_ds,env=:tabular,fmt="%.7f") #|> String
-    io = open(mydir*"/rep_mut_ds_x0_sample_L1.tex", "w")
+    io = open(mydir*"/rep_mut_ds_x0_sample_L2.tex", "w")
     write(io,tab_ds);
     close(io)
 end

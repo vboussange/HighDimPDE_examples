@@ -11,7 +11,7 @@ import Flux
 import Flux.tanh, Flux.relu, Flux.Dense
 using Revise
 
-function DeepSplitting_rep_mut_L1(; d, T, N, batch_size = 8000, K = 1, cuda_device=5, maxiters = 2000)
+function DeepSplitting_rep_mut_L2(; d, T, N, batch_size = 8000, K = 1, cuda_device=5, maxiters = 2000)
         dt = T / N
         tspan = (0f0,T)
         ##############################
@@ -66,9 +66,9 @@ function DeepSplitting_rep_mut_L1(; d, T, N, batch_size = 8000, K = 1, cuda_devi
                 nint = 1000
                 for i in 1:nint
                     x = mc_sample(x0)
-                    r+= abs(uanal(x) - uapprox(reshape(x,:,1))[])
+                    r+= (uanal(x) - uapprox(reshape(x,:,1))[])^2
                 end
-                return r / nint
+                return sqrt(r / nint)
         end
 
         # defining the problem
