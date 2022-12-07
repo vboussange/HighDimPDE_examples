@@ -31,7 +31,7 @@ using LaTeXStrings
 using CSV, JLD2, ProgressMeter
 using Dates
 
-include("DeepSplitting_rep_mut_x0_sample_L1.jl")
+include("DeepSplitting_rep_mut_x0_sample_abs_L2.jl")
 
 # common to all experiments
 d = 5

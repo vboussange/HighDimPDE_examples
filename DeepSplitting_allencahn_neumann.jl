@@ -55,7 +55,7 @@ end
 if false
         using BenchmarkTools
         d = 1
-        dt = 1f-1
+        N = 10
         T = 1f0
-        @time DeepSplitting_allencahn_neumann(d, T, dt, 6)
+        @time DeepSplitting_allencahn_neumann(;d, T, N, cuda_device = 1, batch_size = 10^3)
 end

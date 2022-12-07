@@ -73,8 +73,11 @@ end
 
 if false
         d = 10
-        dt = 5f-2
+        N = 10
         T = 5f-1
-        @time sol, lossmax, truesol = DeepSplitting_rep_mut(d, T, dt, 7)
+        @time sol, truesol = DeepSplitting_rep_mut(;d, T, N, cuda_device=1, batch_size=10^5)
+        # batch_size=10^3: 27.335493 seconds, GPU 30%
+        # batch_size=10^4: 29.422127 seconds, GPU 50%
+        # batch_size=10^5 : 88.612500 seconds, GPU 70%
         println("True solution: $truesol, Deep splitting approximation = $(sol)")
 end

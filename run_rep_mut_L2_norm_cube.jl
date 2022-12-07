@@ -25,7 +25,7 @@ using CSV, JLD2, ProgressMeter, Dates
 mydir = "results/$(today())/results_rep_mut_x0_sample_L2"
 isdir(mydir) ? nothing : mkpath(mydir)
 
-include("DeepSplitting_rep_mut_x0_sample_L2.jl")
+include("DeepSplitting_rep_mut_x0_sample_abs_L2.jl")
 
 ds = [1, 2, 5, 10]
 
