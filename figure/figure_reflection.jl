@@ -142,17 +142,17 @@ for r in 1:3
     X1 = X11
 end
 
-ax.annotate(L"b = P(\mathcal{R}_0(c,d))", coord_refs[1], (5e0, 5e0), textcoords="offset points",)
+ax.annotate(L"b = P(\mathcal{R}_0(a,b))", coord_refs[1], (5e0, 5e0), textcoords="offset points",)
 display(fig)
-ax.annotate(L"P(\mathcal{R}_1(c,d))", coord_refs[2], (5e0, 5e0), textcoords="offset points",)
+ax.annotate(L"P(\mathcal{R}_1(a,b))", coord_refs[2], (5e0, 5e0), textcoords="offset points",)
 display(fig)
-ax.annotate(L"P(\mathcal{R}_2(c,d))", coord_refs[3], (5e0, 5e0), textcoords="offset points",)
+ax.annotate(L"P(\mathcal{R}_2(a,b))", coord_refs[3], (5e0, 5e0), textcoords="offset points",)
 display(fig)
 
 ax.plot([c[1],X1[1]],[c[2],X1[2]], c = "tab:blue", ) # original segment
 display(fig)
 ax.scatter([X1[1]],[X1[2]], c = "tab:blue", zorder = 10)
-ax.annotate(L"P(\mathcal{R}_4(c,d)) = R(a,b)", (X1[1],X1[2]), (-4e1, -1.5e1), textcoords="offset points",)
+ax.annotate(L"P(\mathcal{R}_4(a,b)) = R(a,b)", (X1[1],X1[2]), (-4e1, -1.5e1), textcoords="offset points",)
 display(fig)
 
 # plotting dots
