@@ -38,6 +38,8 @@ T = 0.2
 N = 2
 K = 3
 batch_size = 200
+nhlayers = 1
+hls = d + 50
 
 mydir = "results/$(today())/explo_param_DS_T=$T"
 isdir(mydir) ? nothing : mkpath(mydir)
@@ -46,14 +48,15 @@ isdir(mydir) ? nothing : mkpath(mydir)
 Ns = 1:5
 batch_sizes = [10^i for i in 1:4]
 Ks = 1:5
+nshlayers = -1:3 # number of hidden layers
+hlss = d:20:85 # hidden layer sizes
 
 default_settings = Dict{Symbol,Any}()
-@pack! default_settings = d, T, N, batch_size, K
+@pack! default_settings = d, T, N, batch_size, K, nhlayers, hls
 
-explo_all = Dict("explo_K" => Dict[], "explo_batch_size" => Dict[], "explo_N" => Dict[])
-dict_results = Dict("explo_K" => Dict{String,Any}(), 
-                    "explo_batch_size" => Dict{String,Any}(), 
-                    "explo_N" => Dict{String,Any}())
+scenarios = ["explo_K", "explo_batch_size", "explo_N", "explo_nhlayers", "explo_hls"]
+explo_all = Dict([ scen => Dict[] for scen in scenarios]...)
+dict_results = Dict([ scen => Dict{String,Any}() for scen in scenarios]...)
 
 for K in Ks
     dict_temp = copy(default_settings)
@@ -72,6 +75,18 @@ for batch_size in batch_sizes
     dict_temp[:batch_size] = batch_size
     push!(explo_all["explo_batch_size"], dict_temp)
 end
+for nhlayers in nshlayers
+    dict_temp = copy(default_settings)
+    dict_temp[:batch_size] = 1000
+    @pack! dict_temp = nhlayers
+    push!(explo_all["explo_nhlayers"], dict_temp)
+end
+for hls in hlss
+    dict_temp = copy(default_settings)
+    dict_temp[:batch_size] = 1000
+    @pack! dict_temp = hls
+    push!(explo_all["explo_hls"], dict_temp)
+end
 
 # result containers
 # summary stats table
@@ -81,10 +96,10 @@ df_ds_init = DataFrame("Mean" => Float64[],
                 L"L^1-"*"approx. error" => Float64[],
                 "Std. dev. error" => Float64[],
                 "avg. runtime (s)" => Float64[], 
-                (string.(keys(default_settings)) .=> [Int64[], Float64[], Int64[], Int64[], Int64[]])...)
+                (string.(keys(default_settings)) .=> [Int64[], Float64[], Int64[], Int64[], Int64[], Int64[], Int64[]])...)
 
 # complete table
-dfu_ds_init = DataFrame((string.(keys(default_settings)) .=> [Int64[], Float64[], Int64[], Int64[], Int64[]])...,
+dfu_ds_init = DataFrame((string.(keys(default_settings)) .=> [Int64[], Float64[], Int64[], Int64[], Int64[], Int64[], Int64[]])...,
                 "u" => Float64[],
                 "time simu" => Float64[],
                 "ref_value" => Float64[])

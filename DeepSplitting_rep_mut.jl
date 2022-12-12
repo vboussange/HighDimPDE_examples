@@ -4,20 +4,40 @@ using Test
 using Flux
 using Revise
 
-function DeepSplitting_rep_mut(; d, T, N, batch_size = 8000, K = 1, cuda_device=0, maxiters = 1000)
+# function used to vary the number of layers and neurons
+function make_nn(;d, 
+                nhlayers = 1, # number of hiddel layers
+                hls = d + 50 # hidden layer size
+                )
+        if nhlayers == -1
+                nn = Flux.Chain(Dense(d, 1, x->x^2))
+        else
+                hlayers = [Dense(hls, hls, tanh) for _ in 1:nhlayers]
+                nn = Flux.Chain(Dense(d, hls, tanh),
+                                hlayers...,
+                                Dense(hls, 1, x->x^2))
+        end
+        return nn
+end
+
+function DeepSplitting_rep_mut(; 
+                                d, 
+                                T, 
+                                N, 
+                                batch_size = 8000, 
+                                K = 1, 
+                                cuda_device=0, 
+                                maxiters = 1000,
+                                kwargs...)
         dt = T / N
         tspan = (0f0,T)
         ##############################
         #######   ML params    #######
         ##############################
-        
-
-        hls = d + 50 #hidden layer size
 
         # Neural network used by the scheme
-        nn = Flux.Chain(Dense(d, hls, tanh),
-                        Dense(hls,hls,tanh),
-                        Dense(hls, 1, x->x^2))
+        make_nn(;d, kwargs...)
+        
 
         opt = Flux.ADAM(1e-3) #optimiser
 
