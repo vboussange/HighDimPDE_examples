@@ -38,7 +38,7 @@ U = 1f0
 # overwritten for certain experiments
 N = 2
 K = 3
-batch_size = 1000
+batch_size = 8000
 nhlayers = 1
 hls = d + 10
 
@@ -70,7 +70,7 @@ end
 for N in Ns
     dict_temp = copy(default_settings)
     dict_temp[:N] = N
-    dict_temp[:T] = 10.0
+    dict_temp[:T] = 1.0
     push!(explo_all["explo_N"], dict_temp)
 end
 for batch_size in batch_sizes
@@ -80,13 +80,13 @@ for batch_size in batch_sizes
 end
 for nhlayers in nshlayers
     dict_temp = copy(default_settings)
-    dict_temp[:batch_size] = 1000
+    # dict_temp[:batch_size] = 1000
     @pack! dict_temp = nhlayers
     push!(explo_all["explo_nhlayers"], dict_temp)
 end
 for hls in hlss
     dict_temp = copy(default_settings)
-    dict_temp[:batch_size] = 1000
+    # dict_temp[:batch_size] = 1000
     @pack! dict_temp = hls
     push!(explo_all["explo_hls"], dict_temp)
 end
