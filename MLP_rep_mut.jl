@@ -4,13 +4,12 @@ using Test
 using Flux
 using Revise
 
-function MLP_rep_mut(;d, T, M, L, K=1)
+function MLP_rep_mut(;d, T, M, L, K=1, U = 5e-1)
         tspan = (0e0,T)
         ##########################
         ###### PDE Problem #######
         ##########################
         ss0 = 5e-2#std g0
-        U = 5e-1
         mc_sample_∂ = (fill(-U, d), fill(U, d))
         x0 = fill(0e0,d) # initial point
         μ(X,p,t) = 0e0 # advection coefficients

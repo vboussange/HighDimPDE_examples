@@ -31,7 +31,8 @@ T = 0.5
 M = 5
 K = 5
 L = 4
-mydir = "results/$(today())/explo_param_MLP_T=$(T)_explo_K_M_4"
+U = 1e0
+mydir = "results/$(today())/explo_param_MLP_T=$(T)_explo_uniform_sampling_1e0"
 isdir(mydir) ? nothing : mkpath(mydir)
 
 # Array of params to explore
@@ -40,7 +41,7 @@ Ks = 1:4:20
 Ls = 1:5
 
 default_settings = Dict{Symbol,Any}()
-@pack! default_settings = d, T, M, K, L
+@pack! default_settings = d, T, M, K, L, U
 
 # scenarios = ["explo_K", "explo_M", "explo_L"]
 scenarios = ["explo_L"]
@@ -73,10 +74,10 @@ df_ds_init = DataFrame("Mean" => Float64[],
                 L"L^1-"*"approx. error" => Float64[],
                 "Std. dev. error" => Float64[],
                 "avg. runtime (s)" => Float64[], 
-                (string.(keys(default_settings)) .=> [Int64[], Float64[], Int64[], Int64[], Int64[]])...)
+                (string.(keys(default_settings)) .=> [Int64[], Float64[], Int64[], Int64[], Int64[], Float64[]])...)
 
 # complete table
-dfu_ds_init = DataFrame((string.(keys(default_settings)) .=> [Int64[], Float64[], Int64[], Int64[], Int64[]])...,
+dfu_ds_init = DataFrame((string.(keys(default_settings)) .=> [Int64[], Float64[], Int64[], Int64[], Int64[],Float64[]])...,
                 "u" => Float64[],
                 "time simu" => Float64[],
                 "ref_value" => Float64[])
