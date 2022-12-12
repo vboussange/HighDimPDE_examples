@@ -287,15 +287,15 @@
     f(n,M) &= \sum_{l=0}^{n-1}
 		\sum_{m=1}^{M^{n-l}}\left[
     d % X
-    + f(l,m)
-    + \mathbbm{1}_\N(l) f(l-1,m)\right] \\
+    + f(l,M)
+    + \mathbbm{1}_\N(l) f(l-1,M)\right] \\
     &\quad +
     \sum_{l=0}^{n-1}
 		\sum_{m=1}^{M^{n-l}} 
 		\sum_{k=1}^{K_{n,l,m}}\left[
 		d
-    + f(l,m)
-    + \mathbbm{1}_\N(l) f(l-1,m)\right] +
+    + f(l,M)
+    + \mathbbm{1}_\N(l) f(l-1,M)\right]
     + \mathbbm{1}_\N(n) \sum_{m=1}^{M^n} d
 	\end{split}
 \end{equation}

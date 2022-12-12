@@ -23,26 +23,22 @@ end
 indicator(l) = l < 1 ? 0 : 1
 function nb_rand_var_eval_MLP(d, L, M, K)
     nb_rand_var = 0
-    if !(L < 0)
-        for l in 0:L-1, m in 1:M^(L-l)
-            nb_rand_var += d + nb_rand_var_eval_MLP(d, l, m, K) + indicator(l) * nb_rand_var_eval_MLP(d, l-1, m, K)
-        end
-        for l in 0:L-1, m in 1:M^(L-l), k in 1:K
-            nb_rand_var += d + nb_rand_var_eval_MLP(d, l, m, K) + indicator(l) * nb_rand_var_eval_MLP(d, l-1, m, K)
-        end
+    for l in 0:L-1, m in 1:M^(L-l)
+        nb_rand_var += d + nb_rand_var_eval_MLP(d, l, M, K) + indicator(l) * nb_rand_var_eval_MLP(d, l-1, M, K)
+    end
+    for l in 0:L-1, m in 1:M^(L-l), k in 1:K
+        nb_rand_var += d + nb_rand_var_eval_MLP(d, l, M, K) + indicator(l) * nb_rand_var_eval_MLP(d, l-1, M, K)
     end
     if !(L < 1)
-        for m in 1:M^L
-            nb_rand_var += d
-        end
+        nb_rand_var += M^L * d
     end
     return nb_rand_var
 end
 
 # testing nb_rand_var_eval_MLP
-nb_rand_var_eval_MLP(10, 2, 2, 5)
+nb_rand_var_eval_MLP(10, 6, 6, 6)
 # testing nb_rand_var_eval_DS
-nb_rand_var_eval_DS(1, 1, 1, 1, 1000)
+nb_rand_var_eval_DS(10, 10, 1000, 1, 1)
 
 ###########
 ### DS ####

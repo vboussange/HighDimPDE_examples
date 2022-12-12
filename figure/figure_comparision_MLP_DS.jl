@@ -2,7 +2,7 @@
 Comparing time taken for replicator mutator, 
 with replicator mutator example
 
-For now, replace by script "complexity_vs_error.jl"
+For now, replaced by script "complexity_vs_error.jl"
 =#
 
 cd(@__DIR__)

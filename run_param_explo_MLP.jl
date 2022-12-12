@@ -32,7 +32,7 @@ M = 5
 K = 5
 L = 4
 U = 1e0
-mydir = "results/$(today())/explo_param_MLP_T=$(T)_explo_uniform_sampling_1e0"
+mydir = "results/$(today())/explo_param_MLP_T=$(T)_with_K_explo_uniform_sampling_1e0"
 isdir(mydir) ? nothing : mkpath(mydir)
 
 # Array of params to explore
@@ -44,16 +44,16 @@ default_settings = Dict{Symbol,Any}()
 @pack! default_settings = d, T, M, K, L, U
 
 # scenarios = ["explo_K", "explo_M", "explo_L"]
-scenarios = ["explo_L"]
+scenarios = ["explo_K", "explo_L"]
 explo_all = Dict([ scen => Dict[] for scen in scenarios]...)
 dict_results = Dict([ scen => Dict{String,Any}() for scen in scenarios]...)
 
-# for K in Ks
-#     dict_temp = copy(default_settings)
-#     dict_temp[:K] = K
-#     dict_temp[:M] = 4
-#     push!(explo_all["explo_K"], dict_temp)
-# end
+for K in Ks
+    dict_temp = copy(default_settings)
+    dict_temp[:K] = K
+    dict_temp[:L] = 5
+    push!(explo_all["explo_K"], dict_temp)
+end
 # for M in Ms
 #     dict_temp = copy(default_settings)
 #     dict_temp[:M] = M
