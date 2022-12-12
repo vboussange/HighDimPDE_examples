@@ -6,6 +6,9 @@ cd(@__DIR__)
 using PyPlot
 using HighDimPDE
 using LinearAlgebra
+rcParams = PyPlot.PyDict(PyPlot.matplotlib."rcParams")
+rcParams["font.size"] =14
+
 """
     function reflect_once(a::T, b::T, s::T, e::T) where T <: Vector
 
@@ -105,7 +108,7 @@ ax.annotate(L"c",(c[1],c[2]), (0, 1.5e1), textcoords="offset points")
 display(fig)
 ax.annotate(L"n",(c[1],c[2]), (-1.5e1, -4e1), textcoords="offset points", c="tab:red")
 display(fig)
-ax.annotate(L"n\langle n, b-c\rangle",(c[1],c[2]), (-5.5e1, -7.e1), textcoords="offset points", c="tab:red")
+ax.annotate(L"n\langle n, b-c\rangle",(c[1],c[2]), (-8e1, -7.e1), textcoords="offset points", c="tab:red")
 display(fig)
 fig.savefig("reflection_half_plane.pdf", dpi=300)
 
@@ -126,7 +129,7 @@ ax.plot([1,1],[-1,1], c = "black", linewidth=3.) # half plane
 display(fig)
 
 ax.scatter([X0[1]],[X0[2]], c = "tab:blue", zorder = 10)
-ax.annotate(L"a", (X0[1],X0[2]),(5e0, 5e0), textcoords="offset points",)
+ax.annotate(L"a", (X0[1],X0[2]),(-5e0, -2e1), textcoords="offset points",)
 display(fig)
 
 coord_refs = []
