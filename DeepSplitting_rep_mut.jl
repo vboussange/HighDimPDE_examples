@@ -52,7 +52,7 @@ function DeepSplitting_rep_mut(;
         μ(X,p,t) = 0f0 # advection coefficients
         σ(X,p,t) = 1f-1 # diffusion coefficients
         g(x) = Float32((2f0*π)^(-d/2f0)) * ss0^(- Float32(d) * 5f-1) * 
-                exp.(-5f-1 *sum(x .^2 / ss0, dims = 1)) # initial condition
+                exp.(-5f-1 *sum(x .^2f0 / ss0, dims = 1)) # initial condition
         m(x) = - 5f-1 * sum(x.^2, dims=1)
         _scale = Float32((2 * π )^(d/2) * σ_sampling^d)
         f(y, z, v_y, v_z, ∇u_x, ∇u_y, p, t) =  v_y .* (m(y) .- _scale * exp.(5f-1 * sum(z .^2, dims = 1) / σ_sampling^2 ) .* v_z .* m(z))
