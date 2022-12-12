@@ -37,7 +37,7 @@ isdir(mydir) ? nothing : mkpath(mydir)
 # Array of params to explore
 Ms = 1:5
 Ks = 1:4:20
-Ls = 3:7
+Ls = 1:5
 
 default_settings = Dict{Symbol,Any}()
 @pack! default_settings = d, T, M, K, L
@@ -122,5 +122,5 @@ for scen in keys(explo_all)
     @pack! dict_results[scen] = df_ds, dfu_ds
 end
 suffix_name_file = prod(scenarios)
-JLD2.save(mydir*"/dict_results_MLP_param_$suffix_name_file.jld2", dict_results)
+JLD2.save(mydir*"/dict_results_MLP_param_$(suffix_name_file)_cpu_5.jld2", dict_results)
 println("All results saved in $mydir")
