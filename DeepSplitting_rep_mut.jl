@@ -36,7 +36,7 @@ function DeepSplitting_rep_mut(;
         ##############################
 
         # Neural network used by the scheme
-        make_nn(;d, kwargs...)
+        nn = make_nn(;d, kwargs...)
         
 
         opt = Flux.ADAM(1e-3) #optimiser
