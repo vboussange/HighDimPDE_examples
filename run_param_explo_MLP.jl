@@ -37,30 +37,31 @@ isdir(mydir) ? nothing : mkpath(mydir)
 # Array of params to explore
 Ms = 1:5
 Ks = 1:4:20
-Ls = 1:5
+Ls = 3:7
 
 default_settings = Dict{Symbol,Any}()
 @pack! default_settings = d, T, M, K, L
 
-explo_all = Dict("explo_K" => Dict[], "explo_M" => Dict[], "explo_L" => Dict[])
-dict_results = Dict("explo_K" => Dict{String,Any}(), 
-                    "explo_M" => Dict{String,Any}(), 
-                    "explo_L" => Dict{String,Any}())
+# scenarios = ["explo_K", "explo_M", "explo_L"]
+scenarios = ["explo_L"]
+explo_all = Dict([ scen => Dict[] for scen in scenarios]...)
+dict_results = Dict([ scen => Dict{String,Any}() for scen in scenarios]...)
 
-for K in Ks
-    dict_temp = copy(default_settings)
-    dict_temp[:K] = K
-    dict_temp[:M] = 4
-    push!(explo_all["explo_K"], dict_temp)
-end
-for M in Ms
-    dict_temp = copy(default_settings)
-    dict_temp[:M] = M
-    push!(explo_all["explo_M"], dict_temp)
-end
+# for K in Ks
+#     dict_temp = copy(default_settings)
+#     dict_temp[:K] = K
+#     dict_temp[:M] = 4
+#     push!(explo_all["explo_K"], dict_temp)
+# end
+# for M in Ms
+#     dict_temp = copy(default_settings)
+#     dict_temp[:M] = M
+#     push!(explo_all["explo_M"], dict_temp)
+# end
 for L in Ls
     dict_temp = copy(default_settings)
     dict_temp[:L] = L
+    dict_temp[:M] = L
     push!(explo_all["explo_L"], dict_temp)
 end
 
@@ -86,7 +87,7 @@ nruns = 5 #number of runs per example
 progr = Progress( length(Ms) * length(Ls) * length(Ks) * nruns, showspeed = true, barlen = 10)
 # running for precompilation
 for _ in 1:nruns         
-    simul(;explo_all["explo_L"][1]...)
+    simul(;explo_all[scenarios[1]][1]...)
 end
 
 println("Experiment started")
@@ -120,6 +121,6 @@ for scen in keys(explo_all)
     end
     @pack! dict_results[scen] = df_ds, dfu_ds
 end
-
-JLD2.save(mydir*"/dict_results_MLP_param_explo.jld2", dict_results)
+suffix_name_file = prod(scenarios)
+JLD2.save(mydir*"/dict_results_MLP_param_$suffix_name_file.jld2", dict_results)
 println("All results saved in $mydir")

@@ -39,7 +39,7 @@ N = 2
 K = 3
 batch_size = 200
 nhlayers = 1
-hls = d + 50
+hls = d + 10
 
 mydir = "results/$(today())/explo_param_DS_T=$T"
 isdir(mydir) ? nothing : mkpath(mydir)
@@ -49,7 +49,7 @@ Ns = 1:5
 batch_sizes = [10^i for i in 1:4]
 Ks = 1:5
 nshlayers = -1:3 # number of hidden layers
-hlss = d:20:85 # hidden layer sizes
+hlss = 1:5:21 # hidden layer sizes
 
 default_settings = Dict{Symbol,Any}()
 @pack! default_settings = d, T, N, batch_size, K, nhlayers, hls
@@ -149,5 +149,5 @@ for scen in keys(explo_all)
 end
 
 suffix_name_file = prod(scenarios)
-JLD2.save(mydir*"/dict_results_DeepSplitting_param_$suffix_name_file.jld2", dict_results)
+JLD2.save(mydir*"/dict_results_DeepSplitting_param_$(suffix_name_file)_smaller_hls.jld2", dict_results)
 println("All results saved in $mydir")
