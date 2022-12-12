@@ -10,26 +10,47 @@ import Flux
 import Flux.tanh, Flux.relu, Flux.Dense
 using Revise
 
-function DeepSplitting_rep_mut(; d, T, N, batch_size = 8000, K = 1, cuda_device=0, maxiters = 2000)
+# function used to vary the number of layers and neurons
+function make_nn(;d, 
+        nhlayers = 1, # number of hiddel layers
+        hls = d + 50 # hidden layer size
+        )
+if nhlayers == -1
+        nn = Flux.Chain(Dense(d, 1, x->x^2))
+else
+        hlayers = [Dense(hls, hls, tanh) for _ in 1:nhlayers]
+        nn = Flux.Chain(Dense(d, hls, tanh),
+                        hlayers...,
+                        Dense(hls, 1, x->x^2))
+end
+return nn
+end
+
+function DeepSplitting_rep_mut(; 
+                                d, 
+                                T, 
+                                N, 
+                                batch_size = 8000, 
+                                K = 1, 
+                                cuda_device=0, 
+                                maxiters = 2000, 
+                                U = 5f-1,
+                                kwargs...)
         dt = T / N
         tspan = (0f0,T)
         ##############################
-        ####### ML params #######
+        #######   ML params    #######
         ##############################
 
-        hls = d + 50 #hidden layer size
-
         # Neural network used by the scheme
-        nn = Flux.Chain(Dense(d, hls, tanh),
-                        Dense(hls,hls,tanh),
-                        Dense(hls, 1, x->x^2))
+        nn = make_nn(;d, kwargs...)
 
-        opt = Flux.ADAM() # optimiser
+
+        opt = Flux.ADAM() #optimiser
 
         ##########################
         ###### PDE Problem #######
         ##########################
-        U = 5f-1
         domain = (fill(-U, d), fill(U, d))
         x0_sample = UniformSampling(domain...)
         ss0 = 5f-2#std g0
