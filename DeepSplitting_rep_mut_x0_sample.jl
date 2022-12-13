@@ -79,7 +79,7 @@ function DeepSplitting_rep_mut(;
         end
 
         # defining the problem
-        alg = DeepSplitting(nn, K=K, opt = opt, λs = [5e-3,1e-3],
+        alg = DeepSplitting(nn, K=K, opt = opt, λs = [1e-2,1e-3],
                 mc_sample = UniformSampling(domain[1], domain[2]) )
         prob = PIDEProblem(g, f, μ, σ, zeros(Float32,d), tspan, x0_sample = x0_sample)
         # solving
@@ -100,7 +100,7 @@ end
 if false
         d = 5
         N = 5 # time step
-        T = 5f-1
-        sol, truesol = DeepSplitting_rep_mut(;d, T, N, batch_size = 8000, K = 5,)
+        T = 1.
+        sol, truesol = DeepSplitting_rep_mut(;d, T, N, batch_size = 8000, K = 1,)
         println("True solution: $truesol, Deep splitting approximation = $(sol)")
 end
