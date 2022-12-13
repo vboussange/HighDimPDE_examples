@@ -37,59 +37,59 @@ T = 0.2
 U = 1f0
 # overwritten for certain experiments
 N = 2
-K = 3
-batch_size = 8000
+K = 5
+batch_size = 10000
 nhlayers = 1
-hls = d + 10
+hls = d + 50
 
-mydir = "results/$(today())/explo_param_DS_x0_sample_T=$(T)_U_1e0"
+mydir = "results/$(today())/explo_param_DS_x0_sample_U_1e0_batch_size_10000"
 isdir(mydir) ? nothing : mkpath(mydir)
 
 # Array of params to explore
 Ns = 1:5
-batch_sizes = [10^i for i in 1:4]
+batch_sizes = [10^i for i in 1:5]
 Ks = 1:5
 nshlayers = -1:3 # number of hidden layers
-hlss = 1:5:21 # hidden layer sizes
+hlss = 5:15:65 # hidden layer sizes
 
 default_settings = Dict{Symbol,Any}()
 @pack! default_settings = d, T, N, batch_size, K, nhlayers, hls, U
 
-scenarios = ["explo_K", "explo_batch_size", "explo_N", "explo_nhlayers", "explo_hls"]
-# scenarios = ["explo_nhlayers", "explo_hls"]
+# scenarios = ["explo_K", "explo_batch_size", "explo_N", "explo_nhlayers", "explo_hls"]
+scenarios = ["explo_N"]
 
 explo_all = Dict([ scen => Dict[] for scen in scenarios]...)
 dict_results = Dict([ scen => Dict{String,Any}() for scen in scenarios]...)
 
-for K in Ks
-    dict_temp = copy(default_settings)
-    dict_temp[:K] = K
-    dict_temp[:batch_size] = 50
-    push!(explo_all["explo_K"], dict_temp)
-end
+# for K in Ks
+#     dict_temp = copy(default_settings)
+#     dict_temp[:K] = K
+#     # dict_temp[:batch_size] = 5000
+#     push!(explo_all["explo_K"], dict_temp)
+# end
 for N in Ns
     dict_temp = copy(default_settings)
     dict_temp[:N] = N
     dict_temp[:T] = 1.0
     push!(explo_all["explo_N"], dict_temp)
 end
-for batch_size in batch_sizes
-    dict_temp = copy(default_settings)
-    dict_temp[:batch_size] = batch_size
-    push!(explo_all["explo_batch_size"], dict_temp)
-end
-for nhlayers in nshlayers
-    dict_temp = copy(default_settings)
-    # dict_temp[:batch_size] = 1000
-    @pack! dict_temp = nhlayers
-    push!(explo_all["explo_nhlayers"], dict_temp)
-end
-for hls in hlss
-    dict_temp = copy(default_settings)
-    # dict_temp[:batch_size] = 1000
-    @pack! dict_temp = hls
-    push!(explo_all["explo_hls"], dict_temp)
-end
+# for batch_size in batch_sizes
+#     dict_temp = copy(default_settings)
+#     dict_temp[:batch_size] = batch_size
+#     push!(explo_all["explo_batch_size"], dict_temp)
+# end
+# for nhlayers in nshlayers
+#     dict_temp = copy(default_settings)
+#     # dict_temp[:batch_size] = 1000
+#     @pack! dict_temp = nhlayers
+#     push!(explo_all["explo_nhlayers"], dict_temp)
+# end
+# for hls in hlss
+#     dict_temp = copy(default_settings)
+#     # dict_temp[:batch_size] = 1000
+#     @pack! dict_temp = hls
+#     push!(explo_all["explo_hls"], dict_temp)
+# end
 
 # result containers
 # summary stats table

@@ -7,7 +7,7 @@ script=$1
 echo "lauching script $script"
 date
 # Launching on GPU zero
-($HOME/utils/julia-1.7.2/bin/julia --project=. --threads=20 $script.jl $2 &> stdout/$script.stdout) 
+($HOME/utils/julia-1.7.2/bin/julia --project=. --threads=50 $script.jl $2 &> stdout/$script.stdout) 
 wait
 echo "computation over"
 date

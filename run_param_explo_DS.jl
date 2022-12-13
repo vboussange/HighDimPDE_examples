@@ -33,23 +33,23 @@ include("DeepSplitting_rep_mut.jl")
 
 # common to all experiments
 d = 5
-T = 0.2
+T = 1f0
 # overwritten for certain experiments
 N = 2
 K = 3
-batch_size = 200
+batch_size = 10000
 nhlayers = 1
-hls = d + 10
+hls = d + 50
 
 mydir = "results/$(today())/explo_param_DS_T=$T"
 isdir(mydir) ? nothing : mkpath(mydir)
 
 # Array of params to explore
 Ns = 1:5
-batch_sizes = [10^i for i in 1:4]
+batch_sizes = [10^i for i in 1:5]
 Ks = 1:5
 nshlayers = -1:3 # number of hidden layers
-hlss = 1:5:21 # hidden layer sizes
+hlss = 5:15:65 # hidden layer sizes
 
 default_settings = Dict{Symbol,Any}()
 @pack! default_settings = d, T, N, batch_size, K, nhlayers, hls
@@ -69,7 +69,7 @@ end
 for N in Ns
     dict_temp = copy(default_settings)
     dict_temp[:N] = N
-    dict_temp[:T] = 10.0
+    dict_temp[:T] = 1.0
     push!(explo_all["explo_N"], dict_temp)
 end
 for batch_size in batch_sizes
@@ -98,10 +98,10 @@ df_ds_init = DataFrame("Mean" => Float64[],
                 L"L^1-"*"approx. error" => Float64[],
                 "Std. dev. error" => Float64[],
                 "avg. runtime (s)" => Float64[], 
-                (string.(keys(default_settings)) .=> [Int64[], Float64[], Int64[], Int64[], Int64[], Int64[], Int64[]])...)
+                (string.(keys(default_settings)) .=> [Int64[], Float64[], Int64[], Int64[], Int64[], Int64[], Int64[], Float64[],])...)
 
 # complete table
-dfu_ds_init = DataFrame((string.(keys(default_settings)) .=> [Int64[], Float64[], Int64[], Int64[], Int64[], Int64[], Int64[]])...,
+dfu_ds_init = DataFrame((string.(keys(default_settings)) .=> [Int64[], Float64[], Int64[], Int64[], Int64[], Int64[], Int64[], Float64[],])...,
                 "u" => Float64[],
                 "time simu" => Float64[],
                 "ref_value" => Float64[])
@@ -149,5 +149,5 @@ for scen in keys(explo_all)
 end
 
 suffix_name_file = prod(scenarios)
-JLD2.save(mydir*"/dict_results_DeepSplitting_param_$(suffix_name_file)_smaller_hls.jld2", dict_results)
+JLD2.save(mydir*"/dict_results_DeepSplitting_param_$(suffix_name_file).jld2", dict_results)
 println("All results saved in $mydir")
