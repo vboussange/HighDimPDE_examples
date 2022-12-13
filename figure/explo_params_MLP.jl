@@ -15,12 +15,13 @@ path_results = "../results/2022-12-12/explo_param_MLP_T=0.5_with_K_explo_uniform
 dict_results =load(path_results*"dict_results_MLP_param_explo_Kexplo_L_cpu_5.jld2")
 
 fig, axs = subplots(2,2, figsize = (6,4), sharex = "col")
+[ax.set_yscale("log") for ax in axs[1,:]]
 
 ## explo K
 ax = axs[1,1]
 scen = "explo_K"
 @unpack df_ds, dfu_ds = dict_results[scen]
-ax.set_title(L"M = n = %$(Int(df_ds.L[1]))")
+ax.set_title(L"M = n = %$(Int(df_ds.L[1])), T = %$(df_ds.T[1])")
 println(df_ds)
 for r in eachrow(df_ds)
     ax.errorbar(r.K, r."\$L^1-\$approx. error", yerr = r."Std. dev. error", c = "tab:blue", fmt = "o", ms = 4)
@@ -71,7 +72,7 @@ display(fig)
 ax = axs[1,2]
 scen = "explo_L"
 @unpack df_ds, dfu_ds = dict_results[scen]
-ax.set_title(L"M = n, K = %$(Int(df_ds.K[1]))")
+ax.set_title(L"M = n, K = %$(Int(df_ds.K[1])), T = %$(df_ds.T[1])")
 println(df_ds)
 # fig, ax = subplots(1)
 for r in eachrow(df_ds)

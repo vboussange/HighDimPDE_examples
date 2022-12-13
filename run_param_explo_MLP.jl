@@ -26,13 +26,13 @@ include("MLP_rep_mut.jl")
 
 # common to all experiments
 d = 5
-T = 1.
+T = 0.2
 # overwritten for certain experiments
 M = 5
 K = 5
 L = 4
 U = 1e0
-mydir = "results/$(today())/explo_param_MLP_T=$(T)_with_K_explo_uniform_sampling_1e0"
+mydir = "results/$(today())/explo_param_MLP_T=$(T)_uniform_sampling_1e0"
 isdir(mydir) ? nothing : mkpath(mydir)
 
 # Array of params to explore

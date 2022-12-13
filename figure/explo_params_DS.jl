@@ -11,7 +11,7 @@ using DataFrames
 # path_results = "../results/2022-10-04/explo_param_DS_x0_sample_T=0.2_L1_err/"
 # path_results = "../results/2022-10-04/explo_param_DS_x0_sample_T=0.2/"
 # path_results = "../results/2022-10-04/explo_param_DS_T=0.2/"
-path_results = "../results/2022-12-12/explo_param_DS_x0_sample_T=0.2_U_1e0/"
+path_results = "../results/2022-12-12/explo_param_DS_x0_sample_T=0.2_U_1e0/" # T = 1, U=1
 
 dict_results =load(path_results*"dict_resultsparam_explo_DS_x0_sample.jld2")
 # dict_results =load(path_results*"dict_results_DeepSplitting_param_explo.jld2")
@@ -21,12 +21,14 @@ fig, axs = subplots(2,5,
                     sharex = "col", 
                     # sharey=true
                     )
+[ax.set_yscale("log") for ax in axs[1,:]]
+[ax.set_ylim(1e-2,2e0) for ax in axs[1,1:1]]
 
 ## explo K
 ax = axs[1,1]
 scen = "explo_K"
 @unpack df_ds, dfu_ds = dict_results[scen]
-ax.set_title(L"J_m = %$(Int(df_ds.batch_size[1])), N = %$(Int(df_ds.N[1]))")
+ax.set_title(L"J_m = %$(Int(df_ds.batch_size[1])), N = %$(Int(df_ds.N[1])),  T = %$(df_ds.T[1])")
 println(df_ds)
 for r in eachrow(df_ds)
     ax.errorbar(r.K, r."\$L^1-\$approx. error", yerr = r."Std. dev. error", c = "tab:blue", fmt = "o", ms = 4)
@@ -51,7 +53,7 @@ display(fig)
 ax = axs[1,2]
 scen = "explo_batch_size"
 @unpack df_ds = dict_results[scen]
-ax.set_title(L"K = %$(Int(df_ds.K[1])), N = %$(Int(df_ds.N[1]))")
+ax.set_title(L"K = %$(Int(df_ds.K[1])), N = %$(Int(df_ds.N[1])), T = %$(df_ds.T[1])")
 println(df_ds)
 # fig, ax = subplots(1)
 for r in eachrow(df_ds)
@@ -77,9 +79,9 @@ display(fig)
 ax = axs[1,3]
 scen = "explo_N"
 path_results = "../results/2022-12-13/explo_param_DS_x0_sample_T=0.2_U_1e0/"
-df_ds = load(path_results*"dict_resultsparam_explo_DS_x0_sample.jld2", scen)["df_ds"]
+df_ds = load(path_results*"dict_resultsparam_explo_DS_x0_sample.jld2", scen)["df_ds"] # T = 1
 # @unpack df_ds = dict_results[scen]
-ax.set_title(L"J_m = %$(Int(df_ds.batch_size[1])), K = %$(Int(df_ds.K[1]))")
+ax.set_title(L"J_m = %$(Int(df_ds.batch_size[1])), K = %$(Int(df_ds.K[1])), T = %$(df_ds.T[1])")
 println(df_ds[2:end,:])
 # fig, ax = subplots(1)
 for r in eachrow(df_ds[:,:])
@@ -95,13 +97,13 @@ end
 ax.set_ylabel("avg. runtime (s)")
 ax.set_xlabel(L"N")
 ax.set_xticks(df_ds.N)
-# ax.set_yscale("log")
+ax.set_yscale("log")
 display(fig)
 
 ax = axs[1,4]
 scen = "explo_hls"
 @unpack df_ds, dfu_ds = dict_results[scen]
-ax.set_title(L"J_m = %$(Int(df_ds.batch_size[1])), N = %$(Int(df_ds.N[1])), K = %$(Int(df_ds.K[1]))")
+ax.set_title(L"J_m = %$(Int(df_ds.batch_size[1])), N = %$(Int(df_ds.N[1])), K = %$(Int(df_ds.K[1])),  T = %$(df_ds.T[1])")
 println(df_ds)
 for r in eachrow(df_ds)
     ax.errorbar(r.hls, r."\$L^1-\$approx. error", yerr = r."Std. dev. error", c = "tab:blue", fmt = "o", ms = 4)
@@ -124,7 +126,7 @@ ax = axs[1,5]
 scen = "explo_nhlayers"
 @unpack df_ds, dfu_ds = dict_results[scen]
 df_ds.nhlayers .= df_ds.nhlayers .+ 2
-ax.set_title(L"J_m = %$(Int(df_ds.batch_size[1])), N = %$(Int(df_ds.N[1])), K = %$(Int(df_ds.K[1]))")
+ax.set_title(L"J_m = %$(Int(df_ds.batch_size[1])), N = %$(Int(df_ds.N[1])), K = %$(Int(df_ds.K[1])), T = %$(df_ds.T[1])")
 println(df_ds)
 for r in eachrow(df_ds)
     ax.errorbar(r.nhlayers, r."\$L^1-\$approx. error", yerr = r."Std. dev. error", c = "tab:blue", fmt = "o", ms = 4)
@@ -147,4 +149,4 @@ display(fig)
 fig.tight_layout()
 display(fig)
 
-fig.savefig(path_results*"/fig_DS_param_explo.pdf", dpi=100)
+fig.savefig(path_results*"/fig_DS_param_explo.pdf", dpi=100, bbox_inches="tight")

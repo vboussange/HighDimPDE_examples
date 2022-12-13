@@ -98,10 +98,10 @@ df_ds_init = DataFrame("Mean" => Float64[],
                 L"L^1-"*"approx. error" => Float64[],
                 "Std. dev. error" => Float64[],
                 "avg. runtime (s)" => Float64[], 
-                (string.(keys(default_settings)) .=> [Int64[], Float64[], Int64[], Int64[], Int64[], Int64[], Int64[], Float64[],])...)
+                (string.(keys(default_settings)) .=> [Int64[], Float64[], Int64[], Int64[], Int64[], Int64[], Int64[]])...)
 
 # complete table
-dfu_ds_init = DataFrame((string.(keys(default_settings)) .=> [Int64[], Float64[], Int64[], Int64[], Int64[], Int64[], Int64[], Float64[],])...,
+dfu_ds_init = DataFrame((string.(keys(default_settings)) .=> [Int64[], Float64[], Int64[], Int64[], Int64[], Int64[], Int64[]])...,
                 "u" => Float64[],
                 "time simu" => Float64[],
                 "ref_value" => Float64[])

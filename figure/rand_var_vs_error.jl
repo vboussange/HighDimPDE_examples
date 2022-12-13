@@ -63,8 +63,8 @@ nb_rand_var_eval_DS(10, 10, 1000, 1, 1)
 # df_all_params_DS = vcat([dict_results_DS[k]["df_ds"] for k in keys(dict_results_DS)]...)
 
 scen = "explo_batch_size"
-path_results = "../results/2022-12-12/explo_param_DS_x0_sample_T=0.2_U_1e0/"
-df_all_params_DS = load(path_results*"dict_resultsparam_explo_DS_x0_sample.jld2", scen)["df_ds"]
+path_results = "../results/2022-12-13/explo_param_DS_T=1.0/"
+df_all_params_DS = load(path_results*"dict_results_DeepSplitting_param_explo_Kexplo_batch_sizeexplo_Nexplo_nhlayersexplo_hls.jld2", scen)["df_ds"]
 batch_size = 8000
 maxiters = 1000
 
@@ -137,4 +137,4 @@ ax.set_yscale("log")
 fig.legend(loc="lower center", bbox_to_anchor=(0.55, 0.2,))
 fig.tight_layout()
 display(fig)
-fig.savefig("nb_rand_var_vs_l1_err_x0_sample.pdf", dpi=100)
+fig.savefig("nb_rand_var_vs_l1_err.pdf", dpi=100)

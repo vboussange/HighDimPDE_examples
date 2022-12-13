@@ -93,8 +93,12 @@ df_all_params_DS[!,"nb_rand_var"] = nb_rand_var_eval_DS.(df_all_params_DS[:, "d"
 # df_all_params_MLP = vcat([dict_results_MLP[k]["df_ds"] for k in keys(dict_results_MLP)]...)
 
 scen = "explo_L"
-path_results = "../results/2022-12-12/explo_param_MLP_T=0.5_with_K_explo_uniform_sampling_1e0/"
-df_all_params_MLP = load(path_results*"dict_results_MLP_param_explo_Kexplo_L_cpu_5.jld2", scen)["df_ds"]
+# path_results = "../results/2022-12-12/explo_param_MLP_T=0.5_with_K_explo_uniform_sampling_1e0/"
+# df_all_params_MLP = load(path_results*"dict_results_MLP_param_explo_Kexplo_L_cpu_5.jld2", scen)["df_ds"]
+# path_results = "../results/2022-12-13/explo_param_MLP_T=1.0_with_K_explo_uniform_sampling_1e0/"
+# df_all_params_MLP = load(path_results*"dict_results_MLP_param_explo_L_cpu_5.jld2", scen)["df_ds"]
+path_results = "../results/2022-12-13/explo_param_MLP_T=0.2_uniform_sampling_1e0/"
+df_all_params_MLP = load(path_results*"dict_results_MLP_param_explo_L_cpu_5.jld2", scen)["df_ds"]
 
 df_all_params_MLP[!,"nb_rand_var"] = nb_rand_var_eval_MLP.(df_all_params_MLP[:, "d"], 
                                                             df_all_params_MLP[:,"L"],
@@ -104,6 +108,7 @@ df_all_params_MLP[!,"nb_rand_var"] = nb_rand_var_eval_MLP.(df_all_params_MLP[:, 
 #######################################
 # Plotting only for a single parameter
 #######################################
+@assert all(df_all_params_DS.T[1] .== df_all_params_MLP.T[1])
 fig, ax = subplots(1, figsize=(4,4))
 ## time vs error
 # ax = axs[1]
@@ -121,7 +126,8 @@ ax.set_ylabel(L"$L^1-$approx. error")
 # ax.set_xscale("log")
 display(fig)
 # MLP
-data = df_all_params_MLP
+data = df_all_params_MLP[2:end,:]
+ax.set_title(L"T = %$(df_all_params_DS.T[1])")
 # ax = axs[2]
 ax.errorbar(data.nb_rand_var, 
             data."\$L^1-\$approx. error", 
@@ -137,4 +143,4 @@ ax.set_yscale("log")
 fig.legend(loc="lower center", bbox_to_anchor=(0.55, 0.2,))
 fig.tight_layout()
 display(fig)
-fig.savefig("nb_rand_var_vs_l1_err_x0_sample.pdf", dpi=100)
+fig.savefig("nb_rand_var_vs_l1_err_x0_sample.pdf", dpi=100, bbox_inches="tight")
