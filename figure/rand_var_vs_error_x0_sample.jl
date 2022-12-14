@@ -63,6 +63,7 @@ nb_rand_var_eval_DS(10, 10, 1000, 1, 1)
 # df_all_params_DS = vcat([dict_results_DS[k]["df_ds"] for k in keys(dict_results_DS)]...)
 
 scen = "explo_batch_size"
+# scen = "explo_N"
 path_results = "../results/2022-12-12/explo_param_DS_x0_sample_T=0.2_U_1e0/"
 df_all_params_DS = load(path_results*"dict_resultsparam_explo_DS_x0_sample.jld2", scen)["df_ds"]
 batch_size = 8000
