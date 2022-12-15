@@ -1,7 +1,10 @@
 #=
 Replicator mutator example with Deep Splitting,
 solving on the whole hypercube,
-returning L1 norm
+returning L2 norm
+
+* Simulations
+- 15-02-2022:U = 1f0
 =#
 
 using HighDimPDE
@@ -11,7 +14,15 @@ import Flux
 import Flux.tanh, Flux.relu, Flux.Dense
 using Revise
 
-function DeepSplitting_rep_mut_L2(; d, T, N, batch_size = 8000, K = 1, cuda_device=5, maxiters = 2000)
+function DeepSplitting_rep_mut_L2(; d, 
+                                T, 
+                                N, 
+                                batch_size = 8000, 
+                                K = 1, 
+                                cuda_device = 5, 
+                                maxiters = 2000,
+                                U = 1f0,
+                                )
         dt = T / N
         tspan = (0f0,T)
         ##############################
@@ -30,7 +41,6 @@ function DeepSplitting_rep_mut_L2(; d, T, N, batch_size = 8000, K = 1, cuda_devi
         ##########################
         ###### PDE Problem #######
         ##########################
-        U = 5f-1
         domain = (fill(-U, d), fill(U, d))
         x0_sample = UniformSampling(domain...)
         ss0 = 5f-2#std g0

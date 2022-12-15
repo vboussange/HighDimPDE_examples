@@ -5,6 +5,9 @@ and computing L2 norm on the whole hypercube
 * Arguments
 - `ARGS[1] = cuda_device::Int`
 - `ARGS[2] = example::Symbol`
+
+* Simulations
+- 15-12-2022: simulation with U = 1f0
 =#
 cd(@__DIR__)
 if !isempty(ARGS)
