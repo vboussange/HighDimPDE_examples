@@ -144,21 +144,21 @@ display(fig)
 ax, axb = axs[5]
 scen = "explo_nhlayers"
 @unpack df_ds, dfu_ds = dict_results[scen]
-df_ds.nhlayers .= df_ds.nhlayers .+ 2
+df_ds.nhlayers .= df_ds.nhlayers .+ 1
 ax.set_title(L"J_m = %$(Int(df_ds.batch_size[1])), N = %$(Int(df_ds.N[1])), K = %$(Int(df_ds.K[1])), T = %$(df_ds.T[1])")
 println(df_ds)
 for r in eachrow(df_ds)
     ax.errorbar(r.nhlayers, r."\$L^1-\$approx. error", yerr = r."Std. dev. error", c = "tab:blue", fmt = "o", ms = 4)
 end
 # ax.set_ylabel(L"$L^1$-approx. error")
-ax.set_xlabel("Nb. of layers")
+ax.set_xlabel("Nb. of hidden layers")
 ax.set_yscale("log")
 
 for r in eachrow(df_ds)
     axb.errorbar(r.nhlayers, r."avg. runtime (s)", c = "tab:red", fmt = "o", ms = 4)
 end
 # axb.set_ylabel("avg. runtime (s)")
-axb.set_xlabel("Nb. of layers")
+axb.set_xlabel("Nb. of hidden layers")
 axb.set_xticks(df_ds.nhlayers)
 axb.set_ylim(0,50)
 display(fig)
