@@ -4,7 +4,7 @@ using Test
 using Flux
 using Revise
 
-function MLP_rep_mut(;d, T, M, L, K=1, U = 5e-1)
+function MLP_rep_mut(;d, T, M, L, K=1, U = 1e0)
         tspan = (0e0,T)
         ##########################
         ###### PDE Problem #######

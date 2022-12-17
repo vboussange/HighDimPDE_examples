@@ -82,7 +82,7 @@ function DeepSplitting_rep_mut_L2(; d,
         end
 
         # defining the problem
-        alg = DeepSplitting(nn, K=K, opt = opt, λs = [5e-3,1e-3],
+        alg = DeepSplitting(nn, K=K, opt = opt, λs = [1e-2,1e-3],
                 mc_sample = mc_sample )
         prob = PIDEProblem(g, f, μ, σ, x0, tspan, x0_sample = x0_sample)
         # solving

@@ -6,7 +6,7 @@ We keep constant
 - T = 0.5
 - d = 5
 
-Similar to run_param_explo_DS, but we vary parameters together in order to increase the nb. of std. random var. evaluations.
+Similar to run_param_explo_DS_x0_sample, but we vary parameters together in order to increase the nb. of std. random var. evaluations.
 * Arguments
 - `ARGS[1] = cuda_device::Int`
 - `ARGS[2] = example::Symbol`
@@ -30,16 +30,17 @@ using LaTeXStrings
 using CSV, JLD2, ProgressMeter
 using Dates
 
-include("DeepSplitting_rep_mut.jl")
+include("DeepSplitting_rep_mut_x0_sample.jl")
 
 # common to all experiments
 d = 5
-T = 1f0
+T = 0.2
+U = 1f0
 # overwritten for certain experiments
-K = 3
+K = 5
 nhlayers = 1
 
-mydir = "results/$(today())/explo_param_DS_T=$(T)_nb_rand_var"
+mydir = "results/$(today())/explo_param_DS_x0_sample_T=$(T)_nb_rand_var"
 isdir(mydir) ? nothing : mkpath(mydir)
 
 # Array of params to explore
@@ -48,7 +49,7 @@ batch_sizes = [10^i for i in 1:4]
 hlss = 10:10:40 # hidden layer sizes
 
 default_settings = Dict{Symbol,Any}()
-@pack! default_settings = d, T, K, nhlayers
+@pack! default_settings = d, T, K, nhlayers, U
 
 scenarios = ["explo_nb_rand_var"]
 # scenarios = ["explo_nhlayers", "explo_hls"]
@@ -73,10 +74,10 @@ df_ds_init = DataFrame("Mean" => Float64[],
                 L"L^1-"*"approx. error" => Float64[],
                 "Std. dev. error" => Float64[],
                 "avg. runtime (s)" => Float64[], 
-                (string.(keys(explo_all["explo_nb_rand_var"][1])) .=> [Int64[], Float64[], Int64[], Int64[], Int64[], Int64[], Int64[]])...)
+                (string.(keys(explo_all["explo_nb_rand_var"][1])) .=> [Int64[], Float64[], Int64[], Int64[], Int64[], Int64[], Int64[], Float64[],])...)
 
 # complete table
-dfu_ds_init = DataFrame((string.(keys(explo_all["explo_nb_rand_var"][1])) .=> [Int64[], Float64[], Int64[], Int64[], Int64[], Int64[], Int64[]])...,
+dfu_ds_init = DataFrame((string.(keys(explo_all["explo_nb_rand_var"][1])) .=> [Int64[], Float64[], Int64[], Int64[], Int64[], Int64[], Int64[], Float64[],])...,
                 "u" => Float64[],
                 "time simu" => Float64[],
                 "ref_value" => Float64[])
@@ -113,7 +114,7 @@ for scen in keys(explo_all)
 
             push!(u_ds,[sol_ds.value[1],sol_ds.time,sol_ds.value[2]])
             push!(dfu_ds,(values(dict)..., u_ds[end,:]...))
-            CSV.write(mydir*"/$(scen)_DS.csv", dfu_ds)
+            CSV.write(mydir*"/$(scen)_DS_x0_sample.csv", dfu_ds)
             # logging
             next!(progr)
         end
@@ -124,5 +125,5 @@ for scen in keys(explo_all)
 end
 
 suffix_name_file = prod(scenarios)
-JLD2.save(mydir*"/dict_results_DeepSplitting_param_$(suffix_name_file).jld2", dict_results)
+JLD2.save(mydir*"/dict_resultsparam_explo_DS_x0_sample_$(suffix_name_file).jld2", dict_results)
 println("All results saved in $mydir")

@@ -62,11 +62,10 @@ nb_rand_var_eval_DS(10, 10, 1000, 1, 1)
 # end
 # df_all_params_DS = vcat([dict_results_DS[k]["df_ds"] for k in keys(dict_results_DS)]...)
 
-scen = "explo_batch_size"
+scen = "explo_nb_rand_var"
 # scen = "explo_N"
-path_results = "../results/2022-12-12/explo_param_DS_x0_sample_T=0.2_U_1e0/"
-df_all_params_DS = load(path_results*"dict_resultsparam_explo_DS_x0_sample.jld2", scen)["df_ds"]
-batch_size = 8000
+path_results = "../results/2022-12-16/explo_param_DS_x0_sample_T=0.2_nb_rand_var/"
+df_all_params_DS = load(path_results*"dict_resultsparam_explo_DS_x0_sample_explo_nb_rand_var.jld2", scen)["df_ds"]
 maxiters = 1000
 
 df_all_params_DS[!,"nb_rand_var"] = nb_rand_var_eval_DS.(df_all_params_DS[:, "d"], 
@@ -141,7 +140,7 @@ display(fig)
 # ax.set_ylabel(L"$L^1-$approx. error")
 ax.set_xscale("log")
 ax.set_yscale("log")
-fig.legend(loc="lower center", bbox_to_anchor=(0.55, 0.2,))
+fig.legend(loc="lower center", bbox_to_anchor=(0.52, 0.15,))
 fig.tight_layout()
 display(fig)
 fig.savefig("nb_rand_var_vs_l1_err_x0_sample.pdf", dpi=100, bbox_inches="tight")
