@@ -5,6 +5,7 @@ Manifest.toml
 # *.jld2
 *.code-workspace
 paper.pdf
+*.CondaPkg
 
 # Core latex/pdflatex auxiliary files:
 *.aux
