@@ -1,4 +1,6 @@
 #= 
+Script used to generate data for figure 4
+
 Run DeepSplitting examples
 with varying K, batch size, and N
 
@@ -37,7 +39,7 @@ d = 5
 T = 0.2
 U = 1f0
 # overwritten for certain experiments
-K = 5
+K = 5 # /!\ should be set to 1
 nhlayers = 1
 
 mydir = "results/$(today())/explo_param_DS_x0_sample_T=$(T)_nb_rand_var"

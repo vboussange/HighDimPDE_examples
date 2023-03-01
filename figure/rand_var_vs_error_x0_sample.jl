@@ -122,7 +122,7 @@ ax.errorbar(data.nb_rand_var,
             ecolor="tab:blue", elinewidth=3, capsize=0, label="ML-based approx. method")
 display(fig)
 ax.set_xlabel("Number of random variables")
-ax.set_ylabel(L"$L^1-$approx. error")
+ax.set_ylabel(L"$L^1$-approx. error")
 # ax.set_xscale("log")
 display(fig)
 # MLP
