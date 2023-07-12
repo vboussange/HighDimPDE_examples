@@ -1,4 +1,7 @@
 # HighDimPDE_examples
+
+🚨 This branch is the work in progress branch, containing all raw results 🚨
+
 This repository contains the code used in the examples of the paper
 
 > Boussange, V., Becker, S., Jentzen, A., Kuckuck, B., Pellissier, L., Deep learning approximations for non-local nonlinear PDEs with Neumann boundary conditions. [arXiv](https://arxiv.org/abs/2205.03672) (2022), 59 pages.
