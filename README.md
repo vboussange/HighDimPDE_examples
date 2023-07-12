@@ -8,5 +8,5 @@ This repository contains the code used in the examples of the paper
 - `tables/` contains all final tables 
 - `MLP_*.jl` specify the example simulations for the MLP method, and can be run independently
 - `DeepSplitting_*.jl` specify the example simulations for the machine learning-based method, and can be run independently
-- `run_*.jl` are wrapper files to run example simulations with specific meta parameter values.
-- `run_*.sh` are files used to run the wrapper files
+- `run_*.jl` are wrapper files to run example simulations with specific meta parameter values. See headers for more details.
+- `run_*.sh` are files used to run the wrapper files.
