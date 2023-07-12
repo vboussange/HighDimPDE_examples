@@ -1,7 +1,7 @@
 ################################
 #=
 Simulating and plotting results
-for the replicator equation
+for the replicator equation with DeepSplitting
 =#
 ################################
 
